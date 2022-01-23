@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block titre%}Home{%endblock titre %}
+{% block Content %}
+
+    <div class="slider">
+      <div class="slide">
+          <div class="center">
+              <h1 class="logo" ">AnnonceLushi</h1>
+          </div> 
+          <div class="mySlides">
+              <img  src="{% static 'home/img/mais.jpg' %}" style="width:100%;height:500px; ">
+              <div class="center-slide">
+                <h3 class="titre"> BIENVENU(E) SUR NOTRE SITE</h3>
+                <p class="subtitre">Ce Site permet de vous donner les annonces 
+                    des produits Agricoles et Elevages. 
+                </p>
+                <div class="links">
+                  <a href="{% url 'signIn' %}" class="link">Connexion</a>
+                </div>
+              </div> 
+          </div>
+          <div class="mySlides">
+              <img  src="{% static 'home/img/porc.jpg' %}" style="width:100%;height:500px;">
+              <div class="center-slide">
+                <h3 class="titre"> DEVENEZ NOTRE PATERNAIRE</h3>
+                <p class="subtitre">Creer Un compte chez nous afin des publies vos annonces.  
+                </p>
+                <div class="links">
+                  <a href=" {% url 'signUp' %}" class="link">Inscrption</a>
+                </div>
+              </div>   
+          </div>
+        <div class="mySlides">
+          <img  src="{% static 'home/img/m3.jpg' %}" style="width:100%;height:500px;">
+          <div class="center-slide">
+            <h3 class="titre"> NOTRE APPLICATION MOBILE</h3>
+            <p class="subtitre">Telecharger notre application mobile Android
+             </p>
+             <div class="links">
+              <a href="" class="link">Telechargement</a>
+            </div>
+          </div> 
+        </div>
+    </div>
+  </div>
+
+    <div style="margin: 20px;">
+      <div class="rubrique">
+        <h1 class="titre">Nos rubriques</h1>
+      </div>
+      <div class="choice">
+          <div class="container">
+              <img src="{% static 'home/img/porc.jpg' %}" alt="" />
+              <p class="title">Elevage</p>
+              <div class="overlay"></div>
+              <div class="button"><a href="{% url 'elevage' %}"> Clique Ici</a></div>
+            </div>
+            <div class="container">
+              <img src="{% static 'home/img/mais.jpg' %}" alt="" />
+              <p class="title">Agriculture</p>
+              <div class="overlay"></div>
+              <div class="button"><a href="{% url 'agriculture' %}"> Clique Ici</a></div>
+            </div>
+      </div>
+    </div>
+    
+
+{% endblock Content %}
+    
+        

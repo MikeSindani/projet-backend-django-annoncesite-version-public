@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block titre%}Agriculture{%endblock titre %}
+{% block Content %}  
+<style>
+    .band .category{
+           background-image: url('{% static "home/img/mais.jpg" %}');
+           }
+         
+   </style>
+   
+    <div class="conteneur-card">
+        <div class="band">
+            <div class="category">
+                <h1 class="titre">
+                    Agriculture
+                </h1>
+                <p class="subtitre">Section d'annonces des produits agricoles</p>
+            </div>
+        </div>
+
+        <div class="card-long">
+            <div class="thumbnail">
+                <img src="img/champ.jpg" alt="" class="card-image">
+            </div>
+            <div class="contenain">
+                <h2 class="titre">card </h2>
+                <p class="subtitle">Disponible</p>
+                <p class="description"> Lorem ipsum dolor sit amet 
+                    consectetur adipisicing elit. Nemo rem doloremque aspernatur 
+                    modi officiis impedit inventore fugit quidem a repudiandae 
+                    voluptatem reiciendis,
+                    magni accusantium necessitatibus illum cum atque, vero odit. 
+                </p>
+                <div class="element">
+                    <p class="vu"><i class="fa fa-users" aria-hidden="true"> Mike</i></p>
+                    <p class="vu"><i class="fas fa-clock    "></i> 2 minutes</p>
+                    <p class="vu"> <i class="fa fa-map-marker" aria-hidden="true"> kasumbalesa</i></p>  
+                </div> 
+            </div>
+            <div  class="more">
+                <a href="">Voir Plus</a>
+            </div>
+        </div>
+
+        <div class="card-long">
+            <div class="thumbnail">
+                <img src="img/ferme.jpg" alt="" class="card-image">
+            </div>
+            <div class="contenain">
+                <h2 class="titre">card </h2>
+                <p class="subtitle">Disponible</p>
+                <p class="description"> Lorem ipsum dolor sit amet 
+                    consectetur adipisicing elit. Nemo rem doloremque aspernatur 
+                    modi officiis impedit inventore fugit quidem a repudiandae 
+                    voluptatem reiciendis,
+                    magni accusantium necessitatibus illum cum atque, vero odit. 
+                </p>
+                <div class="element">
+                    <p class="vu"><i class="fa fa-users" aria-hidden="true"> Mike</i></p>
+                    <p class="vu"><i class="fas fa-clock    "></i> 2 minutes</p>
+                    <p class="vu"> <i class="fa fa-map-marker" aria-hidden="true"> kasumbalesa</i></p>  
+                </div> 
+            </div>
+            <div  class="more">
+                <a href="">Voir Plus</a>
+            </div>
+        </div>
+    </div>
+{% endblock Content %}  

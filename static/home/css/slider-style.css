@@ -1,0 +1,116 @@
+
+.center {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .center-slide {
+    position: absolute;
+    top: 250px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+ .slider .slide img { 
+    width: 100%;
+  }
+.slider .mySlides .center-slide .titre {
+       color: tomato;
+       font-family: sans-serif;
+       text-align: center;
+       font-size: 25px;
+  }
+  .slider .mySlides .center-slide .subtitre {
+    text-align: center;
+    color: white;
+}
+  .slider .center h1 {
+    color: rgba(255, 255, 255, 0.774);
+    font-size: 60px;
+    opacity: 0.6;
+    text-align: center;
+  }
+  .slider .mySlides .center-slide .links{
+    text-align: center;
+    margin: 20px 0;
+  }
+  .slider .mySlides .center-slide .links a{
+    border-radius: 25px;
+    border: 1px solid rgba(196, 158, 158, 0.486);
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.781);
+    padding: 10px 50px;
+    text-decoration: none;
+   align-items: center;
+    
+  }
+  @media screen and (max-width: 1024px){
+    .center {
+      position: relative;
+      align-items: center;
+    }
+    .center-slide {
+      position: relative;
+      top: -275px;
+      align-items: center;
+    }
+    .slider .center h1 {
+      font-size: 45px;
+    }
+    .slider .slide img { 
+      height: 50%;
+    }
+    .slider .mySlides .center-slide .titre {
+      font-size: 15px;
+ }
+  }
+  @media screen and (max-width: 700px){
+    .center {
+      position: relative;
+      align-items: center;
+    }
+    .center-slide {
+      position: relative;
+      top: -275px;
+      align-items: center;
+    }
+    .slider .center .titre {
+      font-size: 14px;
+ }
+ .slider .center .subtitre {
+   font-size: 15px;
+}
+ .slider .center h1 {
+  font-size: 45px;
+  text-align: center;
+ }
+}
+
+/* POUR LES MOBILES SCREENS */
+@media screen and (max-width: 500px){
+  .slider{
+    position: relative;
+    top: -50px;
+    overflow-x: hidden;
+  }
+  .center {
+    position: relative;
+    top: 200px;
+    align-items: center;
+  }
+  .center-slide {
+    position: relative;
+    top: -275px;
+    align-items: center;
+  }
+  .slider .center h1 {
+    text-align: center;
+    font-size: 35px;
+   }
+   .slider .center .subtitre {
+    font-size: 12px;
+ }
+
+}
+

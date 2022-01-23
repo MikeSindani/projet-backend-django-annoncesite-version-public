@@ -1,0 +1,52 @@
+{% load static %}
+     <footer class="footer">
+
+         <div class="footer-main">
+            <div class="about">
+                <h1 class="logo">Annonce<strong class="logo-pres">lushi</strong></h1>
+                <p class="descp">Ce site Permet a mettre à disposition <br>
+                     les Annonces des produits des agriculteurs  <br>  
+                     et Eleveurs de la ville de lubumbashi/RDC. 
+               </p>
+            </div>
+
+            <div class="download">
+                <img  width="75" height="150" src="{% static 'footer/img/phone.png' %}" alt="" class="phone">
+                <div>
+                     <p class="text">Clique sur Notre Application mobile <br>
+                    pour le telecharger</p>
+                    <a href="" class="download-btn">Telecharger</a>
+                </div>
+                
+            </div>
+
+            <div class="links">
+                <ul>
+                    <li class="link"><a href="">Telechargement</a></li>
+                    <li class="link"><a href="{% url 'contact' %}">Contact</a></li>
+                    <li class="link"><a href="{% url 'signUp' %}">S'Inscirer</a></li>
+                    <li class="link"><a href="{% url 'signIn' %}">Connexion</a></li>
+                    <li class="link"><a href="">A Propos de Nous</a></li>
+                </ul>
+            </div>
+         </div>
+    
+         <div class="social-contact">
+             <p class="social-title">Contact Rapide</p>
+             <ul>
+                 <li class="social-link"> <a href=""><i class="fab fa-facebook-messenger"></i></a> </i></li>
+                 <li class="social-link"><a href=""><i class="fab fa-telegram-plane"></i></a></li>
+                 <li class="social-link"> <a href=""><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
+             </ul>
+         </div>
+
+         <div class="copyright">
+            Annonce Site Copyright <span id="date1"></span><span>-</span><span id="date"></span>
+            <script>
+                var d = new Date();
+                document.getElementById("date").innerHTML = d.getFullYear();
+                document.getElementById("date1").innerHTML = d.getFullYear()-1;
+            </script> 
+         </div>
+
+     </footer>

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block titre%}Connexion{%endblock titre %}
+{% block Content %}
+<style>
+    .body-second .overlay-container-in .overlay-in{
+		background-image: url('{% static "login/img/poule.jpg" %}');
+           }
+         
+   </style>
+ <div class="body-second">
+	<div class="container" id="container">
+		<div class="form-container sign-in-container">
+			<form class="form-main" action="#">
+				<h1>Connetez-Vous</h1>
+				<div class="social-container">
+					<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+					<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+					<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+				</div>
+				<span>or use your account</span>
+				<input type="email" placeholder="Email" />
+				<input type="password" placeholder="Password" />
+				<a href="#">Forgot your password?</a>
+				<button>Connexion</button>
+			</form>
+		</div>
+		<div class="overlay-container-in">
+			<div class="overlay-in">
+				<div class="overlay-panel overlay-right">
+					<h1>Devenir Notre Partenaire</h1>
+					<p>Veillez Cliquer ici Pour Vous inscrir <br> 
+						Enfin Notre Paternaire</p>
+					<a href="{% url 'signUp' %}" class="ghost" id="signUp">Inscription</a>
+				</div>
+			</div>
+		</div>
+	</div> 
+ </div>   
+
+ {% endblock Content %}

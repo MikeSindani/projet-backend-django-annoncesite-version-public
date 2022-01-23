@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'header/css/nav.css' %}"/>
+    <link rel="stylesheet" href="{% static 'footer/css/footer-style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'home/css/slider-style.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/style-rubrique.css' %}">
+    <link rel="stylesheet" href="{% static 'login/css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'autre/css/contact-style.css' %}">
+    <link rel="stylesheet" href="{% static 'annonces/css/style-card2.css' %}">
+    <link rel="stylesheet" href="{% static 'annonces/css/style-category.css' %}">
+    <script src="https://kit.fontawesome.com/e1d1ed83e9.js" crossorigin="anonymous"></script>
+    <title>Annonce - {%block titre%}{%endblock titre %}</title>
+
+</head>
+<body style="background-color: #f2f2f2;">
+    <div>
+        {% include "header/nav.html" %}
+    </div>   
+    <div style="position:relative;top: 0;width:100%;">
+    {%block Content %}
+        <h1>Default result</h1>
+    {%endblock Content %}
+    </div>
+    <div>
+        {% include "footer/footer.html" %}
+    
+    </div>
+       
+    <script src="{% static 'header/js/nav.js' %}"></script>
+    <script src="{% static 'home/js/slider-js.js' %}"></script>
+</body>
+</html>
