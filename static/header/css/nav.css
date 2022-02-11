@@ -50,7 +50,7 @@ body{
 .navbar .logo .search-bar{
     padding:2vh 1.7vw;
     margin:0vh 0.5vw;
-    width: 38vw;
+    width: 36vw;
     border: none;
     color: rgb(255, 255, 255);
     background-color: var(--generale-bleu);
