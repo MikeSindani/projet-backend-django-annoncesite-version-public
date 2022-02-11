@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 {%block titre%}Home{%endblock titre %}
+{%block links %}
+     <link rel="stylesheet" href="{% static 'home/css/slider-style.css' %}">
+     <link rel="stylesheet" href="{% static 'home/css/style-rubrique.css' %}">
+{%endblock links %}
 {% block Content %}
 
     <div class="slider">
@@ -45,7 +49,7 @@
     </div>
   </div>
 
-    <div style="margin: 20px;">
+    <div class="container-choice">
       <div class="rubrique">
         <h1 class="titre">Nos rubriques</h1>
       </div>

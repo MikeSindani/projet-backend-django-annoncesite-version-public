@@ -92,13 +92,18 @@
   .slider{
     position: relative;
     top: -50px;
-    overflow-x: hidden;
+    height: 470px;
+    overflow: hidden;
+    
   }
   .center {
     position: relative;
-    top: 200px;
+    top: 220px;
     align-items: center;
   }
+  .slider .mySlides .center-slide .subtitre {
+    padding: 20px;
+}
   .center-slide {
     position: relative;
     top: -275px;

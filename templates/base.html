@@ -1,4 +1,5 @@
 {% load static %}
+{% load cache %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,19 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'header/css/nav.css' %}"/>
     <link rel="stylesheet" href="{% static 'footer/css/footer-style.css' %}"/>
-    <link rel="stylesheet" href="{% static 'home/css/slider-style.css' %}">
-    <link rel="stylesheet" href="{% static 'home/css/style-rubrique.css' %}">
     <link rel="stylesheet" href="{% static 'login/css/login.css' %}">
-    <link rel="stylesheet" href="{% static 'autre/css/contact-style.css' %}">
     <link rel="stylesheet" href="{% static 'annonces/css/style-card2.css' %}">
     <link rel="stylesheet" href="{% static 'annonces/css/style-category.css' %}">
     <script src="https://kit.fontawesome.com/e1d1ed83e9.js" crossorigin="anonymous"></script>
-    <title>Annonce - {%block titre%}{%endblock titre %}</title>
+    {%block links %} {%endblock links %}
+    <title>{%block titre%}{%endblock titre %}-AnnonceSite</title>
 
 </head>
 <body style="background-color: #f2f2f2;">
     <div>
-        {% include "header/nav.html" %}
+        {% cache 10000 header %}
+            {% include "header/nav.html" %}
+        {% endcache %}
     </div>   
     <div style="position:relative;top: 0;width:100%;">
     {%block Content %}
@@ -27,8 +28,9 @@
     {%endblock Content %}
     </div>
     <div>
-        {% include "footer/footer.html" %}
-    
+        {% cache 10000 footer %}
+            {% include "footer/footer.html" %}
+        {% endcache %}
     </div>
        
     <script src="{% static 'header/js/nav.js' %}"></script>

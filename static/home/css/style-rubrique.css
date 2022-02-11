@@ -83,6 +83,15 @@
     opacity: 1;
   }
   @media screen and (max-width: 800px){
+    .container-choice{
+    position: relative;
+    top: -50px;
+    margin: 20px;
+    
+  }
+  .rubrique .titre{
+    font-size: 24px;
+  }
     .choice {
       display: flex;
       flex-direction: column;
@@ -92,13 +101,13 @@
     .choice .container {
       position: relative;
       width: 400px;
-      height: 200px;
-      margin: 5px;
+      height: 180px;
+      margin: 10px 0;
     }
     .choice .container img {
       position: absolute;
-      width: 500px;
-      height: 300px;
+      width: 400px;
+      height: 180px;
       left: 0;
     }
     .choice .container .title {

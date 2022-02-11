@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load cache %}
 {%block titre%}Contact{%endblock titre %}
+{% cache 500 contact %}
+{%block links %}
+      <link rel="stylesheet" href="{% static 'autre/css/contact-style.css' %}">
+{%endblock links %}
 {% block Content %}
+
 <style>
     .body-contact .overlay-container-contact .overlay-contact{
 		background-image: url('{% static "home/img/m3.jpg" %}');
@@ -41,3 +47,4 @@
 	</div> 
  </div>   
  {% endblock Content %}
+{% endcache %}
