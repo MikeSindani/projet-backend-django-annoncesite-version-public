@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cache %}
+{%block titre%}Contact{%endblock titre %}
+{% cache 500 contact %}
+{%block links %}
+      <link rel="stylesheet" href="{% static 'autre/css/contact-style.css' %}">
+{%endblock links %}
+{% block Content %}
+
+<style>
+    .body-contact .overlay-container-contact .overlay-contact{
+		background-image: url('{% static "home/img/m3.jpg" %}');
+           }
+         
+   </style>
+ <div class="body-contact">
+	<div class="container-contact" id="container">
+		<div class="form-container-contact contact-container">
+			<form class="form-main" action="#" method="post">
+				<h1>Contactez-Nous</h1>
+				
+				<span>Contactez-Nous</span>
+				<input type="text" placeholder="Nom" />
+				<input type="text" placeholder="Prenom" />
+				<input type="email" placeholder="Email" />
+				<textarea name="message" rows="10" cols="30" placeholder="Entre Votre message ici...">
+					
+				</textarea>
+				<button>Envoyer</button>
+			</form>
+		</div>
+		<div class="overlay-container-contact">
+			<div class="overlay-contact">
+				<div class="overlay-panel-contact overlay-right">
+					<h1>Contacter Rapide</h1>
+					<p>Cliquer sur un de vos reseaux sociale preferer  ci-dessous 
+						 afin de nous contacter</p>
+					<div class="social-container">
+						<a href="#" class="sociallink"><i class="fab fa-facebook-messenger"></i></a>
+						<a href="https://t.me/mikesnd" class="sociallink"><i class="fab fa-telegram-plane"></i></a>
+						<a href="#" class="sociallink"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> 
+ </div>   
+ {% endblock Content %}
+{% endcache %}
