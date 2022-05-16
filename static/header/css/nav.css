@@ -14,12 +14,16 @@ body{
     overflow-x: hidden;
 }
 .navbar{
+    position: fixed;
+    z-index: 10;
+}
+.navbar{
+    
     height: 4rem;
     width: 100vw;
     background-color: var(--generale-bleu);
     box-shadow: 0 3px 20px rgba(0, 0, 0, 0.2);
-    display: flex;
-    z-index: 10;
+    display: flex; 
 }
 
 /*Styling logo*/

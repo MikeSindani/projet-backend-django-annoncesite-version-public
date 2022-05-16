@@ -5,17 +5,26 @@
      <link rel="stylesheet" href="{% static 'home/css/slider-style.css' %}">
      <link rel="stylesheet" href="{% static 'home/css/style-rubrique.css' %}">
      <link rel="stylesheet" href="{% static 'owl-carrousel/css/card-style.css' %}">
+     <style>
+         .overlay{
+             width: 100%;
+             height: 70vh;
+             background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.8)) ;
+             position: absolute;
+             top: 64px;
+         }
+     </style>
 
 {%endblock links %}
 {% block Content %}
-
+    <div class="overlay"></div>
     <div class="slider">
       <div class="slide">
           <div class="center">
               <h1 class="logo" ">AnnonceLushi</h1>
           </div> 
           <div class="mySlides">
-              <img  src="{% static 'home/img/mais.jpg' %}" style="width:100%;height:500px; ">
+              <img  src="https://images.pexels.com/photos/5490702/pexels-photo-5490702.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" style="width:100%;height:500px; ">
               <div class="center-slide">
                 <h3 class="titre"> BIENVENU(E) SUR NOTRE SITE</h3>
                 <p class="subtitre">Ce Site permet de vous donner les annonces 
@@ -27,7 +36,7 @@
               </div> 
           </div>
           <div class="mySlides">
-              <img  src="{% static 'home/img/porc.jpg' %}" style="width:100%;height:500px;">
+              <img  src="https://images.pexels.com/photos/4022123/pexels-photo-4022123.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" style="width:100%;height:500px;">
               <div class="center-slide">
                 <h3 class="titre"> DEVENEZ NOTRE PATERNAIRE</h3>
                 <p class="subtitre">Creer Un compte chez nous afin des publies vos annonces.  
@@ -38,7 +47,7 @@
               </div>   
           </div>
         <div class="mySlides">
-          <img  src="{% static 'home/img/m3.jpg' %}" style="width:100%;height:500px;">
+          <img  src="https://images.pexels.com/photos/1152659/pexels-photo-1152659.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" style="width:100%;height:500px;">
           <div class="center-slide">
             <h3 class="titre"> NOTRE APPLICATION MOBILE</h3>
             <p class="subtitre">Telecharger notre application mobile Android
