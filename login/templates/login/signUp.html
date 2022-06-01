@@ -2,12 +2,59 @@
 {% load static %}
 {% load cache %}
 {%block titre%}Inscription{%endblock titre %}
-
+{%block style %}
+<style>
+	.form-container .part .text{
+		color: rgb(119, 119, 119);
+	}
+	#profil_pic{
+		border-radius: 50%;
+	}
+	#loginBtn {
+	display: block;
+	border-radius: 20px;
+	border: 1px solid tomato;
+	background-color: tomato;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+  }
+  #loginBtn:active{
+	transform: scale(0.95);
+  }
+  .item{
+	font-size: 40px;
+	font-weight: bold;
+	color: rgb(184, 184, 184);
+	margin: 10px;
+	cursor: pointer;
+  }
+  .part{
+	display: none;
+  }
+  .isactived{
+	display: block;
+	color: black;
+  }
+  
+  .step {
+	display: flex;
+	align-items: center;
+  }
+  
+</style>
+{%endblock style %}
 {% block Content %}
+	
 	<div class="body-second">
 		<div class="container" id="container">
 	<div class="form-container sign-up-container">
-		<form  class="form-main" action="#">
+		<form  class="form-main" action="#" name="myForm">
+			{% csrf_token %}
 			<h1>Creer Un Compte</h1>
 			<div class="social-container">
 				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -15,10 +62,49 @@
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
 			<span>ou enregistrez-vous par email</span>
-			<input type="text" placeholder="Name" />
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Password" />
-			<button>Creer</button>
+			<div class="step">
+				<div class="item item1 isactived">1</div>
+				<div class="item item2" id="item2" >2</div>
+				<div class="item item3" id="item3">3</div>
+				<div class="item item3" id="item4" >4</div>
+			</div>
+			<div class="part pass isactived">
+				<h2 class="text">Mettre le mot de passe et Utilisateur</h2>
+					<input type="email" name="email" placeholder="email" required>
+					<input type="password" name="password" id="password" placeholder="password" required onkeyup="check();">
+					<input type="password" name="confirm_password" id="confirm_password" placeholder="confirm password" required onkeyup="check();">
+				<button type="button" onclick="Suivant(1);">suivant</button>
+		  </div>
+	  
+		  <div class="part personnel_info">
+			<h2 class="text">Vos Information Personnel</h2>
+				<input type="text" placeholder="name" name="name">
+				<input type="text" placeholder="Prenom" name="prenom">
+				<input type="text" placeholder="Adresse" name="adr">
+				<input type="text" placeholder="Nom Entreprise" name="entreprise">
+		   <button type="button" onclick="Precedent(2);">precedent</button>
+		   <button type="button" onclick="Suivant(2);">suivant</button>
+		  </div>
+		  <div class="part contact_info">
+			<h2 class="text">Vos Informations de Contact</h2>
+				<input type="number" placeholder="numero phone 1" name="tel1">
+				<input type="number" placeholder="numero phone 2" name="tel2">
+				<input type="number" placeholder="Numero Whastapp" name="whatsapp">
+				<input type="number" placeholder="Telegram ex:@clam" name="telegram">
+		   <button type="button" onclick="Precedent(3);">precedent</button>
+		   <button type="button" onclick="Suivant(3);">suivant</button>
+		  </div>
+	  
+		  <div class="part profil_info">
+			<h2 class="text">Photo de profil</h2>
+				<input type="file" name="files[]" id="files">
+				<input type="hidden" name="url" id="url">
+		    <button type="button" onclick="Precedent(4);">precedent</button>
+			<button type="button" onclick="uploadimage()" >Upload</button>
+			<input type="submit" id="loginBtn" value="Inscription" >
+		  </div>
+		  <p id="message"></p>
+			
 		</form>
 	</div>
 	<div class="overlay-container-up">
@@ -31,5 +117,89 @@
 		</div>
 	</div>
 </div>
-</div>    
+</div>
+{%block js %} 
+<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+<script src="{% static 'firebase/firebase_site.js' %}"></script>
+<script>
+       // get the number step 
+        const item1 = document.querySelector(".item1");
+        const item2 = document.querySelector(".item2");
+        const item3 = document.querySelector(".item3");
+		const item4 = document.getElementById("item4");
+        // get the div step button
+        const part_pass = document.querySelector(".pass");
+        const part_personnel = document.querySelector(".personnel_info"); 
+        const part_contact = document.querySelector(".contact_info");
+		const profil_info = document.querySelector(".profil_info");   
+        // create function top change de step 
+        function Suivant(a){
+            if(a == 1){
+              item1.classList.add("isactived");
+              part_pass.classList.remove("isactived");
+              item2.classList.add("isactived");
+              part_personnel.classList.add("isactived");
+            }
+            if(a == 2){
+              item1.classList.add("isactived");
+              item2.classList.add("isactived");
+              part_personnel.classList.remove("isactived");
+              item3.classList.add("isactived");
+              part_contact.classList.add("isactived");
+            }
+			if(a == 3){
+              item1.classList.add("isactived");
+              item2.classList.add("isactived");
+			  item3.classList.add("isactived");
+			  part_contact.classList.remove("isactived");
+              item4.classList.add("isactived");
+              profil_info.classList.add("isactived");
+            }
+      }
+      function Precedent(a){
+            if(a == 2){
+              item2.classList.remove("isactived");
+              part_personnel.classList.remove("isactived");
+              item1.classList.add("isactived");
+              part_pass.classList.add("isactived");
+            }
+            if(a == 3){
+              item3.classList.remove("isactived");
+              part_contact.classList.remove("isactived");
+              item1.classList.add("isactived");
+              item2.classList.add("isactived");
+              part_personnel.classList.add("isactived");
+             
+            }
+			if(a == 4){
+              item4.classList.remove("isactived");
+              profil_info.classList.remove("isactived");
+              item1.classList.add("isactived");
+              item2.classList.add("isactived");
+			  item3.classList.add("isactived");
+              part_contact.classList.add("isactived");
+             
+            }
+      }
+		// get the value for form password 
+		var password = document.getElementById("password").value;
+		var confirmpassword = document.getElementById("confirm_password").value;
+		function check(){
+			if(password == confirmpassword){
+				var message = document.getElementById("message").innerHTML="ca conrepondre";
+			}else{
+				var message = document.getElementById("message").innerHTML="doit correspond";
+			}
+		/*if(password.length < 8){
+			var message = document.getElementById("message").innerHTML="mot de passe doit etre superieur a 8.";
+		}else{
+			var message = document.getElementById("message").innerHTML="";
+			
+		}*/
+		
+		
+
+		}
+  </script>    
+{%endblock js %}
 {% endblock Content %}
