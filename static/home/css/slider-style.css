@@ -4,15 +4,19 @@
     top: 150px;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 2;
   }
   .center-slide {
     position: absolute;
     top: 250px;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 2;
+   
   }
   
  .slider .slide img { 
+
     width: 100%;
   }
 .slider .mySlides .center-slide .titre {
@@ -20,10 +24,12 @@
        font-family: sans-serif;
        text-align: center;
        font-size: 25px;
+       
   }
   .slider .mySlides .center-slide .subtitre {
     text-align: center;
     color: white;
+   
 }
   .slider .center h1 {
     color: rgba(255, 255, 255, 0.774);
@@ -46,6 +52,10 @@
     
   }
   @media screen and (max-width: 1024px){
+    .slider .slide img { 
+      margin-top: -50px;
+    }
+    
     .center {
       position: relative;
       align-items: center;
@@ -54,20 +64,27 @@
       position: relative;
       top: -275px;
       align-items: center;
+      
     }
     .slider .center h1 {
       font-size: 45px;
+     
     }
     .slider .slide img { 
       height: 50%;
     }
     .slider .mySlides .center-slide .titre {
       font-size: 15px;
- }
+      
+     }
   }
   @media screen and (max-width: 700px){
+    .overlay{
+      height: 200px;
+    }
     .center {
-      position: relative;
+      position: absolute;
+       top: 10px;
       align-items: center;
     }
     .center-slide {
@@ -80,6 +97,7 @@
  }
  .slider .center .subtitre {
    font-size: 15px;
+   margin-top: 70px;
 }
  .slider .center h1 {
   font-size: 45px;
@@ -89,6 +107,9 @@
 
 /* POUR LES MOBILES SCREENS */
 @media screen and (max-width: 500px){
+  .overlay{
+    height: 70vh;
+  }
   .slider{
     position: relative;
     top: -50px;
@@ -98,11 +119,11 @@
   }
   .center {
     position: relative;
-    top: 220px;
+    top: 180px;
     align-items: center;
   }
   .slider .mySlides .center-slide .subtitre {
-    padding: 20px;
+    padding: 50px;
 }
   .center-slide {
     position: relative;
@@ -111,10 +132,13 @@
   }
   .slider .center h1 {
     text-align: center;
-    font-size: 35px;
+    font-size: 30px;
+    
    }
    .slider .center .subtitre {
-    font-size: 12px;
+    font-size: 10px;
+    
+    
  }
 
 }
