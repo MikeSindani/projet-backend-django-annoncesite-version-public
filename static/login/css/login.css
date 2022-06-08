@@ -1,7 +1,47 @@
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
+.form-container .part .text{
+	color: rgb(119, 119, 119);
+}
+#profil_pic{
+	border-radius: 50%;
+}
+#loginBtn {
+display: block;
+border-radius: 20px;
+border: 1px solid tomato;
+background-color: tomato;
+color: #FFFFFF;
+font-size: 12px;
+font-weight: bold;
+padding: 12px 45px;
+letter-spacing: 1px;
+text-transform: uppercase;
+transition: transform 80ms ease-in;
+}
+#loginBtn:active{
+transform: scale(0.95);
+}
+.item{
+font-size: 40px;
+font-weight: bold;
+color: rgb(184, 184, 184);
+margin: 10px;
+cursor: pointer;
+}
+.part{
+display: none;
+}
+.isactived{
+display: block;
+color: black;
+}
 
+.step {
+display: flex;
+align-items: center;
+}
 .body-second {
 	box-sizing: border-box;
 	background:  #f2f2f2;
@@ -110,6 +150,7 @@
 
 .body-second .container {
 	overflow: hidden;
+	
 }
 
 .body-second .form-container {
@@ -130,6 +171,7 @@
 	width: 50%;
 	z-index: 2;
 }
+
 
 
 .overlay-container-in{
@@ -235,12 +277,12 @@
 
 @media screen and (max-width: 800px){
 	.body-second {
-		height: 750px;
+		height: 900px;
 		z-index: -3;
 	}
 	.body-second .form-container {
 		position: absolute;
-		top: 350px;
+		top: 400px;
 		width: 100%;
 		height: 60%;
 		transition: all 0.6s ease-in-out;
@@ -268,7 +310,7 @@
 	}
 	.body-second .form-main {
 		position: relative;
-		top:10px;
+		top:70px;
 		height: 300px;
 	}
 	

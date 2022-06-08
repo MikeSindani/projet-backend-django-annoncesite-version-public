@@ -38,7 +38,7 @@
           console.log("got url");
           document.getElementById("url").value = downloadURL;
           console.log("file uploaded successfully");
-          var btnLogin = document.getElementById("loginBtn").style.display="block";
+          var btnLogin = document.getElementById("loginBtn").disabled = false;
 
         });
       }

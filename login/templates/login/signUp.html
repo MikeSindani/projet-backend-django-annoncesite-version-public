@@ -3,50 +3,6 @@
 {% load cache %}
 {%block titre%}Inscription{%endblock titre %}
 {%block style %}
-<style>
-	.form-container .part .text{
-		color: rgb(119, 119, 119);
-	}
-	#profil_pic{
-		border-radius: 50%;
-	}
-	#loginBtn {
-	display: block;
-	border-radius: 20px;
-	border: 1px solid tomato;
-	background-color: tomato;
-	color: #FFFFFF;
-	font-size: 12px;
-	font-weight: bold;
-	padding: 12px 45px;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	transition: transform 80ms ease-in;
-  }
-  #loginBtn:active{
-	transform: scale(0.95);
-  }
-  .item{
-	font-size: 40px;
-	font-weight: bold;
-	color: rgb(184, 184, 184);
-	margin: 10px;
-	cursor: pointer;
-  }
-  .part{
-	display: none;
-  }
-  .isactived{
-	display: block;
-	color: black;
-  }
-  
-  .step {
-	display: flex;
-	align-items: center;
-  }
-  
-</style>
 {%endblock style %}
 {% block Content %}
 	
@@ -73,7 +29,7 @@
 					<input type="email" name="email" placeholder="email" required>
 					<input type="password" name="password" id="password" placeholder="password" required onkeyup="check();">
 					<input type="password" name="confirm_password" id="confirm_password" placeholder="confirm password" required onkeyup="check();">
-				<button type="button" onclick="Suivant(1);">suivant</button>
+				<button type="button" disabled id="suivant_part_pass" onclick="Suivant(1);">suivant</button>
 		  </div>
 	  
 		  <div class="part personnel_info">
@@ -181,25 +137,32 @@
              
             }
       }
-		// get the value for form password 
-		var password = document.getElementById("password").value;
-		var confirmpassword = document.getElementById("confirm_password").value;
+		
 		function check(){
-			if(password == confirmpassword){
-				var message = document.getElementById("message").innerHTML="ca conrepondre";
-			}else{
-				var message = document.getElementById("message").innerHTML="doit correspond";
-			}
-		/*if(password.length < 8){
-			var message = document.getElementById("message").innerHTML="mot de passe doit etre superieur a 8.";
-		}else{
-			var message = document.getElementById("message").innerHTML="";
-			
-		}*/
-		
-		
-
-		}
+       // get the value for form password 
+        var password = document.forms["myForm"]["password"].value;
+        var confirmpassword = document.forms["myForm"]["confirm_password"].value;
+        var email = document.forms["myForm"]["email"].value;
+        var suivant_part_pass = document.getElementById("suivant_part_pass");
+  
+        if(email != '' && password !='' && confirmpassword != ''){
+          if(password.length < 8){
+              var message = document.getElementById("message").innerHTML="Mot de passe doit etre superieur a 8.";
+              }else{
+                  var message = document.getElementById("message").innerHTML="";
+                  if(password == confirmpassword){
+                      var message = document.getElementById("message").innerHTML="Ca conrepondre";
+                      suivant_part_pass.disabled = false;
+                  }else{
+                      var message = document.getElementById("message").innerHTML="doit correspond";
+                      suivant_part_pass.disabled = true;
+                  }
+            }
+            
+      }
+    
+    }
+    
   </script>    
 {%endblock js %}
 {% endblock Content %}
