@@ -4,6 +4,7 @@
 .form-container .part .text{
 	color: rgb(119, 119, 119);
 }
+
 #profil_pic{
 	border-radius: 50%;
 }
@@ -171,9 +172,6 @@ align-items: center;
 	width: 50%;
 	z-index: 2;
 }
-
-
-
 .overlay-container-in{
 	position: absolute;
 	top: 0;
