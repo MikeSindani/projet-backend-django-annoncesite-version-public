@@ -3,13 +3,20 @@
 {% load cache %}
 {%block titre%}Inscription{%endblock titre %}
 {%block style %}
+<style>
+  .msg_avertis{
+    background-color: yellow;
+    padding: 10px;
+    border-radius: 30px;
+  }
+</style>
 {%endblock style %}
 {% block Content %}
 	
 	<div class="body-second">
 		<div class="container" id="container">
 	<div class="form-container sign-up-container">
-		<form  class="form-main" action="#" name="myForm">
+		<form  class="form-main" action="/postsignup/" name="myForm" method="post">
 			{% csrf_token %}
 			<h1>Creer Un Compte</h1>
 			<div class="social-container">
@@ -26,6 +33,9 @@
 			</div>
 			<div class="part pass isactived">
 				<h2 class="text">Mettre le mot de passe et Utilisateur</h2>
+          {% if msg %}
+            <p class="msg_avertis">{{msg}}</p>
+          {% endif %}
 					<input type="email" name="email" placeholder="email" required>
 					<input type="password" name="password" id="password" placeholder="password" required onkeyup="check();">
 					<input type="password" name="confirm_password" id="confirm_password" placeholder="confirm password" required onkeyup="check();">
@@ -53,7 +63,7 @@
 	  
 		  <div class="part profil_info">
 			<h2 class="text">Photo de profil</h2>
-        <img   id="img_profil">
+        <img src="https://th.bing.com/th/id/OIP.iOnAhgLrg_AR5D6STimV3wAAAA?w=221&h=220&c=7&r=0&o=5&pid=1.7"  id="img_profil" height="120" width="120">
 				<input type="file" name="files[]" id="files">
 				<input type="hidden" name="url" id="url">
 		    <button type="button" onclick="Precedent(4);">precedent</button>
@@ -68,8 +78,8 @@
 		<div class="overlay-up" style="background-image: url('{% static 'login/img/mais.jpg' %}');">
 			<div class="overlay-panel overlay-left">
 				<h1>Bienvenu(e)</h1>
-				<p>To keep connected with us please login with your personal info</p>
-				<a href="{% url 'signIn' %}" class="ghost" id="signIn">Sign In</a>
+				<p>TU peux te connecter avec ton compte personnel si tu en as un.</p>
+				<a href="{% url 'signIn' %}" class="ghost" id="signIn">Connexion</a>
 			</div>
 		</div>
 	</div>
@@ -88,16 +98,21 @@
         const part_pass = document.querySelector(".pass");
         const part_personnel = document.querySelector(".personnel_info"); 
         const part_contact = document.querySelector(".contact_info");
-		const profil_info = document.querySelector(".profil_info");   
+      const profil_info = document.querySelector(".profil_info");  
+      const body_second = document.querySelector(".body-second");
+        const from_main = document.querySelector(".form-main "); 
         // create function top change de step 
       function Suivant(a){
             if(a == 1){
+              from_main.classList.add("form-main-2")
+              body_second.classList.add("body-second-2")
               item1.classList.add("isactived");
               part_pass.classList.remove("isactived");
               item2.classList.add("isactived");
               part_personnel.classList.add("isactived");
             }
             if(a == 2){
+             
               item1.classList.add("isactived");
               item2.classList.add("isactived");
               part_personnel.classList.remove("isactived");
@@ -113,7 +128,7 @@
               profil_info.classList.add("isactived");
             }
       }
-      function Precedent(a){
+      function Precedent(a,height){
             if(a == 2){
               item2.classList.remove("isactived");
               part_personnel.classList.remove("isactived");

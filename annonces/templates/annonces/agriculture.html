@@ -2,19 +2,36 @@
 {% load static %}
 {%block titre%}Agriculture{%endblock titre %}
 {%block links %}
-
 <link rel="stylesheet" href="{% static 'owl-carrousel/css/card-style.css' %}">
 {%endblock links %} 
+{%block style %}
+        <style>
+            .band .category{
+               background-image: url('{% static "home/img/mais.jpg" %}');
+              }
+              .container-card{
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  width: 100%;
+              }
+              .recommandation .info{
+                    text-align: center;
+                }
+              
+              @media screen and (max-width: 800px){
+                  .container-card{
+                      margin-top: 0px;
+                  }
+                  .recommandation .info{
+                    font-size: 12px;
+                    text-align: center;
+                }
+              }
+        </style>
+{%endblock style %}
 {% block Content %} 
-<style>
-    .band .category{
-           background-image: url('{% static "home/img/mais.jpg" %}');
-           }
-    .container{
-        margin-top: 70px;
-    }
-   </style>
- <div class="container">
+
     <div class="conteneur-card">
         <div class="band">
             <div class="category">
@@ -72,7 +89,7 @@
                 <a href="">Voir Plus</a>
             </div>
         </div>
-        <div class="recommandation">
+        <div class="recommandation" style="width:100%;">
             <div class="info">
                 <h1>Choix de nos equipes</h1>
             </div>
@@ -174,7 +191,7 @@
             </div>
         </div>
     </div>
-</div>
+
 {% endblock Content %} 
 {%block js %} 
     <script src="{% static 'owl-carrousel/js/card.js' %}"></script>

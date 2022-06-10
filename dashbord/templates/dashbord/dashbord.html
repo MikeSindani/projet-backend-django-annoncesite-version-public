@@ -1,0 +1,296 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cache %}
+{%block titre%}Dashbord{%endblock titre %}
+{%block style %}
+{%endblock style %}
+{%block links %} 
+<link rel="stylesheet" href="{% static 'dashbord/css/style-dashbord.css' %}">
+{%endblock links %}
+
+{% block Content %}
+ <div class="container">
+    <div class="band-dash">
+        <div class="dash-milieu">
+            <a href="">
+                {% if data.imgurl %}
+                <img class="dash-profil" src="{{data.imgurl}}" width="120" height="120" alt="">
+                {% else %}
+                <img class="dash-profil" src="https://th.bing.com/th/id/OIP.iOnAhgLrg_AR5D6STimV3wAAAA?w=221&h=220&c=7&r=0&o=5&pid=1.7" width="120" height="120" alt="">
+                {% endif%} 
+            </a>
+            <div class="dash-profil-text">
+                <h3 class="dash-username">{{data.nom}}</h3>
+                <P class="dash-useremail">{{data.email}}</P>
+                <div class="dash-socialmedia">
+                    <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                    <i class="fa fa-telegram" aria-hidden="true"></i>
+                </div>  
+            </div>  
+            <button class="btn-modifier">Modifier</button>      
+        </div>
+    </div>
+
+    <div class="dash-contaneur">
+        <div class="container">
+            <div class="wrapper">
+                <button id="btn-modal-annonce" class="button"> <i class="fa fa-plus" aria-hidden="true"></i> Ajouter une Annonce </button>
+            </div>
+        </div>
+
+        <div class="modal-connexion" id="myModal">
+            <!-- Modal content -->
+            <div  class="modal-content">
+                <div class="modal-header">
+                    <span class="close"> 
+                        <span class="fermer">&times;</span>
+                        <span class="text-search">Ajouter Une Annonce</span>
+                        <span></span>
+                    </span>
+                </div>
+                <div class="modal-body">
+                        <p class="text social">
+                            Connectez-Vous avec Vos Reseaux Preferer.
+                        </p>
+                        <form action="">
+                            <div class="part_item">
+                                <div class="item item1 isactived-item" id="item1">Details</div>
+                                <div class="item item2 " id="item2">Prix&Delai</div>
+                                <div class="item item3" id="item3">Photos</div>
+                            </div>
+                            <div class="part part_info isactived">
+                                <input type="text" placeholder="Titre" name="titre">
+                                <label for="cat">Categories:</label>
+                                <select id="cat" name="cat">
+                                    <option value="elevage">Elevage</option>
+                                    <option value="saab">Agriculture</option>
+                                </select>                           
+                                <input type="text" placeholder="Produit" name="produit">
+                                <input type="number" placeholder="Quatite" name="quatite">
+                                <textarea rows="4" cols="50" name="descp"></textarea>
+                                <div class="btn">
+                                    <button type="button" onclick="Suivant(1,'400px')" >Suivant</button>
+                                </div>  
+                            </div>
+                            <div class="part part_info_2">
+                                <input type="number" placeholder="Prix" name="Prix">
+                                <br>
+                                <input type="number" placeholder="Prix Minimun" name="prix_min">
+                                <input type="number" placeholder="Prix Maximun" name="prix_max">
+                                <br>
+                                <div class="btn">
+                                    <button type="button" id="btn_precedent"onclick="Precedent(2,'500px')">Precedent</button>
+                                    <button type="button" id="btn_suivant" onclick="Suivant(2,'500px')" >Suivant</button>
+                                </div>  
+                                    
+                            </div>
+                            <div class="part part_photo">
+                                    <input type="file" name="files[]" id="file1">
+                                    <button type="button" class="btn_uplaod" onclick="uploadimage(1)" >Uplaod</button> 
+                                    <br>
+                                    <input type="file"  name="files[]" id="file2">
+                                    <button type="button"  class="btn_uplaod" onclick="uploadimage(2)">Uplaod</button> 
+                                    <br>
+                                    <input type="file" name="files[]" id="file3">
+                                    <button type="button"  class="btn_uplaod" onclick="uploadimage(3)">Uplaod</button> 
+                                    <br>
+                                    <input type="hidden" name="imgurl1" id="url1">
+                                    <input type="hidden" name="imgurl2" id="url2">
+                                    <input type="hidden" name="imgurl3" id="url3">
+                                    <br>
+                                    <div class="wrap-circles" style="display:none ;">
+                                        <div class="circle per-0">
+                                            <div class="inner">0%</div>
+                                        </div>
+                                        <div class="circle per-25">
+                                            <div class="inner">25%</div>
+                                        </div>
+                                        <div class="circle per-50">
+                                            <div class="inner">50%</div>
+                                        </div>
+                                        <div class="circle per-75">
+                                            <div class="inner">75%</div>
+                                        </div>
+                                        <div class="circle per-100">
+                                            <div class="inner">100%</div>
+                                        </div>
+                                    </div>
+                            
+                                <div class="btn">
+                                    <button type="button" id="btn_precedent" onclick="Precedent(3,'500px')">Precedent</button>
+                                    <button  id="annoncer_btn"  disabled>Ajouter</button>
+                                </div> 
+                            </div>  
+                        </form>
+             </div>     
+        </div>
+     </div>
+
+        <div class="tab-container">
+            <div class="tabButton">
+                <button class="tablink" onclick="openPage('Home', this)">VosFavoris</button>
+                <button class="tablink" onclick="openPage('News', this)" id="defaultOpen">VosAnnonces</button>
+                <button class="tablink" onclick="openPage('Contact', this)">VosAbonnement</button>
+            </div>
+        </div>
+        
+        <div id="Home" class="tabcontent">
+        <h1 class="text" >Vos Favoris</h1>
+        <p>Home is where the heart is..</p>
+        </div>
+
+        <div id="News" class="tabcontent">
+        <h1 class="text">Vos Annonces</h1>
+        <p>Some news this fine day!</p> 
+        <div class="conteneur-card">
+            
+            <div class="card-long" onClick='window.location.href="http://www.google.com"'>
+                <div class="thumbnail">
+                    <img src="https://images.pexels.com/photos/375510/pexels-photo-375510.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" class="card-image">
+                </div>
+                <div class="contenain">
+                    <h2 class="titre">card </h2>
+                    <p class="subtitle">Disponible</p>
+                    <p class="description"> Lorem ipsum dolor sit amet 
+                        consectetur adipisicing elit. Nemo rem doloremque aspernatur 
+                        modi officiis impedit inventore fugit quidem a repudiandae 
+                        voluptatem reiciendis,
+                        magni accusantium necessitatibus illum cum atque, vero odit. 
+                    </p>
+                    <div class="element">
+                        <p class="vu"><i class="fa fa-users" aria-hidden="true"> Mike</i></p>
+                        <p class="vu"><i class="fas fa-clock    "></i> 2 minutes</p>
+                        <p class="vu"> <i class="fa fa-map-marker" aria-hidden="true"> kasumbalesa</i></p>  
+                    </div> 
+                </div>
+                <div  class="more">
+                    <a href="">Voir</a>
+                </div>
+                <div class="dash_control">
+                    <div  class="more" id="modifier">
+                        <a href=""><i class="fa fa-marker"></i></i></a>
+                    </div>
+                    <div  class="more" id="supprimer">
+                        <a href=""><i class="fa fa-trash"></i></a>
+                    </div>
+                </div>     
+            </div>
+
+            <div class="card-long">
+                <div class="thumbnail">
+                    <img src="https://images.pexels.com/photos/458825/pexels-photo-458825.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="card-image">
+                </div>
+                <div class="contenain">
+                    <h2 class="titre">card </h2>
+                    <p class="subtitle">Disponible</p>
+                    <p class="description"> Lorem ipsum dolor sit amet 
+                        consectetur adipisicing elit. Nemo rem doloremque aspernatur 
+                        modi officiis impedit inventore fugit quidem a repudiandae 
+                        voluptatem reiciendis,
+                        magni accusantium necessitatibus illum cum atque, vero odit. 
+                    </p>
+                    <div class="element">
+                        <p class="vu"><i class="fa fa-users" aria-hidden="true"> Mike</i></p>
+                        <p class="vu"><i class="fas fa-clock    "></i> 2 minutes</p>
+                        <p class="vu"> <i class="fa fa-map-marker" aria-hidden="true"> kasumbalesa</i></p>  
+                    </div> 
+                </div>
+                <div  class="more">
+                    <a href="">Voir</a>
+                </div>
+                <div class="dash_control">
+                    <div  class="more" id="modifier">
+                        <a href=""><i class="fa fa-marker"></i></i></a>
+                    </div>
+                    <div  class="more" id="supprimer">
+                        <a href=""><i class="fa fa-trash"></i></a>
+                    </div>
+                </div>     
+            </div>
+    
+        </div>
+        
+        </div>
+
+        <div id="Contact" class="tabcontent">
+        <h1 class="text">Vos Abonnement</h1>
+        <p>Get in touch, or swing by for a cup of coffee.</p>
+        <div class="conteneur-card">
+            
+            <div class="card-long">
+                <div class="thumbnail">
+                    <img src="https://images.pexels.com/photos/457447/pexels-photo-457447.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="card-image">
+                </div>
+                <div class="contenain">
+                    <h2 class="titre">card </h2>
+                    <p class="subtitle">Disponible</p>
+                    <p class="description"> Lorem ipsum dolor sit amet 
+                        consectetur adipisicing elit. Nemo rem doloremque aspernatur 
+                        modi officiis impedit inventore fugit quidem a repudiandae 
+                        voluptatem reiciendis,
+                        magni accusantium necessitatibus illum cum atque, vero odit. 
+                    </p>
+                    <div class="element">
+                        <p class="vu"><i class="fa fa-users" aria-hidden="true"> Mike</i></p>
+                        <p class="vu"><i class="fas fa-clock    "></i> 2 minutes</p>
+                        <p class="vu"> <i class="fa fa-map-marker" aria-hidden="true"> kasumbalesa</i></p>  
+                    </div> 
+                </div>
+                <div  class="more">
+                    <a href="">Voir</a>
+                </div>
+                <div class="dash_control">
+                    <div  class="more" id="supprimer">
+                        <a href=""><i class="fa fa-trash"></i></a>
+                    </div>
+                </div>     
+            </div>
+
+            <div class="card-long">
+                <div class="thumbnail">
+                    <img src="https://images.pexels.com/photos/457447/pexels-photo-457447.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="card-image">
+                </div>
+                <div class="contenain">
+                    <h2 class="titre">card </h2>
+                    <p class="subtitle">Disponible</p>
+                    <p class="description"> Lorem ipsum dolor sit amet 
+                        consectetur adipisicing elit. Nemo rem doloremque aspernatur 
+                        modi officiis impedit inventore fugit quidem a repudiandae 
+                        voluptatem reiciendis,
+                        magni accusantium necessitatibus illum cum atque, vero odit. 
+                    </p>
+                    <div class="element">
+                        <p class="vu"><i class="fa fa-users" aria-hidden="true"> Mike</i></p>
+                        <p class="vu"><i class="fas fa-clock    "></i> 2 minutes</p>
+                        <p class="vu"> <i class="fa fa-map-marker" aria-hidden="true"> kasumbalesa</i></p>  
+                    </div> 
+                </div>
+                <div  class="more">
+                    <a href="">Voir</a>
+                </div>
+                <div class="dash_control">
+                    <div  class="more" id="supprimer">
+                        <a href=""><i class="fa fa-trash"></i></a>
+                    </div>
+                </div>     
+            </div>
+        </div>
+        </div>
+
+    
+    </div>
+   
+    <div class="dash-flotant-haut">
+        <img class="dash-flotant" src="img/pers.jpg" width="30" height="30" alt="">
+        <P class="dash-flotant-username">
+            Mike Sindani
+        </P>
+        <button class="dash-entre">Dashbord</button>
+    </div>
+ </div>
+    
+    {%block js %} 
+    <script src="{% static 'dashbord/js/dash-js.js' %}"></script>
+    <script src="{% static 'dashbord/js/modal.js' %}"></script>
+    {%endblock js %}
+{% endblock Content %}

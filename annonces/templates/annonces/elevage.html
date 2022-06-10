@@ -4,17 +4,32 @@
 {%block links %}
 <link rel="stylesheet" href="{% static 'owl-carrousel/css/card-style.css' %}">
 {%endblock links %} 
-{% block Content %}  
-    <div class="conteneur-card">
-        <style>
-         .band .category{
-                background-image: url('{% static "home/img/porc.jpg" %}');
+{%block style %}
+  <style>
+      .band .category{
+            background-image: url('{% static "home/img/porc.jpg" %}');
+        }
+        .container-card{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        .recommandation .info{
+                    text-align: center;
                 }
-        .container{
-        margin-top: 70px;
-        }  
-        </style>
- <div class="container"> 
+        
+        @media screen and (max-width: 800px){
+       
+            .recommandation .info{
+            font-size: 12px;
+            text-align: center;
+          }
+        }
+  </style>   
+{%endblock style %}
+{% block Content %}    
+    <div class="conteneur-card">
         <div class="band">
             <div class="category" >
                 <h1 class="titre">
@@ -71,14 +86,37 @@
                 <a href="">Voir Plus</a>
             </div>
         </div>
-    </div>
-    <div class="recommandation">
-        <div class="info">
-            <h1>Choix de nos equipes</h1>
-        </div>
-        <div class=" owl-carousel owl-theme">
-            <div class="item">
-                        <!-- Post-->
+
+        <div class="recommandation" style="width:100%;">
+            <div class="info">
+                <h1>Choix de nos equipes</h1>
+            </div>
+            <div class=" owl-carousel owl-theme">
+                <div class="item">
+                            <!-- Post-->
+                        <div class="post-module">
+                            <!-- Thumbnail-->
+                            <div class="thumbnail">
+                            <img src="img/champ.jpg" height="500"/>
+                            </div>
+                            <!-- Post Content-->
+                            <div class="post-content">
+                            <div class="category">Elevage</div>
+                            <h1 class="title">Vente des Montons a panda makomemo venez </h1>
+                            <h2 class="sub_title">Disponible</h2>
+                            <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
+                            <div class="post-meta">
+                                <span class="timestamp"><i class="fas fa-clock"></i>6 mins ago</span>
+                                <span class="users"><i class="fas fa-users"></i>mike sindani</span>
+                                <span  class="lieu"><i class="fas fa-map-marker-alt"></i>kasumbalesha</span>
+                            </div>
+                            </div>
+                            <div class="post-click">
+                            <p>Voir Plus</p>
+                            </div>
+                        </div>
+                </div>
+                <div class="item">
                     <div class="post-module">
                         <!-- Thumbnail-->
                         <div class="thumbnail">
@@ -100,80 +138,59 @@
                         <p>Voir Plus</p>
                         </div>
                     </div>
-            </div>
-            <div class="item">
-                <div class="post-module">
-                    <!-- Thumbnail-->
-                    <div class="thumbnail">
-                    <img src="img/champ.jpg" height="500"/>
-                    </div>
-                    <!-- Post Content-->
-                    <div class="post-content">
-                    <div class="category">Elevage</div>
-                    <h1 class="title">Vente des Montons a panda makomemo venez </h1>
-                    <h2 class="sub_title">Disponible</h2>
-                    <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
-                    <div class="post-meta">
-                        <span class="timestamp"><i class="fas fa-clock"></i>6 mins ago</span>
-                        <span class="users"><i class="fas fa-users"></i>mike sindani</span>
-                        <span  class="lieu"><i class="fas fa-map-marker-alt"></i>kasumbalesha</span>
-                    </div>
-                    </div>
-                    <div class="post-click">
-                    <p>Voir Plus</p>
+                </div>
+                <div class="item">
+                    <div class="post-module">
+                        <!-- Thumbnail-->
+                        <div class="thumbnail">
+                        <img src="img/champ.jpg" height="500"/>
+                        </div>
+                        <!-- Post Content-->
+                        <div class="post-content">
+                        <div class="category">Elevage</div>
+                        <h1 class="title">Vente des Montons a panda makomemo venez </h1>
+                        <h2 class="sub_title">Disponible</h2>
+                        <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
+                        <div class="post-meta">
+                            <span class="timestamp"><i class="fas fa-clock"></i>6 mins ago</span>
+                            <span class="users"><i class="fas fa-users"></i>mike sindani</span>
+                            <span  class="lieu"><i class="fas fa-map-marker-alt"></i>kasumbalesha</span>
+                        </div>
+                        </div>
+                        <div class="post-click">
+                        <p>Voir Plus</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="item">
-                <div class="post-module">
-                    <!-- Thumbnail-->
-                    <div class="thumbnail">
-                    <img src="img/champ.jpg" height="500"/>
-                    </div>
-                    <!-- Post Content-->
-                    <div class="post-content">
-                    <div class="category">Elevage</div>
-                    <h1 class="title">Vente des Montons a panda makomemo venez </h1>
-                    <h2 class="sub_title">Disponible</h2>
-                    <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
-                    <div class="post-meta">
-                        <span class="timestamp"><i class="fas fa-clock"></i>6 mins ago</span>
-                        <span class="users"><i class="fas fa-users"></i>mike sindani</span>
-                        <span  class="lieu"><i class="fas fa-map-marker-alt"></i>kasumbalesha</span>
-                    </div>
-                    </div>
-                    <div class="post-click">
-                    <p>Voir Plus</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="post-module">
-                    <!-- Thumbnail-->
-                    <div class="thumbnail">
-                    <img src="img/champ.jpg" height="500"/>
-                    </div>
-                    <!-- Post Content-->
-                    <div class="post-content">
-                    <div class="category">Elevage</div>
-                    <h1 class="title">Vente des Montons a panda makomemo venez </h1>
-                    <h2 class="sub_title">Disponible</h2>
-                    <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
-                    <div class="post-meta">
-                        <span class="timestamp"><i class="fas fa-clock"></i>6 mins ago</span>
-                        <span class="users"><i class="fas fa-users"></i>mike sindani</span>
-                        <span  class="lieu"><i class="fas fa-map-marker-alt"></i>kasumbalesha</span>
-                    </div>
-                    </div>
-                    <div class="post-click">
-                    <p>Voir Plus</p>
+                <div class="item">
+                    <div class="post-module">
+                        <!-- Thumbnail-->
+                        <div class="thumbnail">
+                        <img src="img/champ.jpg" height="500"/>
+                        </div>
+                        <!-- Post Content-->
+                        <div class="post-content">
+                        <div class="category">Elevage</div>
+                        <h1 class="title">Vente des Montons a panda makomemo venez </h1>
+                        <h2 class="sub_title">Disponible</h2>
+                        <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
+                        <div class="post-meta">
+                            <span class="timestamp"><i class="fas fa-clock"></i>6 mins ago</span>
+                            <span class="users"><i class="fas fa-users"></i>mike sindani</span>
+                            <span  class="lieu"><i class="fas fa-map-marker-alt"></i>kasumbalesha</span>
+                        </div>
+                        </div>
+                        <div class="post-click">
+                        <p>Voir Plus</p>
+                        </div>
                     </div>
                 </div>
+               
             </div>
-           
         </div>
     </div>
-</div>
+   
+
  {% endblock Content %}   
  {%block js %} 
     <script src="{% static 'owl-carrousel/js/card.js' %}"></script>

@@ -17,25 +17,23 @@
     <link rel="stylesheet" href="{% static 'owl-carrousel/css/owl.carousel.min.css' %}">
     <link rel="stylesheet" href="{% static 'owl-carrousel/css/owl-style.css' %}">
 
-    
-
-
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://kit.fontawesome.com/e1d1ed83e9.js" crossorigin="anonymous"></script>
     {%block links %} {%endblock links %}
     <title>{%block titre%}{%endblock titre %} - AnnonceSite</title>
-    {%block style%}{%endblock style %}
+    {%block style %}{%endblock style %}</style>
+    
 
 </head>
 <body style="background-color: #f2f2f2;">
     <div>
         
-            {% include "header/nav.html" %}
+        {% include "header/nav.html" %}
         
     </div>   
-    <div style="position:relative;top: 0;width:100%;">
+    <div style="position:relative;top:0;width:100%;">
     {%block Content %}
-        <h1>Default result</h1>
+        <h1>Default Content</h1>
     {%endblock Content %}
     </div>
     <div>

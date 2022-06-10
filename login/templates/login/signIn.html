@@ -5,13 +5,20 @@
 <style>
     .body-second .overlay-container-in .overlay-in{
 		background-image: url('{% static "login/img/poule.jpg" %}');
-           }
+        }
+		.msg_avertis{
+				background-color: yellow;
+				padding: 10px;
+				border-radius: 30px;
+				font-size: 10px;
+  			}
          
    </style>
  <div class="body-second">
 	<div class="container" id="container">
 		<div class="form-container sign-in-container">
-			<form class="form-main" action="#">
+			<form class="form-main" action="/postsignin/" method="post">
+				{% csrf_token %}
 				<h1>Connetez-Vous</h1>
 				<div class="social-container">
 					<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -19,8 +26,11 @@
 					<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 				</div>
 				<span>ou utiliser un compte </span>
-				<input type="email" placeholder="Email" />
-				<input type="password" placeholder="Password" />
+				{% if msg %}
+				  <p class="msg_avertis">{{msg}}</p>
+			    {% endif %}
+				<input type="email" name="email" placeholder="Email" />
+				<input type="password" name="password" placeholder="Password" />
 				<a href="#">Mot de passer?</a>
 				<button>Connexion</button>
 			</form>
