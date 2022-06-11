@@ -2,7 +2,7 @@
 /* WRAPPER */
 .btn_uplaod{
   position: relative;
-  left: 30%;
+  left: 20%;
   border-radius: 20px;
   border: 1px solid #09112e;
   background-color: #000000;
@@ -144,7 +144,10 @@ option {
 }
 
 @media screen and (max-width: 800px) {
+
   .btn_uplaod{
+    position: relative;
+    left: 10%;
     padding: 10px 40px;
   
   }

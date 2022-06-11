@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load cache %}
-{%block titre%}Dashbord{%endblock titre %}
+{%block titre%}{{data.prenom}} {{data.nom}} - Dashbord {%endblock titre %}
 {%block style %}
 {%endblock style %}
 {%block links %} 
@@ -23,7 +23,7 @@
                 {% endif%} 
             </a>
             <div class="dash-profil-text">
-                <h3 class="dash-username">{{data.prenom}} - {{data.nom}}</h3>
+                <h3 class="dash-username">{{data.prenom}}  {{data.nom}}</h3>
                 <P class="dash-useremail">{{data.email}}</P>
                 <div class="dash-socialmedia">
                     <i class="fa fa-whatsapp" aria-hidden="true"></i>
@@ -52,8 +52,8 @@
                     </span>
                 </div>
                 <div class="modal-body">
-                        <p class="text social">
-                            Connectez-Vous avec Vos Reseaux Preferer.
+                        <p class="text social" id="text-annonce">
+                            Remplir les champs et appuyer sur suivant.
                         </p>
                         <form action="">
                             <div class="part_item">
@@ -76,28 +76,31 @@
                                 </div>  
                             </div>
                             <div class="part part_info_2">
+                                <label for="Prix">Veillez Introduire un Prix fixe</label>
                                 <input type="number" placeholder="Prix" name="Prix">
                                 <br>
+                                <label for="prix_min">Veillez Introduire un Interval de Prix de Votre produit</label>
                                 <input type="number" placeholder="Prix Minimun" name="prix_min">
                                 <input type="number" placeholder="Prix Maximun" name="prix_max">
                                 <br>
-                                <input type="date" placeholder="Mettez le delai Minimun " name="Delai_min">
-                                <input type="date" placeholder="Mettez le delai Maximun" name="Delai_max">
+                                <label for="Delai_max">Veillez Introduire un delai Max et Min de Vente de Votre produit</label>
+                                <input type="date"  name="Delai_min">
+                                <input type="date"  name="Delai_max">
                                 <div class="btn">
                                     <button type="button" id="btn_precedent"onclick="Precedent(2,'500px')">Precedent</button>
-                                    <button type="button" id="btn_suivant" onclick="Suivant(2,'500px')" >Suivant</button>
+                                    <button type="button" id="btn_suivant" onclick="Suivant(2,'530px')" >Suivant</button>
                                 </div>  
                                     
                             </div>
                             <div class="part part_photo">
                                     <input type="file" name="files[]" id="file1">
-                                    <button type="button" class="btn_uplaod" onclick="uploadimage(1)" >Uplaod</button> 
+                                    <button type="button" class="btn_uplaod" onclick="uploadimage(1)" >Envoyer La Photo 1</button> 
                                     <br>
                                     <input type="file"  name="files[]" id="file2">
-                                    <button type="button"  class="btn_uplaod" onclick="uploadimage(2)">Uplaod</button> 
+                                    <button type="button"  class="btn_uplaod" onclick="uploadimage(2)">Envoyer La Photo 2</button> 
                                     <br>
                                     <input type="file" name="files[]" id="file3">
-                                    <button type="button"  class="btn_uplaod" onclick="uploadimage(3)">Uplaod</button> 
+                                    <button type="button"  class="btn_uplaod" onclick="uploadimage(3)">Envoyer La Photo 3</button> 
                                     <br>
                                     <input type="hidden" name="imgurl1" id="url1">
                                     <input type="hidden" name="imgurl2" id="url2">

@@ -64,6 +64,7 @@ function Suivant(a,height){
       part_info_2.classList.remove("isactived");
       item3.classList.add("isactived-item");
       part_photo.classList.add("isactived");
+      document.getElementById("text-annonce").innerHTML="Ajouter 3 Photos upload et Appuyer sur Botton Envoyer";
     }
 }
 function Precedent(a,height){
