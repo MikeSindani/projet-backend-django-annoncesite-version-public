@@ -887,7 +887,7 @@ body .dash-contaneur .tabcontent > p {
     width: 80%;
   }
   body .dash-contaneur .tab-container .tabButton {
-    background-color: yellow;
+    
     position: relative;
     left: -10px;
     width: 50%;
