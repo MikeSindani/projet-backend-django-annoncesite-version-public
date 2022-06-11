@@ -48,6 +48,9 @@ var part_info = document.querySelector(".part_info");
 var part_info_2 = document.querySelector(".part_info_2"); 
 var part_photo = document.querySelector(".part_photo"); 
 var modal_content = document.querySelector(".modal-content");
+
+var titre = document.getElementById("titre");
+var produit = document.getElementById("produit");
 // create function top change de step 
 function Suivant(a,height){
     if(a == 1){
@@ -66,6 +69,8 @@ function Suivant(a,height){
       part_photo.classList.add("isactived");
       document.getElementById("text-annonce").innerHTML="Ajouter 3 Photos upload et Appuyer sur Botton Envoyer";
     }
+   
+    
 }
 function Precedent(a,height){
     if(a == 2){
@@ -82,6 +87,18 @@ function Precedent(a,height){
       part_photo.classList.remove("isactived");
       item2.classList.add("isactived-item");
       part_info_2.classList.add("isactived");
+      document.getElementById("text-annonce").innerHTML="Remplir les champs et appuyer sur suivant";
      
     }
 }
+/*
+function checkfrom(a){
+var titre = document.getElementById("titre");
+var produit = document.getElementById("produit");
+var quatite = document.getElementById("quatite");
+  if(a==1){
+    if(titre.value != "" && produit.value != "" && quatite.value !=""){
+      document.getElementById("btn_suivant_1").disabled = true;
+    }
+  }
+}*/

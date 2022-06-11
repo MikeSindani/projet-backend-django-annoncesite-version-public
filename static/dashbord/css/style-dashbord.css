@@ -1,4 +1,6 @@
 /* IMPORTATION DES COMPOSANTS9*/
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&family=Quicksand:wght@300;500;600&display=swap');
 /* WRAPPER */
 .btn_uplaod{
   position: relative;
@@ -87,6 +89,7 @@
 }
 
 .modal {
+  font-family: "Quicksand";
   display: none;
   background-color: #fff;
   padding: 10px;
@@ -177,7 +180,7 @@ option {
   z-index: 999;
   /* Sit on top */
   left: 0;
-  top: 65px;
+  top: 64px;
   width: 100%;
   /* Full width */
   height: 100%;
@@ -196,7 +199,7 @@ option {
   margin: auto;
   padding: 0;
   width: 50%;
-  height: 450px;
+  height: 500px;
   -webkit-box-shadow: 0 4px 8px 20px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
           box-shadow: 0 4px 8px 20px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   -webkit-animation-name: animatetop;
@@ -340,7 +343,7 @@ option {
       -ms-flex-pack: center;
           justify-content: center;
   position: relative;
-  top: 75px;
+  top: 10px;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
 }
@@ -1021,11 +1024,6 @@ body .dash-contaneur .tabcontent > p {
 a {
   text-decoration: none;
 }
-
-p, li, a {
-  font-size: 14px;
-}
-
 .button, input {
   -webkit-appearance: none;
   -moz-appearance: none;

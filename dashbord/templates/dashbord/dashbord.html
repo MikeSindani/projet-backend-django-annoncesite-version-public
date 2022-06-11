@@ -15,13 +15,13 @@
  <div class="container">
     <div class="band-dash">
         <div class="dash-milieu">
-            <a href="">
+            <div>
                 {% if data.imgurl %}
                 <img class="dash-profil" src="{{data.imgurl}}" width="120" height="120" alt="">
                 {% else %}
                 <img class="dash-profil" src="https://th.bing.com/th/id/OIP.iOnAhgLrg_AR5D6STimV3wAAAA?w=221&h=220&c=7&r=0&o=5&pid=1.7" width="120" height="120" alt="">
                 {% endif%} 
-            </a>
+            </div>
             <div class="dash-profil-text">
                 <h3 class="dash-username">{{data.prenom}}  {{data.nom}}</h3>
                 <P class="dash-useremail">{{data.email}}</P>
@@ -52,9 +52,9 @@
                     </span>
                 </div>
                 <div class="modal-body">
-                        <p class="text social" id="text-annonce">
+                        <h5 style="color:tomato;" class="text social" id="text-annonce">
                             Remplir les champs et appuyer sur suivant.
-                        </p>
+                        </h5>
                         <form action="">
                             <div class="part_item">
                                 <div class="item item1 isactived-item" id="item1">Details</div>
@@ -62,30 +62,32 @@
                                 <div class="item item3" id="item3">Photos</div>
                             </div>
                             <div class="part part_info isactived">
-                                <input type="text" placeholder="Titre" name="titre">
+                                <input id="titre" type="text" placeholder="Titre(exemple:5 Poules aux quartier...)" name="titre" >
                                 <label for="cat">Categories:</label>
                                 <select id="cat" name="cat">
+                                    <option value="">Choisir Entre Elevage et Agriculture ici</option>
                                     <option value="elevage">Elevage</option>
-                                    <option value="saab">Agriculture</option>
+                                    <option value="agriculture">Agriculture</option>
                                 </select>                           
-                                <input type="text" placeholder="Produit" name="produit">
-                                <input type="number" placeholder="Quatite" name="quatite">
-                                <textarea rows="4" cols="50" name="descp"></textarea>
+                                <input id="produit" type="text" placeholder="Produit(exemple:Poule)" name="produit">
+                                <input id="quatite"  type="number" placeholder="Quatite(exemple:5)" name="quatite">
+                                <textarea id="desc" rows="4" cols="50" name="descp" placeholder="Description (exemple: je ai 5 poules de couleurs blancs ...) "></textarea>
                                 <div class="btn">
-                                    <button type="button" onclick="Suivant(1,'500px')" >Suivant</button>
+                                    <button id="btn_suivant_1" type="button" onclick="Suivant(1,'500px')" >Suivant</button>
                                 </div>  
                             </div>
                             <div class="part part_info_2">
-                                <label for="Prix">Veillez Introduire un Prix fixe</label>
-                                <input type="number" placeholder="Prix" name="Prix">
+                                <label for="Prix">Veillez Introduire un Prix fixe en CDF</label>
+                                <input type="number" placeholder="Prix (exemple:50000)" name="Prix">
                                 <br>
-                                <label for="prix_min">Veillez Introduire un Interval de Prix de Votre produit</label>
-                                <input type="number" placeholder="Prix Minimun" name="prix_min">
-                                <input type="number" placeholder="Prix Maximun" name="prix_max">
+                                <label for="prix_min">Veillez Introduire un Interval de Prix de Votre produit </label>
+                                <input type="number" placeholder="Prix Minimun (exemple:1000)" name="prix_min">
+                                <input type="number" placeholder="Prix Maximun (exemple:5000" name="prix_max">
                                 <br>
                                 <label for="Delai_max">Veillez Introduire un delai Max et Min de Vente de Votre produit</label>
                                 <input type="date"  name="Delai_min">
                                 <input type="date"  name="Delai_max">
+                                 <p style=" text-align: center;" ><strong>NB:les Prix sont en CDF</strong></p>
                                 <div class="btn">
                                     <button type="button" id="btn_precedent"onclick="Precedent(2,'500px')">Precedent</button>
                                     <button type="button" id="btn_suivant" onclick="Suivant(2,'530px')" >Suivant</button>
