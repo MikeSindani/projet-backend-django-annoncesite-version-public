@@ -1,6 +1,47 @@
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
+ /*** <--- CIRCLE STYLES ---> ***/
+
+ .circle {
+	display: none;
+	position: relative;
+	left: 40%;
+	width: 70px;
+	height: 70px;
+	margin: 0.5rem;
+	border-radius: 50%;
+	background: #000000;
+	overflow: hidden;
+  }
+  .circle.per-25 {
+	background-image: conic-gradient(tomato 25%, #000000 0);
+  }
+  .circle.per-50 {
+	background-image: conic-gradient(tomato 50%, #000000 0);
+  }
+  .circle.per-75 {
+	background-image: conic-gradient(tomato 75%, #000000 0);
+  }
+  .circle.per-100 {
+	background-image: conic-gradient(tomato 100%, #000000 0);
+  }
+  .circle .inner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 50px;
+	height: 50px;
+	background: #fff;
+	border-radius: 50%;
+	font-size: 1em;
+	font-weight: 300;
+	color: rgba(0, 0, 0, 0.75);
+  }
 .form-container .part .text{
 	color: rgb(119, 119, 119);
 }
@@ -10,7 +51,6 @@
 	border-radius: 50%;
 }
 #loginBtn {
-display: block;
 border-radius: 20px;
 border: 1px solid tomato;
 background-color: tomato;
@@ -59,7 +99,7 @@ align-items: center;
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
 	z-index: -1;
-	height: 700px;
+	height: 750px;
 }
 
 .form-main h1 {
@@ -81,6 +121,7 @@ align-items: center;
 
 .form-main span {
 	font-size: 12px;
+	margin: 5px;
 }
 
 .form-main a {
@@ -107,6 +148,7 @@ align-items: center;
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	transition: transform 80ms ease-in;
+	margin: 5px;
 }
 
 .form-main button:active {
@@ -262,6 +304,7 @@ align-items: center;
 }
 
  .social-container {
+	 display: none;
 	margin: 20px 0;
 }
 
@@ -280,17 +323,15 @@ align-items: center;
 }
 
 @media screen and (max-width: 800px){
-	.part{
-		margin-top: 50px;
-		}
+	
 		.step {
-		margin-top: 20px;
+		margin: 5px;
 		display: flex;
 		align-items: center;
 		
 		}
 	.body-second {
-		height: 950px;
+		height: 1000px;
 		z-index: -3;
 	}
 	.body-second-2 {
@@ -299,7 +340,7 @@ align-items: center;
 	}
 	.body-second .form-container {
 		position: absolute;
-		top: 400px;
+		top: 350px;
 		width: 100%;
 		height: 60%;
 		transition: all 0.6s ease-in-out;

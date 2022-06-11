@@ -26,7 +26,17 @@
      </style>
 
 {%endblock links %}
+
+  {%block Connexion %}
+    {% if uid %}
+        {% include "header/nav_connexion.html" %}
+   {% else %}
+      {% include "header/nav.html" %}
+   {% endif %}
+  {%endblock Connexion %} 
 {% block Content %}
+ 
+
     <div class="overlay"></div>
     <div class="slider">
       <div class="slide">

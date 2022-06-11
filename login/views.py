@@ -8,11 +8,28 @@ authe = firebase_app.auth()
 database = firebase_app.database()
 # Create your views here.
 def signIn(request):
+     try:
+        # intrcution pour recupere l'id dans la session
+        geta = fonction.AfficherAnnonce()
+        uid = geta.get_token(request, authe)   
+     except:
+        uid = False
+        return render(request,"login/signIn.html",{"uid":uid})
    
-    return render(request, "login/signIn.html")
+     return render(request, "login/signIn.html",{"uid":uid})
 
 def signUp(request):
-    return render(request,"login/signUp.html")
+    try:
+        # intrcution pour recupere l'id dans la session
+        geta = fonction.AfficherAnnonce()
+        uid = geta.get_token(request, authe)   
+    except:
+        uid = False
+        return render(request,"login/signUp.html",{"uid":uid})
+   
+    return render(request, "login/signUp.html",{"uid":uid})
+
+    
 # pour se signup
 def postsignup(request):
     #recuperer le form de signUp
@@ -41,12 +58,12 @@ def postsignup(request):
     
     # intruction pour recuprer le nom d'utilisateur
     geta = fonction.AfficherAnnonce()
-    dataUser = geta.get_profil_data(database = database,uid = uid )
+    userdata = geta.get_profil_data(database = database,uid = uid )
     print("HUM = " + str(data))
     message = "utilisateur a ete cree"
     # notre objet ann
     #com_list = geta.afficher_annonces_alls(database)
-    return render(request, "dashbord/dashbord.html",  { "msg": message, "data": dataUser})
+    return render(request, "dashbord/dashbord.html",  { "msg": message, "data": userdata})
 
 def postsignin(request):
     email = request.POST.get("email")
@@ -67,7 +84,6 @@ def postsignin(request):
     uid = geta.get_token(request, authe)
 
     # intruction pour recuprer le nom d'utilisateur
-
     userdata = geta.get_profil_data(database = database,uid = uid )
     print("HUM = " + str(userdata))
 

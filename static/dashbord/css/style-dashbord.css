@@ -144,10 +144,14 @@ option {
 }
 
 @media screen and (max-width: 800px) {
+  .btn_uplaod{
+    padding: 10px 40px;
+  
+  }
   .wrapper {
     margin-left: -150px;
     width: 300px;
-    z-index: 500;
+    z-index: 1;
   }
   .button {
     left: 10px;
@@ -408,14 +412,14 @@ option {
     /* Modal Header */
     /* Modal Body */
   }
-  .modal-connexion .modal-content .modal-header .close .text-search {
+  /*.modal-connexion .modal-content .modal-header .close .text-search {
     font-size: 18px;
-  }
+  }*/
   .modal-connexion .modal-content .modal-header .close .fermer {
     font-size: 40px;
   }
   .modal-connexion .modal-content .modal-body form .part_item .item {
-    font-size: 15px;
+    font-size: 23px;
   }
   .modal-connexion .modal-content .modal-body form .part {
     width: 75%;
@@ -462,7 +466,7 @@ option {
   }
   .modal-connexion .modal-content .modal-body form .part .btn button {
     margin: 0 5px;
-    padding: 5px 25px;
+    padding: 10px 40px;
     font-size: 10px;
   }
   
@@ -894,7 +898,7 @@ body .dash-contaneur .tabcontent > p {
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
-    z-index: 700;
+    z-index: 1;
     /* Style tab links */
   }
   body .dash-contaneur .tab-container .tabButton .tablink {

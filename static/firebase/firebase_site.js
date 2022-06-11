@@ -2,6 +2,7 @@
       // Get a reference to the storage service, which is used to create references in your storage bucket
          
           function uploadimage(){
+            progressBar(0);
              // Your web app's Firebase configuration
             // For Firebase JS SDK v7.20.0 and later, measurementId is optional
             const Config = {
@@ -14,6 +15,7 @@
               appId: "1:86048778948:web:12646f497c766ed9f5b791"
             };
             firebase.initializeApp(Config);
+            progressBar(25);
 
               var storage = firebase.storage();
 
@@ -21,12 +23,12 @@
 
               var storageRef = storage.ref();
 
-              var thisref = storageRef.child(file.name).put(file);
+              var thisref = storageRef.child("profils").child(file.name).put(file);
 
               thisref.on('state_changed',function(snapshot){
 
               console.log("file uplaoded succesfully");
-
+            progressBar(50);
           },
           function(error) {
 
@@ -36,9 +38,42 @@
           // Upload completed successfully, now we can get the download URL
           var downloadURL = thisref.snapshot.downloadURL;
           console.log("got url");
+          progressBar(75);
           document.getElementById("url").value = downloadURL;
           console.log("file uploaded successfully");
-          var btnLogin = document.getElementById("loginBtn").disabled = false;
-          document.getElementById("message").innerHTML=""     
+          progressBar(100);
+          document.getElementById("message").innerHTML='<span style="color:green;"></i>Photo de Profil Envoyer</span>'
+          // activation du bouton quand c'est upload
+          document.getElementById("loginBtn").disabled = false;
+          
+          
+             
         });
+      }
+      // fonctioon qui gerer la progression du transfert 
+      function  progressBar(value){
+        if(value == 0){
+        document.querySelector(".per-0").style.display="none";
+        document.querySelector(".per-0").style.display="block";
+        }
+        if(value == 25){
+          document.querySelector(".per-25").style.display="none";
+          document.querySelector(".per-0").style.display="none";
+          document.querySelector(".per-25").style.display="block";
+        }
+        if(value == 50){
+         document.querySelector(".per-50").style.display="none";
+         document.querySelector(".per-25").style.display="none";
+         document.querySelector(".per-50").style.display="block";
+        }
+        if(value == 75){
+          document.querySelector(".per-75").style.display="none";
+          document.querySelector(".per-50").style.display="none";
+          document.querySelector(".per-75").style.display="block";
+        }
+        if(value == 100){
+          document.querySelector(".per-75").style.display="none";
+          document.querySelector(".per-75").style.display="none";
+          document.querySelector(".per-100").style.display="block";
+        }
       }

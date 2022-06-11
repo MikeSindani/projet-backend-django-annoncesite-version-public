@@ -1,6 +1,7 @@
 .conteneur-card{
     margin-top: 100px;
     margin-bottom: 120px;
+    height: auto;
 }
 
 
@@ -31,6 +32,7 @@
 }
 @media screen and (max-width: 800px){
     .conteneur-card{
+        margin-top: 60px;
         margin-bottom: 120px;
     }
     .band{

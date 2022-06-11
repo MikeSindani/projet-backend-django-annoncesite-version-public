@@ -11,6 +11,15 @@
   }
 </style>
 {%endblock style %}
+
+{%block Connexion %}
+    {% if uid %}
+        {% include "header/nav_connexion.html" %}
+   {% else %}
+      {% include "header/nav.html" %}
+   {% endif %}
+{%endblock Connexion %} 
+
 {% block Content %}
 	
 	<div class="body-second">
@@ -68,10 +77,26 @@
 				<input type="hidden" name="url" id="url">
 		    <button type="button" onclick="Precedent(4);">precedent</button>
 			  <button type="button" onclick="uploadimage();"  onchange="img_profil(event);" accept="image/*" >Upload</button>
-			  <input type="submit" id="loginBtn" value="Inscription" >
+        <div class="wrap-circles">
+          <div class="circle per-0">
+            <div class="inner">0%</div>
+          </div>
+          <div class="circle per-25">
+            <div class="inner">25%</div>
+          </div>
+          <div class="circle per-50">
+            <div class="inner">50%</div>
+          </div>
+          <div class="circle per-75">
+            <div class="inner">75%</div>
+          </div>
+          <div class="circle per-100">
+            <div class="inner">100%</div>
+          </div>
+        </div>
+			  <input type="submit" id="loginBtn" value="Inscription" disabled >
 		  </div>
-		  <p id="message"></p>
-			
+		  <p id="message"></p>	
 		</form>
 	</div>
 	<div class="overlay-container-up">
@@ -88,103 +113,9 @@
 {%block js %} 
 <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
 <script src="{% static 'firebase/firebase_site.js' %}"></script>
+<script src="{% static 'login/js/signup.js' %}"></script>
 <script>
-       // get the number step 
-        const item1 = document.querySelector(".item1");
-        const item2 = document.querySelector(".item2");
-        const item3 = document.querySelector(".item3");
-		const item4 = document.getElementById("item4");
-        // get the div step button
-        const part_pass = document.querySelector(".pass");
-        const part_personnel = document.querySelector(".personnel_info"); 
-        const part_contact = document.querySelector(".contact_info");
-      const profil_info = document.querySelector(".profil_info");  
-      const body_second = document.querySelector(".body-second");
-        const from_main = document.querySelector(".form-main "); 
-        // create function top change de step 
-      function Suivant(a){
-            if(a == 1){
-              from_main.classList.add("form-main-2")
-              body_second.classList.add("body-second-2")
-              item1.classList.add("isactived");
-              part_pass.classList.remove("isactived");
-              item2.classList.add("isactived");
-              part_personnel.classList.add("isactived");
-            }
-            if(a == 2){
-             
-              item1.classList.add("isactived");
-              item2.classList.add("isactived");
-              part_personnel.classList.remove("isactived");
-              item3.classList.add("isactived");
-              part_contact.classList.add("isactived");
-            }
-			if(a == 3){
-              item1.classList.add("isactived");
-              item2.classList.add("isactived");
-			  item3.classList.add("isactived");
-			  part_contact.classList.remove("isactived");
-              item4.classList.add("isactived");
-              profil_info.classList.add("isactived");
-            }
-      }
-      function Precedent(a,height){
-            if(a == 2){
-              item2.classList.remove("isactived");
-              part_personnel.classList.remove("isactived");
-              item1.classList.add("isactived");
-              part_pass.classList.add("isactived");
-            }
-            if(a == 3){
-              item3.classList.remove("isactived");
-              part_contact.classList.remove("isactived");
-              item1.classList.add("isactived");
-              item2.classList.add("isactived");
-              part_personnel.classList.add("isactived");
-             
-            }
-			if(a == 4){
-              item4.classList.remove("isactived");
-              profil_info.classList.remove("isactived");
-              item1.classList.add("isactived");
-              item2.classList.add("isactived");
-			  item3.classList.add("isactived");
-              part_contact.classList.add("isactived");
-             
-            }
-      }
-		
-		  function check(){
-       // get the value for form password 
-        var password = document.forms["myForm"]["password"].value;
-        var confirmpassword = document.forms["myForm"]["confirm_password"].value;
-        var email = document.forms["myForm"]["email"].value;
-        var suivant_part_pass = document.getElementById("suivant_part_pass");
-  
-        if(email != '' && password !='' && confirmpassword != ''){
-          if(password.length < 8){
-              var message = document.getElementById("message").innerHTML="Mot de passe doit etre superieur a 8.";
-              }else{
-                  var message = document.getElementById("message").innerHTML="";
-                  if(password == confirmpassword){
-                      var message = document.getElementById("message").innerHTML='<span style="color:green;"><i class="fa fa-triangle-exclamation"></i>Ca Correspondre!</span>';
-                      suivant_part_pass.disabled = false;
-                  }else{
-                      var message = document.getElementById("message").innerHTML='<span style="color:rgb(134, 43, 43);"><i class="fa fa-circle-exclamation"></i>Doit Correspondre!</span>';
-                      suivant_part_pass.disabled = true;
-                  }
-            }   
-      }
-    }
       
-      function img_profil(event){
-                  if (event.target.files.length > 0) { 
-                  var src = URL.createObjectURL(event.target.files[O]) ;  
-                  var preview = document.getEIementById("img_profil") ; 
-                  preview. src = src;
-                  preview.style.display = "block";
-                }
-          }
-  </script>    
+</script>    
 {%endblock js %}
 {% endblock Content %}

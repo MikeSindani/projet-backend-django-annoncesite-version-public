@@ -7,6 +7,9 @@
 {%block links %} 
 <link rel="stylesheet" href="{% static 'dashbord/css/style-dashbord.css' %}">
 {%endblock links %}
+{%block Connexion %}
+    {% include "header/nav_connexion.html" %}
+{%endblock Connexion %} 
 
 {% block Content %}
  <div class="container">
@@ -20,7 +23,7 @@
                 {% endif%} 
             </a>
             <div class="dash-profil-text">
-                <h3 class="dash-username">{{data.nom}}</h3>
+                <h3 class="dash-username">{{data.prenom}} - {{data.nom}}</h3>
                 <P class="dash-useremail">{{data.email}}</P>
                 <div class="dash-socialmedia">
                     <i class="fa fa-whatsapp" aria-hidden="true"></i>
@@ -69,7 +72,7 @@
                                 <input type="number" placeholder="Quatite" name="quatite">
                                 <textarea rows="4" cols="50" name="descp"></textarea>
                                 <div class="btn">
-                                    <button type="button" onclick="Suivant(1,'400px')" >Suivant</button>
+                                    <button type="button" onclick="Suivant(1,'500px')" >Suivant</button>
                                 </div>  
                             </div>
                             <div class="part part_info_2">
@@ -78,6 +81,8 @@
                                 <input type="number" placeholder="Prix Minimun" name="prix_min">
                                 <input type="number" placeholder="Prix Maximun" name="prix_max">
                                 <br>
+                                <input type="date" placeholder="Mettez le delai Minimun " name="Delai_min">
+                                <input type="date" placeholder="Mettez le delai Maximun" name="Delai_max">
                                 <div class="btn">
                                     <button type="button" id="btn_precedent"onclick="Precedent(2,'500px')">Precedent</button>
                                     <button type="button" id="btn_suivant" onclick="Suivant(2,'500px')" >Suivant</button>
@@ -280,13 +285,7 @@
     
     </div>
    
-    <div class="dash-flotant-haut">
-        <img class="dash-flotant" src="img/pers.jpg" width="30" height="30" alt="">
-        <P class="dash-flotant-username">
-            Mike Sindani
-        </P>
-        <button class="dash-entre">Dashbord</button>
-    </div>
+   
  </div>
     
     {%block js %} 

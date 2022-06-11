@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 {%block titre%}Connexion{%endblock titre %}
+{%block Connexion %}
+    {% if uid %}
+        {% include "header/nav_connexion.html" %}
+   {% else %}
+      {% include "header/nav.html" %}
+   {% endif %}
+{%endblock Connexion %} 
 {% block Content %}
 <style>
     .body-second .overlay-container-in .overlay-in{

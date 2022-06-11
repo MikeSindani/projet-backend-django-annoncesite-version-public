@@ -30,6 +30,15 @@
               }
         </style>
 {%endblock style %}
+
+{%block Connexion %}
+    {% if uid %}
+        {% include "header/nav_connexion.html" %}
+   {% else %}
+      {% include "header/nav.html" %}
+   {% endif %}
+{%endblock Connexion %} 
+
 {% block Content %} 
 
     <div class="conteneur-card">
