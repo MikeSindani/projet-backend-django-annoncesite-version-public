@@ -89,8 +89,10 @@ def postsignin(request):
 
     # notre objet ann
     #com_list = geta.afficher_annonces_alls(database)
+    # notre objet class afficher 
+    com_list = geta.afficher_annonces_user_all(database,uid)
        
-    return render(request, "dashbord/dashbord.html", {"data":userdata})
+    return render(request, "dashbord/dashbord.html", {"com_list": com_list,"data":userdata})
 
 
     

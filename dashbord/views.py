@@ -1,9 +1,13 @@
-from email import message
+
 from django.shortcuts import render
 import pyrebase 
 from annoncesite import fonction
 from annoncesite import firebase
 from django.contrib import auth
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+
 firebase_app = pyrebase.initialize_app(firebase.firebaseConfig)
 # Get a reference to the auth service
 authe = firebase_app.auth()
@@ -18,15 +22,96 @@ def dashbord(request):
         uid = geta.get_token(request, authe)
         # intruction pour recuprer le nom d'utilisateur
         userdata = geta.get_profil_data(database = database,uid = uid )
-        print("HUM = " + str(userdata))
-        return render(request,"dashbord/dashbord.html",{"data": userdata})
+        print("HUM = " + str(userdata))   
     except:
         message = "Veillez cree Un compte ou Connectez-Vous"
         return render(request,"login/signUp.html", {"msg": message})
-        
+   # notre objet class afficher 
+    com_list = geta.afficher_annonces_user_all(database,uid)
+    message=" "
+    return render(request, "dashbord/dashbord.html", {"com_list": com_list, "msge": message, "data": userdata})
 
 def logout(request):
     auth.logout(request)
     #geta = fonction.AfficherAnnonce()
     #com_list = geta.afficher_annonces_publics_alls(database)
     return render(request, "home/home.html")
+
+def create_annonce(request):
+
+    import time
+    from datetime import datetime, timezone
+    import pytz
+    # la date de la publication
+    tz = pytz.timezone('Europe/Berlin')
+    time_now = datetime.now(timezone.utc).astimezone(tz)
+    #millis = int(time.mktime(time_now.timetuple())) #le temps qu'on a recuperer
+    id_annonce = time_now.strftime('%Y%m%d%H%M%S%f')
+    annee = time_now.year
+    mois = time_now.month
+    day = time_now.day
+    clock = time_now.strftime('%H %M %S')
+
+    # on recuper les infos du formulaires
+    titre = request.POST.get("titre")
+    cat = request.POST.get("cat")
+    descp = request.POST.get("descp")
+    produit = request.POST.get("produit")
+    prix = request.POST.get("prix")
+    prix_min = request.POST.get("prix_min")
+    prix_max = request.POST.get("prix_max")
+    delai_min = request.POST.get("delai_min")
+    delai_max = request.POST.get("delai_max")
+    quatite = request.POST.get("quatite")
+    imgurl1 = request.POST.get("imgurl1")
+    imgurl2 = request.POST.get("imgurl2")
+    imgurl3 = request.POST.get("imgurl3")
+
+
+    # intrcution pour recupere l'id dans la session
+    geta = fonction.AfficherAnnonce()
+    uid = geta.get_token(request, authe)
+    userdata = geta.get_profil_data(database,uid)
+
+    #le dictionnaire des donnes a envoyer a firebase
+    data = {
+        "titre": titre,
+        "categorie": cat,
+        "description": descp,
+        "uid":uid,
+        "quatite":quatite,
+        "Annee": annee,
+        "mois":mois,
+        "day" : day,
+        "Heure" :clock,
+        "prix":prix,
+        "prix_max":prix_max,
+        "prix_min":prix_min,
+        "delai_max":delai_max,
+        "delai_min":delai_min,
+        "produit": produit,
+        "imgurl1":imgurl1,
+        "imgurl2":imgurl2,
+        "imgurl3":imgurl3,
+    }    
+    #put data in the firedata base
+    try:
+        database.child("annonces").child(id_annonce).set(data)
+        database.child("utilisateurs").child(uid).child("annonces").child(id_annonce).set(data)
+        if cat == "agriculture":
+           database.child("categories").child(cat).child(id_annonce).set(data)
+           database.child("utilisateurs").child(uid).child("categories").child(id_annonce).set(data)
+        if cat == "elevage":
+           database.child("categories").child(cat).child(id_annonce).set(data)
+           database.child("utilisateurs").child(uid).child("categories").child(cat).child(id_annonce).set(data)
+    except:
+        message = "Annonce non publies"
+        return render(request, "dashbord/dashbord.html", {"msge": message, "data": userdata})
+    message = "Annonce  publies"
+
+    # notre objet class afficher 
+    com_list = geta.afficher_annonces_user_all(database,uid)
+    #return render(request, "dashbord/dashbord.html", {"com_list": com_list, "msge": message, "data": userdata})
+    url = reverse('dashbord')
+    ret = HttpResponseRedirect(url)
+    return ret

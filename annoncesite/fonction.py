@@ -4,36 +4,28 @@ from imghdr import what
 class AfficherAnnonce:
      def afficher_annonces_publics_alls(self, database):
             
-        timeshamps_Agri = database.child("Annonces").child("Agriculture").shallow().get().val()
-        timeshamps_Ele = database.child("Annonces").child("Elevage").shallow().get().val()
+        timeshamps= database.child("Annonces").shallow().get().val()
+        lis_time = []
+        for i in timeshamps:
+            lis_time.append(i)
 
-        if timeshamps_Agri or timeshamps_Ele:
-            lis_time = []
-            if timeshamps_Agri :
-                for i in timeshamps_Agri:
-                    lis_time.append(i)
-            if timeshamps_Ele :
-                for i in timeshamps_Ele:
-                    lis_time.append(i)
+        lis_time.sort(reverse=True)
+        print("test = " + str(lis_time))
 
-            lis_time.sort(reverse=True)
-            print("test = " + str(lis_time))
-            work = []
-            for i in lis_time:
-                worA = database.child("Annonces").child("Agriculture").child(i).get().val()
-                if worA :
-                   work.append(worA)
-                worE = database.child("Annonces").child("Elevage").child(i).get().val()
-                if worE :
-                   work.append(worE)
-            print("test2 = " + str(work))
+        work = []
 
-            data = []
+        for i in lis_time:
+            wor = database.child("Annonces").child(i).get().val()
 
-            for i in lis_time:
-                i = float(i)
-                dat = datetime.datetime.fromtimestamp(i).strftime('%H:%M: %d-%m-%Y')
-                data.append(dat)
+        work.append(wor)
+        print("test2 = " + str(work))
+
+        data = []
+
+        for i in lis_time:
+            i = float(i)
+            dat = datetime.datetime.fromtimestamp(i).strftime('%H:%M: %d-%m-%Y')
+            data.append(dat)
 
             print(data)
             # on combine le touts
@@ -126,8 +118,8 @@ class AfficherAnnonce:
         }
         # rendre les dictionnaires 
         return data
-     def afficher_annonces_alls(self, database):
-        timeshamps = database.child("annonces").shallow().get().val()
+     def afficher_annonces_user_all(self, database,uid):
+        timeshamps = database.child("utilisateurs").child(uid).child("annonces").shallow().get().val()
         if timeshamps :
             lis_time = []
 
@@ -139,20 +131,18 @@ class AfficherAnnonce:
             print("test = " + str(lis_time))
 
             for i in lis_time:
-                wor = database.child("annonces").child(i).get().val()
+                wor = database.child("utilisateurs").child(uid).child("annonces").child(i).get().val()
                 work.append(wor)
-            print("test2 = " + str(work))
-
+            print("liste = " + str(work))
+                
             data = []
-
-            for i in lis_time:
+            ''' for i in lis_time:
                 i = float(i)
                 dat = datetime.datetime.fromtimestamp(i).strftime('%H:%M: %d-%m-%Y')
                 data.append(dat)
-
-            print(data)
+            print(data)'''
             # on combine le touts
-            com_list = zip(lis_time, data, work)
+            com_list = zip(lis_time, work)
             return com_list   
         else:
              return False
