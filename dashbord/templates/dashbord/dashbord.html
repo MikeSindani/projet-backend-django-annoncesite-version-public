@@ -33,14 +33,12 @@
             <button class="btn-modifier">Modifier</button>      
         </div>
     </div>
-
     <div class="dash-contaneur">
         <div class="container">
             <div class="wrapper">
                 <button id="btn-modal-annonce" class="button"> <i class="fa fa-plus" aria-hidden="true"></i> Ajouter une Annonce </button>
             </div>
         </div>
-
         <div class="modal-connexion" id="myModal">
             <!-- Modal content -->
             <div  class="modal-content">
@@ -75,23 +73,32 @@
                                 <input id="quatite"  type="number" placeholder="Quatite(exemple:5)" name="quatite">
                                 <textarea id="desc" rows="4" cols="50" name="descp" placeholder="Description (exemple: je ai 5 poules de couleurs blancs ...) "></textarea>
                                 <div class="btn">
-                                    <button id="btn_suivant_1" type="button" onclick="Suivant(1,'500px')" >Suivant</button>
+                                    <button id="btn_suivant_1" type="button" onclick="Suivant(1,'530px')" >Suivant</button>
                                 </div>  
                             </div>
                             <div class="part part_info_2">
-                                <label for="Prix">Veillez Introduire un Prix fixe en CDF</label>
-                                <input type="number" placeholder="Prix (exemple:50000) " name="prix">
+                                <br>
+                                <label for="devise">Devise:</label>
+                                <select id="cat" name="devise">
+                                    <option >Choississez la Devise</option>
+                                    <option value="CDF">CDF(Franc Congolais)</option>
+                                    <option value="USD">USD( Dollar Americain)</option>
+                                </select> 
+                                <br>
+                                <label for="Prix">Veillez Introduire un Prix fixe</label>
+                                <input type="number" placeholder="Prix (exemple:50000 ou 50) " name="prix">
                                 <br>
                                 <label for="prix_min">Veillez Introduire un Interval de Prix de Votre produit </label>
-                                <input type="number" placeholder="Prix Minimun (exemple:1000)" name="prix_min">
-                                <input type="number" placeholder="Prix Maximun (exemple:5000" name="prix_max">
+                                <input type="number" placeholder="Prix Minimun (exemple:1000 ou 10)" name="prix_min">
+                                <input type="number" placeholder="Prix Maximun (exemple:5000 ou 10 )" name="prix_max">
                                 <br>
                                 <label for="Delai_max">Veillez Introduire un delai Max et Min de Vente de Votre produit</label>
                                 <input type="date"  name="delai_min">
                                 <input type="date"  name="delai_max">
-                                 <p style=" text-align: center;" ><strong>NB:les Prix sont en CDF</strong></p>
+                                <br>
+                                <br>
                                 <div class="btn">
-                                    <button type="button" id="btn_precedent"onclick="Precedent(2,'500px')">Precedent</button>
+                                    <button type="button" id="btn_precedent"onclick="Precedent(2,'530px')">Precedent</button>
                                     <button type="button" id="btn_suivant" onclick="Suivant(2,'530px')" >Suivant</button>
                                 </div>  
                                     
@@ -153,27 +160,40 @@
 
         <div id="News" class="tabcontent">
         <h1 class="text">Vos Annonces</h1>
-        <p>Some news this fine day!</p> 
+         {%if uid %}
+           <p>Voici la liste de Vos Annonces</p> 
+         {% else %}
+           <p></p>
+         {% endif%}
         <div class="conteneur-card">
-            {%if com_list  %}
-            {%for lis_time,work in com_list %}
+
+        {%for lis_time,work in com_list %}
 
             <div class="card-long" onClick='window.location.href="http://www.google.com"'>
                 <div class="thumbnail">
-                    <img src="https://images.pexels.com/photos/375510/pexels-photo-375510.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" class="card-image">
+                    {% if work.imgurl1 %}
+                       <img src="{{work.imgurl1}}" alt="" class="card-image">
+                    {% elif work.imgurl2 %}
+                       <img src="{{work.imgurl2}}" alt="" class="card-image">
+                    {% elif work.imgurl3 %}
+                       <img src="{{work.imgurl3}}" alt="" class="card-image">
+                    {% else %}
+                      <img src="https://images.pexels.com/photos/375510/pexels-photo-375510.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" class="card-image">
+                    {%endif%}
                 </div>
                 <div class="contenain">
-                    <h2 class="titre">{{work.titre}} </h2>
-                    <p class="subtitle">Disponible</p>
-                    <p class="description"> {{work.description}}</p>
+                    <h2 class="titre">{{work.titre|title }} </h2>
+                    <div class="prix">{{work.prix}} {% if work.devise == USD %}${% elif work.devise == CDF %}Fc{% endif %}<span class="prix_interval">{{work.prix_min}} - {{work.prix_max}} {% if work.devise == USD %}${% elif work.devise == CDF %}Fc{% endif %}</span></div>
+                    <div class="subtitle">Disponible</div>
+                    <p class="description"> {{work.description|truncatechars:100}}</p>
                     <div class="element">
-                        <p class="vu"><i class="fa fa-users" aria-hidden="true"> {{data.nom}} {{data.prenom}}</i></p>
-                        <p class="vu"><i class="fas fa-clock    "></i> {{work.annee}}</p>
-                        <p class="vu"> <i class="fa fa-map-marker" aria-hidden="true">{{data.adr}}</i></p>  
+                        <span class="vu"><i class="fa fa-users" aria-hidden="true"> {{data.prenom}} {{data.nom}} </i></span>
+                        <span class="vu"><i class="fas fa-clock    "></i> {{work.Annee}}</span>
+                        <span class="vu"> <i class="fa fa-map-marker" aria-hidden="true"> {{data.adr}}</i></span>  
                     </div> 
                 </div>
                 <div  class="more">
-                    <a href="">Voir</a>
+                    <a href="">Voir Plus</a>
                 </div>
                 <div class="dash_control">
                     <div  class="more" id="modifier">
@@ -184,10 +204,9 @@
                     </div>
                 </div>     
             </div>
-            {% endfor %}
-            {%else %}
+            {% empty %}
               <h3 style="color:rgb(71, 71, 71) ;">Pas d'annonce Appuyer sur Ajouter Annonnce.</h3>
-            {%endif%}
+     {% endfor %}
            
     
         </div>

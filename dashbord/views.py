@@ -29,13 +29,15 @@ def dashbord(request):
    # notre objet class afficher 
     com_list = geta.afficher_annonces_user_all(database,uid)
     message=" "
-    return render(request, "dashbord/dashbord.html", {"com_list": com_list, "msge": message, "data": userdata})
+    return render(request, "dashbord/dashbord.html", {"com_list": com_list, "msge": message, "data": userdata,"uid":uid})
 
 def logout(request):
     auth.logout(request)
     #geta = fonction.AfficherAnnonce()
     #com_list = geta.afficher_annonces_publics_alls(database)
-    return render(request, "home/home.html")
+    url = reverse('home')
+    ret = HttpResponseRedirect(url)
+    return ret
 
 def create_annonce(request):
 
@@ -57,6 +59,7 @@ def create_annonce(request):
     cat = request.POST.get("cat")
     descp = request.POST.get("descp")
     produit = request.POST.get("produit")
+    devise = request.POST.get("devise")
     prix = request.POST.get("prix")
     prix_min = request.POST.get("prix_min")
     prix_max = request.POST.get("prix_max")
@@ -85,6 +88,7 @@ def create_annonce(request):
         "day" : day,
         "Heure" :clock,
         "prix":prix,
+        "devise":devise,
         "prix_max":prix_max,
         "prix_min":prix_min,
         "delai_max":delai_max,

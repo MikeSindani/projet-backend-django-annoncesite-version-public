@@ -2,10 +2,15 @@ from django.shortcuts import render
 import pyrebase
 from annoncesite import fonction
 from annoncesite import firebase
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+
 firebase_app = pyrebase.initialize_app(firebase.firebaseConfig)
 # Get a reference to the auth service
 authe = firebase_app.auth()
 database = firebase_app.database()
+
 # Create your views here.
 def signIn(request):
      try:
@@ -63,7 +68,10 @@ def postsignup(request):
     message = "utilisateur a ete cree"
     # notre objet ann
     #com_list = geta.afficher_annonces_alls(database)
-    return render(request, "dashbord/dashbord.html",  { "msg": message, "data": userdata})
+    #return render(request, "dashbord/dashbord.html",  { "msg": message, "data": userdata})
+    url = reverse('dashbord') 
+    ret = HttpResponseRedirect(url)
+    return ret
 
 def postsignin(request):
     email = request.POST.get("email")
@@ -92,7 +100,10 @@ def postsignin(request):
     # notre objet class afficher 
     com_list = geta.afficher_annonces_user_all(database,uid)
        
-    return render(request, "dashbord/dashbord.html", {"com_list": com_list,"data":userdata})
+    #return render(request, "dashbord/dashbord.html", {"com_list": com_list,"data":userdata})
+    url = reverse('dashbord') 
+    ret = HttpResponseRedirect(url)
+    return ret
 
 
     

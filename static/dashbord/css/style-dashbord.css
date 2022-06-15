@@ -1,6 +1,19 @@
 /* IMPORTATION DES COMPOSANTS9*/
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&family=Quicksand:wght@300;500;600&display=swap');
+/* NOUVEAU DANS LES CARD */ 
+.conteneur-card .card-long .contenain .prix{
+  font-weight: bold;
+  color: #555555;
+  margin: 5px;
+  font-size: 18px;
+}
+.conteneur-card .card-long .contenain .prix_interval{
+  font-weight: bold;
+  color: #808080;
+  margin: 5px;
+  font-size: 14px;
+}
 /* WRAPPER */
 .btn_uplaod{
   position: relative;
@@ -27,7 +40,7 @@
   margin-left: -300px;
   max-width: 600px;
   width: 600px;
-  z-index: 5;
+  z-index: 3;
 }
 
 /* OVERLAY */
@@ -585,9 +598,9 @@ body {
 .conteneur-card
 .card-long .contenain .titre {
   color: #413333;
-  text-transform: uppercase;
   padding: 0 5px 0 5px;
   font-weight: bold;
+  margin: 7px 0;
 }
 
 .card-long .contenain .description {

@@ -41,31 +41,60 @@
     <div class="slider">
       <div class="slide">
           <div class="center">
-              <h1 class="logo" translate="no">AnnonceLushi</h1>
+              <h1 class="logo" translate="no">Annoncelushi</h1>
           </div> 
+          {% if uid %}
           <div class="mySlides">
-              <img  src="https://images.pexels.com/photos/5490702/pexels-photo-5490702.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" style="width:100%;height:500px; ">
-              <div class="center-slide">
-                <h3 class="titre"> BIENVENU(E) SUR NOTRE SITE</h3>
-                <p class="subtitre">Ce Site permet de vous donner les annonces 
-                    des produits Agricoles et Elevages. 
-                </p>
-                <div class="links">
-                  <a href="{% url 'signIn' %}" class="link">Connexion</a>
-                </div>
-              </div> 
+            <img  src="https://images.pexels.com/photos/754308/pexels-photo-754308.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" style="width:100%;height:500px; ">
+            <div class="center-slide">
+              <h3 class="titre"> BIENVENU(E) SUR NOTRE SITE</h3>
+              <p class="subtitre">Ce Site permet de vous donner les annonces 
+                  des produits Agricoles et Elevages. </p>
+              <div class="links">
+                <a href=" {% url 'dashbord' %}" style="background-color:tomato ;" class="link">Dashbord</a>
+              </div>
+            </div> 
           </div>
+          {% else %}
           <div class="mySlides">
-              <img  src="https://images.pexels.com/photos/4022123/pexels-photo-4022123.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" style="width:100%;height:500px;">
-              <div class="center-slide">
-                <h3 class="titre"> DEVENEZ NOTRE PATERNAIRE</h3>
-                <p class="subtitre">Creer Un compte chez nous afin des publies vos annonces.  
-                </p>
-                <div class="links">
-                  <a href=" {% url 'signUp' %}" class="link">Inscrption</a>
-                </div>
-              </div>   
-          </div>
+            <img  src="https://images.pexels.com/photos/5490702/pexels-photo-5490702.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" style="width:100%;height:500px; ">
+            <div class="center-slide">
+              <h3 class="titre"> BIENVENU(E) SUR NOTRE SITE</h3>
+              <p class="subtitre">Ce Site permet de vous donner les annonces 
+                  des produits Agricoles et Elevages. 
+              </p>
+              <div class="links">
+                <a href="{% url 'signIn' %}" class="link">Connexion</a>
+              </div>
+            </div> 
+        </div>
+          
+          {% endif%}
+          {% if uid %}
+          <div class="mySlides">
+            <img  src="https://images.pexels.com/photos/11467286/pexels-photo-11467286.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" style="width:100%;height:500px;">
+            <div class="center-slide">
+              <h3 class="titre"> MERCI POUR NOTRE ETRE DEVENU NOTRE PARTENAIRE</h3>
+              <p class="subtitre">Publier Autant d'Annonce que Vous voullez dans le Dashbord.</p>
+              <div class="links">
+                <a href=" {% url 'dashbord' %}" style="background-color:tomato ;" class="link">Dashbord</a>
+              </div>
+            </div>   
+        </div>
+        {% else %}
+        <div class="mySlides">
+            <img  src="https://images.pexels.com/photos/4022123/pexels-photo-4022123.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" style="width:100%;height:500px;">
+            <div class="center-slide">
+              <h3 class="titre"> DEVENEZ NOTRE PATERNAIRE</h3>
+              <p class="subtitre">Creer Un compte chez nous afin des publies vos annonces.  
+              </p>
+              <div class="links">
+                <a href=" {% url 'signUp' %}" class="link">Inscrption</a>
+              </div>
+            </div>   
+        </div>
+        {% endif%}
+
         <div class="mySlides">
             <img  src="https://images.pexels.com/photos/1300375/pexels-photo-1300375.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" style="width:100%;height:500px;">
           <div class="center-slide">
