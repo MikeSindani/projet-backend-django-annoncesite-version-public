@@ -183,7 +183,7 @@
                 </div>
                 <div class="contenain">
                     <h2 class="titre">{{work.titre|title }} </h2>
-                    <div class="prix">{{work.prix}} {% if work.devise == USD %}${% elif work.devise == CDF %}Fc{% endif %}<span class="prix_interval">{{work.prix_min}} - {{work.prix_max}} {% if work.devise == USD %}${% elif work.devise == CDF %}Fc{% endif %}</span></div>
+                    <div class="prix">{{work.prix}} {% if work.devise == "USD" %}${% elif work.devise == "CDF" %}Fc{% endif %}<span class="prix_interval">{{work.prix_min}} - {{work.prix_max}} {% if work.devise == "USD" %}${% elif work.devise == "CDF" %}Fc{% endif %}</span></div>
                     <div class="subtitle">Disponible</div>
                     <p class="description"> {{work.description|truncatechars:100}}</p>
                     <div class="element">
