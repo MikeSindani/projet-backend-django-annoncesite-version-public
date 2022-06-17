@@ -89,12 +89,24 @@
                                 <input type="number" placeholder="Prix (exemple:50000 ou 50) " name="prix">
                                 <br>
                                 <label for="prix_min">Veillez Introduire un Interval de Prix de Votre produit </label>
-                                <input type="number" placeholder="Prix Minimun (exemple:1000 ou 10)" name="prix_min">
-                                <input type="number" placeholder="Prix Maximun (exemple:5000 ou 10 )" name="prix_max">
+                                <input id="prix" type="number" placeholder="Prix Minimun (exemple:1000 ou 10)" name="prix_min">
+                                <input id="prix" type="number" placeholder="Prix Maximun (exemple:5000 ou 10 )" name="prix_max">
                                 <br>
-                                <label for="Delai_max">Veillez Introduire un delai Max et Min de Vente de Votre produit</label>
-                                <input type="date"  name="delai_min">
-                                <input type="date"  name="delai_max">
+                                <label for="Delai">Veillez Introduire un delai Max et Min sera en fonction de la dete</label>
+                                <br>
+                                <label for="delai">Delai:</label>
+                                <select id="cat" name="delai">
+                                    <option >Choississez le Delai max</option>
+                                    <option value="1">24 Heure</option>
+                                    <option value="2">48 Heures</option>
+                                    <option value="3">3 jours</option>
+                                    <option value="7">1 Semaines</option>
+                                    <option value="14">2 Semaines</option>
+                                    <option value="30">1 Mois</option>
+                                    <option value="90">3 Mois</option>
+                                    <option value="240">6 Mois</option>
+                                    <option value="365">1 Annee</option>
+                                </select> 
                                 <br>
                                 <br>
                                 <div class="btn">
@@ -104,20 +116,29 @@
                                     
                             </div>
                             <div class="part part_photo">
-                                    <input type="file" name="files[]" id="file1">
-                                    <button type="button" class="btn_uplaod" onclick="uploadimage(1)" >Envoyer La Photo 1</button> 
-                                    <br>
-                                    <input type="file"  name="files[]" id="file2">
-                                    <button type="button"  class="btn_uplaod" onclick="uploadimage(2)">Envoyer La Photo 2</button> 
-                                    <br>
-                                    <input type="file" name="files[]" id="file3">
-                                    <button type="button"  class="btn_uplaod" onclick="uploadimage(3)">Envoyer La Photo 3</button> 
+                                    <div class="affiche_image">
+                                        <span class="img_show" id="selectedBanner1"></span>
+                                        <span class="img_show" id="selectedBanner2"></span>
+                                        <span class="img_show" id="selectedBanner3"></span>
+                                    </div>
+                                    <div>
+                                        <input class="image_file" type="file" name="files[]" id="file1">
+                                        <button type="button" class="btn_uplaod" onclick="uploadimage(1)" >Envoyer La Photo 1</button>
+                                    </div>
+                                    <div>
+                                        <input class="image_file" type="file"  name="files[]" id="file2">
+                                        <button type="button"  class="btn_uplaod" onclick="uploadimage(2)">Envoyer La Photo 2</button> 
+                                    </div>
+                                    <div>
+                                        <input class="image_file" type="file" name="files[]" id="file3">
+                                        <button type="button"  class="btn_uplaod" onclick="uploadimage(3)">Envoyer La Photo 3</button> 
+                                    </div>
                                     <br>
                                     <input type="hidden" name="imgurl1" id="url1">
                                     <input type="hidden" name="imgurl2" id="url2">
                                     <input type="hidden" name="imgurl3" id="url3">
                                     <br>
-                                    <div class="wrap-circles" style="display:none ;">
+                                    <div class="wrap-circles">
                                         <div class="circle per-0">
                                             <div class="inner">0%</div>
                                         </div>
@@ -183,7 +204,8 @@
                 </div>
                 <div class="contenain">
                     <h2 class="titre">{{work.titre|title }} </h2>
-                    <div class="prix">{{work.prix}} {% if work.devise == "USD" %}${% elif work.devise == "CDF" %}Fc{% endif %}<span class="prix_interval">{{work.prix_min}} - {{work.prix_max}} {% if work.devise == "USD" %}${% elif work.devise == "CDF" %}Fc{% endif %}</span></div>
+                    <div class="prix">{{work.prix}} {% if work.devise == "USD" %}${% elif work.devise == "CDF" %}Fc{% endif %}<span class="prix_interval">{{work.prix_min}} {% if work.devise == "USD" %}${% elif work.devise == "CDF" %}Fc{% endif %}
+                         - {{work.prix_max}} {% if work.devise == "USD" %}${% elif work.devise == "CDF" %}Fc{% endif %}</span></div>
                     <div class="subtitle">Disponible</div>
                     <p class="description"> {{work.description|truncatechars:100}}</p>
                     <div class="element">
@@ -283,9 +305,218 @@
    
    
  </div>
-    
+ 
+
     {%block js %} 
     <script src="{% static 'dashbord/js/dash-js.js' %}"></script>
     <script src="{% static 'dashbord/js/modal.js' %}"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+    <script>
+         
+      // Get a reference to the storage service, which is used to create references in your storage bucket
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var Config = {
+                    apiKey: "AIzaSyB8EzstENagg8-JjE-C90sdowpd58AInN8",
+                    authDomain: "appmemoire-a5a2a.firebaseapp.com",
+                    databaseURL: "https://appmemoire-a5a2a-default-rtdb.firebaseio.com",
+                    projectId: "appmemoire-a5a2a",
+                    storageBucket: "appmemoire-a5a2a.appspot.com",
+                    messagingSenderId: "86048778948",
+                    appId: "1:86048778948:web:12646f497c766ed9f5b791"
+                };
+        
+        firebase.initializeApp(Config);
+
+      function uploadimage(a){
+                  // Your web app's Firebase configuration
+                
+
+                progressBar(0);
+                if( a==1){
+                  var file = document.getElementById("file1").files[0];
+                  upimage(file,a);
+                }
+                if( a==2){
+                  var file = document.getElementById("file2").files[0];
+                  upimage(file,a);
+                }
+                if( a==3){
+                  var file = document.getElementById("file3").files[0];
+                  upimage(file,a);
+                }
+
+                function upimage(files,b){
+                  progressBar(25);
+                  var file = files; 
+                  var B = b;
+                  var storage = firebase.storage();
+
+                  var storageRef = storage.ref();
+
+                  var thisref = storageRef.child("annonces").child(file.name).put(file);
+
+                  thisref.on('state_changed',function(snapshot){
+
+                  console.log("file uplaoded succesfully");
+                  progressBar(50);
+                  },
+                  function(error) {
+
+                  },
+
+                  function() {
+                  // Upload completed successfully, now we can get the download URL
+                  var downloadURL = thisref.snapshot.downloadURL;
+                if( B==1){
+                  console.log("got url");
+                  progressBar(75);
+                  document.getElementById("url1").value = downloadURL;
+                  var url1 = downloadURL;
+                  console.log(url1);
+                  console.log("file uploaded successfully in firebase img1");
+                  progressBar(100);
+                } 
+                if( B==2){
+                  console.log("got url");
+                  progressBar(75);
+                   document.getElementById("url2").value = downloadURL;
+                   var url2 = downloadURL;
+                   console.log(url2);
+                   console.log("file uploaded successfully in firebase img2");
+                  progressBar(100);
+                } 
+                if( B==3){
+                  console.log("got url");
+                  progressBar(75);
+                  document.getElementById("url3").value = downloadURL;
+                  var url3 = downloadURL;
+                  console.log(url3);
+                  console.log("file uploaded successfully in firebase img3");
+                  progressBar(100);
+                } 
+                if(url1 != "" &&  url2 !="" && url3 !=""){
+                  document.getElementById("annoncer_btn").disabled= false;
+                }else{
+                  document.getElementById("annoncer_btn").disabled= true;
+                }
+               
+
+            });
+         }
+                
+    }
+      function  progressBar(value){
+      if(value == 0){
+      document.querySelector(".per-0").style.display="none";
+      document.querySelector(".per-0").style.display="block";
+      }
+      if(value == 25){
+        document.querySelector(".per-25").style.display="none";
+        document.querySelector(".per-0").style.display="none";
+        document.querySelector(".per-25").style.display="block";
+      }
+      if(value == 50){
+       document.querySelector(".per-50").style.display="none";
+       document.querySelector(".per-25").style.display="none";
+       document.querySelector(".per-50").style.display="block";
+      }
+      if(value == 75){
+        document.querySelector(".per-75").style.display="none";
+        document.querySelector(".per-50").style.display="none";
+        document.querySelector(".per-75").style.display="block";
+      }
+      if(value == 100){
+        document.querySelector(".per-75").style.display="none";
+        document.querySelector(".per-75").style.display="none";
+        document.querySelector(".per-100").style.display="block";
+      }
+    }
+        var selDiv1 = "";
+        var storedFiles1 = [];
+        var selDiv2 = "";
+        var storedFiles2 = [];
+        var selDiv3 = "";
+        var storedFiles3 = [];
+        $(document).ready(function () {
+          $("#file1").on("change", handleFileSelect1);
+          selDiv1 = $("#selectedBanner1");
+        });
+        $(document).ready(function () {
+          $("#file2").on("change", handleFileSelect2);
+          selDiv2 = $("#selectedBanner2");
+        });
+        $(document).ready(function () {
+          $("#file3").on("change", handleFileSelect3);
+          selDiv3 = $("#selectedBanner3");
+        });
+    
+        function handleFileSelect1(e) {
+          var files = e.target.files;
+          var filesArr = Array.prototype.slice.call(files);
+          filesArr.forEach(function (f) {
+            if (!f.type.match("image.*")) {
+              return;
+            }
+            storedFiles1.push(f);
+    
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              var html =
+                '<img src="' +
+                e.target.result +
+                "\" data-file='" +
+                f.name +
+                "alt='Category Image' height='70px' width='70px'>";
+              selDiv1.html(html);
+            };
+            reader.readAsDataURL(f);
+          });
+        }
+        function handleFileSelect2(e) {
+          var files = e.target.files;
+          var filesArr = Array.prototype.slice.call(files);
+          filesArr.forEach(function (f) {
+            if (!f.type.match("image.*")) {
+              return;
+            }
+            storedFiles2.push(f);
+    
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              var html =
+                '<img src="' +
+                e.target.result +
+                "\" data-file='" +
+                f.name +
+                "alt='Category Image' height='70px' width='70px'>";
+              selDiv2.html(html);
+            };
+            reader.readAsDataURL(f);
+          });
+        }
+        function handleFileSelect3(e) {
+          var files = e.target.files;
+          var filesArr = Array.prototype.slice.call(files);
+          filesArr.forEach(function (f) {
+            if (!f.type.match("image.*")) {
+              return;
+            }
+            storedFiles3.push(f);
+    
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              var html =
+                '<img src="' +
+                e.target.result +
+                "\" data-file='" +
+                f.name +
+                "alt='Category Image' height='70px' width='70px'>";
+              selDiv3.html(html);
+            };
+            reader.readAsDataURL(f);
+          });
+        }
+    
+      </script>
     {%endblock js %}
 {% endblock Content %}

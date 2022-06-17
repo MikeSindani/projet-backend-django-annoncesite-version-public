@@ -9,6 +9,19 @@
     color: tomato;
 }
 
+.conteneur-card .card-long .contenain .prix{
+    font-weight: bold;
+    color: #555555;
+    margin: 5px;
+    font-size: 18px;
+  }
+  .conteneur-card .card-long .contenain .prix_interval{
+    font-weight: bold;
+    color: #808080;
+    margin: 5px;
+    font-size: 14px;
+  }
+
 .card-long {
     display: flex;
     justify-content: space-around;
@@ -18,6 +31,7 @@
     margin: 10px;
     
 }
+
 .card-long .contenain .titre{
     color: rgb(65, 51, 51);
     text-transform: uppercase;
@@ -33,6 +47,7 @@
     font-size: 14px;
     line-height: 1.2em;
     word-wrap: break-word;
+    height: 50px;
 }
 .card-long .contenain .subtitle{
     color: rgb(19, 196, 19);
@@ -74,6 +89,8 @@
     display: flex;
     flex-direction: column;
     padding: 10px;
+    width: 650px;
+    
 }
 .card-long .contenain .element{
     display: flex;

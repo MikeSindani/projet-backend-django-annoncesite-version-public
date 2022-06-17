@@ -1,7 +1,60 @@
 /* IMPORTATION DES COMPOSANTS9*/
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&family=Quicksand:wght@300;500;600&display=swap');
+/*** <--- CIRCLE STYLES ---> ***/
+.circle {
+  display: none;
+  position: relative;
+  width: 70px;
+  height: 70px;
+  margin: 0.5rem;
+  border-radius: 50%;
+  background: #000000;
+  overflow: hidden;
+}
+.circle.per-25 {
+  background-image: conic-gradient(tomato 25%, #000000 0);
+}
+.circle.per-50 {
+  background-image: conic-gradient(tomato 50%, #000000 0);
+}
+.circle.per-75 {
+  background-image: conic-gradient(tomato 75%, #000000 0);
+}
+.circle.per-100 {
+  background-image: conic-gradient(tomato 100%, #000000 0);
+}
+.circle .inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  border-radius: 50%;
+  font-size: 1em;
+  font-weight: 300;
+  color: rgba(0, 0, 0, 0.75);
+}
 /* NOUVEAU DANS LES CARD */ 
+.part_photo .affiche_image{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.part_photo .affiche_image .img_show{
+  width: 72px;
+  height: 72px;
+  margin: 5px;
+  background-color: rgb(230, 227, 227);
+}
+.part_photo .image_file{
+  width: 50px;
+}
 .conteneur-card .card-long .contenain .prix{
   font-weight: bold;
   color: #555555;
@@ -17,14 +70,13 @@
 /* WRAPPER */
 .btn_uplaod{
   position: relative;
-  left: 20%;
   border-radius: 20px;
   border: 1px solid #09112e;
   background-color: #000000;
   color: #FFFFFF;
   font-size: 10px;
   font-weight: bold;
-  padding: 10px 60px;
+  padding: 10px 40px;
   margin: 0 5px;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -335,6 +387,16 @@ option {
   padding: 0.5vw 1vh;
   margin-top: 10px;
 }
+.modal-connexion .modal-content .modal-body form .part input[type="file"] {
+  border: none;
+  color: black;
+  background-color: #f3f3f3;
+  font-size: 16px;
+  width: 50%;
+  padding: 0.5vw 1vh;
+  margin-top: 10px;
+}
+
 
 .modal-connexion .modal-content .modal-body form .part textarea {
   border: none;

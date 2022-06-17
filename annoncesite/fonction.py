@@ -146,3 +146,62 @@ class AfficherAnnonce:
             return com_list   
         else:
              return False
+     def afficher_annonces_publics_cat_elevage(self, database):
+        timeshamps = database.child("categories").child("elevage").shallow().get().val()
+        
+        if timeshamps :
+            lis_time = []
+
+            for i in timeshamps:
+                lis_time.append(i)
+
+            lis_time.sort(reverse=True)
+            work = []
+            #print("test = " + str(lis_time))
+            userdata = []
+            for i in lis_time:
+                wor = database.child("categories").child("elevage").child(i).get().val()
+                uid = database.child("categories").child("elevage").child(i).child("uid").get().val()
+                work.append(wor)
+                userdata.append(uid)
+            print("users id = " + str(userdata))
+                
+            data = []
+            ''' for i in lis_time:
+                i = float(i)
+                dat = datetime.datetime.fromtimestamp(i).strftime('%H:%M: %d-%m-%Y')
+                data.append(dat)
+            print(data)'''
+            # on combine le touts
+            com_list = zip(lis_time, work)
+            return com_list   
+        else:
+             return False
+     def afficher_annonces_publics_cat_agriculture(self, database):
+        timeshamps = database.child("categories").child("agriculture").shallow().get().val()
+        if timeshamps :
+            lis_time = []
+
+            for i in timeshamps:
+                lis_time.append(i)
+
+            lis_time.sort(reverse=True)
+            work = []
+            print("test = " + str(lis_time))
+
+            for i in lis_time:
+                wor = database.child("categories").child("agriculture").child(i).get().val()
+                work.append(wor)
+            print("liste = " + str(work))
+                
+            data = []
+            ''' for i in lis_time:
+                i = float(i)
+                dat = datetime.datetime.fromtimestamp(i).strftime('%H:%M: %d-%m-%Y')
+                data.append(dat)
+            print(data)'''
+            # on combine le touts
+            com_list = zip(lis_time, work)
+            return com_list   
+        else:
+             return False

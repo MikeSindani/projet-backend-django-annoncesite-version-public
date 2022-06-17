@@ -52,7 +52,39 @@
                 <p class="subtitre">Section d'annonces des produits agricoles</p>
             </div>
         </div>
+         
+        {%for lis_time,work in com_list %}
 
+            <div class="card-long" onClick='window.location.href="http://www.google.com"'>
+                <div class="thumbnail">
+                    {% if work.imgurl1 %}
+                       <img src="{{work.imgurl1}}" alt="" class="card-image">
+                    {% elif work.imgurl2 %}
+                       <img src="{{work.imgurl2}}" alt="" class="card-image">
+                    {% elif work.imgurl3 %}
+                       <img src="{{work.imgurl3}}" alt="" class="card-image">
+                    {% else %}
+                      <img src="https://images.pexels.com/photos/375510/pexels-photo-375510.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" class="card-image">
+                    {%endif%}
+                </div>
+                <div class="contenain">
+                    <h2 class="titre">{{work.titre|title }} </h2>
+                    <div class="prix">{{work.prix}} {% if work.devise == "USD" %}${% elif work.devise == "CDF" %}Fc{% endif %}
+                    <span class="prix_interval">{{work.prix_min}} {% if work.devise == "USD" %}${% elif work.devise == "CDF" %}Fc{% endif %}
+                         - {{work.prix_max}} {% if work.devise == "USD" %}${% elif work.devise == "CDF" %}Fc{% endif %}</span></div>
+                    <div class="subtitle">Disponible</div>
+                    <p class="description"> {{work.description|truncatechars:100}}</p>
+                    <div class="element">
+                        <span class="vu"><i class="fa fa-users" aria-hidden="true"> {{data.prenom}} {{data.nom}} </i></span>
+                        <span class="vu"><i class="fas fa-clock    "></i> {{work.Annee}}</span>
+                        <span class="vu"> <i class="fa fa-map-marker" aria-hidden="true"> {{data.adr}}</i></span>  
+                    </div> 
+                </div>
+                <div  class="more">
+                    <a href="">Voir Plus</a>
+                </div>    
+            </div>
+            {% empty %}
         <div class="card-long">
             <div class="thumbnail">
                 <img src="img/champ.jpg" alt="" class="card-image">
@@ -99,7 +131,8 @@
             <div  class="more">
                 <a href="">Voir Plus</a>
             </div>
-        </div>
+        </div>  
+        {% endfor %}
         <div class="recommandation" style="width:100%;">
             <div class="info">
                 <h1>Choix de nos equipes</h1>

@@ -10,21 +10,23 @@ database = firebase_app.database()
 
 # Create your views here.
 def elevage(request):
-     try:
-        # intrcution pour recupere l'id dans la session
-        geta = fonction.AfficherAnnonce()
-        uid = geta.get_token(request, authe)   
-     except:
-        uid = False
-        return render(request,"annonces/elevage.html",{"uid":uid})
+    geta = fonction.AfficherAnnonce()
+    com_list = geta.afficher_annonces_publics_cat_elevage(database)
+    try:
+      # intrcution pour recupere l'id dans la session
+      uid = geta.get_token(request, authe) 
+    except:
+      uid = False
+      return render(request,"annonces/elevage.html",{"uid":uid,"com_list":com_list})
 
-     return render(request,"annonces/elevage.html",{"uid":uid})
+    return render(request,"annonces/elevage.html",{"uid":uid,"com_list":com_list})
 def agriculture(request):
+    geta = fonction.AfficherAnnonce()
+    com_list = geta.afficher_annonces_publics_cat_agriculture(database)
     try:
         # intrcution pour recupere l'id dans la session
-        geta = fonction.AfficherAnnonce()
         uid = geta.get_token(request, authe)   
     except:
         uid = False
-        return render(request,"annonces/agriculture.html",{"uid":uid})
-    return render(request,"annonces/agriculture.html",{"uid":uid})
+        return render(request,"annonces/agriculture.html",{"uid":uid,"com_list":com_list})
+    return render(request,"annonces/agriculture.html",{"uid":uid,"com_list":com_list})

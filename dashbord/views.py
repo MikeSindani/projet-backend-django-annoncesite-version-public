@@ -63,8 +63,7 @@ def create_annonce(request):
     prix = request.POST.get("prix")
     prix_min = request.POST.get("prix_min")
     prix_max = request.POST.get("prix_max")
-    delai_min = request.POST.get("delai_min")
-    delai_max = request.POST.get("delai_max")
+    delai = request.POST.get("delai_max")
     quatite = request.POST.get("quatite")
     imgurl1 = request.POST.get("imgurl1")
     imgurl2 = request.POST.get("imgurl2")
@@ -91,8 +90,7 @@ def create_annonce(request):
         "devise":devise,
         "prix_max":prix_max,
         "prix_min":prix_min,
-        "delai_max":delai_max,
-        "delai_min":delai_min,
+        "delai":delai,
         "produit": produit,
         "imgurl1":imgurl1,
         "imgurl2":imgurl2,
