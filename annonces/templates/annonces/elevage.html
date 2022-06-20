@@ -49,18 +49,18 @@
         </div>
 
         
-        {%for lis_time,work in com_list %}
+        {%for lis_time,work,data in com_list %}
 
             <div class="card-long" onClick='window.location.href="http://www.google.com"'>
                 <div class="thumbnail">
                     {% if work.imgurl1 %}
-                       <img src="{{work.imgurl1}}" alt="" class="card-image">
+                       <img src="{{work.imgurl1}}" alt="" class="card-image" height="620" width="620">
                     {% elif work.imgurl2 %}
-                       <img src="{{work.imgurl2}}" alt="" class="card-image">
+                       <img src="{{work.imgurl2}}" alt="" class="card-image" height="620" width="620">
                     {% elif work.imgurl3 %}
-                       <img src="{{work.imgurl3}}" alt="" class="card-image">
+                       <img src="{{work.imgurl3}}" alt="" class="card-image" height="600" width="620" >
                     {% else %}
-                      <img src="https://images.pexels.com/photos/375510/pexels-photo-375510.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" class="card-image">
+                      <img src="https://images.pexels.com/photos/375510/pexels-photo-375510.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" class="card-image" height="620" width="620">
                     {%endif%}
                 </div>
                 <div class="contenain">
@@ -69,11 +69,15 @@
                     <span class="prix_interval">{{work.prix_min}} {% if work.devise == "USD" %}${% elif work.devise == "CDF" %}Fc{% endif %}
                          - {{work.prix_max}} {% if work.devise == "USD" %}${% elif work.devise == "CDF" %}Fc{% endif %}</span></div>
                     <div class="subtitle">Disponible</div>
-                    <p class="description"> {{work.description|truncatechars:100}}</p>
+                    <div class="element lieu">
+                        <span class="vu"> <i class="fa fa-map-marker" aria-hidden="true"> {{data.adr}}</i></span>
+                    </div>
+                    <div class="description"> {{work.description|truncatechars:100}}</div>
+                    <div class="commentaire"><strong>Commentaire: |100|</strong></div>
                     <div class="element">
                         <span class="vu"><i class="fa fa-users" aria-hidden="true"> {{data.prenom}} {{data.nom}} </i></span>
                         <span class="vu"><i class="fas fa-clock    "></i> {{work.Annee}}</span>
-                        <span class="vu"> <i class="fa fa-map-marker" aria-hidden="true"> {{data.adr}}</i></span>  
+                        <span class="vu"><i class="fas fa-eye"></i>{{work.Annee}}</span> 
                     </div> 
                 </div>
                 <div  class="more">

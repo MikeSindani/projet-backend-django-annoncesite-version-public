@@ -158,22 +158,24 @@ class AfficherAnnonce:
             lis_time.sort(reverse=True)
             work = []
             #print("test = " + str(lis_time))
-            userdata = []
+            data = []
             for i in lis_time:
                 wor = database.child("categories").child("elevage").child(i).get().val()
-                uid = database.child("categories").child("elevage").child(i).child("uid").get().val()
+                id = database.child("categories").child("elevage").child(i).child("uid").get().val()
+                uidata = database.child("utilisateurs").child(id).child("Informations").get().val()
                 work.append(wor)
-                userdata.append(uid)
-            print("users id = " + str(userdata))
+                data.append(uidata)
+
+            print("users id = " + str(data))
                 
-            data = []
+            #data = []
             ''' for i in lis_time:
                 i = float(i)
                 dat = datetime.datetime.fromtimestamp(i).strftime('%H:%M: %d-%m-%Y')
                 data.append(dat)
             print(data)'''
             # on combine le touts
-            com_list = zip(lis_time, work)
+            com_list = zip(lis_time,work,data)
             return com_list   
         else:
              return False
@@ -187,21 +189,26 @@ class AfficherAnnonce:
 
             lis_time.sort(reverse=True)
             work = []
-            print("test = " + str(lis_time))
+            data = []
+            #print("test = " + str(lis_time))
 
             for i in lis_time:
                 wor = database.child("categories").child("agriculture").child(i).get().val()
+                id = database.child("categories").child("agriculture").child(i).child("uid").get().val()
+                uidata = database.child("utilisateurs").child(id).child("Informations").get().val()
                 work.append(wor)
-            print("liste = " + str(work))
+                data.append(uidata)
                 
-            data = []
+            #print("liste = " + str(work))
+                
+            
             ''' for i in lis_time:
                 i = float(i)
                 dat = datetime.datetime.fromtimestamp(i).strftime('%H:%M: %d-%m-%Y')
                 data.append(dat)
             print(data)'''
             # on combine le touts
-            com_list = zip(lis_time, work)
+            com_list = zip(lis_time, work,data)
             return com_list   
         else:
              return False

@@ -694,8 +694,19 @@ body {
 
 .card-long .thumbnail {
   background: #000000;
-  min-width: 350px;
+  width: 450px;
   overflow: hidden;
+}
+
+.card-long .contenain .lieu{
+    justify-content: flex-start !important;
+    margin: 3px 0;
+    padding: 5px;
+}
+.card-long .contenain .commentaire{
+    font-size: 12px;
+    margin: 5px 0;
+    padding: 5px;
 }
 
 .card-long .thumbnail img {

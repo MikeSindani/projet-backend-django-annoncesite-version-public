@@ -20,6 +20,7 @@ def elevage(request):
       return render(request,"annonces/elevage.html",{"uid":uid,"com_list":com_list})
 
     return render(request,"annonces/elevage.html",{"uid":uid,"com_list":com_list})
+    
 def agriculture(request):
     geta = fonction.AfficherAnnonce()
     com_list = geta.afficher_annonces_publics_cat_agriculture(database)

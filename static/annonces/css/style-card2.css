@@ -34,7 +34,6 @@
 
 .card-long .contenain .titre{
     color: rgb(65, 51, 51);
-    text-transform: uppercase;
     padding: 0 5px 0 5px;
     font-weight: bold;
 }
@@ -47,13 +46,23 @@
     font-size: 14px;
     line-height: 1.2em;
     word-wrap: break-word;
-    height: 50px;
+    height: 35px;
 }
 .card-long .contenain .subtitle{
     color: rgb(19, 196, 19);
     padding: 0 5px 0 5px;
     font-weight: bold;
     margin: 0;
+}
+.card-long .contenain .lieu{
+    justify-content: flex-start !important;
+    margin: 3px 0;
+    padding: 5px;
+}
+.card-long .contenain .commentaire{
+    font-size: 12px;
+    margin: 5px 0;
+    padding: 5px;
 }
 
 
@@ -65,7 +74,7 @@
   }
   .card-long .thumbnail {
     background: #000000;
-    min-width: 350px;
+    width: 450px;
     overflow: hidden;
   }
   .card-long .thumbnail img{
