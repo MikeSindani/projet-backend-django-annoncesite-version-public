@@ -1,4 +1,5 @@
 
+from datetime import date
 from django.shortcuts import render
 import pyrebase 
 from annoncesite import fonction
@@ -40,19 +41,15 @@ def logout(request):
     return ret
 
 def create_annonce(request):
-
-    import time
-    from datetime import datetime, timezone
+    from datetime import datetime, timezone , date
     import pytz
     # la date de la publication
     tz = pytz.timezone('Europe/Berlin')
     time_now = datetime.now(timezone.utc).astimezone(tz)
     #millis = int(time.mktime(time_now.timetuple())) #le temps qu'on a recuperer
     id_annonce = time_now.strftime('%Y%m%d%H%M%S%f')
-    annee = time_now.year
-    mois = time_now.month
-    day = time_now.day
-    clock = time_now.strftime('%H %M %S')
+    datetoday = str(date.today())
+    clock = time_now.strftime('%H:%M:%S')
 
     # on recuper les infos du formulaires
     titre = request.POST.get("titre")
@@ -63,7 +60,7 @@ def create_annonce(request):
     prix = request.POST.get("prix")
     prix_min = request.POST.get("prix_min")
     prix_max = request.POST.get("prix_max")
-    delai = request.POST.get("delai_max")
+    delai = request.POST.get("delai")
     quatite = request.POST.get("quatite")
     imgurl1 = request.POST.get("imgurl1")
     imgurl2 = request.POST.get("imgurl2")
@@ -82,10 +79,8 @@ def create_annonce(request):
         "description": descp,
         "uid":uid,
         "quatite":quatite,
-        "Annee": annee,
-        "mois":mois,
-        "day" : day,
         "Heure" :clock,
+        "date":datetoday,
         "prix":prix,
         "devise":devise,
         "prix_max":prix_max,
@@ -96,6 +91,7 @@ def create_annonce(request):
         "imgurl2":imgurl2,
         "imgurl3":imgurl3,
     }    
+    print("test"+str(data))
     #put data in the firedata base
     try:
         database.child("annonces").child(id_annonce).set(data)
@@ -108,12 +104,39 @@ def create_annonce(request):
            database.child("utilisateurs").child(uid).child("categories").child(cat).child(id_annonce).set(data)
     except:
         message = "Annonce non publies"
-        return render(request, "dashbord/dashbord.html", {"msge": message, "data": userdata})
+        url = reverse('dashbord')
+        ret = HttpResponseRedirect(url)
+        return ret
+        #return render(request, "dashbord/dashbord.html", {"msge": message, "data": userdata})
     message = "Annonce  publies"
 
     # notre objet class afficher 
     com_list = geta.afficher_annonces_user_all(database,uid)
     #return render(request, "dashbord/dashbord.html", {"com_list": com_list, "msge": message, "data": userdata})
+    url = reverse('dashbord')
+    ret = HttpResponseRedirect(url)
+    return ret
+
+def supprimer_annonce(request,cat,idannonce):
+    # intrcution pour recupere l'id dans la session
+    geta = fonction.AfficherAnnonce()
+    uid = geta.get_token(request, authe)
+    # instruction pour la suppression d'une annonce 
+    try:
+        database.child("annonces").child(idannonce).remove()
+        database.child("utilisateurs").child(uid).child("annonces").child(idannonce).remove()
+        if cat == "agriculture":
+           database.child("categories").child(cat).child(idannonce).remove()
+           database.child("utilisateurs").child(uid).child("categories").child(idannonce).remove()
+        if cat == "elevage":
+           database.child("categories").child(cat).child(idannonce).remove()
+           database.child("utilisateurs").child(uid).child("categories").child(cat).child(idannonce).remove()
+    except:
+        message = "Annonce non publies"
+        url = reverse('home')
+        ret = HttpResponseRedirect(url)
+        return ret
+
     url = reverse('dashbord')
     ret = HttpResponseRedirect(url)
     return ret

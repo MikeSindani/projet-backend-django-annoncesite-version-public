@@ -76,10 +76,10 @@ class AfficherAnnonce:
         idtoken = request.session['uid']
         a = authe.get_account_info(idtoken)
         a = a["users"]
-        print("uid session 1  = " + str(a))
+        #print("uid session 1  = " + str(a))
         a = a[0]
         a = a["localId"]
-        print("uid session 2  = " + str(a))
+        #print("uid session 2  = " + str(a))
 
         return a
      def get_profil_data(self,database,uid):
@@ -97,9 +97,9 @@ class AfficherAnnonce:
         whatsapp = database.child("utilisateurs").child(uid).child('Informations').child('whatsapp').get().val()
         entreprise = database.child("utilisateurs").child(uid).child('Informations').child('entreprise').get().val()
         # verifeir c'est donnes 
-        print("nom" + nom )
-        print("prenom" + prenom )
-        print("uid" + uid )
+        #print("nom" + nom )
+        #print("prenom" + prenom )
+        #print("uid" + uid )
 
         # mettre ca dans une base de donnes 
 
@@ -128,12 +128,12 @@ class AfficherAnnonce:
 
             lis_time.sort(reverse=True)
             work = []
-            print("test = " + str(lis_time))
+            #print("test = " + str(lis_time))
 
             for i in lis_time:
                 wor = database.child("utilisateurs").child(uid).child("annonces").child(i).get().val()
                 work.append(wor)
-            print("liste = " + str(work))
+            #print("liste = " + str(work))
                 
             data = []
             ''' for i in lis_time:
