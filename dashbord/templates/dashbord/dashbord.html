@@ -88,7 +88,7 @@
                                 <label for="Prix">Veillez Introduire un Prix fixe</label>
                                 <input type="number" placeholder="Prix (exemple:50000 ou 50) " name="prix">
                                 <br>
-                                <label for="prix_min">Veillez Introduire un Interval de Prix de Votre produit </label>
+                                <label for="prix_min">ou Veillez Introduire un Interval de Prix de Votre produit </label>
                                 <input id="prix" type="number" placeholder="Prix Minimun (exemple:1000 ou 10)" name="prix_min">
                                 <input id="prix" type="number" placeholder="Prix Maximun (exemple:5000 ou 10 )" name="prix_max">
                                 <br>
@@ -188,7 +188,7 @@
          {% endif%}
         <div class="conteneur-card">
 
-        {%for lis_time,work in com_list %}
+        {%for work in com_list %}
 
             <div class="card-long">
                 <div class="thumbnail" >
@@ -204,8 +204,23 @@
                 </div>
                 <div class="contenain" onClick='window.location.href="http://www.google.com"' >
                     <h2 class="titre">{{work.titre|title }} </h2>
-                    <div class="prix">{{work.prix}} {% if work.devise == "USD" %}${% elif work.devise == "CDF" %}Fc{% endif %}<span class="prix_interval">{{work.prix_min}} {% if work.devise == "USD" %}${% elif work.devise == "CDF" %}Fc{% endif %}
-                         - {{work.prix_max}} {% if work.devise == "USD" %}${% elif work.devise == "CDF" %}Fc{% endif %}</span></div>
+                    <div class="prix">
+                        {% if work.prix %} 
+                            {{work.prix}}
+                            {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %} 
+                        {% endif %}
+                        <span class="prix_interval">
+                        
+                        {% if work.prix_min %}
+                           {{work.prix_min}} 
+                           {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}
+                        {% endif %}
+                        {% if work.prix_min %}
+                          - {{work.prix_max}}
+                          {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}
+                        {% endif %}
+                        </span>
+                    </div>
                     <div class="subtitle">Disponible</div>
                     <div class="element lieu">
                         <span class="vu"><i class="fa fa-map-marker" aria-hidden="true"></i> {{data.adr}}</span>
@@ -226,13 +241,21 @@
                         <a href=""><i class="fa fa-marker"></i></i></a>
                     </div>
                     <div  class="more" id="supprimer">
-                        <a href="/supprimer_annonce/{{work.categorie}}/{{lis_time}}"><i class="fa fa-trash"></i></a>
+                        <a href="/suppr _annonce/{{work.categorie}}/{{work.id}}"><i class="fa fa-trash"></i></a>
                     </div>
                 </div>     
             </div>
             {% empty %}
               <h3 style="color:rgb(71, 71, 71) ;">Pas d'annonce Appuyer sur Ajouter Annonnce.</h3>
-     {% endfor %}
+             {% endfor %}
+        <div class="pagination">
+            {% if com_list.has_previous %}
+                <a href="{% url 'dashbord' %}?page={{com_list.previous_page_number}}" class="page prev">Precedent</a>
+            {% endif %}
+            {% if com_list.has_next %}
+                <a href="{% url 'dashbord' %}?page={{com_list.next_page_number}}" class="page next">Suivant</a>
+            {% endif%}
+        </div>
            
     
         </div>

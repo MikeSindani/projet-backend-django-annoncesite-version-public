@@ -122,7 +122,6 @@ class AfficherAnnonce:
         timeshamps = database.child("utilisateurs").child(uid).child("annonces").shallow().get().val()
         if timeshamps :
             lis_time = []
-
             for i in timeshamps:
                 lis_time.append(i)
 
@@ -131,19 +130,47 @@ class AfficherAnnonce:
             #print("test = " + str(lis_time))
 
             for i in lis_time:
-                wor = database.child("utilisateurs").child(uid).child("annonces").child(i).get().val()
-                work.append(wor)
-            #print("liste = " + str(work))
+                titre = database.child("utilisateurs").child(uid).child("annonces").child(i).child("titre").get().val()
+                desc = database.child("utilisateurs").child(uid).child("annonces").child(i).child("description").get().val()
+                prix = database.child("utilisateurs").child(uid).child("annonces").child(i).child("prix").get().val()
+                cate = database.child("utilisateurs").child(uid).child("annonces").child(i).child("categorie").get().val()
+                prix_max = database.child("utilisateurs").child(uid).child("annonces").child(i).child("prix_max").get().val()
+                prix_min = database.child("utilisateurs").child(uid).child("annonces").child(i).child("prix_min").get().val()
+                datetoday = database.child("utilisateurs").child(uid).child("annonces").child(i).child("date").get().val()
+                devise = database.child("utilisateurs").child(uid).child("annonces").child(i).child("devise").get().val()
+                imgurl1 = database.child("utilisateurs").child(uid).child("annonces").child(i).child("imgurl1").get().val()
+                imgurl2 = database.child("utilisateurs").child(uid).child("annonces").child(i).child("imgurl2").get().val()
+                imgurl3 = database.child("utilisateurs").child(uid).child("annonces").child(i).child("imgurl3").get().val()
+                id_annonce = database.child("utilisateurs").child(uid).child("annonces").child(i).get().key()
                 
-            data = []
+                data = {
+                        "id":id_annonce,
+                        "titre": titre,
+                        "description": desc,
+                        "categorie":cate,
+                        "uid":uid,
+                        "date":datetoday,
+                        "prix":prix,
+                        "devise":devise,
+                        "prix_max":prix_max,
+                        "prix_min":prix_min,
+                        "imgurl1":imgurl1,
+                        "imgurl2":imgurl2,
+                        "imgurl3":imgurl3,
+                    }  
+                work.append(data)
+            #print("liste = " + str(work))
+            
+            
             ''' for i in lis_time:
                 i = float(i)
                 dat = datetime.datetime.fromtimestamp(i).strftime('%H:%M: %d-%m-%Y')
                 data.append(dat)
             print(data)'''
-            # on combine le touts
-            com_list = zip(lis_time, work)
-            return com_list   
+            
+            #com_list = zip(lis_time, work)
+
+            return work
         else:
              return False
      def afficher_annonces_publics_cat_elevage(self, database):
@@ -212,3 +239,4 @@ class AfficherAnnonce:
             return com_list   
         else:
              return False
+       

@@ -12,6 +12,19 @@
   background: #000000;
   overflow: hidden;
 }
+.pagination{
+ margin: 20px;
+}
+.pagination a{
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+}
+.pagination .page{
+  background-color: #000000;
+  padding: 5px 10px;
+  border-radius:20px;
+}
 .circle.per-25 {
   background-image: conic-gradient(tomato 25%, #000000 0);
 }

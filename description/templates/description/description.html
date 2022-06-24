@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cache %}
+{%block titre%}Dashbord {%endblock titre %}
+{%block style %}
+{%endblock style %}
+{%block links %} 
+<link rel="stylesheet" href="{% static 'description/css/style-description.css' %}">
+{%endblock links %}
+{%block Connexion %}
+    {% include "header/nav_connexion.html" %}
+{%endblock Connexion %} 
+
+{% block Content %}
+
+
+{%block js %} 
+{%endblock js %}
+{% endblock Content %}

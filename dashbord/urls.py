@@ -5,6 +5,6 @@ urlpatterns = [
     path('dashbord/', views.dashbord ,name='dashbord'),
     path('logout/', views.logout, name="logout"),
     path('creation_annonce/', views.create_annonce, name="create_annonce"),
-    path('supprimer_annonce/<str:cat>/<int:idannonce>/', views.supprimer_annonce, name="delete_annonce"),
+    path('suppr_annonce/<str:cat>/<int:idannonce>/', views.supprimer_annonce, name="delete_annonce"),
     
 ]

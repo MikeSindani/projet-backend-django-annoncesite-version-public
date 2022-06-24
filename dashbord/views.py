@@ -1,5 +1,6 @@
 
 from datetime import date
+from queue import Empty
 from django.shortcuts import render
 import pyrebase 
 from annoncesite import fonction
@@ -7,6 +8,7 @@ from annoncesite import firebase
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.core.paginator import Paginator, EmptyPage
 
 
 firebase_app = pyrebase.initialize_app(firebase.firebaseConfig)
@@ -27,10 +29,25 @@ def dashbord(request):
     except:
         message = "Veillez cree Un compte ou Connectez-Vous"
         return render(request,"login/signUp.html", {"msg": message})
-   # notre objet class afficher 
+    # notre objet class afficher 
     com_list = geta.afficher_annonces_user_all(database,uid)
     message=" "
-    return render(request, "dashbord/dashbord.html", {"com_list": com_list, "msge": message, "data": userdata,"uid":uid})
+
+    # pagination 
+    p = Paginator(com_list,3)
+    print("NUMBER DES PAGES ")
+    print(p.num_pages)
+
+    #prendre la page de l'url 
+    page_num = request.GET.get("page",1)
+    try:
+        page = p.page(page_num)
+    except EmptyPage:
+        page = p.page(1)
+
+
+    # rendu de la page 
+    return render(request, "dashbord/dashbord.html",{"com_list": page , "msge": message, "data": userdata,"uid":uid})
 
 def logout(request):
     auth.logout(request)
@@ -41,7 +58,7 @@ def logout(request):
     return ret
 
 def create_annonce(request):
-    from datetime import datetime, timezone , date
+    from datetime import datetime, timezone , date , timedelta
     import pytz
     # la date de la publication
     tz = pytz.timezone('Europe/Berlin')
@@ -72,6 +89,10 @@ def create_annonce(request):
     uid = geta.get_token(request, authe)
     userdata = geta.get_profil_data(database,uid)
 
+    # cacul de la date de limite de la disponibilite 
+    delai = date.today() + timedelta(days = int(delai))
+    delai = str(delai)
+
     #le dictionnaire des donnes a envoyer a firebase
     data = {
         "titre": titre,
@@ -91,7 +112,7 @@ def create_annonce(request):
         "imgurl2":imgurl2,
         "imgurl3":imgurl3,
     }    
-    print("test"+str(data))
+    print("date "+delai)
     #put data in the firedata base
     try:
         database.child("annonces").child(id_annonce).set(data)
