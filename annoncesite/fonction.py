@@ -1,5 +1,7 @@
 import datetime
 from imghdr import what
+from django.core.paginator import Paginator, EmptyPage
+
 
 class AfficherAnnonce:
      def afficher_annonces_publics_alls(self, database):
@@ -130,17 +132,26 @@ class AfficherAnnonce:
             #print("test = " + str(lis_time))
 
             for i in lis_time:
+                print("#........")
                 titre = database.child("utilisateurs").child(uid).child("annonces").child(i).child("titre").get().val()
+                print("##.......")
                 desc = database.child("utilisateurs").child(uid).child("annonces").child(i).child("description").get().val()
+                print("###......")
                 prix = database.child("utilisateurs").child(uid).child("annonces").child(i).child("prix").get().val()
+                print("####.....")
                 cate = database.child("utilisateurs").child(uid).child("annonces").child(i).child("categorie").get().val()
+                print("#####....")
                 prix_max = database.child("utilisateurs").child(uid).child("annonces").child(i).child("prix_max").get().val()
+                print("######...")
                 prix_min = database.child("utilisateurs").child(uid).child("annonces").child(i).child("prix_min").get().val()
+                print("#######..")
                 datetoday = database.child("utilisateurs").child(uid).child("annonces").child(i).child("date").get().val()
                 devise = database.child("utilisateurs").child(uid).child("annonces").child(i).child("devise").get().val()
+                print("########.")
                 imgurl1 = database.child("utilisateurs").child(uid).child("annonces").child(i).child("imgurl1").get().val()
                 imgurl2 = database.child("utilisateurs").child(uid).child("annonces").child(i).child("imgurl2").get().val()
                 imgurl3 = database.child("utilisateurs").child(uid).child("annonces").child(i).child("imgurl3").get().val()
+                print("########")
                 id_annonce = database.child("utilisateurs").child(uid).child("annonces").child(i).get().key()
                 
                 data = {
@@ -159,10 +170,12 @@ class AfficherAnnonce:
                         "imgurl3":imgurl3,
                     }  
                 work.append(data)
+                print("terminer 👍")
             #print("liste = " + str(work))
-            
-            
-            ''' for i in lis_time:
+            '''
+            d = database.child("categories").order_by_child("elevage").limit_to_first(2).get()
+            print(d)
+            for i in lis_time:
                 i = float(i)
                 dat = datetime.datetime.fromtimestamp(i).strftime('%H:%M: %d-%m-%Y')
                 data.append(dat)
@@ -173,27 +186,61 @@ class AfficherAnnonce:
             return work
         else:
              return False
-     def afficher_annonces_publics_cat_elevage(self, database):
-        timeshamps = database.child("categories").child("elevage").shallow().get().val()
+     def afficher_annonces_publics_categorie(self, database,cat):
+
+        timeshamps = database.child("categories").child(cat).shallow().get().val()
         
         if timeshamps :
+            # on cree la liste 
             lis_time = []
-
+            #ON MET LES ELEMENTS DE TIMESHMPS DANS LA LISTE
             for i in timeshamps:
                 lis_time.append(i)
-
+            #ON ORDRONNE LA LISTE 
             lis_time.sort(reverse=True)
             work = []
             #print("test = " + str(lis_time))
             data = []
             for i in lis_time:
-                wor = database.child("categories").child("elevage").child(i).get().val()
-                id = database.child("categories").child("elevage").child(i).child("uid").get().val()
-                uidata = database.child("utilisateurs").child(id).child("Informations").get().val()
-                work.append(wor)
-                data.append(uidata)
+                # on recupere les valeurs precis ayant besoin afin de constituer un dictionnaire
+                id_annonce = database.child("categories").child(cat).child(i).get().key()
+                id_users = database.child("categories").child(cat).child(i).child("uid").get().val()
+                titre = database.child("categories").child(cat).child(i).child("titre").get().val()
+                desc = database.child("categories").child(cat).child(i).child("description").get().val()
+                prix = database.child("categories").child(cat).child(i).child("prix").get().val()
+                cate = database.child("categories").child(cat).child(i).child("categorie").get().val()
+                prix_max = database.child("categories").child(cat).child(i).child("prix_max").get().val()
+                prix_min = database.child("categories").child(cat).child(i).child("prix_min").get().val()
+                datetoday = database.child("categories").child(cat).child(i).child("date").get().val()
+                devise = database.child("categories").child(cat).child(i).child("devise").get().val()
+                imgurl1 =database.child("categories").child(cat).child(i).child("imgurl1").get().val()
+                imgurl2 = database.child("categories").child(cat).child(i).child("imgurl2").get().val()
+                imgurl3 = database.child("categories").child(cat).child(i).child("imgurl3").get().val()
+                # on recupere la personne ayant publier l'annonce son nom et prenom 
+                user_name = database.child("utilisateurs").child(id_users).child("Informations").child("nom").get().val()
+                user_prenom = database.child("utilisateurs").child(id_users).child("Informations").child("prenom").get().val()
+                user_adresse = database.child("utilisateurs").child(id_users).child("Informations").child("adr").get().val()
+                data = {
+                        "id":id_annonce,
+                         "titre": titre,
+                        "description": desc,
+                        "categorie":cate,
+                        "date":datetoday,
+                        "prix":prix,
+                        "devise":devise,
+                        "prix_max":prix_max,
+                        "prix_min":prix_min,
+                        "imgurl1":imgurl1,
+                        "imgurl2":imgurl2,
+                        "imgurl3":imgurl3,
+                        "nom":user_name,
+                        "prenom":user_prenom,
+                        "adr":user_adresse
+                    }  
+                work.append(data)
+                
 
-            print("users id = " + str(data))
+            #print("users id = " + str(data))
                 
             #data = []
             ''' for i in lis_time:
@@ -202,41 +249,21 @@ class AfficherAnnonce:
                 data.append(dat)
             print(data)'''
             # on combine le touts
-            com_list = zip(lis_time,work,data)
-            return com_list   
-        else:
-             return False
-     def afficher_annonces_publics_cat_agriculture(self, database):
-        timeshamps = database.child("categories").child("agriculture").shallow().get().val()
-        if timeshamps :
-            lis_time = []
+            #com_list = zip(lis_time,work,data)
+            return work  
+        else: 
+            return False
+     def pagination_fonction(self,request,list,number_page):
+         # pagination 
+        p = Paginator(list,number_page)
+        print("NUMBER DES PAGES ")
+        print(p.num_pages)
 
-            for i in timeshamps:
-                lis_time.append(i)
-
-            lis_time.sort(reverse=True)
-            work = []
-            data = []
-            #print("test = " + str(lis_time))
-
-            for i in lis_time:
-                wor = database.child("categories").child("agriculture").child(i).get().val()
-                id = database.child("categories").child("agriculture").child(i).child("uid").get().val()
-                uidata = database.child("utilisateurs").child(id).child("Informations").get().val()
-                work.append(wor)
-                data.append(uidata)
-                
-            #print("liste = " + str(work))
-                
-            
-            ''' for i in lis_time:
-                i = float(i)
-                dat = datetime.datetime.fromtimestamp(i).strftime('%H:%M: %d-%m-%Y')
-                data.append(dat)
-            print(data)'''
-            # on combine le touts
-            com_list = zip(lis_time, work,data)
-            return com_list   
-        else:
-             return False
-       
+        #prendre la page de l'url 
+        page_num = request.GET.get("page",1)
+        try:
+            page = p.page(page_num)
+        except EmptyPage:
+            page = p.page(1)
+            return page
+        return page

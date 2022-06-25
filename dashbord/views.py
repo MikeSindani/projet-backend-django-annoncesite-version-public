@@ -8,7 +8,6 @@ from annoncesite import firebase
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.core.paginator import Paginator, EmptyPage
 
 
 firebase_app = pyrebase.initialize_app(firebase.firebaseConfig)
@@ -32,19 +31,7 @@ def dashbord(request):
     # notre objet class afficher 
     com_list = geta.afficher_annonces_user_all(database,uid)
     message=" "
-
-    # pagination 
-    p = Paginator(com_list,3)
-    print("NUMBER DES PAGES ")
-    print(p.num_pages)
-
-    #prendre la page de l'url 
-    page_num = request.GET.get("page",1)
-    try:
-        page = p.page(page_num)
-    except EmptyPage:
-        page = p.page(1)
-
+    page = geta.pagination_fonction(request,com_list,number_page=5)
 
     # rendu de la page 
     return render(request, "dashbord/dashbord.html",{"com_list": page , "msge": message, "data": userdata,"uid":uid})

@@ -17,13 +17,18 @@
 }
 .pagination a{
   text-decoration: none;
-  color: white;
+  color: black;
   text-transform: uppercase;
+  font-weight: bold;
+  font-size: 22px;
+  transition: all .5s ease-in-out;
 }
-.pagination .page{
-  background-color: #000000;
-  padding: 5px 10px;
-  border-radius:20px;
+.pagination a:hover{
+   color: tomato;
+   transform: scale(1.1);
+}
+.pagination a:active{
+  transform: scale(0.9);
 }
 .circle.per-25 {
   background-image: conic-gradient(tomato 25%, #000000 0);

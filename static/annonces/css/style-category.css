@@ -3,7 +3,24 @@
     margin-bottom: 120px;
     height: auto;
 }
-
+.pagination{
+    margin: 20px;
+   }
+.pagination a{
+     text-decoration: none;
+     color: black;
+     text-transform: uppercase;
+     font-weight: bold;
+     font-size: 22px;
+     transition: all .5s ease-in-out;
+ }
+.pagination a:hover{
+      color: tomato;
+      transform: scale(1.1);
+ }
+.pagination a:active{
+     transform: scale(0.9);
+}
 
 .band{
     display: flex;

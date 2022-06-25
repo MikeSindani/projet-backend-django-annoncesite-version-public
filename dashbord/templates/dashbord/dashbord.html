@@ -12,6 +12,7 @@
 {%endblock Connexion %} 
 
 {% block Content %}
+{% cache 500 band uid %}
  <div class="container">
     <div class="band-dash">
         <div class="dash-milieu">
@@ -33,6 +34,7 @@
             <button class="btn-modifier">Modifier</button>      
         </div>
     </div>
+    {% endcache %}
     <div class="dash-contaneur">
         <div class="container">
             <div class="wrapper">
@@ -250,10 +252,10 @@
              {% endfor %}
         <div class="pagination">
             {% if com_list.has_previous %}
-                <a href="{% url 'dashbord' %}?page={{com_list.previous_page_number}}" class="page prev">Precedent</a>
+                <a href="{% url 'dashbord' %}?page={{com_list.previous_page_number}}" class="page prev"><i class="fas fa-arrow-left"></i> Precedent</a>
             {% endif %}
             {% if com_list.has_next %}
-                <a href="{% url 'dashbord' %}?page={{com_list.next_page_number}}" class="page next">Suivant</a>
+                <a href="{% url 'dashbord' %}?page={{com_list.next_page_number}}" class="page next">Suivant <i class="fas fa-arrow-right"></i></a>
             {% endif%}
         </div>
            
