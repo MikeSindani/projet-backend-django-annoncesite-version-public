@@ -21,6 +21,7 @@ def description(request,cat,idannonce):
       data= geta.description_fonction(database=database,categorie=cat,idannonce=idannonce)
       return render(request,"description/description.html", {"uid":uid,"data":data})
     #on recuperer les donnes de l'annonce 
-    data= geta.description_fonction(database=database,categorie=cat,idannonce=idannonce)
+    data = geta.description_fonction(database=database,categorie=cat,idannonce=idannonce)
+    print(data)
 
     return render(request,"description/description.html", {"uid":uid,"data":data})

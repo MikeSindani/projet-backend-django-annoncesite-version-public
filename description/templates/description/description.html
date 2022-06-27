@@ -3,6 +3,12 @@
 {% load cache %}
 {%block titre%}Dashbord {%endblock titre %}
 {%block style %}
+<style>
+    .container{
+        padding: 75px 25%;
+        border: 10px solid red;
+    }
+</style>
 {%endblock style %}
 {%block links %} 
 <link rel="stylesheet" href="{% static 'description/css/style-description.css' %}">
@@ -15,9 +21,12 @@
    {% endif %}
 {%endblock Connexion %}
 {% block Content %}
-
-
-  
+<div class="container">
+    {%for dat,user in data%}
+    <img src="{{dat.imgurl1}}" alt="" height="300" >
+    <div>{{dat.titre}}</div>
+    {%endfor %}
+</div>
 
 {%block js %} 
 {%endblock js %}
