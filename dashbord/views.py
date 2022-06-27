@@ -82,6 +82,7 @@ def create_annonce(request):
 
     #le dictionnaire des donnes a envoyer a firebase
     data = {
+        "id_annonce":id_annonce,
         "titre": titre,
         "categorie": cat,
         "description": descp,

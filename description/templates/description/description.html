@@ -8,11 +8,16 @@
 <link rel="stylesheet" href="{% static 'description/css/style-description.css' %}">
 {%endblock links %}
 {%block Connexion %}
-    {% include "header/nav_connexion.html" %}
-{%endblock Connexion %} 
-
+    {% if uid %}
+        {% include "header/nav_connexion.html" %}
+   {% else %}
+      {% include "header/nav.html" %}
+   {% endif %}
+{%endblock Connexion %}
 {% block Content %}
 
+
+  
 
 {%block js %} 
 {%endblock js %}

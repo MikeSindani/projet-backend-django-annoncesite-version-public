@@ -10,4 +10,5 @@ urlpatterns = [
     path('',include('contact.urls')),
     path('',include('annonces.urls')),
     path('',include('dashbord.urls')),
+    path('',include('description.urls')),
 ]

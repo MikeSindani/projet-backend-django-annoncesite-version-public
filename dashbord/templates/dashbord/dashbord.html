@@ -190,7 +190,7 @@
          {% endif%}
         <div class="conteneur-card">
 
-        {%for work in com_list %}
+        {%for iden,work in com_list %}
 
             <div class="card-long">
                 <div class="thumbnail" >
@@ -204,7 +204,7 @@
                       <img src="https://images.pexels.com/photos/375510/pexels-photo-375510.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" class="card-image" height="620" width="620">
                     {%endif%}
                 </div>
-                <div class="contenain" onClick='window.location.href="http://www.google.com"' >
+                <div class="contenain" onClick='window.location.href="/description/{{work.categorie}}/{{iden.id}}"' >
                     <h2 class="titre">{{work.titre|title }} </h2>
                     <div class="prix">
                         {% if work.prix %} 
@@ -236,14 +236,14 @@
                     </div> 
                 </div>
                 <div  class="more">
-                    <a href="">Voir Plus</a>
+                    <a href="/description/{{work.categorie}}/{{iden.id}}">Voir Plus</a>
                 </div>
                 <div class="dash_control">
                     <div  class="more" id="modifier">
                         <a href=""><i class="fa fa-marker"></i></i></a>
                     </div>
                     <div  class="more" id="supprimer">
-                        <a href="/suppr _annonce/{{work.categorie}}/{{work.id}}"><i class="fa fa-trash"></i></a>
+                        <a href="/suppr _annonce/{{work.categorie}}/{{iden.id}}"><i class="fa fa-trash"></i></a>
                     </div>
                 </div>     
             </div>

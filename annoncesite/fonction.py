@@ -132,45 +132,12 @@ class AfficherAnnonce:
             #print("test = " + str(lis_time))
 
             for i in lis_time:
-                print("#........")
-                titre = database.child("utilisateurs").child(uid).child("annonces").child(i).child("titre").get().val()
-                print("##.......")
-                desc = database.child("utilisateurs").child(uid).child("annonces").child(i).child("description").get().val()
-                print("###......")
-                prix = database.child("utilisateurs").child(uid).child("annonces").child(i).child("prix").get().val()
-                print("####.....")
-                cate = database.child("utilisateurs").child(uid).child("annonces").child(i).child("categorie").get().val()
-                print("#####....")
-                prix_max = database.child("utilisateurs").child(uid).child("annonces").child(i).child("prix_max").get().val()
-                print("######...")
-                prix_min = database.child("utilisateurs").child(uid).child("annonces").child(i).child("prix_min").get().val()
-                print("#######..")
-                datetoday = database.child("utilisateurs").child(uid).child("annonces").child(i).child("date").get().val()
-                devise = database.child("utilisateurs").child(uid).child("annonces").child(i).child("devise").get().val()
-                print("########.")
-                imgurl1 = database.child("utilisateurs").child(uid).child("annonces").child(i).child("imgurl1").get().val()
-                imgurl2 = database.child("utilisateurs").child(uid).child("annonces").child(i).child("imgurl2").get().val()
-                imgurl3 = database.child("utilisateurs").child(uid).child("annonces").child(i).child("imgurl3").get().val()
-                print("########")
+                data_annonce= database.child("utilisateurs").child(uid).child("annonces").child(i).get().val()
                 id_annonce = database.child("utilisateurs").child(uid).child("annonces").child(i).get().key()
-                
-                data = {
-                        "id":id_annonce,
-                        "titre": titre,
-                        "description": desc,
-                        "categorie":cate,
-                        "uid":uid,
-                        "date":datetoday,
-                        "prix":prix,
-                        "devise":devise,
-                        "prix_max":prix_max,
-                        "prix_min":prix_min,
-                        "imgurl1":imgurl1,
-                        "imgurl2":imgurl2,
-                        "imgurl3":imgurl3,
-                    }  
-                work.append(data)
-                print("terminer 👍")
+                id_annonce = {"id":id_annonce} # on cree un dictionnaire pour id
+                data = (id_annonce,data_annonce)# on cree un tuple 
+                work.append(data)# on met le tuple dans la liste
+            print("terminer 👍")
             #print("liste = " + str(work))
             '''
             d = database.child("categories").order_by_child("elevage").limit_to_first(2).get()
@@ -188,8 +155,7 @@ class AfficherAnnonce:
              return False
      def afficher_annonces_publics_categorie(self, database,cat):
 
-        timeshamps = database.child("categories").child(cat).shallow().get().val()
-        
+        timeshamps = database.child("categories").child(cat).shallow().get().val() 
         if timeshamps :
             # on cree la liste 
             lis_time = []
@@ -267,3 +233,35 @@ class AfficherAnnonce:
             page = p.page(1)
             return page
         return page
+     def afficher_annonces_publics_categorie_plus(self, database,cat):
+        
+        timeshamps = database.child("categories").child(cat).shallow().get().val()
+        if timeshamps :
+            lis_time = []
+            for i in timeshamps:
+                lis_time.append(i)
+            lis_time.sort(reverse=True)
+            print("test = " + str(lis_time))
+            #on recupere la list
+            work = []
+
+            for i in lis_time:
+                data_annnonce = database.child("categories").child(cat).child(i).get().val()
+                id_users = database.child("categories").child(cat).child(i).child("uid").get().val()
+                data_user = database.child("utilisateurs").child(id_users).child("Informations").get().val()
+                id_annonce = {"id":i}
+                wor = (id_annonce,data_annnonce,data_user)
+                work.append(wor)
+            print("👌😁😁 " + str(work))
+            print(type(work))
+    
+            return work
+        return False
+     def description_fonction(seft, database,categorie,idannonce):
+         work = []
+         data_annnonce = database.child("categories").child(categorie).child(idannonce).get().val()
+         id_users = database.child("categories").child(categorie).child(idannonce).child("uid").get().val()
+         data_user = database.child("utilisateurs").child(id_users).child("Informations").get().val()
+         wor = (data_annnonce,data_user)
+         work.append(wor)
+         return work

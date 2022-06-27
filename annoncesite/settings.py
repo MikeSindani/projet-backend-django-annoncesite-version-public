@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'contact',
     'annonces',
     'dashbord',
+    'description',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +139,9 @@ WHITENOISE_USE_FINDERS = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_cache',
+    }
+}
