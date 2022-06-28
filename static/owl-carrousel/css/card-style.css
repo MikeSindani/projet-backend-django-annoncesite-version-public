@@ -1,11 +1,20 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-body{
-  margin: 0;
-  padding: 0;
+
+.item .prix{
+  font-weight: bold;
+  color: #555555;
+  margin: 5px;
+  font-size: 18px;
+}
+.item .prix_interval{
+  font-weight: bold;
+  color: #808080;
+  margin: 5px;
+  font-size: 14px;
 }
 /*gerer le choix des nos equipes */
 .container-annonces-home .recommandation{
- background-color: rgb(192, 192, 192);
+ background-color: rgb(226, 226, 226);
  padding: 30px 0 0 0;
 }
 .container-annonces-home{
@@ -49,7 +58,7 @@ body{
   }
   .post-module .thumbnail {
     background: #000000;
-    height: 250px;
+    height: 200px;
     overflow: hidden;
   }
 
@@ -78,12 +87,12 @@ body{
   }
   .post-module .post-content .category {
     position: absolute;
-    top:230px;
-    left: 100px;
+    top: 180px;
+    left: 70px;
     background-color: tomato ;
-    padding: 10px 30px;
+    padding: 7px 25px;
     color: #FFFFFF;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     text-transform: uppercase;
   }
