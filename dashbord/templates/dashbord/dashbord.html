@@ -227,8 +227,8 @@
                     <div class="element lieu">
                         <span class="vu"><i class="fa fa-map-marker" aria-hidden="true"></i> {{data.adr}}</span>
                     </div>
-                    <div class="description"> {{work.description|truncatechars:100}}</div>
-                    <div class="commentaire"><strong>Commentaire: |100|</strong></div>
+                    <div class="description"> {{work.description|truncatechars:50}}</div>
+                    <div class="commentaire"><strong>Commentaire: |50|</strong></div>
                     <div class="element">
                         <span class="vu"><i class="fa fa-users" aria-hidden="true"></i> {{data.prenom}} {{data.nom}}</span>
                         <span class="vu"><i class="fas fa-clock "></i> {{work.date}}</span>
@@ -243,7 +243,7 @@
                         <a href=""><i class="fa fa-marker"></i></i></a>
                     </div>
                     <div  class="more" id="supprimer">
-                        <a href="/suppr _annonce/{{work.categorie}}/{{iden.id}}"><i class="fa fa-trash"></i></a>
+                        <a href="/supprannonce/{{work.categorie}}/{{iden.id}}"><i class="fa fa-trash"></i></a>
                     </div>
                 </div>     
             </div>

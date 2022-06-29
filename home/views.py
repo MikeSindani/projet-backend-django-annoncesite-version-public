@@ -19,16 +19,16 @@ def home(request):
      # nombre de page a afficher par paginator 
     nombre_de_page = 1
     # nombre des choix aleatoire a afficher par section 
-    nombre_choix_aleatoire = 6
+    nombre_choix_aleatoire = 5
     
     # fonction pour fournir un choix aleatoire 
     #le choix aleatoire pour le partie du site partie agriculture 
-    if len(list_element_categorie_agriculture) < 5 :
+    if len(list_element_categorie_agriculture) < nombre_choix_aleatoire :
       choix_aleatoire_agriculture = random.sample(list_element_categorie_agriculture,len(list_element_categorie_agriculture))
     else:
        choix_aleatoire_agriculture = random.sample(list_element_categorie_agriculture,nombre_choix_aleatoire)
     #le choix aleatoire pour le partie du site partie elevage
-    if len(list_element_categorie_elevage) < 5 :
+    if len(list_element_categorie_elevage) < nombre_choix_aleatoire :
       choix_aleatoire_elevage = random.sample(list_element_categorie_elevage,len(list_element_categorie_elevage))
     else:
       choix_aleatoire_elevage = random.sample(list_element_categorie_elevage,nombre_choix_aleatoire)
