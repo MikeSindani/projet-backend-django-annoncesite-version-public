@@ -101,6 +101,9 @@ align-items: center;
 	z-index: -1;
 	height: 750px;
 }
+.body-second-signin {
+	height: 450px !important;
+}
 
 .form-main h1 {
 	font-weight: bold;

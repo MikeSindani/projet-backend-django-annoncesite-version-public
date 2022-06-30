@@ -1,3 +1,4 @@
+from unicodedata import category
 from django.shortcuts import render
 import pyrebase
 from annoncesite import fonction
@@ -19,9 +20,13 @@ def description(request,cat,idannonce):
     except:
       uid = False
       data= geta.description_fonction(database=database,categorie=cat,idannonce=idannonce)
-      return render(request,"description/description.html", {"uid":uid,"data":data})
+      list= geta.description_and_home_categorie_plus(database,cat)
+      nombre_de_vues = geta.nombres_des_vus_fonction(database=database,idannonce=idannonce)
+      return render(request,"description/description.html", {"uid":uid,"data":data,"list":list,"vues":nombre_de_vues})
     #on recuperer les donnes de l'annonce 
     data = geta.description_fonction(database=database,categorie=cat,idannonce=idannonce)
+    list= geta.description_and_home_categorie_plus(database,cat)
+    nombre_de_vues = geta.nombres_des_vus_fonction(database=database,idannonce=idannonce)
     print(data)
 
-    return render(request,"description/description.html", {"uid":uid,"data":data})
+    return render(request,"description/description.html", {"uid":uid,"data":data,"list":list,"vues":nombre_de_vues})

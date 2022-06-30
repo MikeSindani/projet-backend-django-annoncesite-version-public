@@ -47,6 +47,9 @@
     line-height: 1em;
 }
 @media screen and (max-width: 800px){
+    .pagination a{
+        font-size: 18px;
+    }
     
     .band{
         display: block;

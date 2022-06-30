@@ -14,8 +14,8 @@ context={'name':'hum'}
 # Create your views here.
 def home(request):
     geta = fonction.AfficherAnnonce()
-    list_element_categorie_agriculture = geta.afficher_annonces_publics_categorie_plus(database,"agriculture")
-    list_element_categorie_elevage = geta.afficher_annonces_publics_categorie_plus(database,"elevage")
+    list_element_categorie_agriculture = geta.description_and_home_categorie_plus(database,"agriculture")
+    list_element_categorie_elevage = geta.description_and_home_categorie_plus(database,"elevage")
      # nombre de page a afficher par paginator 
     nombre_de_page = 1
     # nombre des choix aleatoire a afficher par section 

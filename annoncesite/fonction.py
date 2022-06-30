@@ -257,6 +257,35 @@ class AfficherAnnonce:
     
             return work
         return False
+     def description_and_home_categorie_plus(self, database,cat):
+        
+        timeshamps = database.child("categories").child(cat).shallow().get().val()
+        if timeshamps :
+            lis_time = []
+            for i in timeshamps:
+                a=0
+                a=a+1
+                lis_time.append(i)
+                if a == 10:
+                    break
+
+            lis_time.sort(reverse=True)
+            print("test = " + str(lis_time))
+            #on recupere la list
+            work = []
+
+            for i in lis_time:
+                data_annnonce = database.child("categories").child(cat).child(i).get().val()
+                id_users = database.child("categories").child(cat).child(i).child("uid").get().val()
+                data_user = database.child("utilisateurs").child(id_users).child("Informations").get().val()
+                id_annonce = {"id":i}
+                wor = (id_annonce,data_annnonce,data_user)
+                work.append(wor)
+            print("👌😁😁 " + str(work))
+            print(type(work))
+    
+            return work
+        return False
      def description_fonction(seft, database,categorie,idannonce):
          work = []
          data_annnonce = database.child("categories").child(categorie).child(idannonce).get().val()
@@ -265,3 +294,24 @@ class AfficherAnnonce:
          wor = (data_annnonce,data_user)
          work.append(wor)
          return work
+     def nombres_des_vus_fonction(self,database,idannonce):
+          get_data = database.child("Vues").child(idannonce).get().val()
+          print(get_data)
+          if get_data is None :       
+              a = 0
+              a=a+1
+              data = {"count":a}    
+              set_data = database.child("Vues").child(idannonce).set(data)
+          else:
+              get_data = database.child("Vues").child(idannonce).get().val()
+              a = int(get_data["count"])
+              a = a+1
+              data = {"count":a}   
+              database.child("Vues").child(idannonce).update(data) 
+          get_data = database.child("Vues").child(idannonce).get().val()
+          print(get_data)
+          return get_data
+           
+
+
+              
