@@ -165,6 +165,9 @@ img {
     border: 1px solid red;
     display: flex;
     justify-content: center;
+    width: 50%;
+    flex-direction: column;
+    margin: 0 25%;
   }
   .container-annonces-description .evaluation-center {
     display: flex;
@@ -541,6 +544,9 @@ img {
   }
   
   @media screen and (max-width: 800px) {
+    .container-annonces-description .control span a{
+        font-size: 14px;
+    }
     .modal-connexion .modal-content {
       width: 80%;
       height: 450px;

@@ -28,7 +28,7 @@
     {%for dat,user in data %}
     <div class="element thumbail">
             <div class="mySlides">
-                <div class="numbertext">1 / 6</div>
+                <div class="numbertext">1 / 3</div>
             {% if dat.imgurl1 %}
                 <img class="demo cursor" src="{{dat.imgurl1}}" style="width:100%" height="350" onclick="currentSlide(1)" alt="{{dat.produit}}">
               {% else %}
@@ -37,7 +37,7 @@
             </div>
           
             <div class="mySlides">
-              <div class="numbertext">2 / 6</div>
+              <div class="numbertext">2 / 3</div>
             {% if dat.imgurl2 %}
               <img class="demo cursor" src="{{dat.imgurl1}}" style="width:100%" height="350" onclick="currentSlide(1)" alt="{{dat.produit}}">
             {% else %}
@@ -46,7 +46,7 @@
             </div>
           
             <div class="mySlides">
-              <div class="numbertext">3 / 6</div>
+              <div class="numbertext">3 / 3</div>
             {% if dat.imgurl3 %}
               <img class="demo cursor" src="{{dat.imgurl1}}" style="width:100%" height="350" onclick="currentSlide(1)" alt="{{dat.produit}}">
             {% else %}
@@ -148,10 +148,14 @@
                         {% csrf_token %}
                         <p class="text">Clique sur Fiable ou Non Faible afin de Noter le Producteur</p>
                         <div class="part-evaluation">
-                            <input type="radio" id="html" name="fav_language" value="fiable">
-                            <label for="fiable">Fiable</label><br><br>
-                            <input type="radio" id="css" name="fav_language" value="nofiable">
-                            <label for="nofiable">Non Fiable</label><br><br>
+                            <div class="fiable" style="border:1px solid red;">
+                                <input type="radio" id="html" name="fav_language" value="fiable">
+                                <label for="fiable">Fiable</label><br><br>
+                            </div>
+                            <div class="nofiable" style="border:1px solid red;">
+                                <input type="radio" id="css" name="fav_language" value="nofiable">
+                                <label for="nofiable">Non Fiable</label><br><br>
+                            </div>
                             <input type="submit" value="Evaluer le Producteur">
                         </div>
                     </form>
