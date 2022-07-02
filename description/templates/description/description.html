@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load cache %}
-{%block titre%}  Description {%endblock titre %}
+
+{%block titre%} {{titre|title}} - Description {%endblock titre %}
+
 {%block style %}
 <style>
     .container{
@@ -94,9 +96,35 @@
     <div class="element evaluation">
         <div class="element-titre">Evaluation du producteur</div>
         <div class="element-center">
-            <div class="evaluation-nombre"></div>
+            {%if evaluation <= 50%}
+            <div class="evaluation-nombre">
+                
+                <div class="progressbar">
+                    <div class="wrap-circles">
+                        <div class="circle" style="background-image: conic-gradient(rgb(196, 29, 0) {{evaluation}}%, #000000 0);">
+                            <div class="inner">{{evaluation}}</div>
+                        </div>
+                    </div>
+            
+                </div>
+                <div class="evaluation-text" style="color:red;">Fiable</div>
+            </div>
+            {%else%}
+                <div class="evaluation-nombre">
+                
+                    <div class="progressbar">
+                        <div class="wrap-circles">
+                            <div class="circle" style="background-image: conic-gradient(rgb(145, 255, 0) {{evaluation}}%, #000000 0);">
+                                <div class="inner">{{evaluation}}</div>
+                            </div>
+                        </div>
+                
+                    </div>
+                    <div class="evaluation-text" style="color:rgb(145, 255, 0);">Fiable</div>
+                </div>
+            {%endif%}
             <p>Cliquer Sur le Bouton ce desous Pour Evaluer</p>
-            <a href="" class="evaluation-btn">Evaluer</a>   
+            <div class="evaluation-btn">Evaluer</div>   
         </div>     
     </div>
 
@@ -110,7 +138,7 @@
                 <a href="{% url 'elevage' %}">{{dat.categorie|title}}</a>
                 {% endif%}
             </li>
-            <li class="detail"><strong>Produit:</strong> {{dat.produit}}</li>
+            <li class="detail"><strong>Produit:</strong> {{dat.produit|title}}</li>
             <li class="detail"><strong>Quatite:</strong>{{dat.quatite}}</li>
             <li class="detail"><strong>Lieu:</strong>{{dat.lieu}}</li>
             <li class="detail"><strong>Date de Publication:</strong>{{dat.date}}</li>
@@ -133,19 +161,29 @@
             <div class="btn-contacter">Contacter</div>
         </div>
     </div>
-   </div> 
+   
     {%endfor %}
-    
-    <div class="element control">
-        <span class="favoris"><a href="">Ajouter Au favoris</a></span>
-        <span class="follow"><a href="">Suivre</a></span>
-    </div>
     <div class="element commentaire">
-        
+        <div class="element-titre">Avis sur le produit</div>
+        <div class="note-produit">
+            <div class="note"><i class="fa fa-star"></i>5</div>
+            <div class="etoile">
+
+            </div>
+        </div>
+        <div class="commentaire-btn">
+            <span class="favoris">Ajouter Un Avis</span>
+            <span class="follow"><a href="">Voir les Avis</a></span> 
+        </div>  
     </div>
+    <div class="element control">
+        <span class="favoris"><a href=""><i class="fas fa-star"></i></i> Ajouter Au favoris</a></span>
+        <span class="follow"><a href=""><i class="fas fa-bookmark"></i> Abonnez-Vous</a></span>
+    </div> 
+</div> 
     <div class="recommandation" style="width:100%;background-color: rgb(226, 226, 226);">
         <div class="info">
-            <h1 style="text-align: center;">Produits de Meme Categorie </h1>
+            <h2 style="text-align: center;">Produits de Meme Categorie </h2>
         </div>
         <div class=" owl-carousel owl-theme">
             {% for iden, work,user in list %}
@@ -283,9 +321,7 @@
            
         </div>
     </div>
-</div>
 
-</div>
 
 {%block js %} 
 <script src="{% static 'description/js/description.js' %}"></script>

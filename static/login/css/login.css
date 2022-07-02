@@ -326,8 +326,7 @@ align-items: center;
 }
 
 @media screen and (max-width: 800px){
-	
-		.step {
+	.step {
 		margin: 5px;
 		display: flex;
 		align-items: center;
@@ -340,6 +339,9 @@ align-items: center;
 	.body-second-2 {
 		height: 1000px;
 		z-index: -3;
+	}
+	.body-second-signin {
+		height: 800px !important;
 	}
 	.body-second .form-container {
 		position: absolute;

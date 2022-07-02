@@ -294,6 +294,7 @@ class AfficherAnnonce:
          wor = (data_annnonce,data_user)
          work.append(wor)
          return work
+     
      def nombres_des_vus_fonction(self,database,idannonce):
           get_data = database.child("Vues").child(idannonce).get().val()
           print(get_data)

@@ -15,9 +15,7 @@
     padding: 0;
 }
 
-.container-annonces-description .element {
-    
-}
+/*  SLIDER */ 
 img {
     vertical-align: middle;
   }
@@ -42,7 +40,7 @@ img {
   .next {
     cursor: pointer;
     position: absolute;
-    top: 20%;
+    top: 10%;
     width: auto;
     padding: 16px;
     margin-top: -50px;
@@ -68,14 +66,14 @@ img {
   
   /* Number text (1/3 etc) */
   .numbertext {
-    color: #f2f2f2;
-    font-size: 12px;
+    color: black;
+    font-size: 20px;
     padding: 8px 12px;
     position: absolute;
-    top: 70%;
+    top: 17%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
+    }
   
   /* Container for image text */
   .caption-container {
@@ -111,6 +109,72 @@ img {
   .demo:hover {
     opacity: 1;
   }
+  /* CERCLE POUR PROGRESSE DE EVALUATION */ 
+  .circle {
+    display: block;
+    position: relative;
+    width: 90px;
+    height: 90px;
+    margin: 0.5rem;
+    border-radius: 50%;
+    background: #000000;
+    overflow: hidden;
+  }
+/*
+  .circle .per-0{
+      display: none;
+  }
+  .circle .per-25 {
+    display: none !important;
+    background-image: conic-gradient(tomato 25%, #000000 0);
+   
+  }
+  .circle.per-50 {
+    background-image: conic-gradient(tomato 50%, #000000 0);
+    display: block;
+  }
+  .circle.per-75 {
+    background-image: conic-gradient(tomato 75%, #000000 0);
+    display: none;
+  }
+  .circle.per-100 {
+    background-image: conic-gradient(tomato 100%, #000000 0);
+    display: none;
+  }*/
+  .circle .inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    background: #fff;
+    border-radius: 50%;
+    font-size: 1.5em;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.75);
+  }
+  .wrap-circles{
+    position: relative;
+    left: -15px;
+  }
+  .container-annonces-description .evaluation .evaluation-text{
+      font-size: 25px;
+      color: tomato;
+  }
+  .container-annonces-description .evaluation .evaluation-btn{
+    color: white;
+    cursor: pointer;
+    padding:5px 40px;
+    border-radius: 20px;
+    width: 50px;
+    background-color: tomato;
+  }
+
+  /* CONTAINEUR */ 
   .container-annonces-description .pritidi{
       text-align: center;
   }
@@ -125,9 +189,18 @@ img {
   .container-annonces-description .pritidi .disponibilite{
     color: rgb(173, 238, 76);
     padding: 10px;
+    font-weight: bold;
+  }
+  .container-annonces-description .evaluation .element-center{
+    text-align: center;
+    align-items: center;
   }
   .container-annonces-description  ul{
     list-style-type: none;
+  }
+  .container-annonces-description  ul li a{
+    color: tomato;
+    text-decoration: none;
   }
   .container-annonces-description .element-titre{
       color: #09112e;
@@ -142,10 +215,10 @@ img {
       align-items: center;
       position: fixed;
       bottom:10px;
-      left: 30%;
+      left: 35%;
       padding:10p;
       border-radius: 20px;
-      width: 40%;
+      width: 30%;
       background-color: white;
       box-shadow: 5px 5px #00000062;
       
@@ -165,7 +238,66 @@ img {
     border-radius: 20px;
     background-color: tomato;
   }
+  .container-annonces-description .commentaire .note-produit{
+      align-items: center;
+      text-align: center;
+  }
+  .container-annonces-description .commentaire .commentaire-btn{
+      margin: 10px;
+      align-items: center;
+      text-align: center;
+  }
+  .container-annonces-description .commentaire .commentaire-btn span{
+   
+    padding:5px 20px;
+    margin:5px;
+    border-radius: 20px;
+    background-color:black;
+    color: white;
+    transition:all .5s ease-in-out;
+  }
+  .container-annonces-description .commentaire .commentaire-btn span a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+  .container-annonces-description .commentaire .note-produit .note{
+      font-size: 70px;
+      opacity: 0.4;
+      font-family: "Quicksand";
+  }
+  .container-annonces-description .control {
+    background-color: tomato !important;
+    color:white !important;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0 !important;
+   }
+   .container-annonces-description .control span a{
+       text-decoration: none;
+       color: rgb(255, 255, 255);
+       padding:5px 20px;
+       margin:5px;
+       border-radius: 20px;
+       border: 1px solid white; 
+       transition:all .5s ease-in-out;
+   }
+
+   .container-annonces-description .control span a:hover{
+       background-color: white;
+       color: black;
+   }
+   .container-annonces-description .control span:active{
+       transform: scale(0.9);
+   }
+   .recommandation{
+       padding-top: 10px;
+   }
   @media screen and (max-width: 800px){
+    .wrap-circles{
+        position: relative;
+        left: -15px;
+      }
     .container-annonces-description{
         padding:0;
         margin: -10px;

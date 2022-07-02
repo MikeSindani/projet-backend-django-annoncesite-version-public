@@ -2,16 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&family=Quicksand:wght@300;500;600&display=swap');
 /*** <--- CIRCLE STYLES ---> ***/
-.circle {
-  display: none;
-  position: relative;
-  width: 70px;
-  height: 70px;
-  margin: 0.5rem;
-  border-radius: 50%;
-  background: #000000;
-  overflow: hidden;
-}
+
 .pagination{
  margin: 20px;
 }
@@ -29,6 +20,16 @@
 }
 .pagination a:active{
   transform: scale(0.9);
+}
+.circle {
+  display: none;
+  position: relative;
+  width: 70px;
+  height: 70px;
+  margin: 0.5rem;
+  border-radius: 50%;
+  background: #000000;
+  overflow: hidden;
 }
 .circle.per-25 {
   background-image: conic-gradient(tomato 25%, #000000 0);
