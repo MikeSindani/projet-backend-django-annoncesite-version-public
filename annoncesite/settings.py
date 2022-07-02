@@ -145,3 +145,10 @@ CACHES = {
         'LOCATION': '/var/tmp/django_cache',
     }
 }
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': 'c:/foo/bar',
+    }
+}

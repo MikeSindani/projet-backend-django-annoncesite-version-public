@@ -107,11 +107,10 @@
                     </div>
             
                 </div>
-                <div class="evaluation-text" style="color:red;">Fiable</div>
+                <div class="evaluation-text" style="color:red;">Non Fiable</div>
             </div>
             {%else%}
                 <div class="evaluation-nombre">
-                
                     <div class="progressbar">
                         <div class="wrap-circles">
                             <div class="circle" style="background-image: conic-gradient(rgb(145, 255, 0) {{evaluation}}%, #000000 0);">
@@ -124,9 +123,41 @@
                 </div>
             {%endif%}
             <p>Cliquer Sur le Bouton ce desous Pour Evaluer</p>
-            <div class="evaluation-btn">Evaluer</div>   
+                
+            <div class="evaluation-center">
+                <div class="evaluation-btn" id="btn-modal-evaluation">Evaluer</div> 
+            </div>     
         </div>     
     </div>
+
+    <div class="modal-connexion" id="myModal">
+        <!-- Modal content -->
+        <div  class="modal-content">
+            <div class="modal-header">
+                <span class="close"> 
+                    <span class="fermer">&times;</span>
+                    <span class="text-search">Evaluation du Producteur</span>
+                    <span></span>
+                </span>
+            </div>
+            <div class="modal-body">
+                    <h5 style="color:tomato;" class="text social" id="text-annonce">
+                        Remplir les champs et appuyer sur suivant.
+                    </h5>
+                    <form action="/creation_annonce/" method="post" >
+                        {% csrf_token %}
+                        <p class="text">Clique sur Fiable ou Non Faible afin de Noter le Producteur</p>
+                        <div class="part-evaluation">
+                            <input type="radio" id="html" name="fav_language" value="fiable">
+                            <label for="fiable">Fiable</label><br><br>
+                            <input type="radio" id="css" name="fav_language" value="nofiable">
+                            <label for="nofiable">Non Fiable</label><br><br>
+                            <input type="submit" value="Evaluer le Producteur">
+                        </div>
+                    </form>
+         </div>   
+    </div>
+ </div>
 
     <div class="element details">
         <div class="element-titre">Details du produit</div>
@@ -326,5 +357,33 @@
 {%block js %} 
 <script src="{% static 'description/js/description.js' %}"></script>
 <script src="{% static 'owl-carrousel/js/card.js' %}"></script>
+<script>
+     // Get the modal
+     var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("btn-modal-evaluation");
+
+// Get the <span> element that closes the modal
+var clos = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+clos.onclick = function() {
+modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+if (event.target == modal) {
+    modal.style.display = "block";
+}
+}
+
+</script>
 {%endblock js %}
 {% endblock Content %}

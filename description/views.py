@@ -19,7 +19,12 @@ def description(request,cat,idannonce):
     data = geta.description_fonction(database=database,categorie=cat,idannonce=idannonce)
     list= geta.description_and_home_categorie_plus(database,cat)
     nombre_de_vues = geta.nombres_des_vus_fonction(database=database,idannonce=idannonce)
-    evaluation = 60
+    #text de la mise ne cache de element sur le serveur 
+    cache.set('my_key', 30 , 30000000)
+    try:
+      evaluation = cache.get('my_key')
+    except:
+      evaluation = 60
     try:
       # intrcution pour recupere l'id dans la session
       uid = geta.get_token(request, authe) 
