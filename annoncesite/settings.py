@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'annonces',
     'dashbord',
     'description',
+    'searchApp',
 ]
 
 MIDDLEWARE = [

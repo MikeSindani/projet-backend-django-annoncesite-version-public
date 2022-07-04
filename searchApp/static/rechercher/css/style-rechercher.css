@@ -1,0 +1,39 @@
+
+.container-annonce-search{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px 10%;
+   
+}
+.container-annonce-search .band-search{
+    padding: 50px;
+    text-align: center;
+    width: 100%;
+    box-shadow: 10px;
+}
+.container-annonce-search .band-search .text{
+    color: tomato;
+    font-size: 50px;
+    
+}
+.container-annonce-search .band-search .search-text{
+    color: rgb(255, 255, 255);
+    color: rgba(0, 0, 0, 0.685);
+    font-size: 30px;
+}
+.container-annonce-search .notrouver{
+    padding: 100px;
+    text-align: center;
+}
+.container-annonce-search .notrouver .icon{
+    font-size: 120px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.37);
+}
+.container-annonce-search .notrouver .text{
+    font-size: 50px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.37);
+}

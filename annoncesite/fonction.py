@@ -1,6 +1,8 @@
 import datetime
 from imghdr import what
+from itertools import product
 from django.core.paginator import Paginator, EmptyPage
+from django.core.cache import cache
 
 
 class AfficherAnnonce:
@@ -294,7 +296,7 @@ class AfficherAnnonce:
          wor = (data_annnonce,data_user)
          work.append(wor)
          return work
-     
+
      def nombres_des_vus_fonction(self,database,idannonce):
           get_data = database.child("Vues").child(idannonce).get().val()
           print(get_data)
@@ -312,7 +314,50 @@ class AfficherAnnonce:
           get_data = database.child("Vues").child(idannonce).get().val()
           print(get_data)
           return get_data
-           
+     def rechercher_fonction_dans_firebase(self,database,search):
+
+        search = search.lower()  
+        
+        timestamps = database.child("annonces").shallow().get().val()
+        print("😎😎😎😎😎😎😎")
+        print(type(timestamps))
+            
+        work_id=[]
+        for i in timestamps:
+            titre = database.child("annonces").child(i).child('titre').get().val()
+            cat = database.child("annonces").child(i).child('categories').get().val()
+            produit = database.child("annonces").child(i).child('produit').get().val()
+            desc = database.child("annonces").child(i).child('description').get().val()
+            wor = str(titre)+str(cat)+str(produit)+str(desc)+"$"+str(i)
+            work_id.append(wor)
+
+        matching = [str(string) for string in work_id if search in string.lower()]
+        s_work=[]
+        s_id=[]
+        for i in matching:
+          part_text,part_ids=i.split("$")
+          s_work.append(part_text)
+          s_id.append(part_ids)
+
+        return s_id
+     def rechercher_afficher_annonces_alls(self,database,listannonce):
+        if listannonce:
+            listannonce.sort(reverse=True)
+            print("test = " + str(listannonce))
+            #on recupere la list
+            work = []
+            for i in listannonce:
+                data_annnonce = database.child("annonces").child(i).get().val()
+                id_users = database.child("annonces").child(i).child("uid").get().val()
+                data_user = database.child("utilisateurs").child(id_users).child("Informations").get().val()
+                id_annonce = {"id":i}
+                wor = (id_annonce,data_annnonce,data_user)
+                work.append(wor)
+            #print("👌😁😁 " + str(work))
+            #print(type(work))
+    
+            return work
+        return False
 
 
               

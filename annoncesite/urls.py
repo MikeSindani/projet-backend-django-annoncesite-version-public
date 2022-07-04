@@ -11,4 +11,5 @@ urlpatterns = [
     path('',include('annonces.urls')),
     path('',include('dashbord.urls')),
     path('',include('description.urls')),
+     path('',include('searchApp.urls')),
 ]

@@ -205,7 +205,7 @@
                     {%endif%}
                 </div>
                 <div class="contenain" onClick='window.location.href="/description/{{work.categorie}}/{{iden.id}}"' >
-                    <h2 class="titre">{{work.titre|titletruncatechars:25 }} </h2>
+                    <h2 class="titre">{{work.titre|title|truncatechars:25 }} </h2>
                     <div class="prix">
                         {% if work.prix %} 
                             {{work.prix}}
