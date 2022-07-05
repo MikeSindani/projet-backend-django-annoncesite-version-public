@@ -229,10 +229,13 @@ class AfficherAnnonce:
 
         #prendre la page de l'url 
         page_num = request.GET.get("page",1)
+        print("1")
         try:
             page = p.page(page_num)
+            print("2")
         except EmptyPage:
             page = p.page(1)
+            print("3")
             return page
         return page
      def afficher_annonces_publics_categorie_plus(self, database,cat):
@@ -317,7 +320,7 @@ class AfficherAnnonce:
      def rechercher_fonction_dans_firebase(self,database,search):
 
         search = search.lower()  
-        
+
         timestamps = database.child("annonces").shallow().get().val()
         print("😎😎😎😎😎😎😎")
         print(type(timestamps))
@@ -341,7 +344,7 @@ class AfficherAnnonce:
 
         return s_id
      def rechercher_afficher_annonces_alls(self,database,listannonce):
-        if listannonce:
+        
             listannonce.sort(reverse=True)
             print("test = " + str(listannonce))
             #on recupere la list
@@ -357,7 +360,45 @@ class AfficherAnnonce:
             #print(type(work))
     
             return work
-        return False
+     def autosuggest_firebase_direct(self,database,search):
+        search = search.lower()  
+        work_id=[]
+        try: 
+            work_id = cache.get('workid')
+            print(work_id)
+            matching = [str(string) for string in work_id if search in string.lower()]
+            s_work=[]
+            s_id=[]
+            for i in matching:
+                part_text,part_ids=i.split("$")
+                s_work.append(part_text)
+                s_id.append(part_ids)
+            print("CACHED")
+            print(s_work)
+            return s_work
+        except:
+            work_id=[]
+            #recuperation des cles 
+            timestamps = database.child("annonces").shallow().get().val()
+            print("😎😎😎😎😎😎😎")
+            print(timestamps)
+        # on recuperer cle par cle 
+            for i in timestamps:
+                titre = database.child("annonces").child(i).child('titre').get().val()
+                wor = str(titre)+"$"+str(i)
+                work_id.append(wor)
 
+            cache.set('workid', work_id,3600)
+            matching = [str(string) for string in work_id if search in string.lower()]
+            s_work=[]
+            s_id=[]
+            for i in matching:
+              part_text,part_ids=i.split("$")
+              s_work.append(part_text)
+              s_id.append(part_ids)
+            print(s_work)
+            return s_work
+
+       
 
               

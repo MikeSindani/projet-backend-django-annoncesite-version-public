@@ -3,7 +3,7 @@
         <div class="logo-meme"><a href="{% url 'home' %}" translate="no">Annonce<strong class="logo-pres">lushi</strong></a></div>
         <form action="{% url 'rechercher' %}" method="get">
             {% csrf_token %}
-            <input type="text" class="search-bar" name="search" placeholder="Rechercher ici Des Annonces..">
+            <input type="text" id="search" class="search-bar" name="search" placeholder="Rechercher ici Des Annonces..">
             <button class="search-btn"><i class="fa fa-search" aria-hidden="true"></i> </button>
         </form>
     </div>

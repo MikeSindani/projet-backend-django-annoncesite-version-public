@@ -4,6 +4,10 @@
 
 {%block titre%} {{titre|title}} - rechercher {%endblock titre %}
 
+{%block meta %}
+<meta http-equiv="X-Frame-Options" content="sameorigin">
+{%endblock meta %}
+
 {%block style %}
 <style>
     .container{
@@ -13,6 +17,7 @@
 </style>
 {%endblock style %}
 {%block links %} 
+
 <link rel="stylesheet" href="{% static 'rechercher/css/style-rechercher.css' %}">
 <link rel="stylesheet" href="{% static 'annonces/css/style-category.css' %}">
 <link rel="stylesheet" href="{% static 'owl-carrousel/css/card-style.css' %}">
@@ -27,7 +32,7 @@
 {%endblock Connexion %}
 {% block Content %}
 <div class="container-annonce-search">
-    <div class="band-search" >
+    <div class="band-search" style="background-color: rgb(197, 197, 197) ;" >
         <h1 class="text">Rechercher</h1>
          <p class="search-text" > << {{titre}} >> </p>
     </div>
@@ -81,7 +86,7 @@
                     <a href="/rechercherpage/{{titre}}/?page={{com_list.previous_page_number}}" class="page prev"><i class="fas fa-arrow-left"></i> Precedent</a>
                 {% endif %}
                 <span class="current">
-                    < {{ com_list.number }} of {{ com_list.paginator.num_pages }} >
+                    [{{ com_list.number }} of {{ com_list.paginator.num_pages }}]
                 </span>
                 {% if com_list.has_next %}
                     <a href="/rechercherpage/{{titre}}/?page={{com_list.next_page_number}}" class="page next">Suivant <i class="fas fa-arrow-right"></i></a>

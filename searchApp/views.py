@@ -1,5 +1,6 @@
 
 from unicodedata import category
+from django.http import JsonResponse
 from django.shortcuts import render
 import pyrebase
 from annoncesite import fonction
@@ -17,7 +18,9 @@ def search(request):
     geta = fonction.AfficherAnnonce()
     # rechercher code pour rechercher 
     if request.method == 'GET' and 'csrfmiddlewaretoken' in request.GET:
-        search = request.GET.get("search")  
+        search = request.GET.get("search")
+        print(type(search)) 
+        print(search)
         search = str(search) 
         titre_de_la_rechercher = search
    
@@ -38,14 +41,16 @@ def search(request):
       uid = geta.get_token(request, authe) 
     except:
       uid = False
+      
       page = geta.pagination_fonction(request,list_element_annonces,number_page=nombre_de_page)
       content = {"uid":uid,"com_list":page,"titre":titre_de_la_rechercher}
       return render(request,"search/search.html",content)
     #pagination
+    
     page = geta.pagination_fonction(request,list_element_annonces,number_page=nombre_de_page)
 
     content = {"uid":uid,"com_list":page,"titre":titre_de_la_rechercher}
-    return(request,"search/search.html",content)
+    return render(request,"search/search.html",content)
 
 def searchpage(request,search):
      #recuperation de la fonction appeler fonction quio est un ensemble des fonctions
@@ -77,4 +82,14 @@ def searchpage(request,search):
     page = geta.pagination_fonction(request,list_element_annonces,number_page=nombre_de_page)
 
     content = {"uid":uid,"com_list":page,"titre":titre_de_la_rechercher}
-    return(request,"search/search.html",content)
+    return render(request,"search/search.html",content)
+def autosuggest(request):
+     #recuperation de la fonction appeler fonction quio est un ensemble des fonctions
+    geta = fonction.AfficherAnnonce()
+    print(request.GET)
+    query_original = request.GET.get('term')
+    query_original = str(query_original)
+    list_element_annonces = geta.autosuggest_firebase_direct(database,search=query_original)
+    '''mylist= []
+    mylist += [x.title for x in queryset]'''
+    return JsonResponse(list_element_annonces, safe=False)

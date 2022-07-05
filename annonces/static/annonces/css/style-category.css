@@ -2,7 +2,8 @@
     height: auto;
 }
 .pagination{
-    margin: 20px;
+    margin: 20px 5px;
+    align-items: center;
    }
 .pagination a{
      text-decoration: none;
