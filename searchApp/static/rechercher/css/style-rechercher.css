@@ -11,7 +11,7 @@
     padding: 10px;
     text-align: center;
     width: 100%;
-    box-shadow: 10px;
+    
 }
 .container-annonce-search .band-search .text{
     color: tomato;
@@ -38,9 +38,12 @@
     color: rgba(0, 0, 0, 0.37);
 }
 @media screen and (max-width: 800px){
-    
+    .container-annonce-search{
+        padding: 0;
+    }
     .container-annonce-search .band-search {
-        padding: 0 ;
+        padding: 0;
+        width: 100%;
     }
 
 }

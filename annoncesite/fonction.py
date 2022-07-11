@@ -360,24 +360,15 @@ class AfficherAnnonce:
             #print(type(work))
     
             return work
-     def autosuggest_firebase_direct(self,database,search):
-        search = search.lower()  
-        work_id=[]
-        try: 
-            work_id = cache.get('workid')
-            print(work_id)
-            matching = [str(string) for string in work_id if search in string.lower()]
-            s_work=[]
-            s_id=[]
-            for i in matching:
-                part_text,part_ids=i.split("$")
-                s_work.append(part_text)
-                s_id.append(part_ids)
+     def autosuggest_firebase_direct(self,database):
+        work=[]
+        if cache.get('work2') is not None: 
+            work = cache.get('work2')
+            print(work)
             print("CACHED")
-            print(s_work)
-            return s_work
-        except:
-            work_id=[]
+            return work
+        else:
+            work=[]
             #recuperation des cles 
             timestamps = database.child("annonces").shallow().get().val()
             print("😎😎😎😎😎😎😎")
@@ -385,19 +376,9 @@ class AfficherAnnonce:
         # on recuperer cle par cle 
             for i in timestamps:
                 titre = database.child("annonces").child(i).child('titre').get().val()
-                wor = str(titre)+"$"+str(i)
-                work_id.append(wor)
-
-            cache.set('workid', work_id,3600)
-            matching = [str(string) for string in work_id if search in string.lower()]
-            s_work=[]
-            s_id=[]
-            for i in matching:
-              part_text,part_ids=i.split("$")
-              s_work.append(part_text)
-              s_id.append(part_ids)
-            print(s_work)
-            return s_work
+                work.append(titre)
+            cache.set('work2', work,3600)
+            return work
 
        
 

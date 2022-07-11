@@ -89,7 +89,8 @@ def autosuggest(request):
     print(request.GET)
     query_original = request.GET.get('term')
     query_original = str(query_original)
-    list_element_annonces = geta.autosuggest_firebase_direct(database,search=query_original)
+    if(query_original is not " "):
+        list_element_annonces = geta.autosuggest_firebase_direct(database)
     '''mylist= []
     mylist += [x.title for x in queryset]'''
     return JsonResponse(list_element_annonces, safe=False)
