@@ -25,3 +25,35 @@
             }
             }
            
+
+            document.body.addEventListener('change', function (e) {
+                let target = e.target;
+                switch (target.id) {
+                    case 'prix-fixe-btn':
+                        document.getElementById("prix-interval").style.display = 'none';
+                        document.getElementById("autres-moyens").style.display = 'none';
+                        document.getElementById("prix-fixe").style.display = 'block';
+                        
+                        break;
+                    case 'prix-interval-btn':
+                        
+                        document.getElementById("autres-moyens").style.display = 'none';
+                        document.getElementById("prix-fixe").style.display = 'none';
+                        document.getElementById("prix-interval").style.display = 'block';
+                        break;
+                    case 'autres-moyens-btn':   
+                        document.getElementById("prix-fixe").style.display = 'none';
+                        document.getElementById("prix-interval").style.display = 'none';
+                        document.getElementById("autres-moyens").style.display = 'block';
+                        break;
+                }
+                
+            });
+            /*
+            Suivant1.document.getElementById("btn_suivant_1");
+            Suivant1.onclick = function(){
+            titre =                 if(email != '' && password !='' && confirmpassword != ''){
+
+            }*/
+
+           

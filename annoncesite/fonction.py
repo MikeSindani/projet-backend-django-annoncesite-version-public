@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 import datetime
 from imghdr import what
 from itertools import product
@@ -136,8 +137,9 @@ class AfficherAnnonce:
             for i in lis_time:
                 data_annonce= database.child("utilisateurs").child(uid).child("annonces").child(i).get().val()
                 id_annonce = database.child("utilisateurs").child(uid).child("annonces").child(i).get().key()
+                vue = database.child("vues").child(i).get().val()
                 id_annonce = {"id":id_annonce} # on cree un dictionnaire pour id
-                data = (id_annonce,data_annonce)# on cree un tuple 
+                data = (id_annonce,data_annonce,vue)# on cree un tuple 
                 work.append(data)# on met le tuple dans la liste
             print("terminer 👍")
             #print("liste = " + str(work))
@@ -223,6 +225,7 @@ class AfficherAnnonce:
             return False
      def pagination_fonction(self,request,list,number_page):
          # pagination 
+        
         p = Paginator(list,number_page)
         print("NUMBER DES PAGES ")
         print(p.num_pages)

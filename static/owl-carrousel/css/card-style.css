@@ -4,7 +4,8 @@
   font-weight: bold;
   color: #555555;
   margin: 5px;
-  font-size: 18px;
+  font-size: 20px;
+  text-align: center;
 }
 .item .prix_interval{
   font-weight: bold;
@@ -166,12 +167,12 @@
     
   }
   
-  .container-annonces-home :before,
+  /*.container-annonces-home :before,
   .container-annonces-home:after {
     content: '';
     display: block;
     clear: both;
-  }
+  }*/
   .container-annonces-home.column {
     width: 50%;
     padding: 0 25px;

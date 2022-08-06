@@ -14,25 +14,31 @@ context={'name':'hum'}
 # Create your views here.
 def home(request):
     geta = fonction.AfficherAnnonce()
-    list_element_categorie_agriculture = geta.description_and_home_categorie_plus(database,"agriculture")
-    list_element_categorie_elevage = geta.description_and_home_categorie_plus(database,"elevage")
+    
      # nombre de page a afficher par paginator 
     nombre_de_page = 1
     # nombre des choix aleatoire a afficher par section 
     nombre_choix_aleatoire = 5
-    
-    # fonction pour fournir un choix aleatoire 
-    #le choix aleatoire pour le partie du site partie agriculture 
-    if len(list_element_categorie_agriculture) < nombre_choix_aleatoire :
-      choix_aleatoire_agriculture = random.sample(list_element_categorie_agriculture,len(list_element_categorie_agriculture))
-    else:
-       choix_aleatoire_agriculture = random.sample(list_element_categorie_agriculture,nombre_choix_aleatoire)
-    #le choix aleatoire pour le partie du site partie elevage
-    if len(list_element_categorie_elevage) < nombre_choix_aleatoire :
-      choix_aleatoire_elevage = random.sample(list_element_categorie_elevage,len(list_element_categorie_elevage))
-    else:
-      choix_aleatoire_elevage = random.sample(list_element_categorie_elevage,nombre_choix_aleatoire)
-     
+
+    try:
+        # fonction pour fournir un choix aleatoire 
+        list_element_categorie_agriculture = geta.description_and_home_categorie_plus(database,"agriculture")
+        list_element_categorie_elevage = geta.description_and_home_categorie_plus(database,"elevage")
+        #le choix aleatoire pour le partie du site partie agriculture 
+        if len(list_element_categorie_agriculture) < nombre_choix_aleatoire :
+          choix_aleatoire_agriculture = random.sample(list_element_categorie_agriculture,len(list_element_categorie_agriculture))
+        else:
+          choix_aleatoire_agriculture = random.sample(list_element_categorie_agriculture,nombre_choix_aleatoire)
+        #le choix aleatoire pour le partie du site partie elevage
+        if len(list_element_categorie_elevage) < nombre_choix_aleatoire :
+          choix_aleatoire_elevage = random.sample(list_element_categorie_elevage,len(list_element_categorie_elevage))
+        else:
+          choix_aleatoire_elevage = random.sample(list_element_categorie_elevage,nombre_choix_aleatoire)
+    except:
+        choix_aleatoire_elevage = False 
+        choix_aleatoire_agriculture = False
+
+        
     try:
         # intrcution pour recupere l'id dans la session
         geta = fonction.AfficherAnnonce()

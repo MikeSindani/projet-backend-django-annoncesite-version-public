@@ -65,40 +65,81 @@
                             </div>
                             <div class="part part_info isactived">
                                 <input id="titre" type="text" placeholder="Titre(exemple:5 Poules aux quartier...)" name="titre" >
-                                <label for="cat">Categories:</label>
-                                <select id="cat" name="cat">
-                                    <option >Choisir Entre Elevage et Agriculture ici</option>
-                                    <option value="elevage">Elevage</option>
-                                    <option value="agriculture">Agriculture</option>
-                                </select>                           
+                                <div style="display:flex;align-items:center;">
+                                  <label for="elevage" >Categorie:</label>
+                                  <input type="radio" id="elevage" name="cat"  value="elevage" style="width:20px;height:20px" required>
+                                  <label for="elevage" >Elevage</label>
+                                  <input type="radio" id="agriculture"  name="cat"  value="agriculture" style="width:20px;height:20px" required >
+                                  <label for="agriculture" >Agriculture</label>
+                                </div>                                                             
                                 <input id="produit" type="text" placeholder="Produit(exemple:Poule)" name="produit">
                                 <input id="quatite"  type="number" placeholder="Quatite(exemple:5)" name="quatite">
                                 <textarea id="desc" rows="4" cols="50" name="descp" placeholder="Description (exemple: je ai 5 poules de couleurs blancs ...) "></textarea>
                                 <div class="btn">
-                                    <button id="btn_suivant_1" type="button" onclick="Suivant(1,'530px')" >Suivant</button>
+                                    <button id="btn_suivant_1" type="button" onclick="Suivant(1,'550px')" >Suivant</button>
                                 </div>  
                             </div>
                             <div class="part part_info_2">
                                 <br>
                                 <label for="devise">Devise:</label>
                                 <select id="cat" name="devise">
-                                    <option >Choississez la Devise</option>
+                                    <option value="CDF">Choississez la Devise</option>
                                     <option value="CDF">CDF(Franc Congolais)</option>
                                     <option value="USD">USD( Dollar Americain)</option>
                                 </select> 
-                                <br>
-                                <label for="Prix">Veillez Introduire un Prix fixe</label>
-                                <input type="number" placeholder="Prix (exemple:50000 ou 50) " name="prix">
-                                <br>
-                                <label for="prix_min">ou Veillez Introduire un Interval de Prix de Votre produit </label>
-                                <input id="prix" type="number" placeholder="Prix Minimun (exemple:1000 ou 10)" name="prix_min">
-                                <input id="prix" type="number" placeholder="Prix Maximun (exemple:5000 ou 10 )" name="prix_max">
-                                <br>
+                                <div style="display:flex;align-items:center;">
+                                  <label for="elevage" >Choissez Entre :</label>
+                                  <input type="radio" id="prix-fixe-btn" name="type-prix"  value="prix-fixe" style="width:20px;height:20px" >
+                                  <label for="prix-fixe" >Prix Fixe</label>
+                                  <input type="radio" id="prix-interval-btn"  name="type-prix"  value="prix-interval" style="width:20px;height:20px" >
+                                  <label for="prix-interval" >Prix Interval</label>
+                                  <input type="radio" id="autres-moyens-btn"  name="type-prix"  value="autres" style="width:20px;height:20px" >
+                                  <label for="autres" >Prix Interval</label>
+                                </div> 
+                                <div class="choix_type_prix " id="prix-fixe" style="padding-bottom:30px;margin-bottom:20px; border-bottom: 1px solid rgba(0, 0, 0, 0.486);">
+                                  <br>
+                                  <label for="Prix">Veillez Introduire un Prix fixe</label>
+                                  <input type="number" placeholder="Prix (exemple:50000 ou 50) " name="prix">
+                                  <label for="choix">Choissez:</label>
+                                  <select id="choix" name="poids">
+                                    <option value="Kilo">Par Kilo</option>
+                                    <option value="Tonne">Par Tonne</option>
+                                    <option value="Partie">Par Partie</option>
+                                    <option value="Sac">Par Sac</option>
+                                    <option value="Piece">Par Piece</option>
+                                    <option value="Animal">Par Animal</option>
+                                  </select>
+                                  <br>
+                                </div>
+                                <div class="choix_type_prix " id="prix-interval" style="display:none;padding-bottom:30px;margin-bottom:20px; border-bottom: 1px solid rgba(0, 0, 0, 0.486);">
+                                  <label for="prix_min">ou Veillez Introduire un Interval de Prix de Votre produit </label>
+                                  <input id="prix" type="number" placeholder="Prix Minimun (exemple:1000 ou 10)" name="prix_min">
+                                  <input id="prix" type="number" placeholder="Prix Maximun (exemple:5000 ou 10 )" name="prix_max">
+                                  <label for="choix">Choissez:</label>
+                                  <select id="choix" name="poids">
+                                    <option value="Kilo">Par Kilo</option>
+                                    <option value="Tonne">Par Tonne</option>
+                                    <option value="Partie">Par Partie</option>
+                                    <option value="Sac">Par Sac</option>
+                                    <option value="Piece">Par Piece</option>
+                                    <option value="Animal">Par Animal</option>
+                                  </select>
+                                  <br>
+
+                                </div>
+                                <div class="choix_type_prix " id="autres-moyens" style="display:none; padding-bottom:30px;margin-bottom:20px; border-bottom: 1px solid rgba(0, 0, 0, 0.486);">
+                                  <label for="choix">Choissez:</label>
+                                  <select id="choix" name="autres">
+                                    <option value="">Choississez Entre: </option>
+                                    <option value="Discuter">A Discuter</option>
+                                    <option value="Contacter Moi">Contacter Moi</option>
+                                  </select>
+                                </div>
                                 <label for="Delai">Veillez Introduire un delai Max et Min sera en fonction de la dete</label>
                                 <br>
                                 <label for="delai">Delai:</label>
                                 <select id="cat" name="delai">
-                                    <option >Choississez le Delai max</option>
+                                    <option value="30">Choississez le Delai max</option>
                                     <option value="1">24 Heure</option>
                                     <option value="2">48 Heures</option>
                                     <option value="3">3 jours</option>
@@ -112,8 +153,8 @@
                                 <br>
                                 <br>
                                 <div class="btn">
-                                    <button type="button" id="btn_precedent"onclick="Precedent(2,'530px')">Precedent</button>
-                                    <button type="button" id="btn_suivant" onclick="Suivant(2,'600px')" >Suivant</button>
+                                    <button type="button" id="btn_precedent"onclick="Precedent(2,'550px')">Precedent</button>
+                                    <button type="button" id="btn_suivant" onclick="Suivant(2,'550px')" >Suivant</button>
                                 </div>  
                                     
                             </div>
@@ -141,20 +182,8 @@
                                     <input type="hidden" name="imgurl3" id="url3">
                                     <br>
                                     <div class="wrap-circles">
-                                        <div class="circle per-0">
-                                            <div class="inner">0%</div>
-                                        </div>
-                                        <div class="circle per-25">
-                                            <div class="inner">25%</div>
-                                        </div>
-                                        <div class="circle per-50">
-                                            <div class="inner">50%</div>
-                                        </div>
-                                        <div class="circle per-75">
-                                            <div class="inner">75%</div>
-                                        </div>
-                                        <div class="circle per-100">
-                                            <div class="inner">100%</div>
+                                        <div class="circle per-100" >
+                                            <div class="inner"></div>
                                         </div>
                                     </div>
                             
@@ -185,12 +214,10 @@
         <h1 class="text">Vos Annonces</h1>
          {%if uid %}
            <p>Voici la liste de Vos Annonces</p> 
-         {% else %}
-           <p></p>
          {% endif%}
         <div class="conteneur-card">
-
-        {%for iden,work in com_list %}
+        {%if com_list %}
+        {%for iden,work,vues in com_list %}
 
             <div class="card-long">
                 <div class="thumbnail" >
@@ -209,9 +236,9 @@
                     <div class="prix">
                         {% if work.prix %} 
                             {{work.prix}}
-                            {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %} 
+                            {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}  
+                            <span  style="font-size:10px;">/{{work.poids}}</span>
                         {% endif %}
-                        <span class="prix_interval">
                         
                         {% if work.prix_min %}
                            {{work.prix_min}} 
@@ -220,8 +247,12 @@
                         {% if work.prix_min %}
                           - {{work.prix_max}}
                           {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}
+                          <span  style="font-size:10px;">/{{work.poids}}</span>
                         {% endif %}
-                        </span>
+
+                        {% if work.autres %}
+                           {{work.autres}}
+                        {% endif %} 
                     </div>
                     <div class="subtitle">Disponible</div>
                     <div class="element lieu">
@@ -232,7 +263,7 @@
                     <div class="element">
                         <span class="vu"><i class="fa fa-users" aria-hidden="true"></i> {{data.prenom}} {{data.nom}}</span>
                         <span class="vu"><i class="fas fa-clock "></i> {{work.date}}</span>
-                        <span class="vu"><i class="fas fa-eye"></i> {{work.Annee}}</span>  
+                        <span class="vu"><i class="fas fa-eye"></i> {{vues.count}}</span>  
                     </div> 
                 </div>
                 <div  class="more">
@@ -247,9 +278,11 @@
                     </div>
                 </div>     
             </div>
-            {% empty %}
-              <h3 style="color:rgb(71, 71, 71) ;">Pas d'annonce Appuyer sur Ajouter Annonnce.</h3>
+            
              {% endfor %}
+             {% else %}
+                 <h3 style="color:rgb(71, 71, 71) ;">Pas d'annonce Appuyer sur Ajouter Annonnce.</h3>
+              {% endif %}
         <div class="pagination">
             {% if com_list.has_previous %}
                 <a href="{% url 'dashbord' %}?page={{com_list.previous_page_number}}" class="page prev"><i class="fas fa-arrow-left"></i> Precedent</a>
@@ -436,28 +469,42 @@
     }
       function  progressBar(value){
       if(value == 0){
-      document.querySelector(".per-0").style.display="none";
-      document.querySelector(".per-0").style.display="block";
+        document.querySelector(".per-100").style.display="block";
+        document.querySelector(".circle").style.backgroundImage="conic-gradient(tomato 0%, #000000 0)";
+        document.querySelector(".inner").innerHTML="0";
+      /*document.querySelector(".per-0").style.display="none";
+      document.querySelector(".per-0").style.display="block";*/
       }
       if(value == 25){
-        document.querySelector(".per-25").style.display="none";
+        
+        document.querySelector(".circle").style.backgroundImage="conic-gradient(tomato 25%, #000000 0)";
+        document.querySelector(".inner").innerHTML="25";
+        /*document.querySelector(".per-25").style.display="none";
         document.querySelector(".per-0").style.display="none";
-        document.querySelector(".per-25").style.display="block";
+        document.querySelector(".per-25").style.display="block";*/
       }
       if(value == 50){
-       document.querySelector(".per-50").style.display="none";
+        document.querySelector(".circle").style.backgroundImage="conic-gradient(tomato 50%, #000000 0)";
+        document.querySelector(".inner").innerHTML="50";
+       /*document.querySelector(".per-50").style.display="none";
        document.querySelector(".per-25").style.display="none";
-       document.querySelector(".per-50").style.display="block";
+       document.querySelector(".per-50").style.display="block";*/
       }
       if(value == 75){
+        document.querySelector(".circle").style.backgroundImage="conic-gradient(tomato 75%, #000000 0)";
+        document.querySelector(".inner").innerHTML="75";
+        /*
         document.querySelector(".per-75").style.display="none";
         document.querySelector(".per-50").style.display="none";
-        document.querySelector(".per-75").style.display="block";
+        document.querySelector(".per-75").style.display="block";*/
       }
       if(value == 100){
+        document.querySelector(".circle").style.backgroundImage="conic-gradient(tomato 100%, #000000 0)";
+        document.querySelector(".inner").innerHTML="100";
+        /*
         document.querySelector(".per-75").style.display="none";
         document.querySelector(".per-75").style.display="none";
-        document.querySelector(".per-100").style.display="block";
+        document.querySelector(".per-100").style.display="block";*/
       }
     }
         var selDiv1 = "";
@@ -545,6 +592,8 @@
             reader.readAsDataURL(f);
           });
         }
+
+       
     
       </script>
     {%endblock js %}

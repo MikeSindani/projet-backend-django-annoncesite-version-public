@@ -28,13 +28,15 @@
 
 {%endblock links %}
 
-  {%block Connexion %}
+{%block Connexion %}
     {% if uid %}
         {% include "header/nav_connexion.html" %}
    {% else %}
       {% include "header/nav.html" %}
    {% endif %}
-  {%endblock Connexion %} 
+{%endblock Connexion %} 
+
+
 {% block Content %}
  
 
@@ -134,7 +136,8 @@
           <h1>Elevage</h1>
       </div>
       <div class=" owl-carousel owl-theme">
-        {% for iden, work,user in list_elevage %}
+    {% if list_elevage %} 
+    {% for iden, work,user in list_elevage %}
         <div class="item">
                     <!-- Post-->
                 <div class="post-module">
@@ -154,9 +157,26 @@
                     <div class="post-content">
                     <div class="category">{{work.categorie}}</div>
                     <h1 class="title">{{work.titre|title|truncatechars:20 }}</h1>
-                    <div class="prix">{{work.prix}} {% if work.devise == "USD" %}${% elif work.devise == "CDF" %}Fc{% endif %}
-                        <span class="prix_interval">{{work.prix_min}} {% if work.devise == "USD" %}${% elif work.devise == "CDF" %}Fc{% endif %}
-                             - {{work.prix_max}} {% if work.devise == "USD" %}${% elif work.devise == "CDF" %}Fc{% endif %}</span>
+                    <div class="prix">
+                        {% if work.prix %} 
+                            {{work.prix}}
+                            {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}  
+                            <span  style="font-size:10px;">/{{work.poids}}</span>
+                        {% endif %}
+                        
+                        {% if work.prix_min %}
+                           {{work.prix_min}} 
+                           {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}
+                        {% endif %}
+                        {% if work.prix_min %}
+                          - {{work.prix_max}}
+                          {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}
+                          <span  style="font-size:10px;">/{{work.poids}}</span>
+                        {% endif %}
+
+                        {% if work.autres %}
+                           {{work.autres}}
+                        {% endif %} 
                     </div>
                     <h2 class="sub_title">Disponible</h2>
                     <p class="description">{{work.description|truncatechars:100}}</p>
@@ -171,7 +191,7 @@
                     </div>
                 </div>
         </div>
-       {% empty %}
+    {% empty %}
         
         <div class="item">
             <div class="post-module">
@@ -265,14 +285,110 @@
                 </div>
             </div>
         </div>
-    {%endfor%}
+    {% endfor %}
+    {% else %} 
+        
+    <div class="item">
+        <div class="post-module">
+            <!-- Thumbnail-->
+            <div class="thumbnail">
+            <img src="img/champ.jpg" height="500"/>
+            </div>
+            <!-- Post Content-->
+            <div class="post-content">
+            <div class="category">Elevage</div>
+            <h1 class="title">Vente des Montons a panda makomemo venez </h1>
+            <h2 class="sub_title">Disponible</h2>
+            <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
+            <div class="post-meta">
+                <span class="timestamp"><i class="fas fa-clock"></i>6 mins ago</span>
+                <span class="users"><i class="fas fa-users"></i>mike sindani</span>
+                <span  class="lieu"><i class="fas fa-map-marker-alt"></i>kasumbalesha</span>
+            </div>
+            </div>
+            <div class="post-click">
+            <p>Voir Plus</p>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="post-module">
+            <!-- Thumbnail-->
+            <div class="thumbnail">
+            <img src="img/champ.jpg" height="500"/>
+            </div>
+            <!-- Post Content-->
+            <div class="post-content">
+            <div class="category">Elevage</div>
+            <h1 class="title">Vente des Montons a panda makomemo venez </h1>
+            <h2 class="sub_title">Disponible</h2>
+            <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
+            <div class="post-meta">
+                <span class="timestamp"><i class="fas fa-clock"></i>6 mins ago</span>
+                <span class="users"><i class="fas fa-users"></i>mike sindani</span>
+                <span  class="lieu"><i class="fas fa-map-marker-alt"></i>kasumbalesha</span>
+            </div>
+            </div>
+            <div class="post-click">
+            <p>Voir Plus</p>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="post-module">
+            <!-- Thumbnail-->
+            <div class="thumbnail">
+            <img src="img/champ.jpg" height="500"/>
+            </div>
+            <!-- Post Content-->
+            <div class="post-content">
+            <div class="category">Elevage</div>
+            <h1 class="title">Vente des Montons a panda makomemo venez </h1>
+            <h2 class="sub_title">Disponible</h2>
+            <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
+            <div class="post-meta">
+                <span class="timestamp"><i class="fas fa-clock"></i>6 mins ago</span>
+                <span class="users"><i class="fas fa-users"></i>mike sindani</span>
+                <span  class="lieu"><i class="fas fa-map-marker-alt"></i>kasumbalesha</span>
+            </div>
+            </div>
+            <div class="post-click">
+            <p>Voir Plus</p>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="post-module">
+            <!-- Thumbnail-->
+            <div class="thumbnail">
+            <img src="img/champ.jpg" height="500"/>
+            </div>
+            <!-- Post Content-->
+            <div class="post-content">
+            <div class="category">Elevage</div>
+            <h1 class="title">Vente des Montons a panda makomemo venez </h1>
+            <h2 class="sub_title">Disponible</h2>
+            <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
+            <div class="post-meta">
+                <span class="timestamp"><i class="fas fa-clock"></i>6 mins ago</span>
+                <span class="users"><i class="fas fa-users"></i>mike sindani</span>
+                <span  class="lieu"><i class="fas fa-map-marker-alt"></i>kasumbalesha</span>
+            </div>
+            </div>
+            <div class="post-click">
+            <p>Voir Plus</p>
+            </div>
+        </div>
+    </div>
+    {% endif %} 
        
     </div>
       <div class="info">
           <h1>Agriculture</h1>
       </div>
       <div class=" owl-carousel owl-theme">
-        {% for iden, work,user in list_agriculture %}
+    {%if list_agriculture %}
+    {% for iden, work,user in list_agriculture %}
         <div class="item">
                     <!-- Post-->
                 <div class="post-module">
@@ -292,9 +408,26 @@
                     <div class="post-content">
                     <div class="category">{{work.categorie}}</div>
                     <h1 class="title">{{work.titre|title|truncatechars:20 }}</h1>
-                    <div class="prix">{{work.prix}} {% if work.devise == "USD" %}${% elif work.devise == "CDF" %}Fc{% endif %}
-                        <span class="prix_interval">{{work.prix_min}} {% if work.devise == "USD" %}${% elif work.devise == "CDF" %}Fc{% endif %}
-                             - {{work.prix_max}} {% if work.devise == "USD" %}${% elif work.devise == "CDF" %}Fc{% endif %}</span>
+                    <div class="prix">
+                        {% if work.prix %} 
+                            {{work.prix}}
+                            {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}  
+                            <span  style="font-size:10px;">/{{work.poids}}</span>
+                        {% endif %}
+                        
+                        {% if work.prix_min %}
+                           {{work.prix_min}} 
+                           {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}
+                        {% endif %}
+                        {% if work.prix_min %}
+                          - {{work.prix_max}}
+                          {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}
+                          <span  style="font-size:10px;">/{{work.poids}}</span>
+                        {% endif %}
+
+                        {% if work.autres %}
+                           {{work.autres}}
+                        {% endif %} 
                     </div>
                     <h2 class="sub_title">Disponible</h2>
                     <p class="description">{{work.description|truncatechars:100}}</p>
@@ -309,7 +442,7 @@
                     </div>
                 </div>
         </div>
-       {% empty %}
+    {% empty %}
         
         <div class="item">
             <div class="post-module">
@@ -403,8 +536,101 @@
                 </div>
             </div>
         </div>
-    {%endfor%}
-       
+    {% endfor %}
+    {% else %}
+    <div class="item">
+        <div class="post-module">
+            <!-- Thumbnail-->
+            <div class="thumbnail">
+            <img src="img/champ.jpg" height="500"/>
+            </div>
+            <!-- Post Content-->
+            <div class="post-content">
+            <div class="category">Elevage</div>
+            <h1 class="title">Vente des Montons a panda makomemo venez </h1>
+            <h2 class="sub_title">Disponible</h2>
+            <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
+            <div class="post-meta">
+                <span class="timestamp"><i class="fas fa-clock"></i>6 mins ago</span>
+                <span class="users"><i class="fas fa-users"></i>mike sindani</span>
+                <span  class="lieu"><i class="fas fa-map-marker-alt"></i>kasumbalesha</span>
+            </div>
+            </div>
+            <div class="post-click">
+            <p>Voir Plus</p>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="post-module">
+            <!-- Thumbnail-->
+            <div class="thumbnail">
+            <img src="img/champ.jpg" height="500"/>
+            </div>
+            <!-- Post Content-->
+            <div class="post-content">
+            <div class="category">Elevage</div>
+            <h1 class="title">Vente des Montons a panda makomemo venez </h1>
+            <h2 class="sub_title">Disponible</h2>
+            <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
+            <div class="post-meta">
+                <span class="timestamp"><i class="fas fa-clock"></i>6 mins ago</span>
+                <span class="users"><i class="fas fa-users"></i>mike sindani</span>
+                <span  class="lieu"><i class="fas fa-map-marker-alt"></i>kasumbalesha</span>
+            </div>
+            </div>
+            <div class="post-click">
+            <p>Voir Plus</p>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="post-module">
+            <!-- Thumbnail-->
+            <div class="thumbnail">
+            <img src="img/champ.jpg" height="500"/>
+            </div>
+            <!-- Post Content-->
+            <div class="post-content">
+            <div class="category">Elevage</div>
+            <h1 class="title">Vente des Montons a panda makomemo venez </h1>
+            <h2 class="sub_title">Disponible</h2>
+            <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
+            <div class="post-meta">
+                <span class="timestamp"><i class="fas fa-clock"></i>6 mins ago</span>
+                <span class="users"><i class="fas fa-users"></i>mike sindani</span>
+                <span  class="lieu"><i class="fas fa-map-marker-alt"></i>kasumbalesha</span>
+            </div>
+            </div>
+            <div class="post-click">
+            <p>Voir Plus</p>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="post-module">
+            <!-- Thumbnail-->
+            <div class="thumbnail">
+            <img src="img/champ.jpg" height="500"/>
+            </div>
+            <!-- Post Content-->
+            <div class="post-content">
+            <div class="category">Elevage</div>
+            <h1 class="title">Vente des Montons a panda makomemo venez </h1>
+            <h2 class="sub_title">Disponible</h2>
+            <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
+            <div class="post-meta">
+                <span class="timestamp"><i class="fas fa-clock"></i>6 mins ago</span>
+                <span class="users"><i class="fas fa-users"></i>mike sindani</span>
+                <span  class="lieu"><i class="fas fa-map-marker-alt"></i>kasumbalesha</span>
+            </div>
+            </div>
+            <div class="post-click">
+            <p>Voir Plus</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}  
     </div>
       <div class="recommandation">
           <div class="info">
@@ -533,7 +759,7 @@
 </div>
     
 
-{% endblock Content %}
+{%endblock Content %}
 {%block js %} 
     <script src="{% static 'owl-carrousel/js/card.js' %}"></script>
 {%endblock js %}

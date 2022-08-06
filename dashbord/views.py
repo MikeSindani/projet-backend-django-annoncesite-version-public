@@ -31,7 +31,10 @@ def dashbord(request):
     # notre objet class afficher 
     com_list = geta.afficher_annonces_user_all(database,uid)
     message=" "
-    page = geta.pagination_fonction(request,com_list,number_page=5)
+    try:
+        page = geta.pagination_fonction(request,com_list,number_page=5)
+    except:
+        page = False
 
     # rendu de la page 
     return render(request, "dashbord/dashbord.html",{"com_list": page , "msge": message, "data": userdata,"uid":uid})
@@ -64,6 +67,8 @@ def create_annonce(request):
     prix = request.POST.get("prix")
     prix_min = request.POST.get("prix_min")
     prix_max = request.POST.get("prix_max")
+    poids = request.POST.get("poids")
+    autres = request.POST.get("autres")
     delai = request.POST.get("delai")
     quatite = request.POST.get("quatite")
     imgurl1 = request.POST.get("imgurl1")
@@ -94,6 +99,8 @@ def create_annonce(request):
         "devise":devise,
         "prix_max":prix_max,
         "prix_min":prix_min,
+        "poids":poids,
+        "autres":autres,
         "delai":delai,
         "produit": produit,
         "imgurl1":imgurl1,

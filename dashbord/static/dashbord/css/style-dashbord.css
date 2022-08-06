@@ -21,6 +21,9 @@
 .pagination a:active{
   transform: scale(0.9);
 }
+.wrap-circles{
+  padding: 10px;
+}
 .circle {
   display: none;
   position: relative;
@@ -30,6 +33,7 @@
   border-radius: 50%;
   background: #000000;
   overflow: hidden;
+  
 }
 .circle.per-25 {
   background-image: conic-gradient(tomato 25%, #000000 0);
@@ -201,6 +205,7 @@
   display: block;
   margin: 15px auto;
 }
+
 
 .modal form input[type="text"], .modal form input[type="email"], select, .modal form textarea {
   border: none;
@@ -397,7 +402,9 @@ option {
   margin-left: -30px;
 }
 
-.modal-connexion .modal-content .modal-body form .part input {
+.modal-connexion .modal-content .modal-body form .part input[type="text"],
+.modal-connexion .modal-content .modal-body form .part input[type="number"], 
+.modal-connexion .modal-content .modal-body form .part textarea {
   border: none;
   color: black;
   background-color: #f3f3f3;
@@ -416,17 +423,9 @@ option {
   margin-top: 10px;
 }
 
-
-.modal-connexion .modal-content .modal-body form .part textarea {
-  border: none;
-  color: black;
-  background-color: #f3f3f3;
-  width: 100%;
-  font-size: 16px;
-  padding: 0.5vw 2vh;
-  margin-top: 10px;
+.modal-connexion .modal-content .modal-body form .part input[type="radio"]{
+ border: 1px solid black;
 }
-
 .modal-connexion .modal-content .modal-body form .part .btn {
   margin: 0;
   display: -webkit-box;
@@ -506,8 +505,7 @@ option {
 @media screen and (max-width: 800px) {
   .button {
     position: relative;
-    top: -30px;
-    
+    top: 10px;  
   }
   .modal-connexion .modal-content {
     width: 100%;
@@ -1147,11 +1145,11 @@ body .dash-contaneur .tabcontent > p {
 a {
   text-decoration: none;
 }
-.button, input {
+/*.button, input {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-}
+}*/
 
 /* GRID */
 .twelve {
