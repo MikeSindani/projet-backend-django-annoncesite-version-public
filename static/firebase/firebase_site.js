@@ -42,7 +42,7 @@
           document.getElementById("url").value = downloadURL;
           console.log("file uploaded successfully");
           progressBar(100);
-          document.getElementById("message").innerHTML='<span style="color:green;"></i>Photo de Profil Envoyer</span>'
+          //document.getElementById("message").innerHTML='<span style="color:green;"></i>Photo de Profil Envoyer</span>'
           // activation du bouton quand c'est upload
           document.getElementById("loginBtn").disabled = false;
           
@@ -53,27 +53,77 @@
       // fonctioon qui gerer la progression du transfert 
       function  progressBar(value){
         if(value == 0){
-        document.querySelector(".per-0").style.display="none";
-        document.querySelector(".per-0").style.display="block";
+          document.querySelector(".per-100").style.display="block";
+          document.querySelector(".circle").style.backgroundImage="conic-gradient(tomato 0%, #000000 0)";
+          document.querySelector(".inner").innerHTML="0";
+        /*document.querySelector(".per-0").style.display="none";
+        document.querySelector(".per-0").style.display="block";*/
         }
         if(value == 25){
-          document.querySelector(".per-25").style.display="none";
+          
+          document.querySelector(".circle").style.backgroundImage="conic-gradient(tomato 25%, #000000 0)";
+          document.querySelector(".inner").innerHTML="25";
+          /*document.querySelector(".per-25").style.display="none";
           document.querySelector(".per-0").style.display="none";
-          document.querySelector(".per-25").style.display="block";
+          document.querySelector(".per-25").style.display="block";*/
         }
         if(value == 50){
-         document.querySelector(".per-50").style.display="none";
+          document.querySelector(".circle").style.backgroundImage="conic-gradient(tomato 50%, #000000 0)";
+          document.querySelector(".inner").innerHTML="50";
+         /*document.querySelector(".per-50").style.display="none";
          document.querySelector(".per-25").style.display="none";
-         document.querySelector(".per-50").style.display="block";
+         document.querySelector(".per-50").style.display="block";*/
         }
         if(value == 75){
+          document.querySelector(".circle").style.backgroundImage="conic-gradient(tomato 75%, #000000 0)";
+          document.querySelector(".inner").innerHTML="75";
+          /*
           document.querySelector(".per-75").style.display="none";
           document.querySelector(".per-50").style.display="none";
-          document.querySelector(".per-75").style.display="block";
+          document.querySelector(".per-75").style.display="block";*/
         }
         if(value == 100){
+          document.querySelector(".circle").style.backgroundImage="conic-gradient(tomato 100%, #000000 0)";
+          document.querySelector(".inner").innerHTML="100";
+          /*
           document.querySelector(".per-75").style.display="none";
           document.querySelector(".per-75").style.display="none";
-          document.querySelector(".per-100").style.display="block";
+          document.querySelector(".per-100").style.display="block";*/
         }
+      }
+
+
+      // code pour affichier la photo de profil
+       
+      var selDiv1 = "";
+      var storedFiles1 = [];
+
+      $(document).ready(function () {
+        $("#files").on("change", handleFileSelect1);
+        selDiv1 = $("#selectedBanner1");
+        
+      });
+
+      function handleFileSelect1(e) {
+        var files = e.target.files;
+        var filesArr = Array.prototype.slice.call(files);
+        filesArr.forEach(function (f) {
+          if (!f.type.match("image.*")) {
+            return;
+          }
+          storedFiles1.push(f);
+          $("#img_profil").css("display","none");
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            var html =
+              '<img src="' +
+              e.target.result +
+              "\" data-file='" +
+              f.name +
+              "alt='profil' height='180px' width='180px'>";
+            selDiv1.html(html);
+          };
+          reader.readAsDataURL(f);
+        });
+
       }

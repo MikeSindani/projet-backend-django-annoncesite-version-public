@@ -84,7 +84,7 @@ class AfficherAnnonce:
         #print("uid session 1  = " + str(a))
         a = a[0]
         a = a["localId"]
-        #print("uid session 2  = " + str(a))
+        print("uid session 2  = " + str(a))
 
         return a
      def get_profil_data(self,database,uid):
@@ -120,6 +120,7 @@ class AfficherAnnonce:
             "telegram" : telegram,
             "whatsapp" : whatsapp,
             "entreprise" : entreprise
+            
         }
         # rendre les dictionnaires 
         return data
@@ -315,6 +316,7 @@ class AfficherAnnonce:
               get_data = database.child("Vues").child(idannonce).get().val()
               a = int(get_data["count"])
               a = a+1
+            # -------- update --------------------------
               data = {"count":a}   
               database.child("Vues").child(idannonce).update(data) 
           get_data = database.child("Vues").child(idannonce).get().val()

@@ -1,0 +1,134 @@
+a{
+    text-decoration: none;
+}
+
+.wrap-circles{
+    
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+ .container-welcome   .circle { 
+    display: none; 
+    position: relative;
+    width: 70px;
+    height: 70px;
+    margin: 0.5rem;
+    border-radius: 50%;
+    background: #000000;
+    overflow: hidden;
+    
+  }
+  .circle.per-25 {
+    background-image: conic-gradient(tomato 25%, #000000 0);
+  }
+  .circle.per-50 {
+    background-image: conic-gradient(tomato 50%, #000000 0);
+  }
+  .circle.per-75 {
+    background-image: conic-gradient(tomato 75%, #000000 0);
+  }
+  .circle.per-100 {
+    display: none;
+    background-image: conic-gradient(tomato 100%, #000000 0);
+  }
+  .container-welcome .circle .inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    border-radius: 50%;
+    font-size: 1em;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.75);
+  }
+
+.container-welcome {
+    margin: 5px 15%;
+    
+}
+.container-welcome h1, .bref{
+    font-size: 40px;
+    text-align: center;
+    color:  #09112e;
+}
+.container-welcome .bref{
+    font-size: 20px;
+    text-align: center;
+    color: rgb(119, 119, 119);
+}
+.container-welcome .text #name{
+    color: tomato;
+}
+.container-welcome .welcome div {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
+}
+.container-welcome .welcome div img{
+    border-radius: 50%;
+}
+
+.container-welcome .welcome{
+    margin: 20px ;
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+   align-items: center;
+}
+
+/* ---------- BOUTON ------------------------------ */ 
+.container-welcome .welcome div button{
+    border-radius: 20px;
+    border: 1px solid #09112e;
+    background-color: #000000;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    margin: 5px;
+}
+
+.container-welcome .welcome div button:active{
+    transform: scale(0.85);
+}
+
+.container-welcome .welcome div input{
+    border-radius: 20px;
+    background-color: #dadada;
+    color: #000000;  
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+}
+.container-welcome .welcome div #submit  {
+    background-color: tomato;
+    border: 1px solid tomato;
+    color: #FFFFFF;
+    padding: 12px 150px;
+}
+
+@media (max-width:800px){
+    .container-welcome h1{ 
+     text-align: none;
+    }
+    .container-welcome .welcome div button,.container-welcome .welcome div a  {
+        padding: 10px 30px;
+    }
+    .container-welcome .welcome div a  {
+        padding: 10px 150px;
+    }
+}

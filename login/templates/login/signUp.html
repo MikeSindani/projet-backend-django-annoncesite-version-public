@@ -46,55 +46,40 @@
             <p class="msg_avertis">{{msg}}</p>
           {% endif %}
 					<input type="email" name="email" placeholder="email" required>
-					<input type="password" name="password" id="password" placeholder="password" required onkeyup="check();">
-					<input type="password" name="confirm_password" id="confirm_password" placeholder="confirm password" required onkeyup="check();">
+					<input type="password" name="password" id="password" placeholder="Mot de Passe" required onkeyup="check();">
+					<input type="password" name="confirm_password" id="confirm password" placeholder="Confirmer le Mot de passe" required onkeyup="check();">
 				<button type="button" disabled id="suivant_part_pass" onclick="Suivant(1);">suivant</button>
 		  </div>
 	  
 		  <div class="part personnel_info">
 			<h2 class="text">Vos Information Personnel</h2>
-				<input type="text" placeholder="name" name="name">
+				<input type="text" placeholder="Nom" name="name">
 				<input type="text" placeholder="Prenom" name="prenom">
-				<input type="text" placeholder="Adresse" name="adr">
-				<input type="text" placeholder="Nom Entreprise" name="entreprise">
+				<input type="text" placeholder="Nom de Votre Entreprise" name="entreprise">
 		    <button type="button" onclick="Precedent(2);">precedent</button>
 		    <button type="button" onclick="Suivant(2);">suivant</button>
 		  </div>
+
 		  <div class="part contact_info">
-			<h2 class="text">Vos Informations de Contact</h2>
-				<input type="tel" placeholder="numero phone 1" name="tel1">
-				<input type="tel" placeholder="numero phone 2" name="tel2">
-				<input type="tel" placeholder="Numero Whastapp" name="whatsapp">
-				<input type="tel" placeholder="Telegram ex:@clam" name="telegram">
+			<h2 class="text">Information sur Votre Adressse</h2>
+			<input type="text" placeholder="Quartier( ex: gambela ...)" name="quartier" >
+			<input type="text" placeholder="Commune ( ex: Lubumbashi ...)" name="commune" >
+			<input type="text" placeholder="Avenue  ( ex: Lac Kipopo ...)" name="avenue" >
+				
 		    <button type="button" onclick="Precedent(3);">precedent</button>
 		    <button type="button" onclick="Suivant(3);">suivant</button>
 		  </div>
 	  
 		  <div class="part profil_info">
-			<h2 class="text">Photo de profil</h2>
-        <img src="https://th.bing.com/th/id/OIP.iOnAhgLrg_AR5D6STimV3wAAAA?w=221&h=220&c=7&r=0&o=5&pid=1.7"  id="img_profil" height="120" width="120">
-				<input type="file" name="files[]" id="files">
-				<input type="hidden" name="url" id="url">
-		    <button type="button" onclick="Precedent(4);">precedent</button>
-			  <button type="button" onclick="uploadimage();"  onchange="img_profil(event);" accept="image/*" >Upload</button>
-        <div class="wrap-circles">
-          <div class="circle per-0">
-            <div class="inner">0%</div>
-          </div>
-          <div class="circle per-25">
-            <div class="inner">25%</div>
-          </div>
-          <div class="circle per-50">
-            <div class="inner">50%</div>
-          </div>
-          <div class="circle per-75">
-            <div class="inner">75%</div>
-          </div>
-          <div class="circle per-100">
-            <div class="inner">100%</div>
-          </div>
-        </div>
-			  <input type="submit" id="loginBtn" value="Inscription" disabled >
+			<h2 class="text">Vos Informations de Contact</h2>
+				<input type="tel" placeholder="numero phone 1" name="tel1">
+				<input type="tel" placeholder="numero phone 2" name="tel2">
+				<input type="tel" placeholder="Numero Whastapp" name="whatsapp">
+				<input type="tel" placeholder="Telegram ex:@clam" name="telegram">
+
+                
+		<button type="button" onclick="Precedent(4);">precedent</button>
+			  <input type="submit" id="loginBtn" value="Inscription">
 		  </div>
 		  <p id="message"></p>	
 		</form>

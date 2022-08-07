@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cache %}
+{%block titre%}Bienvenu(e) - {{userdata.prenom}} {{userdata.nom}} {%endblock titre %}
+{%block style %}
+    <link rel="stylesheet" href="{% static 'login/css/welcome.css' %}">
+{%endblock style %}
+
+{%block Connexion %}
+    {% if uid %}
+        {% include "header/nav_connexion.html" %}
+   {% else %}
+      {% include "header/nav.html" %}
+   {% endif %}
+{%endblock Connexion %} 
+
+{% block Content %}
+
+<div class="container-welcome">
+ <h1 class="text">Bienvenu(e)  <span id="name">{{userdata.prenom}} {{userdata.nom}} </span></h1>
+ <div class="bref">Terminer la creation de votre compte en ajoutant Votre Photo de Profil</div>
+ <div class="welcome">
+     <form action="/finich_Creater_profil/" method="post" enctype="application/x-www-form-urlencoded">
+        {% csrf_token %}
+        <div id="img-profil">
+            <img src="https://th.bing.com/th/id/OIP.iOnAhgLrg_AR5D6STimV3wAAAA?w=221&h=220&c=7&r=0&o=5&pid=1.7"  id="img_profil" height="180" width="180">
+            <span class="img_show" id="selectedBanner1"></span>
+        </div>
+        <div>
+            <input type="file" name="files[]" id="files">
+            <input type="hidden" name="url" id="url"></div>
+            
+        <div class="wrap-circles" >
+           <div class="circle per-100" style="display:none ;">
+             <div class="inner">100%</div>
+           </div>
+        </div>
+        <div><button type="button" onclick="uploadimage();"  onchange="img_profil(event);" accept="image/*" >Envoyer L'image</button></div>
+        <div><button id="submit">terminer</button></div>
+     </form>
+       
+     
+ </div>
+
+</div>
+
+{% endblock Content %}
+{%block js %} 
+<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+<script src="{% static 'firebase/firebase_site.js' %}"></script>
+<script src="{% static 'login/js/signup.js' %}"></script>
+<script>
+      
+</script>    
+{%endblock js %}
