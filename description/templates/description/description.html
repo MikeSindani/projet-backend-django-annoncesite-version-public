@@ -256,8 +256,14 @@
     
 <!---   ------------------------ SECTION FLOTANT ----------------------------  -->
     <div class="description-contact">
+        {% if uid %}
         <span class="favoris"><a href=""><i class="fas fa-star"></i></i> Ajouter Au favoris</a></span>
         <span class="user-btn"><div class="btn-contacter">Contacter</div></span>
+        {% else %}
+        <span id="btn-modal-message" onclick="btn_modal_message()" class="favoris"><a href=""><i class="fas fa-star"></i></i> Ajouter Au favoris</a></span>
+        <span  id="btn-modal-message" onclick="btn_modal_message()" class="user-btn"><div class="btn-contacter">Contacter</div></span>
+        {% endif %}
+        
     </div>
 
     {%endfor %}
@@ -301,7 +307,12 @@
 
 <!---   ----------------- presentation de la personne --------------------  -->
     <div class="element control">
-        <span class="signaler">SIGNALER</span>      
+        {% if uid %}
+                <span id="btn-modal-message" onclick="btn_modal_message()" class="signaler">SIGNALER</span>
+        {% else %}
+                <span id="btn-modal-message" onclick="btn_modal_message()" class="signaler">SIGNALER</span> 
+        {% endif %}
+             
     </div> 
    </div> 
 <!---   -------------------------------------RECOMMANDER ----------------------------------  -->

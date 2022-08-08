@@ -420,13 +420,13 @@ img {
   }
 
   .container-annonces-description .commentaire .commentaire-btn span{
-   
     padding: 7px 50px;
     margin:5px;
     border-radius: 20px;
     background-color:black;
     color: white;
     transition:all .5s ease-in-out;
+    cursor: pointer;
   }
   
   .container-annonces-description .commentaire .commentaire-btn span a{
@@ -445,6 +445,7 @@ img {
     display: flex;
     justify-content: center;
     padding: 10px 0 !important;
+    cursor: pointer;
    }
    .container-annonces-description .control span a{
        text-decoration: none;
@@ -454,6 +455,7 @@ img {
        border-radius: 20px;
        border: 1px solid white; 
        transition:all .5s ease-in-out;
+       cursor: pointer;
    }
 
    
