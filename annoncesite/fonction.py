@@ -2,6 +2,7 @@ from dataclasses import dataclass
 import datetime
 from imghdr import what
 from itertools import product
+from types import NoneType
 from django.core.paginator import Paginator, EmptyPage
 from django.core.cache import cache
 from datetime import datetime, timezone , date
@@ -428,7 +429,81 @@ class AfficherAnnonce:
                 work.append(titre)
             cache.set('work2', work,3600)
             return work
+     def set_evaluation_fonction(self,database,uid,uidannonce,evaluation):
+            data = database.child("evaluation").child(uidannonce).child("list_users_evaluation").child(uid).get().val()
+            print("-----------[")
+            print(data)
+            print("***********")
+            print(evaluation)
 
+            if data == evaluation:
+                return "Vous avez deja evaluer ce producteur"
+
+            fiable = database.child("evaluation").child(uidannonce).child("annonce_evaluation").child("fiable").get().val()
+            count = database.child("evaluation").child(uidannonce).child("annonce_evaluation").child("count").get().val()       
+            if fiable is  None and count is  None and data is not evaluation:
+                a = {"fiable":1,"count":1,"total":100}
+                database.child("evaluation").child(uidannonce).child("annonce_evaluation").set(a)
+        
+                # ------------- list user -------------------
+                u = str(uid)
+                b = {u:evaluation}
+                database.child("evaluation").child(uidannonce).child("list_users_evaluation").set(b)     
+              
+            else:
+                if evaluation == "fiable":
+                    if data == "nofiable" :
+                        fiable = fiable + 1
+                        total = (fiable / count)*100
+                        put = {"fiable":fiable,"count":count,"total":total}
+                        print(put)
+                        database.child("evaluation").child(uidannonce).child("annonce_evaluation").update(put)
+
+                    else:
+                        fiable = fiable + 1
+                        count = count + 1
+                        total = (fiable / count)*100
+                        put = {"fiable":fiable,"count":count,"total":total}
+                        print(put)
+                        database.child("evaluation").child(uidannonce).child("annonce_evaluation").update(put)
+                    # ------------- list user -------------------
+                    u = str(uid)
+                    b = {u:evaluation}
+                    database.child("evaluation").child(uidannonce).child("list_users_evaluation").set(b)
+
+                else:
+                    if data == "fiable" :
+                        count = database.child("evaluation").child(uidannonce).child("annonce_evaluation").child("count").get().val()
+                        fiable = database.child("evaluation").child(uidannonce).child("annonce_evaluation").child("fiable").get().val()
+                        total = database.child("evaluation").child(uidannonce).child("annonce_evaluation").child("total").get().val()
+                        fiable = fiable - 1
+                        total = (fiable / count)*100
+                        put = {"fiable":fiable,"count":count,"total":total}
+                        print(put)
+                        database.child("evaluation").child(uidannonce).child("annonce_evaluation").update(put) 
+                        # ------------- list user -------------------
+                        u = str(uid)
+                        b = {u:evaluation}
+                        database.child("evaluation").child(uidannonce).child("list_users_evaluation").set(b) 
+                    else:
+                        count = database.child("evaluation").child(uidannonce).child("annonce_evaluation").child("count").get().val()
+                        fiable = database.child("evaluation").child(uidannonce).child("annonce_evaluation").child("fiable").get().val()
+                        total = database.child("evaluation").child(uidannonce).child("annonce_evaluation").child("total").get().val()
+                        count = count + 1
+                        total = (fiable / count)*100
+                        put = {"fiable":fiable,"count":count,"total":total}
+                        print(put)
+                        database.child("evaluation").child(uidannonce).child("annonce_evaluation").update(put) 
+                        # ------------- list user -------------------
+                        u = str(uid)
+                        b = {u:evaluation}
+                        database.child("evaluation").child(uidannonce).child("list_users_evaluation").set(b)
+
+            return "Merci Pour Votre evaluation!"
+     def get_evaluation(self,database,idannonce,categorie):
+         uidannonce = database.child("categories").child(categorie).child(idannonce).child("uid").get().val()
+         return database.child("evaluation").child(uidannonce).child("annonce_evaluation").child("total").get().val()
+            
        
 
               

@@ -4,6 +4,107 @@ a{
 }
 
 
+
+/* ------------- BOUTON RADIO MODAL EVALUATION ---------*/
+.part-evaluation{
+  color: #000021;
+  font-size: calc(1em + 1.25vw);
+}
+.part-evaluation form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.part-evaluation label {
+  display: flex;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0.375em;
+  /* Accessible outline */
+  /* Remove comment to use */
+  /*
+  	&:focus-within {
+  			outline: .125em solid $primary-color;
+  	}
+  */
+}
+.part-evaluation label {
+  display: flex;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0.375em;
+  /* Accessible outline */
+  /* Remove comment to use */
+  /*
+  	&:focus-within {
+  			outline: .125em solid $primary-color;
+  	}
+  */
+}
+.part-evaluation  label input {
+  position: absolute;
+  left: -9999px;
+}
+.part-evaluation label input:checked + span {
+  background-color: #d6d6e5;
+}
+.part-evaluation label input:checked + span:before {
+  box-shadow: inset 0 0 0 0.4375em #00005c;
+}
+.part-evaluation label span {
+  display: flex;
+  align-items: center;
+  padding: 0.375em 0.75em 0.375em 0.375em;
+  border-radius: 99em;
+  transition: 0.25s ease;
+}
+.part-evaluation label span:hover {
+  background-color: #d6d6e5;
+}
+.part-evaluation label span:before {
+  display: flex;
+  flex-shrink: 0;
+  content: "";
+  background-color: #fff;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  margin-right: 0.375em;
+  transition: 0.25s ease;
+  box-shadow: inset 0 0 0 0.125em #00005c;
+}
+.part-evaluation input,.part-evaluation button {
+  border-radius: 20px;
+  border: 1px solid tomato;
+  background-color: var(--orange);
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+  margin: 5px;
+  cursor: pointer;
+}
+.part-evaluation input:active,.part-evaluation button:active {
+  transform: scale(0.90);
+}
+.part-evaluation button{
+  background-color: var(--generale-bleu);
+}
+@media (max-width:800px){
+  .part-evaluation input {
+    font-size: 10px;
+    padding: 10px 45px;
+  }
+}
+
 .container-annonces-description{
     padding:10px 15%;
     font-size: 16px;
@@ -171,12 +272,11 @@ img {
     color: rgba(0, 0, 0, 0.75);
   }
   .container-annonces-description .part-evaluation{
-    border: 1px solid red;
+
     display: flex;
     justify-content: center;
-    width: 50%;
     flex-direction: column;
-    margin: 0 25%;
+    margin: 0 20%;
   }
   .container-annonces-description .evaluation-center {
     display: flex;
@@ -190,7 +290,7 @@ img {
   .container-annonces-description .evaluation .evaluation-btn{
     color: white;
     cursor: pointer;
-    padding:5px 40px;
+    padding: 7px 50px;
     border-radius: 20px;
     /*width: 50px;*/
     background-color: tomato;
@@ -321,7 +421,7 @@ img {
 
   .container-annonces-description .commentaire .commentaire-btn span{
    
-    padding:5px 20px;
+    padding: 7px 50px;
     margin:5px;
     border-radius: 20px;
     background-color:black;
@@ -390,8 +490,8 @@ img {
     background-color: #fefefe;
     margin: auto;
     padding: 0;
-    width: 50%;
-    height: 450px;
+    width: 40%;
+    height: 400px;
     -webkit-box-shadow: 0 4px 8px 20px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             box-shadow: 0 4px 8px 20px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -webkit-animation-name: animatetop;
@@ -604,7 +704,7 @@ img {
     }
     .modal-connexion .modal-content {
       width: 80%;
-      height: 450px;
+      height: 300px;
       /* Modal Header */
       /* Modal Body */
     }
@@ -723,7 +823,7 @@ img {
       }
     .container-annonces-description{
         padding:0;
-        margin: -10px;
+        margin-top: -10px;
         padding-bottom: 10px;
         font-size: 16px;
         font-family: sans-serif;

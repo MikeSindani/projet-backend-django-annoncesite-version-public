@@ -154,7 +154,13 @@
             <p>Cliquer Sur le Bouton ce desous Pour Evaluer</p>
                 
             <div class="evaluation-center">
-                <div class="evaluation-btn" id="btn-modal-evaluation">Evaluer</div> 
+                {% if uid %}
+                <div class="evaluation-btn" id="btn-modal-evaluation" onclick="btn_modal_evaluation()">Evaluer</div> 
+                {% else %}
+                <div class="evaluation-btn" id="btn-modal-message" onclick="btn_modal_message()" >Evaluer</div> 
+                {% endif %}
+                
+                
             </div>     
         </div>     
     </div>
@@ -163,33 +169,67 @@
         <!-- Modal content -->
         <div  class="modal-content">
             <div class="modal-header">
-                <span class="close"> 
-                    <span class="fermer">&times;</span>
+                <span class="close close-evaluation"> 
+                    <span class="fermer" onclick="close_evaluation()">&times;</span>
                     <span class="text-search">Evaluation du Producteur</span>
                     <span></span>
                 </span>
             </div>
             <div class="modal-body">
                     
-                    <form action="/creation_annonce/" method="post" >
+                    <form id="evaluation-form"  method="post"  >
                         {% csrf_token %}
-                        <p class="text">Clique sur Fiable ou Non Faible afin de Noter le Producteur</p>
+                        
+                        <p class="text" style="color:tomato;">Cliquer sur "Fiable" ou sur "Non Faible" afin de Noter le Producteur</p>
                         <div class="part-evaluation">
-                            <div class="fiable" style="border:1px solid red;">
-                                <input type="radio" id="html" name="fav_language" value="fiable">
-                                <label for="fiable">Fiable</label><br><br>
+                            <div id="uidannonce" data-uidannonce="{{user.uid}}" data-uid="{{uid}}" ></div>
+                            <div id="uid"  data-uid="{{uid}}" ></div>
+                            <div class="fiable"">
+                                <label>
+                                   <input type="radio" id="fiable" name="evaluation" value="fiable">
+                                   <span>Fiable</span> 
+                                </label>
                             </div>
-                            <div class="nofiable" style="border:1px solid red;">
-                                <input type="radio" id="css" name="fav_language" value="nofiable">
-                                <label for="nofiable">Non Fiable</label><br><br>
+                            <div class="nofiable">
+                                <label>
+                                   <input type="radio" id="nofiable" name="evaluation" value="nofiable">
+                                   <span>Non Fiable</span> 
+                                </label>
                             </div>
-                            <input type="submit" value="Evaluer le Producteur">
+                            <input type="submit" value="Evaluer">
                         </div>
                     </form>
          </div>   
     </div>
     </div>
-   <!---   ------------------------ SECTION dETAILS ----------------------------  -->
+    <!---   ------------------------ MODAL MESSAGE ----------------------------  -->
+   
+    <div class="modal-connexion" id="modal-messsage">
+        <!-- Modal content -->
+        <div  class="modal-content" style="height:250px;">
+            <div class="modal-header">
+                <span class="close close-message"> 
+                    <span class="fermer"  onclick="close_message()">&times;</span>
+                    <span class="text-search">Message</span>
+                    <span></span>
+                </span>
+            </div>
+            <div class="modal-body">
+                    
+                    <form id="evaluation-form"  method="post" data-uid="{{uid}}" >
+                        {% csrf_token %}
+                        
+                        <h3 class="text" >Veillez vous connecter ou vous inscrire s'ils vous plait!</h3>
+                        <div class="part-evaluation">
+                            <button href="{% url 'signIn' %}">Connexion</button>
+                            <button href="{% url 'signUp' %}">Inscription</button>
+                        </div>
+                    </form>
+         </div> 
+           
+    </div>
+    </div>
+   <!---   ------------------------ SECTION DETAILS ----------------------------  -->
     <div class="element details">
         <div class="element-titre">Details du produit</div>
         <ul>
@@ -230,7 +270,12 @@
                 
             </div>
             <div class="commentaire-btn">
-                <span class="favoris">Ajouter Un Avis</span> 
+                {% if uid %}
+                <span class="favoris" id="btn-modal-commentaire" onclick="btn_modal_message()" >Ajouter Un Avis</span>
+                {% else %}
+                <span class="favoris" id="btn-modal-message" onclick="btn_modal_message()">Ajouter Un Avis</span> 
+                {% endif %}
+                 
             </div>
         </div>
         <div>
@@ -260,7 +305,7 @@
     </div> 
    </div> 
 <!---   -------------------------------------RECOMMANDER ----------------------------------  -->
-    <div class="recommandation" style="width:100%;background-color: rgb(226, 226, 226);">
+    <div class="recommandation" style="width:100%;background-color: rgb(213, 209, 223);">
         <div class="info">
             <h2 style="text-align: center;">Produits de Meme Categorie </h2>
         </div>
@@ -423,31 +468,80 @@
 <script src="{% static 'description/js/description.js' %}"></script>
 <script src="{% static 'owl-carrousel/js/card.js' %}"></script>
 <script>
+
+// ----------- MODAL MESSAGE-------------------
      // Get the modal
-     var modal = document.getElementById("myModal");
+var modalmessage = document.getElementById("modal-messsage");
 
 // Get the button that opens the modal
-var btn = document.getElementById("btn-modal-evaluation");
-
-// Get the <span> element that closes the modal
-var clos = document.getElementsByClassName("close")[0];
-
-// When the user clicks on the button, open the modal
-btn.onclick = function() {
-modal.style.display = "block";
+function btn_modal_message() {
+modalmessage.style.display = "block";
 }
 
-// When the user clicks on <span> (x), close the modal
-clos.onclick = function() {
-modal.style.display = "none";
+// Get the <span> element that closes the modal
+function close_message() {
+modalmessage.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-if (event.target == modal) {
-    modal.style.display = "block";
+if (event.target == modalmessage) {
+    modalmessage.style.display = "none";
 }
 }
+/* ----------- MODAL EVALUATION -------------------*/
+ /*Get the modal*/
+ var modalevaluatiion = document.querySelector("#myModal");
+
+/* Get the button that opens the modal*/
+function btn_modal_evaluation() {
+    modalevaluatiion.style.display = "block";
+}
+
+ /*Get the <span> element that closes the modal*/
+function close_evaluation() {
+modalevaluatiion.style.display = "none";
+}
+
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+if (event.target == modalevaluatiion) {
+    modalevaluatiion.style.display = "none";
+}
+}
+
+
+$(document).on('submit', '#evaluation-form', function(e){
+e.preventDefault()
+e.preventDefault();
+var evaluation = document.querySelector('input[name="evaluation"]:checked').id;
+console.log(evaluation);
+
+//name = $('#fiable').val()
+//name = $('#nofiable').val()
+uidannonce = $("#uidannonce").attr("data-uidannonce");
+uid = $("#uid").attr("data-uid");
+console.log(evaluation);
+console.log(uidannonce);
+console.log(uid);
+$.ajax({
+type: 'POST',
+url: "{% url 'evaluation' %}",
+data: {
+    evaluation: evaluation,
+    uidannonce: uidannonce,
+    uid: uid,
+    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+},
+success: function(data) {
+    alert(data);
+    modalevaluatiion.style.display = "none";
+},
+})
+   
+});
+
 
 </script>
 {%endblock js %}

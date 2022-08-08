@@ -56,7 +56,7 @@
 
         <!-- ******************************************POST LONG CART******************************************* -->
         {%if com_list %}
-        {%for iden, work,user,vues in com_list %}
+        {%for iden, work,user,vues,dispo in com_list %}
 
             <div class="card-long" onClick='window.location.href="/description/{{work.categorie}}/{{iden.id}}"'>
                 <div class="thumbnail">
@@ -186,7 +186,7 @@
 
                 <!-- ******************************************POST******************************************* -->
                 {%if list %}
-                {% for iden, work,user,vues in list %}
+                {% for iden, work,user,vues,dispo in list %}
                 <div class="item">
                             <!-- Post-->
                         <div class="post-module">

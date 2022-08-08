@@ -1,4 +1,6 @@
 from unicodedata import category
+from webbrowser import get
+from django.http import HttpResponse
 from django.shortcuts import render
 import pyrebase
 from annoncesite import fonction
@@ -20,17 +22,37 @@ def description(request,cat,idannonce):
     list= geta.description_and_home_categorie_plus(database,cat)
     nombre_de_vues = geta.nombres_des_vus_fonction(database=database,idannonce=idannonce)
     #text de la mise ne cache de element sur le serveur 
-    cache.set('my_key', 30 , 30000000)
-    try:
-      evaluation = cache.get('my_key')
-    except:
-      evaluation = 60
+    
+    evalua = geta.get_evaluation(database,idannonce,cat)
+    evalua = int(evalua)
+
+
     try:
       # intrcution pour recupere l'id dans la session
       uid = geta.get_token(request, authe) 
     except:
       uid = False
-      return render(request,"description/description.html", {"uid":uid,"data":data,"list":list,"vues":nombre_de_vues,"titre":titre,"evaluation":evaluation})
+      return render(request,"description/description.html", {"uid":uid,"data":data,"list":list,"vues":nombre_de_vues,"titre":titre,"evaluation":evalua})
     print(data)
+    cache.set('my_key', 30 , 30000000)
+    
 
-    return render(request,"description/description.html", {"uid":uid,"data":data,"list":list,"vues":nombre_de_vues,"titre":titre})
+    return render(request,"description/description.html", {"uid":uid,"data":data,"list":list,"vues":nombre_de_vues,"titre":titre,"evaluation":evalua})
+
+def evaluation(request):
+  if request.method  =='POST':
+      evaluation = request.POST['evaluation']
+      uid = request.POST['uid']
+      uidannonce = request.POST['uidannonce']
+      
+      print(uidannonce)
+      print(evaluation)
+      print(uid)
+
+      geta = fonction.AfficherAnnonce()
+      data = geta.set_evaluation_fonction(database,uid,uidannonce,evaluation)
+
+      
+     
+      
+  return HttpResponse(data)
