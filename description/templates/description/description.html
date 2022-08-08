@@ -33,7 +33,8 @@
 {%endblock Connexion %}
 {% block Content %}
 <div class="container-annonces-description">
-    {%for dat,user in data %}
+    {%for dat,user,dispo in data %}
+    <!---   ------------------------ SECTION IMAGE----------------------------  -->
     <div class="element thumbail">
             <div class="mySlides">
                 <div class="numbertext"> <i class="fas fa-image"></i> 1 / 3</div>
@@ -90,7 +91,7 @@
           </div>
         
       </div>
-    
+    <!---   ------------------------ SECTION HOME ----------------------------  -->
     <div class="element pritidi">
         
         <div class="prix">
@@ -115,12 +116,13 @@
             {% endif %} 
         </div>
         <div class="titre">{{dat.titre|title}}</div>
-        <div class="disponibilite">Disponible</div>
+        <div class="disponibilite"style="color:{{dispo.color}}">{{dispo.disponible|default:"Delai"}}</div>
         <div class="stat">
             <span class="vu"></span>
             <span class="vu"><i class="fas fa-eye"></i> {{vues.count}}</span>
         </div>
     </div>
+    <!---   ------------------------ SECTION EVALUATION ----------------------------  -->
     <div class="element evaluation">
         <div class="element-titre">Evaluation du producteur</div>
         <div class="element-center">
@@ -156,7 +158,7 @@
             </div>     
         </div>     
     </div>
-
+    <!---   ------------------------ MODAL EVALUATION ----------------------------  -->
     <div class="modal-connexion" id="myModal">
         <!-- Modal content -->
         <div  class="modal-content">
@@ -186,8 +188,8 @@
                     </form>
          </div>   
     </div>
- </div>
-
+    </div>
+   <!---   ------------------------ SECTION dETAILS ----------------------------  -->
     <div class="element details">
         <div class="element-titre">Details du produit</div>
         <ul>
@@ -204,6 +206,7 @@
             <li class="detail"><strong>Date de Publication:</strong>{{dat.date}}</li>
         </ul>
     </div>
+    <!---   ------------------------ SECTION DISCRIPTION ----------------------------  -->
     <div class="element description">
         <div class="element-titre">Description du produit</div>
         <p class="text">
@@ -211,16 +214,14 @@
         </p>
     </div>
     
-
+<!---   ------------------------ SECTION FLOTANT ----------------------------  -->
     <div class="description-contact">
         <span class="favoris"><a href=""><i class="fas fa-star"></i></i> Ajouter Au favoris</a></span>
         <span class="user-btn"><div class="btn-contacter">Contacter</div></span>
     </div>
-   
-
-
 
     {%endfor %}
+ <!---   ------------------------ SECTION COMMENTAIRE ----------------------------  -->
     <div class="element commentaire">
         <div class="element-titre">Avis sur le produit</div>
         <div class="note-produit">
@@ -237,10 +238,8 @@
         </div>  
     </div>
 
-
-
-
-    {%for dat,user in data %}
+ <!---   ----------------- presentation de la personne --------------------  -->
+    {%for dat,user,dispo in data %}
     <div class="element contact">
         <div class="user-thumbails">
             <img src="{{user.imgurl}}" alt="{{user.prenom}}" class="user-img" height="80" width="80">
@@ -255,69 +254,70 @@
     </div>
     {%endfor %}
 
-
+<!---   ----------------- presentation de la personne --------------------  -->
     <div class="element control">
         <span class="signaler">SIGNALER</span>      
     </div> 
    </div> 
+<!---   -------------------------------------RECOMMANDER ----------------------------------  -->
     <div class="recommandation" style="width:100%;background-color: rgb(226, 226, 226);">
         <div class="info">
             <h2 style="text-align: center;">Produits de Meme Categorie </h2>
         </div>
         <div class=" owl-carousel owl-theme">
-            {% for iden, work,user in list %}
+            {% for iden, work,user,dispo in list %}
             <div class="item">
-                        <!-- Post-->
-                    <div class="post-module">
-                        <!-- Thumbnail-->
-                        <div class="thumbnail" onClick='window.location.href="/description/{{work.categorie}}/{{iden.id}}"'>
-                        {% if work.imgurl1 %}
-                            <img src="{{work.imgurl1}}" alt="" class="card-image" height="450" width="500">
-                         {% elif work.imgurl2 %}
-                            <img src="{{work.imgurl2}}" alt="" class="card-image" height="450" width="500">
-                         {% elif work.imgurl3 %}
-                            <img src="{{work.imgurl3}}" alt="" class="card-image" height="450" width="500" >
-                         {% else %}
-                           <img src="https://images.pexels.com/photos/375510/pexels-photo-375510.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" class="card-image" height="620" width="620">
-                         {%endif%}
-                        </div>
-                        <!-- Post Content-->
-                        <div class="post-content">
-                        <div class="category">{{work.categorie}}</div>
-                        <h1 class="title">{{work.titre|title|truncatechars:20 }}</h1>
-                        <div class="prix">
-                            {% if work.prix %} 
-                                {{work.prix}}
-                                {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}  
-                                <span  style="font-size:10px;">/{{work.poids}}</span>
-                            {% endif %}
-                            
-                            {% if work.prix_min %}
-                               {{work.prix_min}} 
-                               {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}
-                            {% endif %}
-                            {% if work.prix_min %}
-                              - {{work.prix_max}}
-                              {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}
-                              <span  style="font-size:10px;">/{{work.poids}}</span>
-                            {% endif %}
-    
-                            {% if work.autres %}
-                               {{work.autres}}
-                            {% endif %} 
-                        </div>
-                        <h2 class="sub_title">Disponible</h2>
-                        <p class="description">{{work.description|truncatechars:100}}</p>
-                        <div class="post-meta">
-                            <span class="timestamp"><i class="fas fa-clock"></i>{{work.date}}</span>
-                            <span class="users"><i class="fas fa-users"></i>{{user.prenom}} {{user.nom}}</span>
-                            <span  class="lieu"><i class="fas fa-map-marker-alt"></i>{{user.adr}}</span>
-                        </div>
-                        </div>
-                        <div class="post-click">
-                            <p  onClick='window.location.href="/description/{{work.categorie}}/{{iden.id}}"'>Voir Plus</p>
-                        </div>
-                    </div>
+                <!-- Post-->
+            <div class="post-module">
+                <!-- Thumbnail-->
+                <div class="thumbnail" onClick='window.location.href="/description/{{work.categorie}}/{{iden.id}}"'>
+                {% if work.imgurl1 %}
+                    <img src="{{work.imgurl1}}" alt="" class="card-image" height="450" width="500">
+                 {% elif work.imgurl2 %}
+                    <img src="{{work.imgurl2}}" alt="" class="card-image" height="450" width="500">
+                 {% elif work.imgurl3 %}
+                    <img src="{{work.imgurl3}}" alt="" class="card-image" height="450" width="500" >
+                 {% else %}
+                   <img src="https://images.pexels.com/photos/375510/pexels-photo-375510.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" class="card-image" height="620" width="620">
+                 {%endif%}
+                </div>
+                <!-- Post Content-->
+                <div class="post-content">
+                <div class="category">{{work.categorie}}</div>
+                <h1 class="title">{{work.titre|title|truncatechars:20 }}</h1>
+                <div class="prix">
+                    {% if work.prix %} 
+                        {{work.prix}}
+                        {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}  
+                        <span  style="font-size:10px;">/{{work.poids}}</span>
+                    {% endif %}
+                    
+                    {% if work.prix_min %}
+                       {{work.prix_min}} 
+                       {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}
+                    {% endif %}
+                    {% if work.prix_min %}
+                      - {{work.prix_max}}
+                      {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}
+                      <span  style="font-size:10px;">/{{work.poids}}</span>
+                    {% endif %}
+        
+                    {% if work.autres %}
+                       {{work.autres}}
+                    {% endif %} 
+                </div>
+                <h2 class="sub_title" style="color:{{dispo.color}}">{{dispo.disponible|default:"Delai"}}</h2>
+                <p class="description">{{work.description|truncatechars:100}}</p>
+                <div class="post-meta">
+                    <span class="timestamp"><i class="fas fa-clock"></i>{{work.date}}</span>
+                    <span class="users"><i class="fas fa-users"></i>{{user.prenom}} {{user.nom}}</span>
+                    <span  class="lieu"><i class="fas fa-map-marker-alt"></i>{{user.quartier}}</span>
+                </div>
+                </div>
+                <div class="post-click">
+                    <p  onClick='window.location.href="/description/{{work.categorie}}/{{iden.id}}"'>Voir Plus</p>
+                </div>
+            </div>
             </div>
            {% empty %}
             

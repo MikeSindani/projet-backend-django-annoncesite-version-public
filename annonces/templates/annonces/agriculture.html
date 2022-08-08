@@ -54,9 +54,9 @@
         </div>
 
 
-
+        <!-- ******************************************POST LONG CART******************************************* -->
         {%if com_list %}
-        {%for iden, work,user in com_list %}
+        {%for iden, work,user,vues in com_list %}
 
             <div class="card-long" onClick='window.location.href="/description/{{work.categorie}}/{{iden.id}}"'>
                 <div class="thumbnail">
@@ -93,16 +93,16 @@
                            {{work.autres}}
                         {% endif %} 
                     </div>
-                    <div class="subtitle">Disponible</div>
+                    <div class="subtitle" style="color:{{dispo.color}}">{{dispo.disponible|default:"Delai"}}</div>
                     <div class="element lieu">
-                        <span class="vu"> <i class="fa fa-map-marker" aria-hidden="true">{{user.adr}}</i></span>
+                        <span class="vu"> <i class="fa fa-map-marker" aria-hidden="true"></i>{{user.quartier}}</span>
                     </div>
-                    <div class="description"> {{work.description|truncatechars:100}}</div>
+                    <div class="description"> {{work.description|truncatechars:30}}</div>
                     <div class="commentaire"><strong>Commentaire: | 100 |</strong></div>
                     <div class="element">
                         <span class="vu"><i class="fa fa-users" aria-hidden="true"></i>{{user.prenom}} {{user.nom}} </span>
                         <span class="vu"><i class="fas fa-clock    "></i> {{work.date}}</span>
-                        <span class="vu"><i class="fas fa-eye"></i> {{work.Annee}}</span> 
+                        <span class="vu"><i class="fas fa-eye"></i> {{vues.count|default:"0"}}</span> 
                     </div> 
                 </div>
                 <div  class="more">
@@ -161,24 +161,32 @@
         {% else %}
              <h3 style="color:rgb(71, 71, 71) ;">Pas d'annonce dans cette categories.</h3>
         {% endif %}
+
+
+         <!-- ******************************************PAGINATION******************************************* -->
+
         <div class="pagination">
             {% if com_list.has_previous %}
                 <a href="{% url 'agriculture' %}?page={{com_list.previous_page_number}}" class="page prev"><i class="fas fa-arrow-left"></i> Precedent</a>
             {% endif %}
             <span class="current">
-                < {{ com_list.number }} of {{ com_list.paginator.num_pages }} >
+                [{{ com_list.number }} of {{ com_list.paginator.num_pages }}] 
             </span>
             {% if com_list.has_next %}
                 <a href="{% url 'agriculture' %}?page={{com_list.next_page_number}}" class="page next">Suivant <i class="fas fa-arrow-right"></i></a>
             {% endif%}
         </div>
+
+        <!-- ******************************************RECOMMADATION******************************************* -->
         <div class="recommandation" style="width:100%;background-color: rgb(226, 226, 226);">
             <div class="info">
                 <h1>Choix de nos equipes</h1>
             </div>
             <div class=" owl-carousel owl-theme">
+
+                <!-- ******************************************POST******************************************* -->
                 {%if list %}
-                {% for iden, work,user in list %}
+                {% for iden, work,user,vues in list %}
                 <div class="item">
                             <!-- Post-->
                         <div class="post-module">
@@ -219,12 +227,12 @@
                                    {{work.autres}}
                                 {% endif %} 
                             </div>
-                            <h2 class="sub_title">Disponible</h2>
+                            <h2 class="sub_title" style="color:{{dispo.color}}">{{dispo.disponible|default:"Delai"}}</h2>
                             <p class="description">{{work.description|truncatechars:100}}</p>
                             <div class="post-meta">
                                 <span class="timestamp"><i class="fas fa-clock"></i>{{work.date}}</span>
                                 <span class="users"><i class="fas fa-users"></i>{{user.prenom}} {{user.nom}}</span>
-                                <span  class="lieu"><i class="fas fa-map-marker-alt"></i>{{user.adr}}</span>
+                                <span  class="lieu"><i class="fas fa-map-marker-alt"></i>{{user.quartier}}</span>
                             </div>
                             </div>
                             <div class="post-click">

@@ -15,7 +15,7 @@
 }
 .container-annonce-search .band-search .text{
     color: tomato;
-    font-size: 50px;
+    font-size: 40px;
     
 }
 .container-annonce-search .band-search .search-text{
@@ -24,7 +24,7 @@
     font-size: 30px;
 }
 .container-annonce-search .notrouver{
-    padding: 100px;
+    padding: 50px;
     text-align: center;
 }
 .container-annonce-search .notrouver .icon{
@@ -33,7 +33,7 @@
     color: rgba(0, 0, 0, 0.37);
 }
 .container-annonce-search .notrouver .text{
-    font-size: 50px;
+    font-size: 30px;
     font-weight: bold;
     color: rgba(0, 0, 0, 0.37);
 }

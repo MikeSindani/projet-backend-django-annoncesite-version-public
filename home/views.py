@@ -23,12 +23,19 @@ def home(request):
     try:
         # fonction pour fournir un choix aleatoire 
         list_element_categorie_agriculture = geta.description_and_home_categorie_plus(database,"agriculture")
-        list_element_categorie_elevage = geta.description_and_home_categorie_plus(database,"elevage")
+        
         #le choix aleatoire pour le partie du site partie agriculture 
         if len(list_element_categorie_agriculture) < nombre_choix_aleatoire :
           choix_aleatoire_agriculture = random.sample(list_element_categorie_agriculture,len(list_element_categorie_agriculture))
         else:
           choix_aleatoire_agriculture = random.sample(list_element_categorie_agriculture,nombre_choix_aleatoire)
+        
+    except:
+        choix_aleatoire_agriculture = False
+
+    try:
+        # fonction pour fournir un choix aleatoire 
+        list_element_categorie_elevage = geta.description_and_home_categorie_plus(database,"elevage")
         #le choix aleatoire pour le partie du site partie elevage
         if len(list_element_categorie_elevage) < nombre_choix_aleatoire :
           choix_aleatoire_elevage = random.sample(list_element_categorie_elevage,len(list_element_categorie_elevage))
@@ -36,7 +43,6 @@ def home(request):
           choix_aleatoire_elevage = random.sample(list_element_categorie_elevage,nombre_choix_aleatoire)
     except:
         choix_aleatoire_elevage = False 
-        choix_aleatoire_agriculture = False
 
         
     try:

@@ -24,7 +24,9 @@ def elevage(request):
       print("👍👍👍👍👍")
       print(com_list)
     except:'''
+     # ------ generartion de liste aleatiore ---------
     try:
+        #fonction pour prendre les elements de la base de donne 
         list_element_categorie = geta.afficher_annonces_publics_categorie_plus(database,"elevage")
         #cache.set('firedata',com_list, 3000)
         print("❤🤣❤❤")
@@ -36,6 +38,8 @@ def elevage(request):
     except:
         choix_aleatoire = False
   
+
+    #  ----------- pour uid  -----------
     try:
       # intrcution pour recupere l'id dans la session
       uid = geta.get_token(request, authe) 
@@ -46,7 +50,9 @@ def elevage(request):
       except:
         page = False
       return render(request,"annonces/elevage.html",{"uid":uid,"com_list":page,"list":choix_aleatoire})
-    #pagination
+
+
+    # --------- pagination ------------
     try:
         page = geta.pagination_fonction(request,list_element_categorie,number_page=nombre_de_page)
     except:

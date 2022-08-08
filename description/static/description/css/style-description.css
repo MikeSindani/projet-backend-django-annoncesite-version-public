@@ -150,8 +150,9 @@ img {
     display: none;
   }*/
   .wrap-circles{
-    position: relative;
-    left: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .circle .inner {
     display: flex;

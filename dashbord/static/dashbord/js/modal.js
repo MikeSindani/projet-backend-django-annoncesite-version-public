@@ -40,6 +40,7 @@
                         document.getElementById("autres-moyens").style.display = 'none';
                         document.getElementById("prix-fixe").style.display = 'none';
                         document.getElementById("prix-interval").style.display = 'block';
+                        $("#prix-fixe").val(" ");
                         break;
                     case 'autres-moyens-btn':   
                         document.getElementById("prix-fixe").style.display = 'none';

@@ -138,7 +138,6 @@
 /* BUTTON */
 .button {
   position: relative;
-  top: -70px;
   left: 25%;
 }
 
@@ -942,8 +941,6 @@ div.dash-flotant-haut {
 }
 
 .container {
-  position: relative;
-  top: 70px;
   margin: 0;
   padding: 0;
   font-family: sans-serif;

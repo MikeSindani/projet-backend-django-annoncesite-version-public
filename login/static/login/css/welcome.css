@@ -118,7 +118,7 @@ a{
     background-color: tomato;
     border: 1px solid tomato;
     color: #FFFFFF;
-    padding: 12px 150px;
+    padding: 12px 100px;
 }
 
 @media (max-width:800px){

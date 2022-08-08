@@ -67,7 +67,7 @@
                                 <input id="titre" type="text" placeholder="Titre(exemple:5 Poules aux quartier...)" name="titre" >
                                 <div style="display:flex;align-items:center;">
                                   <label for="elevage" >Categorie:</label>
-                                  <input type="radio" id="elevage" name="cat"  value="elevage" style="width:20px;height:20px" required>
+                                  <input type="radio" id="elevage" name="cat"  value="elevage" style="width:20px;height:20px" required  checked>
                                   <label for="elevage" >Elevage</label>
                                   <input type="radio" id="agriculture"  name="cat"  value="agriculture" style="width:20px;height:20px" required >
                                   <label for="agriculture" >Agriculture</label>
@@ -89,7 +89,7 @@
                                 </select> 
                                 <div style="display:flex;align-items:center;">
                                   <label for="elevage" >Choissez Entre :</label>
-                                  <input type="radio" id="prix-fixe-btn" name="type-prix"  value="prix-fixe" style="width:20px;height:20px" >
+                                  <input type="radio" id="prix-fixe-btn" name="type-prix"  value="prix-fixe" style="width:20px;height:20px" checked >
                                   <label for="prix-fixe" >Prix Fixe</label>
                                   <input type="radio" id="prix-interval-btn"  name="type-prix"  value="prix-interval" style="width:20px;height:20px" >
                                   <label for="prix-interval" >Prix Interval</label>
@@ -181,10 +181,11 @@
                                     <input type="hidden" name="imgurl2" id="url2">
                                     <input type="hidden" name="imgurl3" id="url3">
                                     <br>
-                                    <div class="wrap-circles">
+                                    <div class="wrap-circles" style="display:flex;justify-content:center">
                                         <div class="circle per-100" >
                                             <div class="inner"></div>
                                         </div>
+                                        <p id="message" style="color:green ;"></p>
                                     </div>
                             
                                 <div class="btn">
@@ -256,9 +257,9 @@
                     </div>
                     <div class="subtitle">Disponible</div>
                     <div class="element lieu">
-                        <span class="vu"><i class="fa fa-map-marker" aria-hidden="true"></i> {{data.adr}}</span>
+                        <span class="vu"><i class="fa fa-map-marker" aria-hidden="true"></i> {{data.quartier}}</span>
                     </div>
-                    <div class="description"> {{work.description|truncatechars:50}}</div>
+                    <div class="description"> {{work.description|truncatechars:20}}</div>
                     <div class="commentaire"><strong>Commentaire: |50|</strong></div>
                     <div class="element">
                         <span class="vu"><i class="fa fa-users" aria-hidden="true"></i> {{data.prenom}} {{data.nom}}</span>
@@ -502,6 +503,8 @@
       if(value == 100){
         document.querySelector(".circle").style.backgroundImage="conic-gradient(tomato 100%, #000000 0)";
         document.querySelector(".inner").innerHTML="100";
+        document.querySelector(".per-100").style.display="none";
+        document.getElementById("message").innerHTML = "Image Envoyer";
         /*
         document.querySelector(".per-75").style.display="none";
         document.querySelector(".per-75").style.display="none";

@@ -4,6 +4,7 @@ from imghdr import what
 from itertools import product
 from django.core.paginator import Paginator, EmptyPage
 from django.core.cache import cache
+from datetime import datetime, timezone , date
 
 
 class AfficherAnnonce:
@@ -256,11 +257,27 @@ class AfficherAnnonce:
 
             for i in lis_time:
                 data_annnonce = database.child("categories").child(cat).child(i).get().val()
+                vues = database.child("Vues").child(i).get().val()
                 id_users = database.child("categories").child(cat).child(i).child("uid").get().val()
                 data_user = database.child("utilisateurs").child(id_users).child("Informations").get().val()
+                 
                 id_annonce = {"id":i}
-                wor = (id_annonce,data_annnonce,data_user)
-                work.append(wor)
+                #----- recuperer le delai --------
+                delai =  database.child("categories").child(cat).child(i).child("delai").get().val()
+                print(delai)
+                datetoday = date.today()
+                print(datetoday)
+                if str(datetoday) <= delai:
+                    disponible = {"disponible": "Disponible","color":"rgb(19, 196, 19)"}
+                    wor = (id_annonce,data_annnonce,data_user,vues,disponible)
+                    work.append(wor)
+                else:
+                    disponible = {"disponible": "Delai Depasse","color":"brown"}
+                    wor = (id_annonce,data_annnonce,data_user,vues,disponible)
+                    work.append(wor)
+
+                # --- mettre ca dans un tuple ------
+                
             print("👌😁😁 " + str(work))
             print(type(work))
     
@@ -285,24 +302,50 @@ class AfficherAnnonce:
 
             for i in lis_time:
                 data_annnonce = database.child("categories").child(cat).child(i).get().val()
+                #----- recuperer uid et data users --------
                 id_users = database.child("categories").child(cat).child(i).child("uid").get().val()
                 data_user = database.child("utilisateurs").child(id_users).child("Informations").get().val()
                 id_annonce = {"id":i}
-                wor = (id_annonce,data_annnonce,data_user)
-                work.append(wor)
+
+                #----- recuperer le delai --------
+                delai =  database.child("categories").child(cat).child(i).child("delai").get().val()
+                print(delai)
+                datetoday = date.today()
+                print(datetoday)
+                if str(datetoday) <= delai:
+                    disponible = {"disponible": "Disponible","color":"rgb(19, 196, 19)"}
+                    wor = (id_annonce,data_annnonce,data_user,disponible)
+                    work.append(wor)
+                else:
+                    disponible = {"disponible": "Delai Depasse","color":"brown"}
+                    wor = (id_annonce,data_annnonce,data_user,disponible)
+                    work.append(wor)
+                
             print("👌😁😁 " + str(work))
             print(type(work))
     
             return work
         return False
      def description_fonction(seft, database,categorie,idannonce):
-         work = []
-         data_annnonce = database.child("categories").child(categorie).child(idannonce).get().val()
-         id_users = database.child("categories").child(categorie).child(idannonce).child("uid").get().val()
-         data_user = database.child("utilisateurs").child(id_users).child("Informations").get().val()
-         wor = (data_annnonce,data_user)
-         work.append(wor)
-         return work
+        work = []
+        data_annnonce = database.child("categories").child(categorie).child(idannonce).get().val()
+        id_users = database.child("categories").child(categorie).child(idannonce).child("uid").get().val()
+        data_user = database.child("utilisateurs").child(id_users).child("Informations").get().val()
+         #----- recuperer le delai --------
+        delai =  database.child("categories").child(categorie).child(idannonce).child("delai").get().val()
+        print(delai)
+        datetoday = date.today()
+        print(datetoday)
+        if str(datetoday) <= delai:
+            disponible = {"disponible": "Disponible","color":"rgb(19, 196, 19)"}
+            wor = (data_annnonce,data_user,disponible)
+            work.append(wor)
+        else:
+            disponible = {"disponible": "Delai Depasse","color":"brown"}
+            wor = (data_annnonce,data_user,disponible)
+            work.append(wor)
+         
+        return work
 
      def nombres_des_vus_fonction(self,database,idannonce):
           get_data = database.child("Vues").child(idannonce).get().val()
@@ -356,10 +399,11 @@ class AfficherAnnonce:
             work = []
             for i in listannonce:
                 data_annnonce = database.child("annonces").child(i).get().val()
+                vues = database.child("Vues").child(i).get().val()
                 id_users = database.child("annonces").child(i).child("uid").get().val()
                 data_user = database.child("utilisateurs").child(id_users).child("Informations").get().val()
                 id_annonce = {"id":i}
-                wor = (id_annonce,data_annnonce,data_user)
+                wor = (id_annonce,data_annnonce,data_user,vues)
                 work.append(wor)
             #print("👌😁😁 " + str(work))
             #print(type(work))
@@ -380,7 +424,7 @@ class AfficherAnnonce:
             print(timestamps)
         # on recuperer cle par cle 
             for i in timestamps:
-                titre = database.child("annonces").child(i).child('titre').get().val()
+                titre = database.child("annonces").child(i).child('produit').get().val()
                 work.append(titre)
             cache.set('work2', work,3600)
             return work
