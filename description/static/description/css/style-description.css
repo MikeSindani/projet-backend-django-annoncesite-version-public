@@ -16,6 +16,12 @@ a{
     margin: 5px;
     cursor: pointer;
 }
+@media (max-width:800px){
+  .container-annonces-description .message span {
+      padding: 7px 40px;
+    
+  }
+}
  .container-annonces-description .message #btn_message_fermer{
      border: none;
  }
@@ -32,9 +38,7 @@ a{
 .container-annonces-description .message div  {
   margin: 5px;
 }
-.container-annonces-description .message div  {
-  margin: 5px;
-}
+
 /*------------- section contacter -------------*/
 .section {
   margin-top: 15px;

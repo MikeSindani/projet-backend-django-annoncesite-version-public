@@ -38,7 +38,7 @@ def description(request,cat,idannonce):
   # -------------- siganler une annonce ---------------------
     signaler = geta.get_signaler(database,idannonce,cat)
     if signaler == True:
-       message = "<p>Cet annonce a ete signaler pour divers motif(pornographique,non dans ca categorie,indesirable)</p> <p>Veillez nous aider a verifier et signaler</p> "
+       message = '<p>Cet annonce a ete signaler pour divers motif(pornographique,Trompe de categorie,indesirable)</p> <p style="font-weight: bold;">Veillez nous aider a verifier et signaler</p>'
 
     try:
       # intrcution pour recupere l'id dans la session
@@ -100,7 +100,7 @@ def signaler(request,idannonce,uidannonce,categorie):
           <li>Caterogie:'''+categorie+'''</li>
           <li>User:'''+uidannonce+'''</li>
           <li>identifiant de l'annonce:'''+str(idannonce)+'''</li>
-          <li><a href="http://"></a></li>   
+          <li><a href="http://">Lien</a></li>   
       </ul> 
       '''
       form_email = 'mbac3info@gmail.com'

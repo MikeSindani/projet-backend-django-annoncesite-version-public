@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-fl512)hi^pu_0po(j3jn+_u^an$s7k$(r&*r^k8=q)8d%+7(1r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','apagrelushi.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','apagrel-lushi.herokuapp.com']
 
 
 
