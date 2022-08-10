@@ -39,7 +39,9 @@ def description(request,cat,idannonce):
     signaler = geta.get_signaler(database,idannonce,cat)
     if signaler == True:
        message = '<p>Cet annonce a ete signaler pour divers motif(pornographique,Trompe de categorie,indesirable)</p> <p style="font-weight: bold;">Veillez nous aider a verifier et signaler</p>'
-
+    else:
+       message = False
+       
     try:
       # intrcution pour recupere l'id dans la session
       uid = geta.get_token(request, authe) 
@@ -94,13 +96,13 @@ def signaler(request,idannonce,uidannonce,categorie):
       message_mail = autre_motif
       html_message_mail = '''
       <h1>APAGRE<strong  style="color:tomato">Lushi</strong></h1>
-      <h2>ALerte Systeme</h2>
-      <p>autre motif'''+autre_motif+'''</p>
+      <h2>Alerte Systeme</h2>
+      <p>Autre motif :'''+autre_motif+'''</p>
       <ul>
           <li>Caterogie:'''+categorie+'''</li>
           <li>User:'''+uidannonce+'''</li>
           <li>identifiant de l'annonce:'''+str(idannonce)+'''</li>
-          <li><a href="http://">Lien</a></li>   
+          <li><a href="http://apagrel-lushi.herokuapp.com/description/'''+categorie+'''/'''+str(idannonce)+'''/">Lien</a></li>   
       </ul> 
       '''
       form_email = 'mbac3info@gmail.com'

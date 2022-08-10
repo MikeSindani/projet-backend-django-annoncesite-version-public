@@ -35,8 +35,8 @@
 
 
 <div class="container-annonces-description">
-    {% if msg%}
-    <div class="element message" style="background-color: yellow;font-weight: bold;">
+    {% if msg %}
+    <div class="element message" style="background-color: yellow;">
         <div class="msg">
             {{msg|safe }}
         </div>
@@ -253,10 +253,10 @@
         <ul>
             <li class="detail"><strong>Categorie:</strong>
                 {%if dat.categorie == "agriculture"%}
-                <div id="data-cat" data-cat="{{dat.categorie}}"></div> 
-                <a href="{% url 'agriculture' %}">{{dat.categorie|title}}</a> 
+                <a href="{% url 'agriculture' %}">{{dat.categorie|title}}</a>
+                <span id="data-cat" data-cat="{{dat.categorie}}"></soan> 
                 {%else %}
-                <div id="data-cat" data-cat="{{dat.categorie}}"></div> 
+                <span id="data-cat" data-cat="{{dat.categorie}}"></span> 
                 <a href="{% url 'elevage' %}">{{dat.categorie|title}}</a>
                 {% endif%}
             </li>
@@ -569,8 +569,14 @@
                             <option value="Arnaque">Arnaque</option>
                             <option value="Faux compte">Faux compte</option>
                             <option value="Pornagaphique">Pornogaphique</option>
+                            <option value="Mauvaise Categorie">Mauvaise Categorie</option>
+                            <option value="Autres">Autres</option>
+
                         </select> 
-                        <textarea id="desc" rows="2" cols="50" name="signaler-autre" placeholder="Autres raisons "></textarea>
+                        <div id="textarea">
+                            <textarea  rows="2" cols="50" name="signaler-autre" placeholder="Autres raisons " ></textarea>
+                        </div>
+                        
                         <div class="btn">
                             <button>Signaler</button>
                         </div>
@@ -584,9 +590,22 @@
 </div>
 {%endfor %}
 {%block js %} 
+
 <script src="{% static 'description/js/description.js' %}"></script>
 <script src="{% static 'owl-carrousel/js/card.js' %}"></script>
 <script>
+// ---------- SIGNALER MODAL FORM ON CHANGE ---------------
+ 
+var select = document.querySelector('#signaler-form');
+var textarea = document.querySelector('#textarea');
+select.addEventListener('change', function () {
+    console.log(this.value)
+            if(this.value=="Autres"){
+                textarea.style.display = block;
+            }else{
+                textarea.style.display = none;
+            }
+});
 // ----------- SECTION  --------------------
 function change_section(number){
     if (number==1){

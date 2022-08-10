@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block meta %}
     {% endblock meta %}
-    <link rel="stylesheet" href="{% static 'base/css/base.css' %}"/>
+    <link rel="stylesheet" href="{% static 'base/base.css' %}"/>
     <link rel="stylesheet" href="{% static 'header/css/nav.css' %}"/>
     <link rel="stylesheet" href="{% static 'footer/css/footer-style.css' %}"/>
     <link rel="stylesheet" href="{% static 'autre/css/scrol-on-top.css' %}"/>
@@ -22,12 +22,12 @@
     <script src="https://kit.fontawesome.com/e1d1ed83e9.js" crossorigin="anonymous"></script>
     
     {%block links %} {%endblock links %}
-    <title>{%block titre%}{%endblock titre %} - AnnonceSite</title>
+    <title>{%block titre%}{%endblock titre %} - APAGREL</title>
     {%block style %}{%endblock style %}</style>
     
 
 </head>
-<body style=" background-color: #e3e3f1;">
+<body>
     <div>
     {%block Connexion %}
         {% include "header/nav.html" %}

@@ -18,7 +18,7 @@ a{
 }
 @media (max-width:800px){
   .container-annonces-description .message span {
-      padding: 7px 40px;
+      padding: 7px 30px;
     
   }
 }
@@ -185,7 +185,7 @@ img {
   }
   
   /* Position the image container (needed to position the left and right arrows) */
-  .container {
+  .thumbail {
     position: relative;
   }
   
@@ -204,7 +204,7 @@ img {
   .next {
     cursor: pointer;
     position: absolute;
-    top: 10%;
+    top: 40%;
     width: auto;
     padding: 16px;
     margin-top: -50px;
@@ -214,11 +214,12 @@ img {
     border-radius: 0 3px 3px 0;
     user-select: none;
     -webkit-user-select: none;
+    
   }
   
   /* Position the "next button" to the right */
   .next {
-    right: 17%;
+    right: 0;
     border-radius: 3px 0 0 3px;
   }
   
@@ -236,9 +237,10 @@ img {
     font-size: 16px;
     padding: 8px 12px;
     position: absolute;
-    top: 15%;
+    top: 65%;
     left: 50%;
     transform: translate(-50%, -50%);
+    box-shadow: 2px 2px 2px 2px rgb(0 0 0 / 50%);
     }
   
   /* Container for image text */
@@ -442,9 +444,9 @@ img {
   left: 35%;
   padding:10px;
   border-radius: 20px;
-  width: 25%;
-  background-color: white;
-  box-shadow: 5px 5px #00000062;
+  width: 27%;
+    background-color: white;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
   
 }
 

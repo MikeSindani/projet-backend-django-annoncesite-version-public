@@ -306,7 +306,8 @@ class AfficherAnnonce:
                     break
 
             lis_time.sort(reverse=True)
-            print("test = " + str(lis_time))
+            print("---------------- LIST FIREBASE ------------")
+            print(str(lis_time))
             #on recupere la list
             work = []
 
@@ -322,14 +323,15 @@ class AfficherAnnonce:
                 disponible = calculdelai(delai)
 
 
-            wor = (id_annonce,data_annnonce,data_user,disponible)
-            work.append(wor)
+                wor = (id_annonce,data_annnonce,data_user,disponible)
+                work.append(wor)
                 
             print("👌😁😁 " + str(work))
             print(type(work))
-    
             return work
-        return False
+        else:
+            return False
+
      def description_fonction(seft, database,categorie,idannonce):
         work = []
         data_annnonce = database.child("categories").child(categorie).child(idannonce).get().val()
@@ -525,8 +527,11 @@ class AfficherAnnonce:
 
             
      def get_signaler(self,database,idannonce,categorie):
-        key = database.child("signaler").child("list_annonces_key").child(idannonce).get().key()
-        if key is None:
+        
+        val = database.child("signaler").child("list_annonces_key").child(idannonce).get().val()
+        print("------------key ----------------")
+        print(val)
+        if val is None:
             return False
         else: 
             return True
