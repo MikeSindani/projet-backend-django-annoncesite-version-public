@@ -498,6 +498,39 @@ class AfficherAnnonce:
      def get_evaluation(self,database,idannonce,categorie):
          uidannonce = database.child("categories").child(categorie).child(idannonce).child("uid").get().val()
          return database.child("evaluation").child(uidannonce).child("annonce_evaluation").child("total").get().val()
+     def set_siganler(self,database,idannonce,uidannonce,categorie,motif,autre_motif):
+
+        count = database.child("signaler").child("compteur").child(idannonce).child("count").get().val()
+        print(type(count))
+        print(count)
+        if count is None:
+            count1=1
+            count2={"count":count1}
+            data = {"idannonce":idannonce,"uiannonce":uidannonce,"categorie":categorie,"motif":motif,"autre_motif":autre_motif}
+            database.child("signaler").child("compteur").child(idannonce).set(count2)
+            database.child("signaler").child("list_annonces_key").child(idannonce).set(data)
+        else:
+            count1 = count + 1 
+            count2={"count":count1}
+            data = {"idannonce":idannonce,"uidannonce":uidannonce,"categorie":categorie,"motif":motif,"autre_motif":autre_motif}
+            database.child("signaler").child("compteur").child(idannonce).update(count2)
+            database.child("signaler").child("list_annonces_key").child(idannonce).set(data)
+
+        if count is not None:
+            if count > 200000:
+                data_annonce = database.child("categories").child(categorie).child(idannonce).get().val()
+                database.child("signaler").child("annonces").child(idannonce).set(data_annonce)
+                database.child("categories").child(categorie).child(idannonce).remove()
+                database.child("annonces").child(idannonce).remove()
+
             
+     def get_signaler(self,database,idannonce,categorie):
+        key = database.child("signaler").child("list_annonces_key").child(idannonce).get().key()
+        if key is None:
+            return False
+        else: 
+            return True
+
+        
       
 

@@ -3,7 +3,39 @@ a{
   color: #000000;
 }
 
+.container-annonces-description .message span {
+  border-radius: 20px;
+    border: 1px solid rgb(0, 0, 0);
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 7px 60px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    margin: 5px;
+    cursor: pointer;
+}
+ .container-annonces-description .message #btn_message_fermer{
+     border: none;
+ }
+.container-annonces-description .message  {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.container-annonces-description .message .msg{
+  text-align: center;
+}
 
+.container-annonces-description .message div  {
+  margin: 5px;
+}
+.container-annonces-description .message div  {
+  margin: 5px;
+}
+/*------------- section contacter -------------*/
 .section {
   margin-top: 15px;
   display: none;
@@ -621,9 +653,7 @@ img {
     width: 80%;
   }
   
-  .modal-connexion .modal-content .modal-body form .part select[id="cat"] {
-    margin-left: -30px;
-  }
+  
   
   .modal-connexion .modal-content .modal-body form .part input {
     border: none;

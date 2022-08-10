@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-fl512)hi^pu_0po(j3jn+_u^an$s7k$(r&*r^k8=q)8d%+7(1r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','annoncelushi.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','apagrelushi.herokuapp.com']
 
 
 
@@ -153,3 +153,9 @@ CACHES = {
         'LOCATION': 'c:/foo/bar',
     }
 }
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'mbac3info@gmail.com'
+EMAIL_HOST_PASSWORD = 'zplgekbcrehfeewh'
+EMAIL_USE_TLS = True

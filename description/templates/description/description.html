@@ -32,7 +32,24 @@
    {% endif %}
 {%endblock Connexion %}
 {% block Content %}
+
+
 <div class="container-annonces-description">
+    {% if msg%}
+    <div class="element message" style="background-color: yellow;font-weight: bold;">
+        <div class="msg">
+            {{msg|safe }}
+        </div>
+        <div>
+            <span id="btn_message_fermer"  class="signaler">FERMER</span>
+            {% if uid %}
+                    <span id="btn-modal-message" onclick="btn_modal_signaler()" class="signaler">SIGNALER</span>
+            {% else %}
+                    <span id="btn-modal-message" onclick="btn_modal_message()" class="signaler">SIGNALER</span> 
+            {% endif %}
+        </div> 
+    </div> 
+    {% endif %}
     {%for dat,user,dispo in data %}
     <!---   ------------------------ SECTION IMAGE----------------------------  -->
     <div class="element thumbail">
@@ -229,8 +246,6 @@
            
     </div>
     </div>
-
-    
 
    <!---   ------------------------ SECTION DETAILS ----------------------------  -->
     <div class="element details">
@@ -560,7 +575,9 @@
                             <button>Signaler</button>
                         </div>
                    </div>       
-                    </form>            
+                    </form>   
+                    
+                 
             
      </div>   
 </div>
@@ -692,6 +709,35 @@ success: function(data) {
    
 });
 
+$(document).on('submit', '#evaluation-form', function(e){
+e.preventDefault()
+e.preventDefault();
+var evaluation = document.querySelector('input[name="evaluation"]:checked').id;
+console.log(evaluation);
+
+//name = $('#fiable').val()
+//name = $('#nofiable').val()
+idannonce = $("#uidannonce").attr("data-uidannonce");
+uid = $("#uid").attr("data-uid");
+console.log(evaluation);
+console.log(uidannonce);
+console.log(uid);
+$.ajax({
+type: 'POST',
+url: "{% url 'evaluation' %}",
+data: {
+    evaluation: evaluation,
+    uidannonce: uidannonce,
+    uid: uid,
+    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+},
+success: function(data) {
+    alert(data);
+    modalevaluatiion.style.display = "none";
+},
+})
+   
+});
 // 
 
 // ----------- MODAL SiGNALER-------------------
@@ -714,6 +760,9 @@ if (event.target == modalSignaler) {
     modalSignaler.style.display = "none";
 }}
 
+$("#btn_message_fermer").click(function (){
+   $(".message").css("display","none");
+  });
 </script>
 {%endblock js %}
 {% endblock Content %}
