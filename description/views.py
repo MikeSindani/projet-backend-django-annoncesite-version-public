@@ -6,6 +6,8 @@ import pyrebase
 from annoncesite import fonction
 from annoncesite import firebase
 from django.core.cache import cache
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 firebase_app = pyrebase.initialize_app(firebase.firebaseConfig)
 # Get a reference to the auth service
 authe = firebase_app.auth()
@@ -32,12 +34,12 @@ def description(request,cat,idannonce):
       uid = geta.get_token(request, authe) 
     except:
       uid = False
-      return render(request,"description/description.html", {"uid":uid,"data":data,"list":list,"vues":nombre_de_vues,"titre":titre,"evaluation":evalua})
+      return render(request,"description/description.html", {"uid":uid,"data":data,"list":list,"vues":nombre_de_vues,"titre":titre,"evaluation":evalua,"idannonce":idannonce,"categorie":cat})
     print(data)
     cache.set('my_key', 30 , 30000000)
     
 
-    return render(request,"description/description.html", {"uid":uid,"data":data,"list":list,"vues":nombre_de_vues,"titre":titre,"evaluation":evalua})
+    return render(request,"description/description.html", {"uid":uid,"data":data,"list":list,"vues":nombre_de_vues,"titre":titre,"evaluation":evalua,"idannonce":idannonce,"categorie":cat})
 
 def evaluation(request):
   if request.method  =='POST':
@@ -56,3 +58,12 @@ def evaluation(request):
      
       
   return HttpResponse(data)
+def signaler(request,idannonce,uidannonce,categorie):
+  
+      motif = request.GET.get('motif')
+      autre_motif = request.GET.get('signaler-autre')
+      
+      
+      
+      reversed_url = reverse('description', kwargs={'cat':categorie, 'idannonce':idannonce})  # /another-url/123/dummy/
+      return HttpResponseRedirect(reversed_url)

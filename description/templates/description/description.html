@@ -221,22 +221,27 @@
                         
                         <h3 class="text" >Veillez vous connecter ou vous inscrire s'ils vous plait!</h3>
                         <div class="part-evaluation">
-                            <button href="{% url 'signIn' %}">Connexion</button>
-                            <button href="{% url 'signUp' %}">Inscription</button>
+                            <button onClick='window.location.href="/signIn/"'>Connexion</button>
+                            <button onClick='window.location.href="/signUp/"'>Inscription</button>
                         </div>
                     </form>
          </div> 
            
     </div>
     </div>
+
+    
+
    <!---   ------------------------ SECTION DETAILS ----------------------------  -->
     <div class="element details">
         <div class="element-titre">Details du produit</div>
         <ul>
             <li class="detail"><strong>Categorie:</strong>
-                {%if dat.categorie == "agriculture"%} 
+                {%if dat.categorie == "agriculture"%}
+                <div id="data-cat" data-cat="{{dat.categorie}}"></div> 
                 <a href="{% url 'agriculture' %}">{{dat.categorie|title}}</a> 
                 {%else %}
+                <div id="data-cat" data-cat="{{dat.categorie}}"></div> 
                 <a href="{% url 'elevage' %}">{{dat.categorie|title}}</a>
                 {% endif%}
             </li>
@@ -257,8 +262,8 @@
 <!---   ------------------------ SECTION FLOTANT ----------------------------  -->
     <div class="description-contact">
         {% if uid %}
-        <span class="favoris"><a href=""><i class="fas fa-star"></i></i> Ajouter Au favoris</a></span>
-        <span class="user-btn"><div class="btn-contacter">Contacter</div></span>
+        <span class="favoris" onclick="btn_modal_message()"><a href=""><i class="fas fa-star"></i></i> Ajouter Au favoris</a></span>
+        <span class="user-btn" onclick="btn_modal_contacter()"><div class="btn-contacter">Contact</div></span>
         {% else %}
         <span id="btn-modal-message" onclick="btn_modal_message()" class="favoris"><a href=""><i class="fas fa-star"></i></i> Ajouter Au favoris</a></span>
         <span  id="btn-modal-message" onclick="btn_modal_message()" class="user-btn"><div class="btn-contacter">Contacter</div></span>
@@ -273,7 +278,7 @@
         <div class="note-produit">
             <div class="note"><i class="fa fa-star"></i>5</div>
             <div class="etoile">
-                
+               
             </div>
             <div class="commentaire-btn">
                 {% if uid %}
@@ -289,7 +294,7 @@
         </div>  
     </div>
 
- <!---   ----------------- presentation de la personne --------------------  -->
+ <!---   ----------------- SECTION SUIVRE et INFO PERSONNE --------------------  -->
     {%for dat,user,dispo in data %}
     <div class="element contact">
         <div class="user-thumbails">
@@ -301,14 +306,14 @@
         <div class="user-entreprise">
             <span class="name">{{user.entreprise}}</span>
         </div>
-        <div class="follow"><a href=""><i class="fas fa-bookmark"></i> Suiver</a></div>
+        <div class="follow"><a href=""><i class="fas fa-bookmark"></i> Suivre</a></div>
     </div>
     {%endfor %}
 
-<!---   ----------------- presentation de la personne --------------------  -->
+<!---   ----------------- SECTION SIGNALER --------------------  -->
     <div class="element control">
         {% if uid %}
-                <span id="btn-modal-message" onclick="btn_modal_message()" class="signaler">SIGNALER</span>
+                <span id="btn-modal-message" onclick="btn_modal_signaler()" class="signaler">SIGNALER</span>
         {% else %}
                 <span id="btn-modal-message" onclick="btn_modal_message()" class="signaler">SIGNALER</span> 
         {% endif %}
@@ -316,7 +321,7 @@
     </div> 
    </div> 
 <!---   -------------------------------------RECOMMANDER ----------------------------------  -->
-    <div class="recommandation" style="width:100%;background-color: rgb(213, 209, 223);">
+    <div class="recommandation" style="width:100%;background-color: rgb(210, 204, 223);">
         <div class="info">
             <h2 style="text-align: center;">Produits de Meme Categorie </h2>
         </div>
@@ -474,12 +479,146 @@
         </div>
     </div>
 
+<!---   ------------------------ MODAL CONTATER ----------------------------  -->
+{%for dat,user,dispo in data %}  
+<div class="modal-connexion" id="modal-contacter">
+    <!-- Modal content -->
+    <div  class="modal-content" id="screen-contact">
+        <div class="modal-header">
+            <span class="close "> 
+                <span class="fermer close-contacter" onclick="close_contacter()">&times;</span>
+                <span class="text-search">Contact du producteur</span>
+                <span></span>
+            </span>
+        </div>
+        <div class="modal-body">
+                <h5 style="color:tomato;" class="text social" id="text-annonce">
+                    Voici les contacter du producteur ou fournisseur.
+                </h5>
+                <form action="/creation_annonce/" method="post" >
+                    {% csrf_token %}
+                    <div class="part_item">
+                        <div class="item item1 isactived-item" id="item1" onclick="change_section(1)">A propos</div>
+                        <div class="item item2 " id="item2" onclick="change_section(2)" >Contacts</div>
+                        <div class="item item3" id="item3" onclick="change_section(3)" >Adresses</div>
+                    </div>
+                    
+                    <div class="section part_info isactived">
+                        <div class="img-profil"><img src="{{user.imgurl}}" alt="" width="100" height="100"></div>
+                        <div class="txt">{{user.prenom}} {{user.nom}} </div>
+                        <div class="txt">{{user.entreprise}}</div>
+                         
+                    </div>
+                    <div class="section part_info_2">
 
+                        <div class="txt"><a href="mailto:{{user.email}}"><i class="fas fa-envelope"></i> email: {{user.email}}</a></div>
+                        <div class="txt"><a href="tel:{{user.tel1}}"> <i class="fa fa-phone" aria-hidden="true"></i> Numero de telephone 1:{{user.tel1}}</a></div>
+                        <div class="txt"><a href="tel:{{user.tel2}}"> <i class="fa fa-phone" aria-hidden="true"></i> </i> Numero de telephone 2:{{user.tel2}}</a></div> 
+                        <div class="txt"><a href="https://t.me/{{user.telegram}}"><i class="fab fa-telegram-plane"></i> Telegram : {{user.telegram}}</a></div> 
+                        <div class="txt"><a href="https://api.whatsapp.com/send?phone=243{{user.whatsapp}}"><i class="fa fa-whatsapp" aria-hidden="true"></i> Whatsapp : {{user.whatsapp}}</a></div>               
+                    </div>
+                    <div class="section part_info_3">
+
+                        <div class="txt">Commune : {{user.commune}}</div>
+                        <div class="txt">Quartier : {{user.quartier}}</div>
+                        <div class="txt">Avenue : {{user.avenue}}</div> 
+                            
+                    </div> 
+                     
+                </form>
+     </div>   
+</div>
+</div>
+
+<!-------------------- MODAL SIGNALER -------------------------->
+<div class="modal-connexion" id="modal-signaler">
+    <!-- Modal content -->
+    <div  class="modal-content" id="screen-contact">
+        <div class="modal-header">
+            <span class="close "> 
+                <span class="fermer close-signaler" onclick="close_signaler()">&times;</span>
+                <span class="text-search">Signaler Mauvaise Annonce</span>
+                <span></span>
+            </span>
+        </div>
+        <div class="modal-body">
+                <h5 style="color:tomato;" class="text social" id="text-annonce">
+                    Selectionner la raison ou ecrivez-nous pour autres raison consernants.
+                </h5>
+               
+                    <form action="/signaler_annonce/{{idannonce}}/{{user.uid}}/{{categorie}}/"  id="signaler-form" methode="get">
+                        {% csrf_token %}
+                        <div class="part part_signaler isactived">
+                        <select id="cat" name="motif">
+                            <option value="Indesirable">Indesirable</option>
+                            <option value="Arnaque">Arnaque</option>
+                            <option value="Faux compte">Faux compte</option>
+                            <option value="Pornagaphique">Pornogaphique</option>
+                        </select> 
+                        <textarea id="desc" rows="2" cols="50" name="signaler-autre" placeholder="Autres raisons "></textarea>
+                        <div class="btn">
+                            <button>Signaler</button>
+                        </div>
+                   </div>       
+                    </form>            
+            
+     </div>   
+</div>
+</div>
+{%endfor %}
 {%block js %} 
 <script src="{% static 'description/js/description.js' %}"></script>
 <script src="{% static 'owl-carrousel/js/card.js' %}"></script>
 <script>
+// ----------- SECTION  --------------------
+function change_section(number){
+    if (number==1){
+        $(".part_info").css("display","block");
+        $(".part_info_2").css("display","none");
+        $(".part_info_3").css("display","none");
+        $("#item1").css("color","black");
+        $("#item2").css("color","gray");
+        $("#item3").css("color","gray");
+    }
+    if (number==2){
+        $(".part_info").css("display","none");
+        $(".part_info_2").css("display","block");
+        $(".part_info_3").css("display","none");
+        $("#item2").css("color","black");
+        $("#item1").css("color","gray");
+        $("#item3").css("color","gray");
+       
+    }
+    if (number==3){
+        $(".part_info").css("display","none");
+        $(".part_info_2").css("display","none");
+        $(".part_info_3").css("display","block");
+        $("#item3").css("color","black");
+        $("#item1").css("color","gray");
+        $("#item2").css("color","gray");
+    }
+}
 
+// ----------- MODAL CONTACTER-------------------
+     // Get the modal
+var modalContacter = document.getElementById("modal-contacter");
+
+// Get the button that opens the modal
+function btn_modal_contacter() {
+modalContacter.style.display = "block";
+}
+
+// Get the <span> element that closes the modal
+function close_contacter() {
+modalContacter.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+if (event.target == modalContacter) {
+    modalContacter.style.display = "none";
+}
+}
 // ----------- MODAL MESSAGE-------------------
      // Get the modal
 var modalmessage = document.getElementById("modal-messsage");
@@ -522,7 +661,7 @@ if (event.target == modalevaluatiion) {
 }
 }
 
-
+// ------------------- Ajax -------------------------------
 $(document).on('submit', '#evaluation-form', function(e){
 e.preventDefault()
 e.preventDefault();
@@ -531,7 +670,7 @@ console.log(evaluation);
 
 //name = $('#fiable').val()
 //name = $('#nofiable').val()
-uidannonce = $("#uidannonce").attr("data-uidannonce");
+idannonce = $("#uidannonce").attr("data-uidannonce");
 uid = $("#uid").attr("data-uid");
 console.log(evaluation);
 console.log(uidannonce);
@@ -553,6 +692,27 @@ success: function(data) {
    
 });
 
+// 
+
+// ----------- MODAL SiGNALER-------------------
+    // Get the modal
+    var modalSignaler = document.getElementById("modal-signaler");
+
+// Get the button that opens the modal
+function btn_modal_signaler() {
+    modalSignaler.style.display = "block";
+}
+
+// Get the <span> element that closes the modal
+function close_signaler() {
+    modalSignaler.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+if (event.target == modalSignaler) {
+    modalSignaler.style.display = "none";
+}}
 
 </script>
 {%endblock js %}

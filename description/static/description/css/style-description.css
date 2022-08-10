@@ -4,7 +4,28 @@ a{
 }
 
 
-
+.section {
+  margin-top: 15px;
+  display: none;
+}
+.section .img-profil{
+  display: flex;
+  justify-content: center;
+}
+.section .img-profil img{
+  border-radius: 50%;
+}
+.section div a{
+  color: #000000;
+}
+.section div {
+  color: black;
+  font-weight: bold;
+  margin: 10px;
+}
+.section .txt{
+  text-align: center;
+}
 /* ------------- BOUTON RADIO MODAL EVALUATION ---------*/
 .part-evaluation{
   color: #000021;
@@ -613,6 +634,15 @@ img {
     padding: 0.5vw 1vh;
     margin-top: 10px;
   }
+  .modal-connexion .modal-content .modal-body form .part_signaler select[id="cat"] {
+    border: none;
+    color: black;
+    background-color: #f3f3f3;
+    font-size: 16px;
+    width: 100%;
+    padding: 0.5vw 1vh;
+    margin-top: 10px;
+  }
   
   .modal-connexion .modal-content .modal-body form .part textarea {
     border: none;
@@ -709,6 +739,9 @@ img {
       height: 300px;
       /* Modal Header */
       /* Modal Body */
+    }
+    .modal-connexion #screen-contact{
+      height: 350px;
     }
     .modal-connexion .modal-content .modal-header .close .text-search {
       font-size: 18px;

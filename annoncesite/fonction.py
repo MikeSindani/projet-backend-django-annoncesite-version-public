@@ -7,8 +7,25 @@ from django.core.paginator import Paginator, EmptyPage
 from django.core.cache import cache
 from datetime import datetime, timezone , date
 
+def calculdelai(delai):
+        print(delai)
+        datetoday = datetime.today()
+        print(datetoday)
+        if str(datetoday) <= delai:
+            dt_str = datetime.strptime(delai, '%Y-%m-%d')
+            dt_cal = dt_str - datetoday 
+            dt_cal = dt_cal.days
+            if dt_cal >= 1:
+                disponible = {"disponible": "Disponible pendant "+str(dt_cal)+" jours","color":"rgb(19, 196, 19)"}
+            else:
+                disponible = {"disponible": "Pour quelques heures","color":"tomato"}
+        else:
+            disponible = {"disponible": "Indisponible","color":"brown"}
+        return disponible 
 
 class AfficherAnnonce:
+     
+     
      def afficher_annonces_publics_alls(self, database):
             
         timeshamps= database.child("Annonces").shallow().get().val()
@@ -265,17 +282,9 @@ class AfficherAnnonce:
                 id_annonce = {"id":i}
                 #----- recuperer le delai --------
                 delai =  database.child("categories").child(cat).child(i).child("delai").get().val()
-                print(delai)
-                datetoday = date.today()
-                print(datetoday)
-                if str(datetoday) <= delai:
-                    disponible = {"disponible": "Disponible","color":"rgb(19, 196, 19)"}
-                    wor = (id_annonce,data_annnonce,data_user,vues,disponible)
-                    work.append(wor)
-                else:
-                    disponible = {"disponible": "Delai Depasse","color":"brown"}
-                    wor = (id_annonce,data_annnonce,data_user,vues,disponible)
-                    work.append(wor)
+                disponible = calculdelai(delai)
+                wor = (id_annonce,data_annnonce,data_user,vues,disponible)
+                work.append(wor)
 
                 # --- mettre ca dans un tuple ------
                 
@@ -310,17 +319,11 @@ class AfficherAnnonce:
 
                 #----- recuperer le delai --------
                 delai =  database.child("categories").child(cat).child(i).child("delai").get().val()
-                print(delai)
-                datetoday = date.today()
-                print(datetoday)
-                if str(datetoday) <= delai:
-                    disponible = {"disponible": "Disponible","color":"rgb(19, 196, 19)"}
-                    wor = (id_annonce,data_annnonce,data_user,disponible)
-                    work.append(wor)
-                else:
-                    disponible = {"disponible": "Delai Depasse","color":"brown"}
-                    wor = (id_annonce,data_annnonce,data_user,disponible)
-                    work.append(wor)
+                disponible = calculdelai(delai)
+
+
+            wor = (id_annonce,data_annnonce,data_user,disponible)
+            work.append(wor)
                 
             print("👌😁😁 " + str(work))
             print(type(work))
@@ -334,17 +337,9 @@ class AfficherAnnonce:
         data_user = database.child("utilisateurs").child(id_users).child("Informations").get().val()
          #----- recuperer le delai --------
         delai =  database.child("categories").child(categorie).child(idannonce).child("delai").get().val()
-        print(delai)
-        datetoday = date.today()
-        print(datetoday)
-        if str(datetoday) <= delai:
-            disponible = {"disponible": "Disponible","color":"rgb(19, 196, 19)"}
-            wor = (data_annnonce,data_user,disponible)
-            work.append(wor)
-        else:
-            disponible = {"disponible": "Delai Depasse","color":"brown"}
-            wor = (data_annnonce,data_user,disponible)
-            work.append(wor)
+        disponible = calculdelai(delai)
+        wor = (data_annnonce,data_user,disponible)
+        work.append(wor)
          
         return work
 
@@ -504,6 +499,5 @@ class AfficherAnnonce:
          uidannonce = database.child("categories").child(categorie).child(idannonce).child("uid").get().val()
          return database.child("evaluation").child(uidannonce).child("annonce_evaluation").child("total").get().val()
             
-       
+      
 
-              
