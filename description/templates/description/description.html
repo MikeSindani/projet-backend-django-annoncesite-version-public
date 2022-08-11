@@ -199,7 +199,7 @@
                         
                         <p class="text" style="color:tomato;">Cliquer sur "Fiable" ou sur "Non Faible" afin de Noter le Producteur</p>
                         <div class="part-evaluation">
-                            <div id="uidannonce" data-uidannonce="{{user.uid}}" data-uid="{{uid}}" ></div>
+                            <div id="uidannonce" data-uidannonce="{{user.uid}}"></div>
                             <div id="uid"  data-uid="{{uid}}" ></div>
                             <div class="fiable"">
                                 <label>
@@ -236,7 +236,7 @@
                     <form id="evaluation-form"  method="post" data-uid="{{uid}}" >
                         {% csrf_token %}
                         
-                        <h3 class="text" >Veillez vous connecter ou vous inscrire s'ils vous plait!</h3>
+                        <p class="text" >Veillez vous connecter ou vous inscrire s'ils vous plait!</p>
                         <div class="part-evaluation">
                             <button onClick='window.location.href="/signIn/"'>Connexion</button>
                             <button onClick='window.location.href="/signUp/"'>Inscription</button>
@@ -560,7 +560,7 @@
                 <h5 style="color:tomato;" class="text social" id="text-annonce">
                     Selectionner la raison ou ecrivez-nous pour autres raison consernants.
                 </h5>
-               
+                      <!--     form modal        -->
                     <form action="/signaler_annonce/{{idannonce}}/{{user.uid}}/{{categorie}}/"  id="signaler-form" methode="get">
                         {% csrf_token %}
                         <div class="part part_signaler isactived">
@@ -576,7 +576,6 @@
                         <div id="textarea">
                             <textarea  rows="2" cols="50" name="signaler-autre" placeholder="Autres raisons " ></textarea>
                         </div>
-                        
                         <div class="btn">
                             <button>Signaler</button>
                         </div>
@@ -699,14 +698,12 @@ if (event.target == modalevaluatiion) {
 
 // ------------------- Ajax -------------------------------
 $(document).on('submit', '#evaluation-form', function(e){
-e.preventDefault()
 e.preventDefault();
 var evaluation = document.querySelector('input[name="evaluation"]:checked').id;
-console.log(evaluation);
 
 //name = $('#fiable').val()
 //name = $('#nofiable').val()
-idannonce = $("#uidannonce").attr("data-uidannonce");
+uidannonce = $("#uidannonce").attr("data-uidannonce");
 uid = $("#uid").attr("data-uid");
 console.log(evaluation);
 console.log(uidannonce);
@@ -728,36 +725,6 @@ success: function(data) {
    
 });
 
-$(document).on('submit', '#evaluation-form', function(e){
-e.preventDefault()
-e.preventDefault();
-var evaluation = document.querySelector('input[name="evaluation"]:checked').id;
-console.log(evaluation);
-
-//name = $('#fiable').val()
-//name = $('#nofiable').val()
-idannonce = $("#uidannonce").attr("data-uidannonce");
-uid = $("#uid").attr("data-uid");
-console.log(evaluation);
-console.log(uidannonce);
-console.log(uid);
-$.ajax({
-type: 'POST',
-url: "{% url 'evaluation' %}",
-data: {
-    evaluation: evaluation,
-    uidannonce: uidannonce,
-    uid: uid,
-    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-},
-success: function(data) {
-    alert(data);
-    modalevaluatiion.style.display = "none";
-},
-})
-   
-});
-// 
 
 // ----------- MODAL SiGNALER-------------------
     // Get the modal

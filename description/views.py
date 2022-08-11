@@ -41,7 +41,7 @@ def description(request,cat,idannonce):
        message = '<p>Cet annonce a ete signaler pour divers motif(pornographique,Trompe de categorie,indesirable)</p> <p style="font-weight: bold;">Veillez nous aider a verifier et signaler</p>'
     else:
        message = False
-       
+
     try:
       # intrcution pour recupere l'id dans la session
       uid = geta.get_token(request, authe) 
@@ -91,7 +91,7 @@ def signaler(request,idannonce,uidannonce,categorie):
   if request.method == "GET":
       motif = request.GET.get('motif')
       autre_motif = request.GET.get('signaler-autre')
-      geta.set_siganler(database,idannonce,uidannonce,categorie,motif,autre_motif)
+      
       objet_mail =  "APALGREL Signale une annonce subspect :"+motif
       message_mail = autre_motif
       html_message_mail = '''
@@ -107,8 +107,13 @@ def signaler(request,idannonce,uidannonce,categorie):
       '''
       form_email = 'mbac3info@gmail.com'
       to_email = ['mikems@live.fr', 'mikesindani@gmail.com']
-      send_mail( subject=objet_mail,message=message_mail,html_message=html_message_mail,from_email=form_email,recipient_list=to_email,fail_silently=False)
 
+      #-------------- envoi email -------------------
+      try:
+        send_mail( subject=objet_mail,message=message_mail,html_message=html_message_mail,from_email=form_email,recipient_list=to_email,fail_silently=False)
+      finally:
+        geta.set_siganler(database,idannonce,uidannonce,categorie,motif,autre_motif)
+        
       
       
       
