@@ -1,7 +1,7 @@
 from email import message
 from unicodedata import category
 from webbrowser import get
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 import pyrebase
 from annoncesite import fonction
@@ -145,5 +145,20 @@ def createCommentaire(request):
       data = geta.set_commentaire(database,idannonce,titre_commentaire,desc_commentaire,star_commentaire,uid,uidannonce)
   return HttpResponse(data)
 
+def commentaire(request,idannonce,num_avis):
+    geta = fonction.AfficherAnnonce()
+    list_avis = geta.get_commentaire(database,idannonce,num_avis)
+    visible = 1
+    print(idannonce)
+    if request.is_ajax():
+      upper = num_avis
+      lower = 0
+      if list_avis == False:
+        list_avis = []
+        size = 0
+      else:
+        size = len(list_avis)
+
+      return JsonResponse({'data':list_avis[lower:upper], 'size': size})
 
   

@@ -589,7 +589,42 @@ class AfficherAnnonce:
             # ---- code qui met le commenataire -------- 
             database.child("avis").child("list_avis").child(idannonce).child(id_commentaire).set(data_avis)
         return "Merci pour votre avis sur ce produit! "
+     def get_commentaire(self,database,idannonce,num):
+        timeshamps = database.child("avis").child("list_avis").child(idannonce).shallow().get().val()
+        if timeshamps :
+            lis_time = []
+            for i in timeshamps:
+                lis_time.append(i)
+            
+            lis_time.sort(reverse=True)
+            print("------------- list de commentaire ---------------")
+            print(lis_time)
+            #on recupere la list
+            work = []
 
+            for i in lis_time:
+                titre = database.child("avis").child("list_avis").child(idannonce).child(i).child("titre").get().val()
+                desc = database.child("avis").child("list_avis").child(idannonce).child(i).child("description").get().val()
+                star = database.child("avis").child("list_avis").child(idannonce).child(i).child("star").get().val()
+                date = database.child("avis").child("list_avis").child(idannonce).child(i).child("data_avis").get().val()
+                id_users = database.child("avis").child("list_avis").child(idannonce).child(i).child("uid").get().val()
+                nom_user = database.child("utilisateurs").child(id_users).child("Informations").child("nom").get().val()
+                prenom_user = database.child("utilisateurs").child(id_users).child("Informations").child("prenom").get().val()
+                wor = {
+                    "titre":titre,
+                    "description":desc,
+                    "star":star,
+                    "date":date,
+                    "nom":nom_user,
+                    "prenom":prenom_user,
+                }
+                work.append(wor)
+                
+            print("😁😁 ")
+            print(work)
+            return work
+        else:
+            return False
 
 
       

@@ -50,6 +50,22 @@
         </div> 
     </div> 
     {% endif %}
+    
+    {%for dat,user,dispo in data %}
+    {% if dispo.disponible == "Indisponible" %}
+    <div class="element message" style="background-color: tomato;">
+        <div class="msg" >
+            Cette annonce n'est plus disponible! 
+        </div>
+        <div>
+            <span id="btn_message_fermer"  class="signaler">FERMER</span>
+        </div> 
+    </div> 
+
+    {% endif %}
+    {% endfor %}
+
+
     {%for dat,user,dispo in data %}
     <!---   ------------------------ SECTION IMAGE----------------------------  -->
     <div class="element thumbail">
@@ -305,16 +321,12 @@
             </div>
             
         </div>
-        <div class="commentaire_promendite">
-            <div class="commentaire_items">
-                <div class="nom_star">mike<span class="nom"></span><span class="star"><i class="fa fa-star"></i>5</span></div>
-                <div class="titre">Tres bon </div>
-                <div class="avis">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur quam, ullam ea incidunt eum earum sunt nihil? Cum, quis sequi quasi iste et quod magnam quidem excepturi corporis laudantium accusantium!</div>
-                <div class="date_publication">14-25-2022</div>
-            </div> 
+        <div id="commentaire_promendite" class="commentaire_promendite">
+            
         </div>
+        <p id="chargement" style="color:red;font: size 20px;"  ></p>
         <div>
-            <div class="btn_voir_plus_commentaire">VOIR PLUS</div> 
+            <div id="btn_load_more_avis" class="btn_voir_plus_commentaire ">VOIR PLUS</div> 
         </div>  
     </div>
 <!---   ------------------------ MODAL COMMENTAIRE ----------------------------  -->
@@ -845,6 +857,65 @@ success: function(data) {
 });
 
 
+// ---------- affichage des commentataire --------
+var commentaireBox = document.getElementById('commentaire_promendite');
+var visible = 1
+var chargementBox = document.getElementById("chargement");
+idannonce = $("#idannonce").attr("data-idannonce");
+var loadBtn = document.getElementById("btn_load_more_avis");
+chargementBox.textContent="CHARGEMENT DES COMMENTAIRES EN COURS ... "   
+var get_commentaire = () => {
+     
+    $.ajax({
+        type: 'GET',
+        url: `/get_commentaire/${idannonce}/${visible}/`,
+        success: function(response){
+            console.log(response)
+            var data = response.data
+            setTimeout(()=>{
+                
+                console.log(data)
+                
+                //const donnee = new Array(data);
+            
+                data.forEach(el=> {
+                    commentaireBox.innerHTML += `
+                    <div class="commentaire_items">
+                        <div class="nom_star">${el.nom} ${el.prenom}<span class="nom"></span><span class="star"><i class="fa fa-star"></i>${el.star}</span></div>
+                        <div class="titre">${el.titre}</div>
+                        <div class="avis">${el.description}</div>
+                        <div class="date_publication">${el.date}</div>
+                    </div>   
+                    `
+                });
+                
+            }, 1000)
+            chargementBox.textContent=""
+            console.log(response.size)
+            if (response.size === 0) {
+                chargementBox.textContent = 'Pas de commentaire'
+            }
+            else if (response.size <= visible) {
+                loadBtn.classList.add('not-visible')
+                chargementBox.textContent = 'Il y a plus de commantaire...'
+            }
+        },
+        error: function(error){
+            console.log(error)
+        }
+    })
+       
+}
+
+loadBtn.addEventListener('click', ()=>{
+    //spinnerBox.classList.remove('not-visible')
+    chargementBox.textContent="CHARGEMENT EN COURS ... " 
+    visible += 1
+    get_commentaire()
+})
+
+
+
 // ----------- MODAL SiGNALER-------------------
     // Get the modal
     var modalSignaler = document.getElementById("modal-signaler");
@@ -868,6 +939,12 @@ if (event.target == modalSignaler) {
 $("#btn_message_fermer").click(function (){
    $(".message").css("display","none");
   });
+
+
+
+// pour execute la fontion afin de charge les elements 
+get_commentaire()
+
 </script>
 {%endblock js %}
 {% endblock Content %}

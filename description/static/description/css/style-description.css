@@ -2,6 +2,13 @@ a{
   text-decoration: none;
   color: #000000;
 }
+.not-visible{
+    display: none;
+}
+#chargement{
+  font-weight: bold;
+  text-align: center;
+}
 
 .container-annonces-description .message span {
   border-radius: 20px;
@@ -454,7 +461,7 @@ img {
     cursor: pointer;
     padding:5px 40px;
     border-radius: 20px;
-    background-color: tomato;
+    background-color: var(--orange);
   }
   .container-annonces-description .description-contact .favoris{
     margin-left: 15px;
@@ -469,8 +476,7 @@ img {
     
   }
   .container-annonces-description .commentaire  .commentaire_promendite {
-    border-bottom: 1px solid rgb(190, 190, 190);
-    border-top: 1px solid rgb(190, 190, 190);
+    
     margin: 0 60px;
     }
   @media (max-width:800px){
@@ -484,9 +490,17 @@ img {
     text-align: center;
     font-weight: bold;
     cursor: pointer;
+    /*border-bottom: 1px solid rgb(190, 190, 190);*/
+    border-top: 1px solid rgb(190, 190, 190);
+  }
+  .container-annonces-description .commentaire .btn_voir_plus_commentaire:hover{
+    color: var(--orange);
   }
   .container-annonces-description .commentaire  .commentaire_promendite .commentaire_items{
-    margin: 10px 0 ;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #19083805;
+    border-bottom: 1px solid rgb(226, 226, 226);
   }
   .container-annonces-description .commentaire  .commentaire_promendite .commentaire_items .nom_star{
     font-weight:bold;
