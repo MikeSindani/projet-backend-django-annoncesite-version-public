@@ -297,16 +297,72 @@
             </div>
             <div class="commentaire-btn">
                 {% if uid %}
-                <span class="favoris" id="btn-modal-commentaire" onclick="btn_modal_message()" >Ajouter Un Avis</span>
+                <span class="favoris" id="btn-modal-commentaire" onclick="btn_modal_avis()"> Donner Votre Avis</span>
                 {% else %}
-                <span class="favoris" id="btn-modal-message" onclick="btn_modal_message()">Ajouter Un Avis</span> 
+                <span class="favoris" id="btn-modal-message" onclick="btn_modal_message()">Donner Votre Avis</span> 
                 {% endif %}
                  
             </div>
+            
+        </div>
+        <div class="commentaire_promendite">
+            <div class="commentaire_items">
+                <div class="nom_star">mike<span class="nom"></span><span class="star"><i class="fa fa-star"></i>5</span></div>
+                <div class="titre">Tres bon </div>
+                <div class="avis">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur quam, ullam ea incidunt eum earum sunt nihil? Cum, quis sequi quasi iste et quod magnam quidem excepturi corporis laudantium accusantium!</div>
+                <div class="date_publication">14-25-2022</div>
+            </div> 
         </div>
         <div>
-            <div class="follow"><a href="">VOIR PLUS</a></div> 
+            <div class="btn_voir_plus_commentaire">VOIR PLUS</div> 
         </div>  
+    </div>
+<!---   ------------------------ MODAL COMMENTAIRE ----------------------------  -->
+    <div class="modal-connexion" id="modal-avis">
+        <!-- Modal content -->
+        <div  class="modal-content" id="screen-comentaire">
+            <div class="modal-header">
+                <span class="close "> 
+                    <span class="fermer close-signaler" onclick="close_avis()">&times;</span>
+                    <span class="text-search">Avis Sur Annonce</span>
+                    <span></span>
+                </span>
+            </div>
+            <div class="modal-body">
+                    <h5 style="color:tomato;" class="text social" id="text-annonce">
+                        Selectionner la raison ou ecrivez-nous pour autres raison consernants.
+                    </h5>
+                          <!--     form modal        -->
+                        <form action="/signaler_annonce/{{idannonce}}/{{user.uid}}/{{categorie}}/"  id="signaler-form" methode="get">
+                            {% csrf_token %}
+                            <div class="part part_signaler isactived">
+                            <input id="titre_commentaire" type="text" placeholder="Titre(exemple:tres bon produits, c'est nul ...)" name="titre" > 
+                            <div style="display:flex;align-items:center;">
+                                <label for="star" >Combien d'etoile donnez-vous :</label>
+                                <input type="radio" id="star" name="star"  value="1" style="width:20px;height:20px" required  checked>
+                                <label for="1" ><i class="fa fa-star"></i> 1</label>
+                                <input type="radio" id="star"  name="star"  value="2" style="width:20px;height:20px" required >
+                                <label for="2" ><i class="fa fa-star"></i> 2</label>
+                                <input type="radio" id="star"  name="star"  value="3" style="width:20px;height:20px" required >
+                                <label for="2" ><i class="fa fa-star"></i> 3</label>
+                                <input type="radio" id="star"  name="star"  value="4" style="width:20px;height:20px" required >
+                                <label for="2" ><i class="fa fa-star"></i> 4</label>
+                                <input type="radio" id="star"  name="star"  value="5" style="width:20px;height:20px" required >
+                                <label for="2" ><i class="fa fa-star"></i> 5</label>
+                              </div> 
+                            <div id="textarea">
+                                <textarea  rows="2" cols="50" name="signaler-autre" placeholder="description(exemple: j'ai beaucoup aime le produits ...) " ></textarea>
+                            </div>
+                            <div class="btn">
+                                <button>Signaler</button>
+                            </div>
+                       </div>       
+                        </form>   
+                        
+                     
+                
+         </div>   
+    </div>
     </div>
 
  <!---   ----------------- SECTION SUIVRE et INFO PERSONNE --------------------  -->
@@ -552,7 +608,7 @@
         <div class="modal-header">
             <span class="close "> 
                 <span class="fermer close-signaler" onclick="close_signaler()">&times;</span>
-                <span class="text-search">Signaler Mauvaise Annonce</span>
+                <span class="text-search">Signaler Cette Annonce</span>
                 <span></span>
             </span>
         </div>
@@ -654,6 +710,27 @@ if (event.target == modalContacter) {
     modalContacter.style.display = "none";
 }
 }
+
+// ----------- MODAL Commentaire-------------------
+     // Get the modal
+     var modalAvis = document.getElementById("modal-avis");
+
+// Get the button that opens the modal
+function btn_modal_avis() {
+    modalAvis.style.display = "block";
+}
+
+// Get the <span> element that closes the modal
+function close_avis() {
+    modalAvis.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+if (event.target == modalAvis) {
+    modalAvis.style.display = "none";
+}
+}
 // ----------- MODAL MESSAGE-------------------
      // Get the modal
 var modalmessage = document.getElementById("modal-messsage");
@@ -724,6 +801,9 @@ success: function(data) {
 })
    
 });
+
+
+// ------------ code commmaentaire ----------------------
 
 
 // ----------- MODAL SiGNALER-------------------

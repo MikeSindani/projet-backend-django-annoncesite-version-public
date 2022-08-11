@@ -464,12 +464,58 @@ img {
   }
 
   /* --------- commentaire -------------- */
+  .container-annonces-description .commentaire  .commentaire_promendite div{
+    text-align: left !important;
+    align-items: left !important;
+    
+  }
+  .container-annonces-description .commentaire  .commentaire_promendite {
+    border-bottom: 1px solid rgb(190, 190, 190);
+    border-top: 1px solid rgb(190, 190, 190);
+    margin: 0 60px;
+    }
+  @media (max-width:800px){
+    .container-annonces-description .commentaire  .commentaire_promendite {
+      
+      margin: 0 10px;
+      }
+
+  }
+  .container-annonces-description .commentaire .btn_voir_plus_commentaire{
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .container-annonces-description .commentaire  .commentaire_promendite .commentaire_items{
+    margin: 10px 0 ;
+  }
+  .container-annonces-description .commentaire  .commentaire_promendite .commentaire_items .nom_star{
+    font-weight:bold;
+    font-size: 14px;
+  }
+  .container-annonces-description .commentaire  .commentaire_promendite .commentaire_items .nom_star .star{
+    color: rgb(170, 170, 170);
+  }
+
+  .container-annonces-description .commentaire  .commentaire_promendite .commentaire_items .titre{
+    color: #242424;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .container-annonces-description .commentaire  .commentaire_promendite .commentaire_items .date_publication{
+    color: #696969;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
   .container-annonces-description .commentaire .note-produit{
       align-items: center;
       text-align: center;
       padding-bottom: 25px;
       margin-bottom: 15px;
-      border-bottom: 1px solid rgb(71, 63, 63);
+      
   }
   .container-annonces-description .commentaire .commentaire-btn,
   .container-annonces-description .commentaire .follow{
@@ -764,6 +810,10 @@ img {
   .modal-connexion .modal-content .modal-body form .text a {
     color: tomato;
     text-decoration: none;
+  }
+  #screen-comentaire {
+    height: 500px;
+    width: 50%;
   }
   
   @media screen and (max-width: 800px) {

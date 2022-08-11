@@ -91,7 +91,9 @@ def signaler(request,idannonce,uidannonce,categorie):
   if request.method == "GET":
       motif = request.GET.get('motif')
       autre_motif = request.GET.get('signaler-autre')
-      
+
+      geta.set_siganler(database,idannonce,uidannonce,categorie,motif,autre_motif)
+      #-------------- preparation envoi email -------------------
       objet_mail =  "APALGREL Signale une annonce subspect :"+motif
       message_mail = autre_motif
       html_message_mail = '''
@@ -111,9 +113,11 @@ def signaler(request,idannonce,uidannonce,categorie):
       #-------------- envoi email -------------------
       try:
         send_mail( subject=objet_mail,message=message_mail,html_message=html_message_mail,from_email=form_email,recipient_list=to_email,fail_silently=False)
-      finally:
-        geta.set_siganler(database,idannonce,uidannonce,categorie,motif,autre_motif)
+      except:
+        reversed_url = reverse('description', kwargs={'cat':categorie, 'idannonce':idannonce})  # /another-url/123/dummy/
+        return HttpResponseRedirect(reversed_url) 
         
+
       
       
       

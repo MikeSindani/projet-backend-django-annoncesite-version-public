@@ -218,7 +218,7 @@
          {% endif%}
         <div class="conteneur-card">
         {%if com_list %}
-        {%for iden,work,vues in com_list %}
+        {%for iden,work,vues,dispo in com_list %}
 
             <div class="card-long">
                 <div class="thumbnail" >
@@ -255,7 +255,7 @@
                            {{work.autres}}
                         {% endif %} 
                     </div>
-                    <div class="subtitle">Disponible</div>
+                    <div class="sub_title" style="color:{{dispo.color}}">{{dispo.disponible|default:"Delai"}}</div>
                     <div class="element lieu">
                         <span class="vu"><i class="fa fa-map-marker" aria-hidden="true"></i> {{data.quartier}}</span>
                     </div>
@@ -469,6 +469,7 @@
          }
                 
     }
+
       function  progressBar(value){
       if(value == 0){
         document.querySelector(".per-100").style.display="block";
@@ -511,6 +512,8 @@
         document.querySelector(".per-100").style.display="block";*/
       }
     }
+
+    
         var selDiv1 = "";
         var storedFiles1 = [];
         var selDiv2 = "";

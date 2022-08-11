@@ -157,12 +157,15 @@ class AfficherAnnonce:
             for i in lis_time:
                 data_annonce= database.child("utilisateurs").child(uid).child("annonces").child(i).get().val()
                 id_annonce = database.child("utilisateurs").child(uid).child("annonces").child(i).get().key()
-                vue = database.child("vues").child(i).get().val()
-                id_annonce = {"id":id_annonce} # on cree un dictionnaire pour id
-                data = (id_annonce,data_annonce,vue)# on cree un tuple 
-                work.append(data)# on met le tuple dans la liste
-            print("terminer 👍")
-            #print("liste = " + str(work))
+                vues = database.child("Vues").child(i).get().val()
+                id_annonce = {"id":id_annonce} 
+                # on cree un dictionnaire pour id
+                #----- recuperer le delai --------
+                delai =  database.child("utilisateurs").child(uid).child("annonces").child(i).child("delai").get().val()
+                disponible = calculdelai(delai)
+                wor = (id_annonce,data_annonce,vues,disponible)
+                work.append(wor)
+                
             '''
             d = database.child("categories").order_by_child("elevage").limit_to_first(2).get()
             print(d)
