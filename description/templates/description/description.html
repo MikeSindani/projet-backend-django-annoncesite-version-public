@@ -330,31 +330,33 @@
             </div>
             <div class="modal-body">
                     <h5 style="color:tomato;" class="text social" id="text-annonce">
-                        Selectionner la raison ou ecrivez-nous pour autres raison consernants.
+                        Donner votre avis sur le produits. 
                     </h5>
                           <!--     form modal        -->
-                        <form action="/signaler_annonce/{{idannonce}}/{{user.uid}}/{{categorie}}/"  id="signaler-form" methode="get">
+                        <form   id="avis-form" methode="post">
                             {% csrf_token %}
                             <div class="part part_signaler isactived">
                             <input id="titre_commentaire" type="text" placeholder="Titre(exemple:tres bon produits, c'est nul ...)" name="titre" > 
                             <div style="display:flex;align-items:center;">
-                                <label for="star" >Combien d'etoile donnez-vous :</label>
-                                <input type="radio" id="star" name="star"  value="1" style="width:20px;height:20px" required  checked>
+
+                                <span id="idannonce" data-idannonce="{{idannonce}}"></span>
+                                <label for="star" >Combien d'etoile? :</label>
+                                <input type="radio" id="1" name="star"  value="1" style="width:20px;height:20px" required  checked>
                                 <label for="1" ><i class="fa fa-star"></i> 1</label>
-                                <input type="radio" id="star"  name="star"  value="2" style="width:20px;height:20px" required >
+                                <input type="radio" id="2"  name="star"  value="2" style="width:20px;height:20px" required >
                                 <label for="2" ><i class="fa fa-star"></i> 2</label>
-                                <input type="radio" id="star"  name="star"  value="3" style="width:20px;height:20px" required >
-                                <label for="2" ><i class="fa fa-star"></i> 3</label>
-                                <input type="radio" id="star"  name="star"  value="4" style="width:20px;height:20px" required >
-                                <label for="2" ><i class="fa fa-star"></i> 4</label>
-                                <input type="radio" id="star"  name="star"  value="5" style="width:20px;height:20px" required >
-                                <label for="2" ><i class="fa fa-star"></i> 5</label>
+                                <input type="radio" id="3"  name="star"  value="3" style="width:20px;height:20px" required >
+                                <label for="3" ><i class="fa fa-star"></i> 3</label>
+                                <input type="radio" id="4"  name="star"  value="4" style="width:20px;height:20px" required >
+                                <label for="4" ><i class="fa fa-star"></i> 4</label>
+                                <input type="radio" id="5"  name="star"  value="5" style="width:20px;height:20px" required >
+                                <label for="5" ><i class="fa fa-star"></i> 5</label>
                               </div> 
                             <div id="textarea">
-                                <textarea  rows="2" cols="50" name="signaler-autre" placeholder="description(exemple: j'ai beaucoup aime le produits ...) " ></textarea>
+                                <textarea id="desc_commentaire"  rows="2" cols="50" name="signaler-autre" placeholder="description(exemple: j'ai beaucoup aime le produits ...) " ></textarea>
                             </div>
                             <div class="btn">
-                                <button>Signaler</button>
+                                <button>Envoyer</button>
                             </div>
                        </div>       
                         </form>   
@@ -576,23 +578,23 @@
                     
                     <div class="section part_info isactived">
                         <div class="img-profil"><img src="{{user.imgurl}}" alt="" width="100" height="100"></div>
-                        <div class="txt">{{user.prenom}} {{user.nom}} </div>
-                        <div class="txt">{{user.entreprise}}</div>
+                        <div class="txt"> <strong> {{user.prenom}} {{user.nom}}  </strong></div>
+                        <div class="txt"> <strong> {{user.entreprise}} </strong></div>
                          
                     </div>
                     <div class="section part_info_2">
 
                         <div class="txt"><a href="mailto:{{user.email}}"><i class="fas fa-envelope"></i> email: {{user.email}}</a></div>
-                        <div class="txt"><a href="tel:{{user.tel1}}"> <i class="fa fa-phone" aria-hidden="true"></i> Numero de telephone 1:{{user.tel1}}</a></div>
-                        <div class="txt"><a href="tel:{{user.tel2}}"> <i class="fa fa-phone" aria-hidden="true"></i> </i> Numero de telephone 2:{{user.tel2}}</a></div> 
-                        <div class="txt"><a href="https://t.me/{{user.telegram}}"><i class="fab fa-telegram-plane"></i> Telegram : {{user.telegram}}</a></div> 
-                        <div class="txt"><a href="https://api.whatsapp.com/send?phone=243{{user.whatsapp}}"><i class="fa fa-whatsapp" aria-hidden="true"></i> Whatsapp : {{user.whatsapp}}</a></div>               
+                        <div class="txt"><a href="tel:{{user.tel1}}"> <i class="fa fa-phone" aria-hidden="true"></i> <strong>Numero de telephone 1 :</strong> {{user.tel1}}</a></div>
+                        <div class="txt"><a href="tel:{{user.tel2}}"> <i class="fa fa-phone" aria-hidden="true"></i></i> <strong>Numero de telephone 2 :</strong> {{user.tel2}}</a></div> 
+                        <div class="txt"><a href="https://t.me/{{user.telegram}}"><i class="fab fa-telegram-plane"></i> <strong>Telegram : </strong> {{user.telegram}}</a></div> 
+                        <div class="txt"><a href="https://api.whatsapp.com/send?phone=243{{user.whatsapp}}"><i class="fab fa-whatsapp" aria-hidden="true"></i> <strong>Whatsapp : </strong> {{user.whatsapp}}</a></div>               
                     </div>
                     <div class="section part_info_3">
 
-                        <div class="txt">Commune : {{user.commune}}</div>
-                        <div class="txt">Quartier : {{user.quartier}}</div>
-                        <div class="txt">Avenue : {{user.avenue}}</div> 
+                        <div class="txt"> <strong>Commune : </strong> {{user.commune}}</div>
+                        <div class="txt"><strong>Quartier :</strong>  {{user.quartier}}</div>
+                        <div class="txt"> <strong>Avenue : </strong> {{user.avenue}}</div> 
                             
                     </div> 
                      
@@ -804,6 +806,43 @@ success: function(data) {
 
 
 // ------------ code commmaentaire ----------------------
+
+$(document).on('submit', '#avis-form', function(e){
+e.preventDefault();
+var star = document.querySelector('input[name="star"]:checked').id;
+// on recupere les donnes 
+titre_commentaire = $('#titre_commentaire').val()
+desc_commentaire = $('#desc_commentaire').val()
+uidannonce = $("#uidannonce").attr("data-uidannonce");
+idannonce = $("#idannonce").attr("data-idannonce");
+uid = $("#uid").attr("data-uid");
+
+// on test 
+console.log(star);
+console.log(titre_commentaire);
+console.log(desc_commentaire);
+console.log(uidannonce);
+console.log(idannonce);
+console.log(uid);
+$.ajax({
+type: 'POST',
+url: "{% url 'create_commentaire' %}",
+data: {
+    titre: titre_commentaire,
+    description: desc_commentaire,
+    star: star,
+    uidannonce: uidannonce,
+    idannonce: idannonce,
+    uid: uid,
+    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+},
+success: function(data) {
+    alert(data);
+    modalAvis.style.display = "none";
+},
+})
+   
+});
 
 
 // ----------- MODAL SiGNALER-------------------

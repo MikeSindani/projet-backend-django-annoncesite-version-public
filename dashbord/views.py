@@ -55,6 +55,7 @@ def create_annonce(request):
     time_now = datetime.now(timezone.utc).astimezone(tz)
     #millis = int(time.mktime(time_now.timetuple())) #le temps qu'on a recuperer
     id_annonce = time_now.strftime('%Y%m%d%H%M%S%f')
+    # ------ date de publication ------- 
     datetoday = str(date.today())
     clock = time_now.strftime('%H:%M:%S')
 

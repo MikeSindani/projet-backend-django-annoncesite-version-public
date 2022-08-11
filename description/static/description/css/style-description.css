@@ -56,7 +56,6 @@ a{
 }
 .section div {
   color: black;
-  font-weight: bold;
   margin: 10px;
 }
 .section .txt{
@@ -827,7 +826,7 @@ img {
       /* Modal Body */
     }
     .modal-connexion #screen-contact{
-      height: 350px;
+      height: 500px;
     }
     .modal-connexion .modal-content .modal-header .close .text-search {
       font-size: 18px;

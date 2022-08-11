@@ -123,3 +123,27 @@ def signaler(request,idannonce,uidannonce,categorie):
       
   reversed_url = reverse('description', kwargs={'cat':categorie, 'idannonce':idannonce})  # /another-url/123/dummy/
   return HttpResponseRedirect(reversed_url)
+
+
+def createCommentaire(request):
+  if request.method  =='POST':
+      titre_commentaire = request.POST['titre']
+      desc_commentaire = request.POST['description']
+      star_commentaire = request.POST['star']
+      uid = request.POST['uid']
+      uidannonce = request.POST['uidannonce']
+      idannonce = request.POST['idannonce']
+      print("-------- commentaire ---------- ")
+      print(uidannonce)
+      print(idannonce)
+      print(uid)
+      print(star_commentaire)
+      print(titre_commentaire)
+      print(desc_commentaire)
+      #--------- on met le commentaire en faissnt appele a set_commentaitre
+      geta = fonction.AfficherAnnonce()
+      data = geta.set_commentaire(database,idannonce,titre_commentaire,desc_commentaire,star_commentaire,uid,uidannonce)
+  return HttpResponse(data)
+
+
+  

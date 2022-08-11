@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 import datetime
 from imghdr import what
-from itertools import product
+from itertools import product, starmap
 from types import NoneType
 from django.core.paginator import Paginator, EmptyPage
 from django.core.cache import cache
@@ -22,6 +22,15 @@ def calculdelai(delai):
         else:
             disponible = {"disponible": "Indisponible","color":"brown"}
         return disponible 
+def calcul_moyen_pondere(database,idannonce):
+    a = database.child("avis").child("compteur").child(idannonce).child("1").get().val()
+    b = database.child("avis").child("compteur").child(idannonce).child("2").get().val()
+    c = database.child("avis").child("compteur").child(idannonce).child("3").get().val()
+    d = database.child("avis").child("compteur").child(idannonce).child("4").get().val()
+    e = database.child("avis").child("compteur").child(idannonce).child("5").get().val()
+    moyen_pondere = ((a*1)+(b*2)+(c*3)+(d*4)+(e*5))/15
+    return (moyen_pondere * 5)/1
+
 
 class AfficherAnnonce:
      
@@ -539,6 +548,49 @@ class AfficherAnnonce:
         else: 
             return True
 
-        
+     def set_commentaire(self,database,idannonce,titre,description,star,uid,uidannonce):
+        import pytz
+        # la date de la publication
+        tz = pytz.timezone('Europe/Berlin')
+        time_now = datetime.now(timezone.utc).astimezone(tz)
+        #millis = int(time.mktime(time_now.timetuple())) #le temps qu'on a recuperer
+        id_commentaire = time_now.strftime('%Y%m%d%H%M%S%f')
+        datetime_avis = datetime.today()
+        data_avis = {
+        "idannonce":idannonce,
+        "titre":titre,
+        "description":description,
+        "star":star,
+        "data_avis":str(datetime_avis),
+        "uid":uid,
+        "uidannonce":uidannonce,
+        }
+        star_str = str(star)
+        data = database.child("avis").child("compteur").child(idannonce).get().val()
+        if data is None:
+            # --------- initilisation ------------
+            dict_data_cpt = {"1":0,"2":0,"3":0,"4":0,"5":0,"moyen":0}
+            database.child("avis").child("compteur").child(idannonce).set(dict_data_cpt)
+            # on met mettant dans la base
+            count_star = 1 
+            database.child("avis").child("compteur").child(idannonce).update({star_str:count_star})
+            #------- moyen -----------------
+            moyen_pondere = calcul_moyen_pondere(database,idannonce)
+            database.child("avis").child("compteur").child(idannonce).update({"moyen":moyen_pondere})
+            # ---- code qui met le commenataire -------- 
+            database.child("avis").child("list_avis").child(idannonce).child(id_commentaire).set(data_avis)
+        else: 
+            count = database.child("avis").child("compteur").child(idannonce).child(star_str).get().val()
+            count_star = count + 1
+            database.child("avis").child("compteur").child(idannonce).update({star_str:count_star})
+            #------- moyen -----------------
+            moyen_pondere = calcul_moyen_pondere(database,idannonce)
+            database.child("avis").child("compteur").child(idannonce).update({"moyen":moyen_pondere})
+            # ---- code qui met le commenataire -------- 
+            database.child("avis").child("list_avis").child(idannonce).child(id_commentaire).set(data_avis)
+        return "Merci pour votre avis sur ce produit! "
+
+
+
       
 
