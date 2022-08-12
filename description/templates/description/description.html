@@ -289,13 +289,14 @@
         </p>
     </div>
     
-<!---   ------------------------ SECTION FLOTANT ----------------------------  -->
+<!---   ------------------------ SECTION FLOTANT FAVORIS  ----------------------------  -->
     <div class="description-contact">
         {% if uid %}
-        <span class="favoris" onclick="btn_modal_message()"><a href=""><i class="fas fa-star"></i></i> Ajouter Au favoris</a></span>
+        <span id="btn-modal-favoris-add" class="favoris" data-id="{{idannonce}}" ><i class="fas fa-star"></i> Ajouter Au favoris</span>
+        <span style="display:none" id="btn-modal-favoris-del" class="favoris" data-id="{{idannonce}}" ><i class="fa fa-xmark"></i> Supprimer Au favoris</span>
         <span class="user-btn" onclick="btn_modal_contacter()"><div class="btn-contacter">Contact</div></span>
         {% else %}
-        <span id="btn-modal-message" onclick="btn_modal_message()" class="favoris"><a href=""><i class="fas fa-star"></i></i> Ajouter Au favoris</a></span>
+        <span  onclick="btn_modal_message()" class="favoris"><i class="fas fa-star"></i> Ajouter Au favoris</span>
         <span  id="btn-modal-message" onclick="btn_modal_message()" class="user-btn"><div class="btn-contacter">Contacter</div></span>
         {% endif %}
         
@@ -307,7 +308,7 @@
         <div class="element-titre">Avis sur le produit</div>
         <div class="note-produit">
             
-            <div class="note"><i class="fa fa-star"></i> {{avis.moyen}}</div>
+            <div class="note"><i class="fa fa-star"></i> {{avis.moyen|default:"?"}}</div>
             
             <div class="etoile">
                <!-- Progress bar green -->
@@ -316,7 +317,7 @@
                         Progress
                         <div class="progress-bar--inner" style="width: {{avis.pourcentage1}}%;"></div>
                         </div>
-                        <span class="progress-bar--counter">({{avis.1}}) {{avis.pourcentage1}}% </span>
+                        <span class="progress-bar--counter">({{avis.1|default:"?"}}) {{avis.pourcentage1|default:"?"}}% </span>
                     </div>
                     
                     <!-- Progress bar blue -->
@@ -325,7 +326,7 @@
                         Progress
                         <div class="progress-bar--inner" style="width: {{avis.pourcentage2}}%;"></div>
                         </div>
-                        <span class="progress-bar--counter">({{avis.2}}) {{avis.pourcentage2}}%</span>
+                        <span class="progress-bar--counter">({{avis.2|default:"?"}}) {{avis.pourcentage2|default:"?"}}%</span>
                     </div>
                     
                     <!-- Progress bar red -->
@@ -334,7 +335,7 @@
                         Progress
                         <div class="progress-bar--inner" style="width: {{avis.pourcentage3}}%;"></div>
                         </div>
-                        <span class="progress-bar--counter">({{avis.3}}) {{avis.pourcentage3}}%</span>
+                        <span class="progress-bar--counter">({{avis.3|default:"?"}}) {{avis.pourcentage3|default:"?"}}%</span>
                     </div>
                     
                     <!-- Progress bar yellow -->
@@ -343,7 +344,7 @@
                         Progress
                         <div class="progress-bar--inner" style="width:{{avis.pourcentage4}}%;"></div>
                         </div>
-                        <span class="progress-bar--counter">({{avis.4}}) {{avis.pourcentage4}}%</span>
+                        <span class="progress-bar--counter">({{avis.4|default:"?"}}) {{avis.pourcentage4|default:"?"}}%</span>
                     </div>
                     
                     <!-- Progress bar yellow -->
@@ -352,7 +353,7 @@
                         Progress
                         <div class="progress-bar--inner" style="width: {{avis.pourcentage5}}%;"></div>
                         </div>
-                        <span class="progress-bar--counter">({{avis.5}}) {{avis.pourcentage5}}%</span>
+                        <span class="progress-bar--counter">({{avis.5|default:"?"}}) {{avis.pourcentage5|default:"?"}}%</span>
                     </div>
             </div>
             <div class="commentaire-btn">
@@ -704,6 +705,30 @@
 </div>
 </div>
 
+<!---   ------------------------ MODAL MESSAGE AUTRE----------------------------  -->
+   
+<div class="modal-connexion" id="modal-messsage-systeme">
+    <!-- Modal content -->
+    <div  class="modal-content" style="height:160px;">
+        <div class="modal-header">
+            <span class="close close-message"> 
+                <span class="fermer"  onclick="close_message_systeme()">&times;</span>
+                <span class="text-search">Message</span>
+                <span></span>
+            </span>
+        </div>
+        <div class="modal-body"> 
+                <form id="evaluation-form"  method="post" data-uid="{{uid}}" >
+                    {% csrf_token %}
+                    <div style="text-align: center;cursor:pointer;">
+                        <p id="message_systeme" ></p>
+                        <span id="btn_message_fermer"  class="signaler"><strong>FERMER</strong> </span>
+                    </div>
+                    
+                </form>
+       </div>      
+</div>
+</div>
 
 
 {%endfor %}
@@ -712,6 +737,7 @@
 <script src="{% static 'description/js/description.js' %}"></script>
 <script src="{% static 'owl-carrousel/js/card.js' %}"></script>
 <script>
+
 // ---------- SIGNALER MODAL FORM ON CHANGE ---------------
  
 var select = document.querySelector('#signaler-form');
@@ -814,6 +840,22 @@ if (event.target == modalmessage) {
     modalmessage.style.display = "none";
 }
 }
+// ----------- MODAL MESSAGE SYSTEME -------------------
+     // Get the modal
+     var modalmessagesys = document.getElementById("modal-messsage-systeme");
+
+
+// Get the <span> element that closes the modal
+function close_message_systeme() {
+modalmessagesys.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+if (event.target == modalmessagesys) {
+    modalmessagesys.style.display = "none";
+}
+}
 /* ----------- MODAL EVALUATION -------------------*/
  /*Get the modal*/
  var modalevaluatiion = document.querySelector("#myModal");
@@ -858,7 +900,11 @@ data: {
     csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
 },
 success: function(data) {
-    alert(data);
+    document.getElementById("modal-messsage-systeme").style.display = "block"
+    document.getElementById("message_systeme").textContent = data
+    setInterval(function(){
+                document.getElementById("modal-messsage-systeme").style.display = "none"
+    },5000);
     modalevaluatiion.style.display = "none";
 },
 })
@@ -872,7 +918,7 @@ success: function(data) {
 var commentaireBox = document.getElementById('commentaire_promendite');
 var visible = 1
 var chargementBox = document.getElementById("chargement");
-idannonce = $("#idannonce").attr("data-idannonce");
+var idannonce = $("#idannonce").attr("data-idannonce");
 var loadBtn = document.getElementById("btn_load_more_avis");
 chargementBox.textContent="CHARGEMENT DES COMMENTAIRES EN COURS ... "   
 var get_commentaire = () => {
@@ -929,7 +975,7 @@ loadBtn.addEventListener('click', ()=>{
 
 // ----------- MODAL SiGNALER-------------------
     // Get the modal
-    var modalSignaler = document.getElementById("modal-signaler");
+var modalSignaler = document.getElementById("modal-signaler");
 
 // Get the button that opens the modal
 function btn_modal_signaler() {
@@ -961,48 +1007,98 @@ get_commentaire()
 // ------------ code commmaentaire ----------------------
 
 $(document).on('submit', '#avis-form', function(e){
-e.preventDefault();
-document.getElementById("message_load_avis").textContent = "ENVOI EN COURS ...";
-var star = document.querySelector('input[name="star"]:checked').id;
-// on recupere les donnes 
-titre_commentaire = $('#titre_commentaire').val()
-desc_commentaire = $('#desc_commentaire').val()
-uidannonce = $("#uidannonce").attr("data-uidannonce");
-idannonce = $("#idannonce").attr("data-idannonce");
-uid = $("#uid").attr("data-uid");
+        e.preventDefault();
+        document.getElementById("message_load_avis").textContent = "ENVOI EN COURS ...";
+        var star = document.querySelector('input[name="star"]:checked').id;
+        // on recupere les donnes 
+        titre_commentaire = $('#titre_commentaire').val()
+        desc_commentaire = $('#desc_commentaire').val()
+        uidannonce = $("#uidannonce").attr("data-uidannonce");
+        idannonce = $("#idannonce").attr("data-idannonce");
+        uid = $("#uid").attr("data-uid");
 
-// on test 
-console.log(star);
-console.log(titre_commentaire);
-console.log(desc_commentaire);
-console.log(uidannonce);
-console.log(idannonce);
-console.log(uid);
-$.ajax({
-type: 'POST',
-url: "{% url 'create_commentaire' %}",
-data: {
-    titre: titre_commentaire,
-    description: desc_commentaire,
-    star: star,
-    uidannonce: uidannonce,
-    idannonce: idannonce,
-    uid: uid,
-    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-},
-success: function(data) {
-    alert(data);
-    
-},
-})
-document.getElementById("message_load_avis").textContent = "ENVOI TERMINE..."; 
-setInterval(function(){
-    document.getElementById("message_load_avis").textContent = " "; 
-    modalAvis.style.display = "none";
-    get_commentaire()
+        // on test 
+        console.log(star);
+        console.log(titre_commentaire);
+        console.log(desc_commentaire);
+        console.log(uidannonce);
+        console.log(idannonce);
+        console.log(uid);
+        $.ajax({
+        type: 'POST',
+        url: "{% url 'create_commentaire' %}",
+        data: {
+            titre: titre_commentaire,
+            description: desc_commentaire,
+            star: star,
+            uidannonce: uidannonce,
+            idannonce: idannonce,
+            uid: uid,
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+        },
+        success: function(data) {
+            document.getElementById("modal-messsage-systeme").style.display = "block"
+            document.getElementById("message_systeme").textContent = data
+            setInterval(function(){
+                document.getElementById("modal-messsage-systeme").style.display = "none"
+            },5000);
+        },
+        })
+        document.getElementById("message_load_avis").textContent = "ENVOI TERMINE..."; 
+        setInterval(function(){
+            document.getElementById("message_load_avis").textContent = " "; 
+            modalAvis.style.display = "none";
+            get_commentaire()
 
-},2000)
-  
+        },5000)
+        
+});
+//----------- AJOUTE FAVORIS ------------------
+user_id = $("#uid").attr("data-uid");
+$('#btn-modal-favoris-add').click(function(){
+    //var catid;
+    //id = $(this).attr("data-id");
+    console.log(user_id)
+    $.ajax(
+    {   
+        type:"GET",
+        url: `/set_favoris/${idannonce}/${user_id}/`,
+        success: function( data ) 
+        {   
+            //$( '#like').remove();
+            //$( '#message' ).text(data);
+            $('#btn-modal-favoris-del').css("display","block");
+            $('#btn-modal-favoris-add').css("display","none");
+            
+            document.getElementById("modal-messsage-systeme").style.display = "block"
+            document.getElementById("message_systeme").textContent = data
+            setInterval(function(){
+                document.getElementById("modal-messsage-systeme").style.display = "none"
+            },5000);
+        }
+     })
+});
+$('#btn-modal-favoris-del').click(function(){
+    //var catid;
+    //id = $(this).attr("data-id");
+    console.log(user_id)
+    $.ajax(
+    {   
+        type:"GET",
+        url: `/get_favoris/${idannonce}/${user_id}/`,
+        success: function( data ) 
+        {   
+
+            $('#btn-modal-favoris-del').css("display","none");
+            $('#btn-modal-favoris-add').css("display","block");
+
+            document.getElementById("modal-messsage-systeme").style.display = "block"
+            document.getElementById("message_systeme").textContent = data
+            setInterval(function(){
+                document.getElementById("modal-messsage-systeme").style.display = "none"
+            },5000);
+        }
+     })
 });
 </script>
 {%endblock js %}

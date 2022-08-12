@@ -160,5 +160,18 @@ def commentaire(request,idannonce,num_avis):
         size = len(list_avis)
 
       return JsonResponse({'data':list_avis[lower:upper], 'size': size})
-
+def addfavoris(request,idannonce,uid):
+    print(idannonce)
+    print(uid)
+    geta = fonction.AfficherAnnonce()
+    data = geta.add_favoris_fonction(database,idannonce,uid)
+         
+    return HttpResponse(data) # Sending an success response
   
+def delfavoris(request,idannonce,uid):
+    print(idannonce)
+    print(uid)
+    geta = fonction.AfficherAnnonce()
+    data = geta.del_favoris_fonction(database,idannonce,uid)
+
+    return HttpResponse(data)

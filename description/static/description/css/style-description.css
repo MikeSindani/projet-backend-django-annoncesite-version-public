@@ -538,8 +538,9 @@ img {
     background-color: var(--orange);
   }
   .container-annonces-description .description-contact .favoris{
-    margin-left: 15px;
+    margin-left: 5px;
     margin-right: 15px;
+    cursor: pointer;
     
   }
 

@@ -7,4 +7,6 @@ urlpatterns = [
      path('create_commentaire/', views.createCommentaire, name="create_commentaire"),
      path('signaler_annonce/<int:idannonce>/<str:uidannonce>/<str:categorie>/', views.signaler, name="signaler"), 
      path('get_commentaire/<int:idannonce>/<int:num_avis>/', views.commentaire, name='getcommentaire'), 
+     path('get_favoris/<int:idannonce>/<str:uid>/', views.delfavoris, name='del_favoris'), 
+     path('set_favoris/<int:idannonce>/<str:uid>/', views.addfavoris, name='add_favoris'), 
 ]

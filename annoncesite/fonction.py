@@ -568,7 +568,7 @@ class AfficherAnnonce:
             count_total = 1
             database.child("avis").child("compteur").child(idannonce).update({star_str:count_star})
             database.child("avis").child("compteur").child(idannonce).update({str(count_total):count_total})
-            
+
             #------- moyen -----------------
             moyen_pondere = sub_fonction.calcul_moyen_pondere(database,idannonce)
             database.child("avis").child("compteur").child(idannonce).update({"moyen":moyen_pondere})
@@ -633,6 +633,13 @@ class AfficherAnnonce:
         else:
             return False
      
-
-      
+     def add_favoris_fonction(self,database,idannonce,uid):
+        database.child("utilisateurs").child(uid).child("favoris").child(str(idannonce)).set(idannonce)
+        return "A Ete Ajoute"    
+     def del_favoris_fonction(self,database,idannonce,uid):
+        database.child("utilisateurs").child(uid).child("favoris").child(str(idannonce)).remove()
+        return "A Ete Supprimer"
+     def get_favoris_fonction(sefl,database,idannonce,uid):
+        return database.child("utilisateurs").child(uid).child("favoris").child(str(idannonce)).get().val()
+        
 

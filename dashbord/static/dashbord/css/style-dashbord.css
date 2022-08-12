@@ -359,6 +359,7 @@ option {
           flex-direction: column;
   position: absolute;
   width: 100%;
+  top: 0px;
 }
 
 .modal-connexion .modal-content .modal-body form .isactived {
@@ -630,7 +631,7 @@ body {
 }
 
 .dash_control #modifier {
-  background-color: #000000;
+  background-color: #323257;
   height: 50%;
 }
 
@@ -821,7 +822,7 @@ body {
   }
   .card-long {
     width: 90vw !important;
-    height: 40vh !important;
+    height: 45vh !important;
   }
   .card-long .contenain .titre {
     padding: 0 2px 0 2px;
