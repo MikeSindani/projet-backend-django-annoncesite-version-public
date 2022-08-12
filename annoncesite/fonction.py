@@ -7,29 +7,7 @@ from django.core.paginator import Paginator, EmptyPage
 from django.core.cache import cache
 from datetime import datetime, timezone , date
 
-def calculdelai(delai):
-        print(delai)
-        datetoday = datetime.today()
-        print(datetoday)
-        if str(datetoday) <= delai:
-            dt_str = datetime.strptime(delai, '%Y-%m-%d')
-            dt_cal = dt_str - datetoday 
-            dt_cal = dt_cal.days
-            if dt_cal >= 1:
-                disponible = {"disponible": "Disponible pendant "+str(dt_cal)+" jours","color":"rgb(19, 196, 19)"}
-            else:
-                disponible = {"disponible": "Pour quelques heures","color":"tomato"}
-        else:
-            disponible = {"disponible": "Indisponible","color":"brown"}
-        return disponible 
-def calcul_moyen_pondere(database,idannonce):
-    a = database.child("avis").child("compteur").child(idannonce).child("1").get().val()
-    b = database.child("avis").child("compteur").child(idannonce).child("2").get().val()
-    c = database.child("avis").child("compteur").child(idannonce).child("3").get().val()
-    d = database.child("avis").child("compteur").child(idannonce).child("4").get().val()
-    e = database.child("avis").child("compteur").child(idannonce).child("5").get().val()
-    moyen_pondere = ((a*1)+(b*2)+(c*3)+(d*4)+(e*5))/15
-    return (moyen_pondere * 5)/1
+from annoncesite import sub_fonction
 
 
 class AfficherAnnonce:
@@ -171,7 +149,7 @@ class AfficherAnnonce:
                 # on cree un dictionnaire pour id
                 #----- recuperer le delai --------
                 delai =  database.child("utilisateurs").child(uid).child("annonces").child(i).child("delai").get().val()
-                disponible = calculdelai(delai)
+                disponible = sub_fonction.calculdelai(delai)
                 wor = (id_annonce,data_annonce,vues,disponible)
                 work.append(wor)
                 
@@ -294,7 +272,7 @@ class AfficherAnnonce:
                 id_annonce = {"id":i}
                 #----- recuperer le delai --------
                 delai =  database.child("categories").child(cat).child(i).child("delai").get().val()
-                disponible = calculdelai(delai)
+                disponible = sub_fonction.calculdelai(delai)
                 wor = (id_annonce,data_annnonce,data_user,vues,disponible)
                 work.append(wor)
 
@@ -332,7 +310,7 @@ class AfficherAnnonce:
 
                 #----- recuperer le delai --------
                 delai =  database.child("categories").child(cat).child(i).child("delai").get().val()
-                disponible = calculdelai(delai)
+                disponible = sub_fonction.calculdelai(delai)
 
 
                 wor = (id_annonce,data_annnonce,data_user,disponible)
@@ -347,12 +325,13 @@ class AfficherAnnonce:
      def description_fonction(seft, database,categorie,idannonce):
         work = []
         data_annnonce = database.child("categories").child(categorie).child(idannonce).get().val()
+        data_avis_annonce =  database.child("avis").child("compteur").child(idannonce).get().val()
         id_users = database.child("categories").child(categorie).child(idannonce).child("uid").get().val()
         data_user = database.child("utilisateurs").child(id_users).child("Informations").get().val()
          #----- recuperer le delai --------
         delai =  database.child("categories").child(categorie).child(idannonce).child("delai").get().val()
-        disponible = calculdelai(delai)
-        wor = (data_annnonce,data_user,disponible)
+        disponible = sub_fonction.calculdelai(delai)
+        wor = (data_annnonce,data_user,disponible,data_avis_annonce)
         work.append(wor)
          
         return work
@@ -569,23 +548,51 @@ class AfficherAnnonce:
         data = database.child("avis").child("compteur").child(idannonce).get().val()
         if data is None:
             # --------- initilisation ------------
-            dict_data_cpt = {"1":0,"2":0,"3":0,"4":0,"5":0,"moyen":0}
+            dict_data_cpt = {
+            "1":0,
+            "2":0,
+            "3":0,
+            "4":0,
+            "5":0,
+            "count_total":0,
+            "pourcentage1":0,
+            "pourcentage2":0,
+            "pourcentage3":0,
+            "pourcentage4":0,
+            "pourcentage5":0,
+            "moyen":0
+            }
             database.child("avis").child("compteur").child(idannonce).set(dict_data_cpt)
             # on met mettant dans la base
             count_star = 1 
+            count_total = 1
             database.child("avis").child("compteur").child(idannonce).update({star_str:count_star})
+            database.child("avis").child("compteur").child(idannonce).update({str(count_total):count_total})
+            
             #------- moyen -----------------
-            moyen_pondere = calcul_moyen_pondere(database,idannonce)
+            moyen_pondere = sub_fonction.calcul_moyen_pondere(database,idannonce)
             database.child("avis").child("compteur").child(idannonce).update({"moyen":moyen_pondere})
+
+            #-------- calcul pourcentage -----------------
+            sub_fonction.calcul_pourcentage_etoile_avis(database,idannonce)
+
             # ---- code qui met le commenataire -------- 
             database.child("avis").child("list_avis").child(idannonce).child(id_commentaire).set(data_avis)
         else: 
             count = database.child("avis").child("compteur").child(idannonce).child(star_str).get().val()
+            count_total = database.child("avis").child("compteur").child(idannonce).child("count_total").get().val()
             count_star = count + 1
+            count_total = count_total + 1
             database.child("avis").child("compteur").child(idannonce).update({star_str:count_star})
+            database.child("avis").child("compteur").child(idannonce).update({str(count_total):count_total})
+
             #------- moyen -----------------
-            moyen_pondere = calcul_moyen_pondere(database,idannonce)
+            moyen_pondere = sub_fonction.calcul_moyen_pondere(database,idannonce)
             database.child("avis").child("compteur").child(idannonce).update({"moyen":moyen_pondere})
+
+            #-------- calcul pourcentage -----------------
+            sub_fonction.calcul_pourcentage_etoile_avis(database,idannonce)
+
             # ---- code qui met le commenataire -------- 
             database.child("avis").child("list_avis").child(idannonce).child(id_commentaire).set(data_avis)
         return "Merci pour votre avis sur ce produit! "
@@ -625,7 +632,7 @@ class AfficherAnnonce:
             return work
         else:
             return False
-
+     
 
       
 

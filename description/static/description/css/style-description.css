@@ -2,6 +2,80 @@ a{
   text-decoration: none;
   color: #000000;
 }
+/*----- progression  -------- */ 
+.hidden {
+  visibility: hidden;
+  width: 0;
+}
+
+.progress-bar {
+  background: #f1f6fa;
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 1px #ccd6dd;
+  height: 10px;
+  overflow: hidden;
+  position: relative;
+  text-indent: 100%;
+  width: 300px;
+}
+@media (max-width:800px){
+  .progress-bar {
+    width: 200px;
+  }
+}
+@media (max-width:500px){
+  .progress-bar {
+    width: 150px;
+  }
+}
+.progress-bar--counter {
+  margin-left: 10px;
+  position: relative;
+  top: -1px;
+}
+.progress-bar--counter .hidden {
+  display: inline-block;
+}
+.progress-bar--wrap {
+  display: flex;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  margin: 10px 0;
+}
+.progress-bar--inner {
+  transition: all 0.5s ease-in-out;
+  border-radius: 10px;
+  height: 10px;
+  left: 0;
+  min-height: 10px;
+  position: absolute;
+  top: 0;
+}
+.progress-bar--green {
+  color: #6fc14b;
+}
+.progress-bar--green .progress-bar--inner {
+  background-color: #6fc14b;
+}
+.progress-bar--blue {
+  color: #068eda;
+}
+.progress-bar--blue .progress-bar--inner {
+  background-color: #068eda;
+}
+.progress-bar--red {
+  color: #fb797e;
+}
+.progress-bar--red .progress-bar--inner {
+  background-color: #fb797e;
+}
+.progress-bar--yellow {
+  color: #f7a81d;
+}
+.progress-bar--yellow .progress-bar--inner {
+  background-color: #f7a81d;
+}
 .not-visible{
     display: none;
 }
@@ -508,6 +582,7 @@ img {
   }
   .container-annonces-description .commentaire  .commentaire_promendite .commentaire_items .nom_star .star{
     color: rgb(170, 170, 170);
+    margin-left: 5px;
   }
 
   .container-annonces-description .commentaire  .commentaire_promendite .commentaire_items .titre{
@@ -517,7 +592,7 @@ img {
     font-weight: 700;
   }
   .container-annonces-description .commentaire  .commentaire_promendite .commentaire_items .date_publication{
-    color: #696969;
+    color: #b9b9b9;
     text-align: left;
     font-size: 10px;
     font-weight: 700;
@@ -554,7 +629,7 @@ img {
 
   .container-annonces-description .commentaire .note-produit .note{
       font-size: 70px;
-      opacity: 0.4;
+      color: #f7a81d;
       font-family: "Quicksand";
   }
   .container-annonces-description .control {
@@ -830,11 +905,15 @@ img {
   }
   
   @media screen and (max-width: 800px) {
+    #screen-comentaire {
+      height: 420px;
+      width: 90%;
+  }
     .container-annonces-description .control span a{
         font-size: 14px;
     }
     .modal-connexion .modal-content {
-      width: 80%;
+      width: 90%;
       height: 300px;
       /* Modal Header */
       /* Modal Body */
