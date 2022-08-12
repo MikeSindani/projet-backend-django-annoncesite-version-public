@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-fl512)hi^pu_0po(j3jn+_u^an$s7k$(r&*r^k8=q)8d%+7(1r'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1','apagrel-lushi.herokuapp.com']
 
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'dashbord',
     'description',
     'searchApp',
+    'error_page_app',
 ]
 
 MIDDLEWARE = [
