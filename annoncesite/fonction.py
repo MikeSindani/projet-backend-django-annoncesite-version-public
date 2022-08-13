@@ -146,11 +146,12 @@ class AfficherAnnonce:
                 id_annonce = database.child("utilisateurs").child(uid).child("annonces").child(i).get().key()
                 vues = database.child("Vues").child(i).get().val()
                 id_annonce = {"id":id_annonce} 
+                data_avis_annonce =  database.child("avis").child("compteur").child(i).get().val()
                 # on cree un dictionnaire pour id
                 #----- recuperer le delai --------
                 delai =  database.child("utilisateurs").child(uid).child("annonces").child(i).child("delai").get().val()
                 disponible = sub_fonction.calculdelai(delai)
-                wor = (id_annonce,data_annonce,vues,disponible)
+                wor = (id_annonce,data_annonce,vues,disponible,data_avis_annonce)
                 work.append(wor)
                 
             '''
@@ -266,6 +267,7 @@ class AfficherAnnonce:
             for i in lis_time:
                 data_annnonce = database.child("categories").child(cat).child(i).get().val()
                 vues = database.child("Vues").child(i).get().val()
+                data_avis_annonce =  database.child("avis").child("compteur").child(i).get().val()
                 id_users = database.child("categories").child(cat).child(i).child("uid").get().val()
                 data_user = database.child("utilisateurs").child(id_users).child("Informations").get().val()
                  
@@ -273,7 +275,7 @@ class AfficherAnnonce:
                 #----- recuperer le delai --------
                 delai =  database.child("categories").child(cat).child(i).child("delai").get().val()
                 disponible = sub_fonction.calculdelai(delai)
-                wor = (id_annonce,data_annnonce,data_user,vues,disponible)
+                wor = (id_annonce,data_annnonce,data_user,vues,disponible,data_avis_annonce)
                 work.append(wor)
 
                 # --- mettre ca dans un tuple ------
@@ -562,13 +564,15 @@ class AfficherAnnonce:
             "pourcentage5":0,
             "moyen":0
             }
+            
             database.child("avis").child("compteur").child(idannonce).set(dict_data_cpt)
+            
             # on met mettant dans la base
             count_star = 1 
             count_total = 1
             database.child("avis").child("compteur").child(idannonce).update({star_str:count_star})
-            database.child("avis").child("compteur").child(idannonce).update({str(count_total):count_total})
-
+            database.child("avis").child("compteur").child(idannonce).update({"count_total":count_total})
+            
             #------- moyen -----------------
             moyen_pondere = sub_fonction.calcul_moyen_pondere(database,idannonce)
             database.child("avis").child("compteur").child(idannonce).update({"moyen":moyen_pondere})
@@ -584,7 +588,7 @@ class AfficherAnnonce:
             count_star = count + 1
             count_total = count_total + 1
             database.child("avis").child("compteur").child(idannonce).update({star_str:count_star})
-            database.child("avis").child("compteur").child(idannonce).update({str(count_total):count_total})
+            database.child("avis").child("compteur").child(idannonce).update({"count_total":count_total})
 
             #------- moyen -----------------
             moyen_pondere = sub_fonction.calcul_moyen_pondere(database,idannonce)
@@ -641,5 +645,29 @@ class AfficherAnnonce:
         return "A Ete Supprimer"
      def get_favoris_fonction(sefl,database,idannonce,uid):
         return database.child("utilisateurs").child(uid).child("favoris").child(str(idannonce)).get().val()
-        
+     def get_favoris_user_fonction(sefl,database,uid):
+        time_favoris_data = database.child("utilisateurs").child(uid).child("favoris").shallow().get().val()
+        list_favoris_data = []
+        for i in time_favoris_data:
+            list_favoris_data.append(i)
+        list_favoris_data.sort(reverse=True)
+        print("************ list annonce favoris ****************")
+        print(list_favoris_data)
+
+        work = []
+            #print("test = " + str(lis_time))
+        for i in list_favoris_data:
+            data_annonce= database.child("annonces").child(i).get().val()
+            id_annonce = database.child("annonces").child(i).get().key()
+            vues = database.child("Vues").child(i).get().val()
+            data_avis_annonce =  database.child("avis").child("compteur").child(i).get().val()
+            id_annonce = {"id":id_annonce}
+                # on cree un dictionnaire pour id
+                #----- recuperer le delai --------
+            delai =  database.child("annonces").child(i).child("delai").get().val()
+            disponible = sub_fonction.calculdelai(delai)
+            wor = (id_annonce,data_annonce,vues,disponible,data_avis_annonce)
+            work.append(wor)
+
+        return work
 

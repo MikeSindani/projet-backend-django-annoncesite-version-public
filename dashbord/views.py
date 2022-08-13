@@ -6,7 +6,7 @@ import pyrebase
 from annoncesite import fonction
 from annoncesite import firebase
 from django.contrib import auth
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 
 
@@ -18,6 +18,7 @@ database = firebase_app.database()
 
 # Create your views here.
 def dashbord(request):
+    choice_variable = "Home"
      # intrcution pour recupere l'id dans la session
     try:
         geta = fonction.AfficherAnnonce()
@@ -37,7 +38,31 @@ def dashbord(request):
         page = False
 
     # rendu de la page 
-    return render(request, "dashbord/dashbord.html",{"com_list": page , "msge": message, "data": userdata,"uid":uid})
+    return render(request, "dashbord/dashbord.html",{"com_list": page , "msge": message, "data": userdata,"uid":uid,"v":choice_variable})
+
+def dashbord_favoris(request):
+    choice_variable = "Favoris"
+     # intrcution pour recupere l'id dans la session
+    try:
+        geta = fonction.AfficherAnnonce()
+        uid = geta.get_token(request, authe)
+        # intruction pour recuprer le nom d'utilisateur
+        userdata = geta.get_profil_data(database = database,uid = uid )
+        print("HUM = " + str(userdata))   
+    except:
+        message = "Veillez cree Un compte ou Connectez-Vous"
+        return render(request,"login/signUp.html", {"msg": message})
+    # notre objet class afficher 
+    com_list = geta.get_favoris_user_fonction(database,uid)
+    message=" "
+    try:
+        page = geta.pagination_fonction(request,com_list,number_page=5)
+    except:
+        page = False
+
+    # rendu de la page 
+    return render(request, "dashbord/dashbord.html",{"com_list": page , "msge": message, "data": userdata,"uid":uid,"v":choice_variable})
+
 
 def logout(request):
     auth.logout(request)
@@ -134,6 +159,22 @@ def create_annonce(request):
     ret = HttpResponseRedirect(url)
     return ret
 
+def supprimer_annonce_favoris(request,idannonce):
+    # intrcution pour recupere l'id dans la session
+    geta = fonction.AfficherAnnonce()
+    uid = geta.get_token(request, authe)
+    # instruction pour la suppression d'une annonce 
+    try:
+        database.child("utilisateurs").child(uid).child("favoris").child(idannonce).remove()
+    except:
+        message = "Annonce non publies"
+        url = reverse('dashbord')
+        ret = HttpResponseRedirect(url)
+        return ret
+
+    url = reverse('dashbord_favoris')
+    ret = HttpResponseRedirect(url)
+    return ret
 def supprimer_annonce(request,cat,idannonce):
     # intrcution pour recupere l'id dans la session
     geta = fonction.AfficherAnnonce()
@@ -157,3 +198,10 @@ def supprimer_annonce(request,cat,idannonce):
     url = reverse('dashbord')
     ret = HttpResponseRedirect(url)
     return ret
+def see_favoris(request,uid,fav):
+    print(uid)
+    # intrcution pour recupere l'id dans la session
+    geta = fonction.AfficherAnnonce()
+    data = geta.get_favoris_user_fonction(database,uid)
+
+    return JsonResponse({'data':data})

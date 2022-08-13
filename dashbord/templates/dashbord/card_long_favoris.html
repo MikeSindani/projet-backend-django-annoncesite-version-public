@@ -1,0 +1,59 @@
+<div class="card-long">
+    <div class="thumbnail" >
+        {% if work.imgurl1 %}
+          <img src="{{work.imgurl1}}" alt="" class="card-image" height="620" width="620">
+        {% elif work.imgurl2 %}
+          <img src="{{work.imgurl2}}" alt="" class="card-image" height="620" width="620">
+        {% elif work.imgurl3 %}
+          <img src="{{work.imgurl3}}" alt="" class="card-image" height="620" width="620">
+        {% else %}
+          <img src="https://images.pexels.com/photos/375510/pexels-photo-375510.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" class="card-image" height="620" width="620">
+        {%endif%}
+    </div>
+    <div class="contenain" onClick='window.location.href="/description/{{work.categorie}}/{{iden.id}}"' >
+        <h2 class="titre">{{work.titre|title|truncatechars:25 }} </h2>
+        <div class="prix">
+            {% if work.prix %} 
+                {{work.prix}}
+                {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}  
+                <span  style="font-size:10px;">/{{work.poids}}</span>
+            {% endif %}
+            
+            {% if work.prix_min %}
+              {{work.prix_min}} 
+              {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}
+            {% endif %}
+            {% if work.prix_min %}
+              - {{work.prix_max}}
+              {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}
+              <span  style="font-size:10px;">/{{work.poids}}</span>
+            {% endif %}
+
+            {% if work.autres %}
+              {{work.autres}}
+            {% endif %} 
+        </div>
+        <div class="subtitle" style="color:{{dispo.color}}">{{dispo.disponible|default:"Delai"}}</div>
+        <div class="element lieu">
+            <span class="vu"><i class="fa fa-map-marker" aria-hidden="true"></i> {{data.quartier|default:"???"}}</span>
+        </div>
+        <div class="description"> {{work.description|truncatechars:30}}</div>
+        <div class="commentaire"><strong> <i class="fas fa-comments"></i>  Commentaire: | {{avis.count_total|default:"0"}} |</strong></div>
+        <div class="element">
+            <span class="vu"><i class="fa fa-users" aria-hidden="true"></i> {{data.prenom}} {{data.nom}}</span>
+            <span class="vu"><i class="fas fa-clock "></i> {{work.date}}</span>
+            <span class="vu"><i class="fas fa-eye"></i> {{vues.count}}</span>  
+        </div> 
+    </div>
+    <div  class="more" style="display:none;">
+        <a href="/description/{{work.categorie}}/{{iden.id}}">Voir Plus</a>
+    </div>
+    <div class="dash_control">
+        <div  class="more" id="modifier">
+            <a href="/description/{{work.categorie}}/{{iden.id}}/"><i class="fas fa-eye"></i></a>
+        </div>
+        <div  class="more" id="supprimer">
+            <a href="/suppr_annonce_favoris/favoris/{{iden.id}}/"><i class="fa fa-trash"></i></a>
+        </div>
+    </div>     
+</div>

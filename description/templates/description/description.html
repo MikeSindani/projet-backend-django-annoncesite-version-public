@@ -150,8 +150,8 @@
         <div class="titre">{{dat.titre|title}}</div>
         <div class="disponibilite"style="color:{{dispo.color}}">{{dispo.disponible|default:"Delai"}}</div>
         <div class="stat">
-            <span class="vu"></span>
-            <span class="vu"><i class="fas fa-eye"></i> {{vues.count}}</span>
+            <span class="vu"><i class="fas fa-comments"></i> {{avis.count_total|default:"0"}}</span>
+            <span class="vu"><i class="fas fa-eye"></i> {{vues.count|default:"0"}}</span>
         </div>
     </div>
     <!---   ------------------------ SECTION EVALUATION ----------------------------  -->
@@ -430,7 +430,11 @@
     
     <div class="element contact">
         <div class="user-thumbails">
+            {% if user.imgurl %}
             <img src="{{user.imgurl}}" alt="{{user.prenom}}" class="user-img" height="80" width="80">
+            {% else %}
+
+            {% endif%}
         </div>
         <div class="user-name">
             <span class="name">{{user.prenom}} {{user.nom}}</span>
@@ -966,7 +970,7 @@ var get_commentaire = () => {
 
 loadBtn.addEventListener('click', ()=>{
     //spinnerBox.classList.remove('not-visible')
-    chargementBox.textContent="CHARGEMENT EN COURS ... " 
+    chargementBox.textContent="CHARGEMENT DES COMMENTAIRES EN COURS ... " 
     visible += 1
     get_commentaire()
 })
@@ -1037,6 +1041,7 @@ $(document).on('submit', '#avis-form', function(e){
             csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
         },
         success: function(data) {
+            // ON AFFICHE LA BOITE DE DIALOGE MESSAGE 
             document.getElementById("modal-messsage-systeme").style.display = "block"
             document.getElementById("message_systeme").textContent = data
             setInterval(function(){

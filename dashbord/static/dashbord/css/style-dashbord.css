@@ -508,8 +508,8 @@ option {
     top: 10px;  
   }
   .modal-connexion .modal-content {
-    width: 100%;
-    height: 450px;
+    width: 95%;
+    height: 580px !important;
     /* Modal Header */
     /* Modal Body */
   }
@@ -986,7 +986,6 @@ body .dash-contaneur .tablink {
 
 body .dash-contaneur .tabcontent {
   color: Black;
-  display: none;
   padding: 100px 20px;
   height: 100%;
 }

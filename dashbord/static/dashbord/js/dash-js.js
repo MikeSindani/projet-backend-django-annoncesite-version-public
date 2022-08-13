@@ -1,5 +1,88 @@
+// *********************** AJAX FAVORIS *********************************
+/*
+function get_favoris_user(variable){
+if(variable == "Home"){
+  console.log("fonctionner");
+  var vr = "favoris"
+  var Box = document.getElementById("favoris-containe")
+}
+  var uid = $("#uid").attr("data-uid"); 
+  
+  $.ajax({
+      type: 'GET',
+      url: `/get_favoris_user/${uid}/${vr}`,
+      success: function(response){
+          console.log(response)
+          var data = response.data
+          setTimeout(()=>{
+              
+              console.log(data)
+              
+              //const donnee = new Array(data);
+          
+              data.forEach(el=> {
+                  Box.innerHTML += `
+                  <div class="card-long">
+                  <div class="thumbnail" >
+                        <img src="https://images.pexels.com/photos/375510/pexels-photo-375510.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" class="card-image" height="620" width="620">
+                  </div>
+                  <div class="contenain" onClick='window.location.href="/description/{{work.categorie}}/{{iden.id}}"' >
+                      <h2 class="titre">${el.titre}</h2>
+                      <div class="prix">
+                          
+                      </div>
+                      <div class="subtitle" style="color:${el.delai.color}">${el.delai.disponible}</div>
+                      <div class="element lieu">
+                          <span class="vu"><i class="fa fa-map-marker" aria-hidden="true"></i> {{data.quartier|default:"???"}}</span>
+                      </div>
+                      <div class="description"> ${el.description}</div>
+                      <div class="commentaire"><strong>Commentaire: |50|</strong></div>
+                      <div class="element">
+                          <span class="vu"><i class="fa fa-users" aria-hidden="true"></i> {{data.prenom}} {{data.nom}}</span>
+                          <span class="vu"><i class="fas fa-clock "></i> ${el.date}</span>
+                          <span class="vu"><i class="fas fa-eye"></i> ${el.vues}</span>  
+                      </div> 
+                  </div>
+                  <div  class="more" style="display:none;">
+                      <a href="/description/{{work.categorie}}/{{iden.id}}">Voir Plus</a>
+                  </div>
+                  <div class="dash_control">
+                      <div  class="more" id="modifier">
+                          <a href="/description/{{work.categorie}}/{{iden.id}}/"><i class="fas fa-eye"></i></a>
+                      </div>
+                      <div  class="more" id="supprimer">
+                          <a href="/supprannonce/{{work.categorie}}/{{iden.id}}"><i class="fa fa-trash"></i></a>
+                      </div>
+                  </div>     
+              </div>   
+                  `
+              });
+              
+          }, 1000)
+          //chargementBox.textContent=""
+          console.log(response.size)
+          if (response.size === 0) {
+              //chargementBox.textContent = 'Pas de commentaire'
+          }
+          else if (response.size <= visible) {
+              //loadBtn.classList.add('not-visible')
+              //chargementBox.textContent = 'Il y a plus de commantaire...'
+          }
+      },
+      error: function(error){
+          console.log(error)
+      }
+  })
+     
+}*/
 
 
+
+
+
+// *********************** TAB *********************************
+
+/*
 var modal = document.querySelector(".modal");
 var overlay = document.querySelector(".overlay");
 var wrapper = document.querySelector(".wrapper");
@@ -23,6 +106,7 @@ function overlayFunction(event){
   button.classList.remove("button-modal-showing");
 };
 /* for tab fonctionement */ 
+/*
 function openPage(pageName,elmnt) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
@@ -35,64 +119,12 @@ function openPage(pageName,elmnt) {
     }
   document.getElementById(pageName).style.display = "block";
   elmnt.style.borderBottom = '4px solid black';
-}
+  //get_favoris_user(pageName);
+}*/
 
 // Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
+//document.getElementById("defaultOpen").click();
 
-// code for next page
-// get the number step 
-var item1 = document.querySelector(".item1");
-var item2 = document.querySelector(".item2");
-var item3 = document.querySelector(".item3");
-// get the div step button
-var part_info = document.querySelector(".part_info");
-var part_info_2 = document.querySelector(".part_info_2"); 
-var part_photo = document.querySelector(".part_photo"); 
-var modal_content = document.querySelector(".modal-content");
-
-var titre = document.getElementById("titre");
-var produit = document.getElementById("produit");
-// create function top change de step 
-function Suivant(a,height){
-    if(a == 1){
-      modal_content.style.height = height;
-     item1.classList.remove("isactived-item");
-      part_info.classList.remove("isactived");
-      item2.classList.add("isactived-item");
-      part_info_2.classList.add("isactived");
-    }
-    if(a == 2){
-      modal_content.style.height = height;
-     // item1.classList.add("isactived");
-      item2.classList.remove("isactived-item");
-      part_info_2.classList.remove("isactived");
-      item3.classList.add("isactived-item");
-      part_photo.classList.add("isactived");
-      document.getElementById("text-annonce").innerHTML="Ajouter 3 Photos upload et Appuyer sur Botton Envoyer";
-    }
-   
-    
-}
-function Precedent(a,height){
-    if(a == 2){
-      modal_content.style.height = height;
-      item2.classList.remove("isactived-item");
-      part_info_2.classList.remove("isactived");
-      item1.classList.add("isactived-item");
-      part_info.classList.add("isactived");
-    }
-    if(a == 3){
-     
-      modal_content.style.height = height;
-      item3.classList.remove("isactived-item");
-      part_photo.classList.remove("isactived");
-      item2.classList.add("isactived-item");
-      part_info_2.classList.add("isactived");
-      document.getElementById("text-annonce").innerHTML="Remplir les champs et appuyer sur suivant";
-     
-    }
-}
 /*
 function checkfrom(a){
 var titre = document.getElementById("titre");

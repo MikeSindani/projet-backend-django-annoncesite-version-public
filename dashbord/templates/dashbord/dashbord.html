@@ -200,91 +200,124 @@
 
         <div class="tab-container">
             <div class="tabButton">
-                <button class="tablink" onclick="openPage('Home', this)">VosFavoris</button>
-                <button class="tablink" onclick="openPage('News', this)" id="defaultOpen">VosAnnonces</button>
-                <button class="tablink" onclick="openPage('Contact', this)">VosAbonnement</button>
+                <button class="tablink" onClick='window.location.href="/dashbord/favoris/"' >VosFavoris</button>
+                <button class="tablink" onClick='window.location.href="/dashbord/"' >VosAnnonces</button>
+                <button class="tablink" onClick='window.location.href="/dashbord/Abonnement/"' >VosAbonnement</button>
             </div>
         </div>
+  {% if v == "Favoris"%}
+  <!---  ----------------------  TAB PARTIE FAVORIS -------------------------->  
         
         <div id="Home" class="tabcontent">
         <h1 class="text" >Vos Favoris</h1>
-        <p>Home is where the heart is..</p>
+        <p>Voici la liste de Vos favoris</p>
+        <div class="container-favoris">
+          <div class="conteneur-card">
+            {%if com_list %}
+              {%for iden,work,vues,dispo,avis in com_list %}
+                  {% include "dashbord/card_long_favoris.html" %}
+              {% endfor %}
+            {% else %}
+                <img src="{% static 'dashbord/img/undraw_Add_post_re_174w.png'%}" alt="add" width="250" height="250">
+                <h3 style="color:rgb(71, 71, 71) ;">Pas d'annonce Appuyer sur Ajouter Annonnce.</h3>
+            {% endif %}
+            <div class="pagination">
+                {% if com_list.has_previous %}
+                    <a href="{% url 'dashbord' %}?page={{com_list.previous_page_number}}" class="page prev"><i class="fas fa-arrow-left"></i> Precedent</a>
+                {% endif %}
+                {% if com_list.has_next %}
+                    <a href="{% url 'dashbord' %}?page={{com_list.next_page_number}}" class="page next">Suivant <i class="fas fa-arrow-right"></i></a>
+                {% endif%}
+            </div>
+               
+        
+            </div>
         </div>
+        </div>
+    {% endif%}  
+ <!---  ---------------------  TAB PARTIE ABONNNEMENT -------------------------->
+    {% if v == "Abonnement" %}
+        <div id="Contact" class="tabcontent">
+            <h1 class="text">Vos Abonnement</h1>
+            <p>Voici la liste des personnes qui vous suivez!</p>
+            <div class="conteneur-card">
+                
+                <div class="card-long">
+                    <div class="thumbnail">
+                        <img src="https://images.pexels.com/photos/457447/pexels-photo-457447.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="card-image">
+                    </div>
+                    <div class="contenain">
+                        <h2 class="titre">card </h2>
+                        <p class="subtitle">Disponible</p>
+                        <p class="description"> Lorem ipsum dolor sit amet 
+                            consectetur adipisicing elit. Nemo rem doloremque aspernatur 
+                            modi officiis impedit inventore fugit quidem a repudiandae 
+                            voluptatem reiciendis,
+                            magni accusantium necessitatibus illum cum atque, vero odit. 
+                        </p>
+                        <div class="element">
+                            <p class="vu"><i class="fa fa-users" aria-hidden="true"> Mike</i></p>
+                            <p class="vu"><i class="fas fa-clock    "></i> 2 minutes</p>
+                            <p class="vu"> <i class="fa fa-map-marker" aria-hidden="true"> kasumbalesa</i></p>  
+                        </div> 
+                    </div>
+                    <div  class="more">
+                        <a href="">Voir</a>
+                    </div>
+                    <div class="dash_control">
+                        <div  class="more" id="supprimer">
+                            <a href=""><i class="fa fa-trash"></i></a>
+                        </div>
+                    </div>     
+                </div>
 
-        <div id="News" class="tabcontent">
+                <div class="card-long">
+                    <div class="thumbnail">
+                        <img src="https://images.pexels.com/photos/457447/pexels-photo-457447.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="card-image">
+                    </div>
+                    <div class="contenain">
+                        <h2 class="titre">card </h2>
+                        <p class="subtitle">Disponible</p>
+                        <p class="description"> Lorem ipsum dolor sit amet 
+                            consectetur adipisicing elit. Nemo rem doloremque aspernatur 
+                            modi officiis impedit inventore fugit quidem a repudiandae 
+                            voluptatem reiciendis,
+                            magni accusantium necessitatibus illum cum atque, vero odit. 
+                        </p>
+                        <div class="element">
+                            <p class="vu"><i class="fa fa-users" aria-hidden="true"> Mike</i></p>
+                            <p class="vu"><i class="fas fa-clock    "></i> 2 minutes</p>
+                            <p class="vu"> <i class="fa fa-map-marker" aria-hidden="true"> kasumbalesa</i></p>  
+                        </div> 
+                    </div>
+                    <div  class="more">
+                        <a href="">Voir</a>
+                    </div>
+                    <div class="dash_control">
+                        <div  class="more" id="supprimer">
+                            <a href=""><i class="fa fa-trash"></i></a>
+                        </div>
+                    </div>     
+                </div>
+            </div>
+        </div>
+    {% endif%}
+    {% if v == "Home"%}
+    <!---  -------------------  TAB PARTIE ANNONCE -------------------------->
+    <div id="News" class="tabcontent" >
         <h1 class="text">Vos Annonces</h1>
          {%if uid %}
            <p>Voici la liste de Vos Annonces</p> 
          {% endif%}
         <div class="conteneur-card">
         {%if com_list %}
-        {%for iden,work,vues,dispo in com_list %}
-
-            <div class="card-long">
-                <div class="thumbnail" >
-                    {% if work.imgurl1 %}
-                       <img src="{{work.imgurl1}}" alt="" class="card-image" height="620" width="620">
-                    {% elif work.imgurl2 %}
-                       <img src="{{work.imgurl2}}" alt="" class="card-image" height="620" width="620">
-                    {% elif work.imgurl3 %}
-                       <img src="{{work.imgurl3}}" alt="" class="card-image" height="620" width="620">
-                    {% else %}
-                      <img src="https://images.pexels.com/photos/375510/pexels-photo-375510.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" class="card-image" height="620" width="620">
-                    {%endif%}
-                </div>
-                <div class="contenain" onClick='window.location.href="/description/{{work.categorie}}/{{iden.id}}"' >
-                    <h2 class="titre">{{work.titre|title|truncatechars:25 }} </h2>
-                    <div class="prix">
-                        {% if work.prix %} 
-                            {{work.prix}}
-                            {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}  
-                            <span  style="font-size:10px;">/{{work.poids}}</span>
-                        {% endif %}
-                        
-                        {% if work.prix_min %}
-                           {{work.prix_min}} 
-                           {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}
-                        {% endif %}
-                        {% if work.prix_min %}
-                          - {{work.prix_max}}
-                          {% if work.devise == "USD"%}${% elif work.devise == "CDF"%}Fc{% endif %}
-                          <span  style="font-size:10px;">/{{work.poids}}</span>
-                        {% endif %}
-
-                        {% if work.autres %}
-                           {{work.autres}}
-                        {% endif %} 
-                    </div>
-                    <div class="subtitle" style="color:{{dispo.color}}">{{dispo.disponible|default:"Delai"}}</div>
-                    <div class="element lieu">
-                        <span class="vu"><i class="fa fa-map-marker" aria-hidden="true"></i> {{data.quartier|default:"???"}}</span>
-                    </div>
-                    <div class="description"> {{work.description|truncatechars:30}}</div>
-                    <div class="commentaire"><strong>Commentaire: |50|</strong></div>
-                    <div class="element">
-                        <span class="vu"><i class="fa fa-users" aria-hidden="true"></i> {{data.prenom}} {{data.nom}}</span>
-                        <span class="vu"><i class="fas fa-clock "></i> {{work.date}}</span>
-                        <span class="vu"><i class="fas fa-eye"></i> {{vues.count}}</span>  
-                    </div> 
-                </div>
-                <div  class="more" style="display:none;">
-                    <a href="/description/{{work.categorie}}/{{iden.id}}">Voir Plus</a>
-                </div>
-                <div class="dash_control">
-                    <div  class="more" id="modifier">
-                        <a href="/description/{{work.categorie}}/{{iden.id}}/"><i class="fas fa-eye"></i></a>
-                    </div>
-                    <div  class="more" id="supprimer">
-                        <a href="/supprannonce/{{work.categorie}}/{{iden.id}}"><i class="fa fa-trash"></i></a>
-                    </div>
-                </div>     
-            </div>
-            
-             {% endfor %}
-             {% else %}
-                 <img src="{% static 'dashbord/img/undraw_Add_post_re_174w.png'%}" alt="add" width="250" height="250">
-                 <h3 style="color:rgb(71, 71, 71) ;">Pas d'annonce Appuyer sur Ajouter Annonnce.</h3>
-              {% endif %}
+          {%for iden,work,vues,dispo,avis in com_list %}
+               {% include "dashbord/card_long.html" %}
+          {% endfor %}
+        {% else %}
+            <img src="{% static 'dashbord/img/undraw_Add_post_re_174w.png'%}" alt="add" width="250" height="250">
+            <h3 style="color:rgb(71, 71, 71) ;">Pas d'annonce Appuyer sur Ajouter Annonnce.</h3>
+        {% endif %}
         <div class="pagination">
             {% if com_list.has_previous %}
                 <a href="{% url 'dashbord' %}?page={{com_list.previous_page_number}}" class="page prev"><i class="fas fa-arrow-left"></i> Precedent</a>
@@ -297,73 +330,8 @@
     
         </div>
         
-        </div>
-
-        <div id="Contact" class="tabcontent">
-        <h1 class="text">Vos Abonnement</h1>
-        <p>Get in touch, or swing by for a cup of coffee.</p>
-        <div class="conteneur-card">
-            
-            <div class="card-long">
-                <div class="thumbnail">
-                    <img src="https://images.pexels.com/photos/457447/pexels-photo-457447.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="card-image">
-                </div>
-                <div class="contenain">
-                    <h2 class="titre">card </h2>
-                    <p class="subtitle">Disponible</p>
-                    <p class="description"> Lorem ipsum dolor sit amet 
-                        consectetur adipisicing elit. Nemo rem doloremque aspernatur 
-                        modi officiis impedit inventore fugit quidem a repudiandae 
-                        voluptatem reiciendis,
-                        magni accusantium necessitatibus illum cum atque, vero odit. 
-                    </p>
-                    <div class="element">
-                        <p class="vu"><i class="fa fa-users" aria-hidden="true"> Mike</i></p>
-                        <p class="vu"><i class="fas fa-clock    "></i> 2 minutes</p>
-                        <p class="vu"> <i class="fa fa-map-marker" aria-hidden="true"> kasumbalesa</i></p>  
-                    </div> 
-                </div>
-                <div  class="more">
-                    <a href="">Voir</a>
-                </div>
-                <div class="dash_control">
-                    <div  class="more" id="supprimer">
-                        <a href=""><i class="fa fa-trash"></i></a>
-                    </div>
-                </div>     
-            </div>
-
-            <div class="card-long">
-                <div class="thumbnail">
-                    <img src="https://images.pexels.com/photos/457447/pexels-photo-457447.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="card-image">
-                </div>
-                <div class="contenain">
-                    <h2 class="titre">card </h2>
-                    <p class="subtitle">Disponible</p>
-                    <p class="description"> Lorem ipsum dolor sit amet 
-                        consectetur adipisicing elit. Nemo rem doloremque aspernatur 
-                        modi officiis impedit inventore fugit quidem a repudiandae 
-                        voluptatem reiciendis,
-                        magni accusantium necessitatibus illum cum atque, vero odit. 
-                    </p>
-                    <div class="element">
-                        <p class="vu"><i class="fa fa-users" aria-hidden="true"> Mike</i></p>
-                        <p class="vu"><i class="fas fa-clock    "></i> 2 minutes</p>
-                        <p class="vu"> <i class="fa fa-map-marker" aria-hidden="true"> kasumbalesa</i></p>  
-                    </div> 
-                </div>
-                <div  class="more">
-                    <a href="">Voir</a>
-                </div>
-                <div class="dash_control">
-                    <div  class="more" id="supprimer">
-                        <a href=""><i class="fa fa-trash"></i></a>
-                    </div>
-                </div>     
-            </div>
-        </div>
-        </div>
-
+    </div>
+    {% endif%}
     
     </div>
    
@@ -599,8 +567,63 @@
             reader.readAsDataURL(f);
           });
         }
+        
+ /* -------------- SUIVANT ET PRECEDENT ----------------*/
+// code for next page
+// get the number step 
+var item1 = document.querySelector(".item1");
+var item2 = document.querySelector(".item2");
+var item3 = document.querySelector(".item3");
+// get the div step button
+var part_info = document.querySelector(".part_info");
+var part_info_2 = document.querySelector(".part_info_2"); 
+var part_photo = document.querySelector(".part_photo"); 
+var modal_content = document.querySelector(".modal-content");
 
-       
+var titre = document.getElementById("titre");
+var produit = document.getElementById("produit");
+// create function top change de step 
+function Suivant(a,height){
+    if(a == 1){
+      modal_content.style.height = height;
+     item1.classList.remove("isactived-item");
+      part_info.classList.remove("isactived");
+      item2.classList.add("isactived-item");
+      part_info_2.classList.add("isactived");
+    }
+    if(a == 2){
+      modal_content.style.height = height;
+     // item1.classList.add("isactived");
+      item2.classList.remove("isactived-item");
+      part_info_2.classList.remove("isactived");
+      item3.classList.add("isactived-item");
+      part_photo.classList.add("isactived");
+      document.getElementById("text-annonce").innerHTML="Ajouter 3 Photos upload et Appuyer sur Botton Envoyer";
+    }
+   
+    
+}
+function Precedent(a,height){
+    if(a == 2){
+      modal_content.style.height = height;
+      item2.classList.remove("isactived-item");
+      part_info_2.classList.remove("isactived");
+      item1.classList.add("isactived-item");
+      part_info.classList.add("isactived");
+    }
+    if(a == 3){
+     
+      modal_content.style.height = height;
+      item3.classList.remove("isactived-item");
+      part_photo.classList.remove("isactived");
+      item2.classList.add("isactived-item");
+      part_info_2.classList.add("isactived");
+      document.getElementById("text-annonce").innerHTML="Remplir les champs et appuyer sur suivant";
+     
+    }
+}
+
+   
     
       </script>
     {%endblock js %}

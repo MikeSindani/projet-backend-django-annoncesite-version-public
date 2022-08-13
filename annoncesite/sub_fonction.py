@@ -6,17 +6,20 @@ def calculdelai(delai):
         print(delai)
         datetoday = datetime.today()
         print(datetoday)
-        if str(datetoday) <= delai:
-            dt_str = datetime.strptime(delai, '%Y-%m-%d')
-            dt_cal = dt_str - datetoday 
-            dt_cal = dt_cal.days
-            if dt_cal >= 1:
-                disponible = {"disponible": "Disponible pendant "+str(dt_cal)+" jours","color":"rgb(19, 196, 19)"}
-            else:
-                disponible = {"disponible": "Pour quelques heures","color":"tomato"}
+        if delai is None :
+            return {"disponible": "delai","color":"green"}
         else:
-            disponible = {"disponible": "Indisponible","color":"brown"}
-        return disponible 
+            if str(datetoday) <= delai:
+                dt_str = datetime.strptime(delai, '%Y-%m-%d')
+                dt_cal = dt_str - datetoday 
+                dt_cal = dt_cal.days
+                if dt_cal >= 1:
+                    disponible = {"disponible": "Disponible pendant "+str(dt_cal)+" jours","color":"rgb(19, 196, 19)"}
+                else:
+                    disponible = {"disponible": "Pour quelques heures","color":"tomato"}
+            else:
+                disponible = {"disponible": "Indisponible","color":"brown"}
+            return disponible 
 def calcul_moyen_pondere(database,idannonce):
     list_of_number = []
     for i in range(1,6):

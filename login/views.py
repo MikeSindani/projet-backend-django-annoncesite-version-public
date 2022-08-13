@@ -155,7 +155,7 @@ def welcome(request):
         print(uid) 
     except:
         uid = False
-        return render( request, "login/welcome.html", { "uid":uid} )
+        return render(request,"login/signIn.html",{"uid":uid})
 
     # intruction pour recuprer le nom d'utilisateur
     userdata = geta.get_profil_data(database = database,uid = uid )
