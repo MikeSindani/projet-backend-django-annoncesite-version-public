@@ -131,7 +131,8 @@
                                   <label for="choix">Choissez:</label>
                                   <select id="choix" name="autres">
                                     <option value="">Choississez Entre: </option>
-                                    <option value="Discuter">A Discuter</option>
+                                    <option value="A Discuter">A Discuter</option>
+                                    <option value="Inbox">Inbox</option>
                                     <option value="Contacter Moi">Contacter Moi</option>
                                   </select>
                                 </div>
@@ -165,23 +166,35 @@
                                         <span class="img_show" id="selectedBanner3"></span>
                                     </div>
                                     <div>
+                                      <label class="label">
                                         <input class="image_file" type="file" name="files[]" id="file1">
-                                        <button type="button" class="btn_uplaod" onclick="uploadimage(1)" >Envoyer La Photo 1</button>
+                                        <span><i class="fas fa-image"></i> Choisir l'image</span>
+                                      </label>
+                                        
+                                        <button type="button" class="btn_uplaod" onclick="uploadimage(1)" >Envoyer l'image</button>
                                     </div>
                                     <div>
-                                        <input class="image_file" type="file"  name="files[]" id="file2">
-                                        <button type="button"  class="btn_uplaod" onclick="uploadimage(2)">Envoyer La Photo 2</button> 
+                                        <label class="label">
+                                          <input class="image_file" type="file"  name="files[]" id="file2">
+                                          <span><i class="fas fa-image"></i> Choisir l'image</span>
+                                        </label>
+                                        
+                                        <button type="button"  class="btn_uplaod" onclick="uploadimage(2)">Envoyer l'image</button> 
                                     </div>
                                     <div>
-                                        <input class="image_file" type="file" name="files[]" id="file3">
-                                        <button type="button"  class="btn_uplaod" onclick="uploadimage(3)">Envoyer La Photo 3</button> 
+                                        <label class="label">
+                                          <input class="image_file" type="file" name="files[]" id="file3">
+                                          <span><i class="fas fa-image"></i> Choisir l'image</span>
+                                        </label>
+                                        
+                                        <button type="button"  class="btn_uplaod" onclick="uploadimage(3)">Envoyer l'image</button> 
                                     </div>
                                     <br>
                                     <input type="hidden" name="imgurl1" id="url1">
                                     <input type="hidden" name="imgurl2" id="url2">
                                     <input type="hidden" name="imgurl3" id="url3">
                                     <br>
-                                    <div class="wrap-circles" style="display:flex;justify-content:center">
+                                    <div class="wrap-circles" style="display:none;justify-content:center">
                                         <div class="circle per-100" >
                                             <div class="inner"></div>
                                         </div>
@@ -440,6 +453,7 @@
 
       function  progressBar(value){
       if(value == 0){
+        document.querySelector(".wrap-circles").style.display="flex";
         document.querySelector(".per-100").style.display="block";
         document.querySelector(".circle").style.backgroundImage="conic-gradient(tomato 0%, #000000 0)";
         document.querySelector(".inner").innerHTML="0";
@@ -474,6 +488,11 @@
         document.querySelector(".inner").innerHTML="100";
         document.querySelector(".per-100").style.display="none";
         document.getElementById("message").innerHTML = "Image Envoyer";
+        setInterval(function(){
+          document.getElementById("message").innerHTML = " ";
+          document.querySelector(".wrap-circles").style.display="none";
+        },3000)
+        
         /*
         document.querySelector(".per-75").style.display="none";
         document.querySelector(".per-75").style.display="none";
@@ -598,7 +617,7 @@ function Suivant(a,height){
       part_info_2.classList.remove("isactived");
       item3.classList.add("isactived-item");
       part_photo.classList.add("isactived");
-      document.getElementById("text-annonce").innerHTML="Ajouter 3 Photos upload et Appuyer sur Botton Envoyer";
+      document.getElementById("text-annonce").innerHTML="Ajouter 3 Photos Appuyer sur envoyer a chaque fois";
     }
    
     

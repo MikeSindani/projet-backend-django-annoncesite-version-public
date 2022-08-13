@@ -1,6 +1,37 @@
 /* IMPORTATION DES COMPOSANTS9*/
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&family=Quicksand:wght@300;500;600&display=swap');
+/* bouton image ---------*/
+label.label input[type="file"] {
+  position: absolute;
+  top: -1000px;
+}
+.label {
+  cursor: pointer;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  padding: 5px 15px;
+  margin: 5px;
+  background: #dddddd;
+  display: inline-block;
+}
+.label:hover {
+  background: val(--orange);
+}
+.label:active {
+  background: #9fa1a0;
+}
+.label:invalid+span {
+  color: #000000;
+}
+.label:valid+span {
+  color: #ffffff;
+}
+
+
+
+
+
 /*** <--- CIRCLE STYLES ---> ***/
 
 .pagination{
@@ -22,6 +53,7 @@
   transform: scale(0.9);
 }
 .wrap-circles{
+  
   padding: 10px;
 }
 .circle {
