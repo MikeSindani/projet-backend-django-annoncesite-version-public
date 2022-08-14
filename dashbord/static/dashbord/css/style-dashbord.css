@@ -1014,6 +1014,7 @@ body .dash-contaneur .tablink {
   width: 25%;
   -webkit-transition: all .5s;
   transition: all .5s;
+  background-color: transparent;
 }
 
 body .dash-contaneur .tabcontent {

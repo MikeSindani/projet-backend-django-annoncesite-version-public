@@ -130,6 +130,9 @@ class AfficherAnnonce:
         }
         # rendre les dictionnaires 
         return data
+
+
+# ------------ fontion pour prendre les annonces d'un utilisateurs dans le dashnbord -----------------
      def afficher_annonces_user_all(self, database,uid):
         timeshamps = database.child("utilisateurs").child(uid).child("annonces").shallow().get().val()
         if timeshamps :
@@ -323,7 +326,7 @@ class AfficherAnnonce:
             return work
         else:
             return False
-
+#----------- fonction pour recupere les donnes dans bd pour la page description -------------
      def description_fonction(seft, database,categorie,idannonce):
         work = []
         data_annnonce = database.child("categories").child(categorie).child(idannonce).get().val()
@@ -670,4 +673,14 @@ class AfficherAnnonce:
             work.append(wor)
 
         return work
-
+     #---------- fonction pour prendre les users pour home -----------
+     def get_data_information_user_to_homepage(self,database):
+        user_data_fournisseurs = database.child("fournisseurs").shallow().get().val()
+        list_fournisseurs = []
+        for i in user_data_fournisseurs:
+            list_fournisseurs.append(i)
+        work = []
+        for i in list_fournisseurs:
+            user_profil_data = database.child("utilisateurs").child(i).child("Informations").get().val()
+            work.append(user_profil_data)
+        return work

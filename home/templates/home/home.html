@@ -5,6 +5,8 @@
      <link rel="stylesheet" href="{% static 'home/css/slider-style.css' %}">
      <link rel="stylesheet" href="{% static 'home/css/style-rubrique.css' %}">
      <link rel="stylesheet" href="{% static 'owl-carrousel/css/card-style.css' %}">
+     <link rel="stylesheet" href="{% static 'base/card-patern.css' %}"/>
+     <link rel="stylesheet" href="{% static 'base/modal.css' %}"/>
      <style>
         .overlay{
             width: 100%;
@@ -638,136 +640,115 @@
 
 
 <!-- ************************************************** RECOMMADATION **********************************************************************--> 
+{%if list_users  %}
       <div class="recommandation" style="width:100%;background-color: rgb(210, 204, 223);">
           <div class="info">
-              <h1>Choix de nos equipes</h1>
+              <h1>Nos partenaires de choix</h1>
           </div>
           <div class=" owl-carousel owl-theme">
-              <div class="item">
-                          <!-- Post-->
-                      <div class="post-module">
-                          <!-- Thumbnail-->
-                          <div class="thumbnail">
-                          <img src="img/champ.jpg" height="500"/>
-                          </div>
-                          <!-- Post Content-->
-                          <div class="post-content">
-                          <div class="category">Elevage</div>
-                          <h1 class="title">Vente des Montons a panda makomemo venez </h1>
-                          <h2 class="sub_title">Disponible</h2>
-                          <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
-                          <div class="post-meta">
-                              <span class="timestamp"><i class="fas fa-clock"></i>6 mins ago</span>
-                              <span class="users"><i class="fas fa-users"></i>mike sindani</span>
-                              <span  class="lieu"><i class="fas fa-map-marker-alt"></i>kasumbalesha</span>
-                          </div>
-                          </div>
-                          <div class="post-click">
-                          <p>Voir Plus</p>
-                          </div>
-                      </div>
-              </div>
-              <div class="item">
-                  <div class="post-module">
-                      <!-- Thumbnail-->
-                      <div class="thumbnail">
-                      <img src="img/champ.jpg" height="500"/>
-                      </div>
-                      <!-- Post Content-->
-                      <div class="post-content">
-                      <div class="category">Elevage</div>
-                      <h1 class="title">Vente des Montons a panda makomemo venez </h1>
-                      <h2 class="sub_title">Disponible</h2>
-                      <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
-                      <div class="post-meta">
-                          <span class="timestamp"><i class="fas fa-clock"></i>6 mins ago</span>
-                          <span class="users"><i class="fas fa-users"></i>mike sindani</span>
-                          <span  class="lieu"><i class="fas fa-map-marker-alt"></i>kasumbalesha</span>
-                      </div>
-                      </div>
-                      <div class="post-click">
-                      <p>Voir Plus</p>
-                      </div>
-                  </div>
-              </div>
-              <div class="item">
-                  <div class="post-module">
-                      <!-- Thumbnail-->
-                      <div class="thumbnail">
-                      <img src="img/champ.jpg" height="500"/>
-                      </div>
-                      <!-- Post Content-->
-                      <div class="post-content">
-                      <div class="category">Elevage</div>
-                      <h1 class="title">Vente des Montons a panda makomemo venez </h1>
-                      <h2 class="sub_title">Disponible</h2>
-                      <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
-                      <div class="post-meta">
-                          <span class="timestamp"><i class="fas fa-clock"></i>6 mins ago</span>
-                          <span class="users"><i class="fas fa-users"></i>mike sindani</span>
-                          <span  class="lieu"><i class="fas fa-map-marker-alt"></i>kasumbalesha</span>
-                      </div>
-                      </div>
-                      <div class="post-click">
-                      <p>Voir Plus</p>
-                      </div>
-                  </div>
-              </div>
-              <div class="item">
-                  <div class="post-module">
-                      <!-- Thumbnail-->
-                      <div class="thumbnail">
-                      <img src="img/champ.jpg" height="500"/>
-                      </div>
-                      <!-- Post Content-->
-                      <div class="post-content">
-                      <div class="category">Elevage</div>
-                      <h1 class="title">Vente des Montons a panda makomemo venez </h1>
-                      <h2 class="sub_title">Disponible</h2>
-                      <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
-                      <div class="post-meta">
-                          <span class="timestamp"><i class="fas fa-clock"></i>6 mins ago</span>
-                          <span class="users"><i class="fas fa-users"></i>mike sindani</span>
-                          <span  class="lieu"><i class="fas fa-map-marker-alt"></i>kasumbalesha</span>
-                      </div>
-                      </div>
-                      <div class="post-click">
-                      <p>Voir Plus</p>
-                      </div>
-                  </div>
-              </div>
-              <div class="item">
-                  <div class="post-module">
-                      <!-- Thumbnail-->
-                      <div class="thumbnail">
-                      <img src="img/champ.jpg" height="500"/>
-                      </div>
-                      <!-- Post Content-->
-                      <div class="post-content">
-                      <div class="category">Elevage</div>
-                      <h1 class="title">Vente des Montons a panda makomemo venez </h1>
-                      <h2 class="sub_title">Disponible</h2>
-                      <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
-                      <div class="post-meta">
-                          <span class="timestamp"><i class="fas fa-clock"></i>6 mins ago</span>
-                          <span class="users"><i class="fas fa-users"></i>mike sindani</span>
-                          <span  class="lieu"><i class="fas fa-map-marker-alt"></i>kasumbalesha</span>
-                      </div>
-                      </div>
-                      <div class="post-click">
-                      <p>Voir Plus</p>
-                      </div>
-                  </div>   
+    {% for user in list_users %}
+            <!-------------------- CARD PATERNAIRE ----------------------- -->
+            <div class="card-partern">
+                <div class="card-body">
+                    <div class="item-card-partern thumbail-card">
+                        {% if user.imgurl %}
+                        <img class="img_profil_card_partern"  src="{{user.imgurl}}" alt="profil-image" width="120" height="120">
+                        {% else %}
+                        <img class="img_profil_card_partern" src="https://th.bing.com/th/id/OIP.iOnAhgLrg_AR5D6STimV3wAAAA?w=221&h=220&c=7&r=0&o=5&pid=1.7" alt="profil-image" width="120" height="120">
+                        {% endif%}
+                        
+                    </div>
+                    <div class="item-card-partern containe-card">
+                        <div  class="name"><strong>{{user.nom}} {{user.prenom}}</strong></div>
+                        <div class="entreprise"> {{user.entreprise|default:"Entreprise"}}</div>
+                        
+                        <div class="social">
+                            {% if uid %}
+                                <span><a href="https://t.me/{{user.telegram}}"><i class="fab fa-telegram-plane"></i></a></span>
+                                <span><a href="https://api.whatsapp.com/send?phone=243{{user.whatsapp}}"><i class="fab fa-whatsapp"></i></a></span>
+                            {% else  %}
+                                <span><a onclick="btn_modal_message()" ><i class="fab fa-telegram-plane"></i></a></span>
+                                <span><a onclick="btn_modal_message()" ><i class="fab fa-whatsapp"></i></a></span>
+                            {% endif %}
+                            
+                        </div>
+                        <div class="follow">
+                            {% if uid %}
+                               <span onclick="btn_modal_message()" class="btn-follow"><i class="fas fa-plus"></i> Suivre</span>
+                            {% else  %}
+                            <span onclick="btn_modal_message()" class="btn-follow"><i class="fas fa-plus"></i> Suivre</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="item-card-partern seemore-card">
+                       <p>Voir plus</p> 
+                    </div>
+                </div>
+            </div>
+   {% endfor %}
+         
+
+          
           </div>
           </div>
-      </div>
-     
+{% endif %}
+  </div> 
+<!---   ------------------------ MODAL MESSAGE ----------------------------  -->
+   
+<div class="modal-connexion" id="modal-messsage">
+    <!-- Modal content -->
+    <div  class="modal-content" style="height:250px;">
+        <div class="modal-header">
+            <span class="close close-message"> 
+                <span class="fermer"  onclick="close_message()">&times;</span>
+                <span class="text-search">Message</span>
+                <span></span>
+            </span>
+        </div>
+        <div class="modal-body">
+                
+                <form id="evaluation-form"  method="post" data-uid="{{uid}}" >
+                    {% csrf_token %}
+                    
+                    <p class="text" >Veillez vous connecter ou vous inscrire s'ils vous plait!</p>
+                    <div class="part-evaluation">
+                        <button onClick='window.location.href="/signIn/"'>Connexion</button>
+                        <button onClick='window.location.href="/signUp/"'>Inscription</button>
+                    </div>
+                </form>
+        </div>     
+    </div>
+</div>
+  
 </div>
     
 
 {%endblock Content %}
 {%block js %} 
     <script src="{% static 'owl-carrousel/js/card.js' %}"></script>
+    <script>
+        // ----------- MODAL MESSAGE-------------------
+     // Get the modal
+var modalmessage = document.getElementById("modal-messsage");
+
+// Get the button that opens the modal
+function btn_modal_message() {
+modalmessage.style.display = "block";
+}
+
+// Get the <span> element that closes the modal
+function close_message() {
+modalmessage.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+if (event.target == modalmessage) {
+    modalmessage.style.display = "none";
+}
+}
+    </script>
+
 {%endblock js %}
     
         

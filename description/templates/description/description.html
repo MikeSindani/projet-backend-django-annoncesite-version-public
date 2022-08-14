@@ -293,7 +293,7 @@
     <div class="description-contact">
         {% if uid %}
         <span id="btn-modal-favoris-add" class="favoris" data-id="{{idannonce}}" ><i class="fas fa-star"></i> Ajouter Au favoris</span>
-        <span style="display:none" id="btn-modal-favoris-del" class="favoris" data-id="{{idannonce}}" ><i class="fa fa-xmark"></i> Supprimer Au favoris</span>
+        <span style="display:none" id="btn-modal-favoris-del" class="favoris" data-id="{{idannonce}}" ><i class="fas fa-trash"></i> Supprimer Au favoris</span>
         <span class="user-btn" onclick="btn_modal_contacter()"><div class="btn-contacter">Contact</div></span>
         {% else %}
         <span  onclick="btn_modal_message()" class="favoris"><i class="fas fa-star"></i> Ajouter Au favoris</span>
@@ -442,7 +442,7 @@
         <div class="user-entreprise">
             <span class="name">{{user.entreprise}}</span>
         </div>
-        <div class="follow"><a href=""><i class="fas fa-bookmark"></i> Suivre</a></div>
+        <div class="follow"><a onclick="btn_modal_message()" ><i class="fas fa-bookmark"></i> Suivre</a></div>
     </div>
    
 
@@ -459,7 +459,7 @@
 <!---   -------------------------------------RECOMMANDER ----------------------------------  -->
     <div class="recommandation" style="width:100%;background-color: rgb(210, 204, 223);">
         <div class="info">
-            <h2 style="text-align: center;">Produits de Meme Categorie </h2>
+            <h2 style="text-align: center;">Meme Categorie </h2>
         </div>
         <div class=" owl-carousel owl-theme">
             {% for iden, work,user,dispo in list %}

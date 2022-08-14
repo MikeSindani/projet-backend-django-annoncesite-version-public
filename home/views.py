@@ -43,6 +43,17 @@ def home(request):
           choix_aleatoire_elevage = random.sample(list_element_categorie_elevage,nombre_choix_aleatoire)
     except:
         choix_aleatoire_elevage = False 
+    
+    try:
+        # fonction pour fournir un choix aleatoire 
+        list_data_profil_fourniseur = geta.get_data_information_user_to_homepage(database)
+        #le choix aleatoire pour le partie du site partie elevage
+        if len( list_data_profil_fourniseur) < nombre_choix_aleatoire :
+         choix_user_profils = random.sample( list_data_profil_fourniseur,len( list_data_profil_fourniseur))
+        else:
+          choix_user_profils = random.sample( list_data_profil_fourniseur,nombre_choix_aleatoire)
+    except:
+        choix_user_profils = False 
 
         
     try:
@@ -51,7 +62,7 @@ def home(request):
         uid = geta.get_token(request, authe)   
     except:
         uid = False
-        return render(request,"home/home.html",{"uid":uid,"list_elevage":choix_aleatoire_elevage,"list_agriculture":choix_aleatoire_agriculture})
+        return render(request,"home/home.html",{"uid":uid,"list_elevage":choix_aleatoire_elevage,"list_agriculture":choix_aleatoire_agriculture,"list_users":choix_user_profils})
 
     return render(request,"home/home.html",{"uid":uid,"list_elevage":choix_aleatoire_elevage,"list_agriculture":choix_aleatoire_agriculture}) 
 

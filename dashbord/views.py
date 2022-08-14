@@ -137,6 +137,7 @@ def create_annonce(request):
     #put data in the firedata base
     try:
         database.child("annonces").child(id_annonce).set(data)
+        database.child("fournisseurs").child(uid).set(uid)
         database.child("utilisateurs").child(uid).child("annonces").child(id_annonce).set(data)
         if cat == "agriculture":
            database.child("categories").child(cat).child(id_annonce).set(data)
