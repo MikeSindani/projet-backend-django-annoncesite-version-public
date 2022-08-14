@@ -64,6 +64,6 @@ def home(request):
         uid = False
         return render(request,"home/home.html",{"uid":uid,"list_elevage":choix_aleatoire_elevage,"list_agriculture":choix_aleatoire_agriculture,"list_users":choix_user_profils})
 
-    return render(request,"home/home.html",{"uid":uid,"list_elevage":choix_aleatoire_elevage,"list_agriculture":choix_aleatoire_agriculture}) 
+    return render(request,"home/home.html",{"uid":uid,"list_elevage":choix_aleatoire_elevage,"list_agriculture":choix_aleatoire_agriculture,"list_users":choix_user_profils})
 
 

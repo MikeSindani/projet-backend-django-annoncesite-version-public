@@ -397,7 +397,12 @@ class AfficherAnnonce:
                 id_users = database.child("annonces").child(i).child("uid").get().val()
                 data_user = database.child("utilisateurs").child(id_users).child("Informations").get().val()
                 id_annonce = {"id":i}
-                wor = (id_annonce,data_annnonce,data_user,vues)
+                #----------- recupere les avis ---------------
+                data_avis_annonce =  database.child("avis").child("compteur").child(i).get().val()
+                # ------- affiche le delai ------------
+                delai =  database.child("annonces").child(i).child("delai").get().val()
+                disponible = sub_fonction.calculdelai(delai)
+                wor = (id_annonce,data_annnonce,data_user,vues,disponible,data_avis_annonce)
                 work.append(wor)
             #print("👌😁😁 " + str(work))
             #print(type(work))
