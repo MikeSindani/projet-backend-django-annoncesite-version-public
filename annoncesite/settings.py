@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'description',
     'searchApp',
     'error_page_app',
+    'space_member_app',
 ]
 
 MIDDLEWARE = [

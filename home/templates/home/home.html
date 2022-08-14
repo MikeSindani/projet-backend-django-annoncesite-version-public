@@ -646,10 +646,10 @@
               <h1>Nos partenaires de choix</h1>
           </div>
           <div class=" owl-carousel owl-theme">
-    {% for user in list_users %}
+    {% for user,url in list_users %}
             <!-------------------- CARD PATERNAIRE ----------------------- -->
             <div class="card-partern">
-                <div class="card-body">
+                <div class="card-body" onClick='window.location.href="/espacemembre/{{url.uidf}}/"'>
                     <div class="item-card-partern thumbail-card">
                         {% if user.imgurl %}
                         <img class="img_profil_card_partern"  src="{{user.imgurl}}" alt="profil-image" width="120" height="120">
@@ -659,7 +659,7 @@
                         
                     </div>
                     <div class="item-card-partern containe-card">
-                        <div  class="name"><strong> {{user.nom}} {{user.prenom}} </strong></div>
+                        <div  class="name"><strong> {{user.nom|default:"Nom"}} {{user.prenom|default:"Prenom"}} </strong></div>
                         <div class="entreprise"> {{user.entreprise|default:"Entreprise"}}</div>
                         
                         <div class="social">
@@ -684,7 +684,7 @@
                         </div>
                     </div>
                     <div class="item-card-partern seemore-card">
-                       <p>Voir plus</p> 
+                       <p onClick='window.location.href="/espacemembre/{{url.uidf}}/"' >Voir plus</p> 
                     </div>
                 </div>
             </div>
@@ -709,16 +709,12 @@
             </span>
         </div>
         <div class="modal-body">
-                
-                <form id="evaluation-form"  method="post" data-uid="{{uid}}" >
-                    {% csrf_token %}
-                    
+        
                     <p class="text" >Veillez vous connecter ou vous inscrire s'ils vous plait!</p>
                     <div class="part-evaluation">
                         <button onClick='window.location.href="/signIn/"'>Connexion</button>
                         <button onClick='window.location.href="/signUp/"'>Inscription</button>
-                    </div>
-                </form>
+                    </div> 
         </div>     
     </div>
 </div>

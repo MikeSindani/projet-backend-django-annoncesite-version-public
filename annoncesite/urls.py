@@ -13,6 +13,7 @@ urlpatterns = [
     path('',include('dashbord.urls')),
     path('',include('description.urls')),
     path('',include('searchApp.urls')),
+    path('',include('space_member_app.urls')),  
     
 ]
 

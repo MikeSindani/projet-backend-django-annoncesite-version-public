@@ -687,5 +687,49 @@ class AfficherAnnonce:
         work = []
         for i in list_fournisseurs:
             user_profil_data = database.child("utilisateurs").child(i).child("Informations").get().val()
-            work.append(user_profil_data)
+            list_uidf = {"uidf":i}
+            tupl = (user_profil_data,list_uidf)
+            work.append(tupl)
         return work
+     def get_data_space_menber_categorie(self,database,categorie,user_id_fournisseur):
+        uid = user_id_fournisseur
+        cat = categorie
+        timeshamps = database.child("utilisateurs").child(uid).child("categories").child(cat).shallow().get().val()
+        
+        if timeshamps :
+            lis_time = []
+            for i in timeshamps:
+                lis_time.append(i)
+
+            lis_time.sort(reverse=True)
+            work = []
+            #print("test = " + str(lis_time))
+
+            for i in lis_time:
+                data_annonce= database.child("utilisateurs").child(uid).child("categories").child(cat).child(i).get().val()
+                id_annonce = database.child("utilisateurs").child(uid).child("categories").child(cat).child(i).get().key()
+                id_annonce = {"id":id_annonce} 
+                
+                # on cree un dictionnaire pour id
+                #----- recuperer le delai --------
+                delai =  database.child("utilisateurs").child(uid).child("annonces").child(i).child("delai").get().val()
+                disponible = sub_fonction.calculdelai(delai)
+                wor = (id_annonce,data_annonce,disponible)
+                work.append(wor)
+                
+            '''
+            d = database.child("categories").order_by_child("elevage").limit_to_first(2).get()
+            print(d)
+            for i in lis_time:
+                i = float(i)
+                dat = datetime.datetime.fromtimestamp(i).strftime('%H:%M: %d-%m-%Y')
+                data.append(dat)
+            print(data)'''
+            
+            #com_list = zip(lis_time, work)
+
+            return work
+        else:
+             return False
+
+     
