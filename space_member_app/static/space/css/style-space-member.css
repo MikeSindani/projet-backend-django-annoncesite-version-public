@@ -14,7 +14,7 @@ a{
     display: grid;
     -ms-grid-rows: 400px 600px;
         grid-template-rows: 400px auto;
-        grid-template-columns: 200%;
+        grid-template-columns: 100%;
     row-gap: 15px;
     margin: 20px 0;
     

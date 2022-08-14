@@ -26,7 +26,7 @@
    {% endif %}
 {%endblock Connexion %}
 {% block Content %}
-<div>
+
 
 
 <div class="container_space_page">
@@ -583,36 +583,35 @@
 </div>
 
 
-</div> 
+    </div> 
+
 <!---   ------------------------ MODAL MESSAGE ----------------------------  -->
 
 <div class="modal-connexion" id="modal-messsage">
-<!-- Modal content -->
-<div  class="modal-content" style="height:250px;">
-  <div class="modal-header">
-      <span class="close close-message"> 
-          <span class="fermer"  onclick="close_message()">&times;</span>
-          <span class="text-search">Message</span>
-          <span></span>
-      </span>
-  </div>
-  <div class="modal-body">
-          
-              <p class="text" >Veillez vous connecter ou vous inscrire s'ils vous plait!</p>
-              <div class="part-evaluation">
-                  <button onClick='window.location.href="{% url 'signIn' %}"'>Connexion</button>
-                  <button onClick='window.location.href="{% url 'signUp' %}"'>Inscription</button>
-              </div>
-  </div>     
-</div>
-</div>
-
+    <!-- Modal content -->
+    <div  class="modal-content" style="height:250px;">
+      <div class="modal-header">
+          <span class="close close-message"> 
+              <span class="fermer"  onclick="close_message()">&times;</span>
+              <span class="text-search">Message</span>
+              <span></span>
+          </span>
+      </div>
+      <div class="modal-body">
+              
+                  <p class="text" >Veillez vous connecter ou vous inscrire s'ils vous plait!</p>
+                  <div class="part-evaluation">
+                      <button onClick='window.location.href="{% url 'signIn' %}"'>Connexion</button>
+                      <button onClick='window.location.href="{% url 'signUp' %}"'>Inscription</button>
+                  </div>
+      </div>     
+    </div>
 </div>
 
 
 </div>
-</div>
-</div>
+
+
 {% endblock Content %}
 {%block js %} 
     <script src="{% static 'owl-carrousel/js/card.js' %}"></script>
