@@ -31,8 +31,12 @@ def description(request,cat,idannonce):
     nombre_de_vues = geta.nombres_des_vus_fonction(database=database,idannonce=idannonce)
     #text de la mise ne cache de element sur le serveur 
     
+  # ------------- evaluation un produteur ---------------------------
     evalua = geta.get_evaluation(database,idannonce,cat)
-    evalua = int(evalua)
+    if evalua is None:
+      evalua = 100
+    else:
+      evalua = int(evalua)
 
 
   # -------------- siganler une annonce ---------------------
@@ -42,6 +46,8 @@ def description(request,cat,idannonce):
     else:
        message = False
 
+
+    favoris = False 
     try:
       # intrcution pour recupere l'id dans la session
       uid = geta.get_token(request, authe) 
@@ -55,12 +61,21 @@ def description(request,cat,idannonce):
       "evaluation":evalua,
       "idannonce":idannonce,
       "categorie":cat,
-      "msg":message})
+      "msg":message,
+      "favoris": favoris
+      })
     print(data)
     cache.set('my_key', 30 , 30000000)
 
 
-    return render(request,"description/description.html", {"uid":uid,
+    favoris = geta.get_favoris_fonction(database,idannonce,uid)
+    if favoris is None:
+      favoris = False 
+    else:
+      favoris = True
+    
+    return render(request,"description/description.html",
+     {"uid":uid,
       "data":data,
       "list":list,
       "vues":nombre_de_vues,
@@ -68,7 +83,9 @@ def description(request,cat,idannonce):
       "evaluation":evalua,
       "idannonce":idannonce,
       "categorie":cat,
-      "msg":message})
+      "msg":message,
+      "favoris": favoris
+      })
 
 def evaluation(request):
   if request.method  =='POST':
@@ -108,7 +125,7 @@ def signaler(request,idannonce,uidannonce,categorie):
       </ul> 
       '''
       form_email = 'mbac3info@gmail.com'
-      to_email = ['mikems@live.fr', 'mikesindani@gmail.com']
+      to_email = ['mikesindani@gmail.com']
 
       #-------------- envoi email -------------------
       try:
@@ -175,3 +192,10 @@ def delfavoris(request,idannonce,uid):
     data = geta.del_favoris_fonction(database,idannonce,uid)
 
     return HttpResponse(data)
+def add_follow(request,idannonce,uid):
+  print(idannonce)
+  print(uid)
+  geta = fonction.AfficherAnnonce()
+  data = geta.add_follow_fonction(database,idannonce,uid)
+
+  return HttpResponse(data)

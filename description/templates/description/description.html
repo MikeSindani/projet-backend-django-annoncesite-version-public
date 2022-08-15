@@ -158,7 +158,7 @@
     <div class="element evaluation">
         <div class="element-titre">Evaluation du producteur</div>
         <div class="element-center">
-            {%if evaluation <= 50%}
+            {% if evaluation <= 40 %}
             <div class="evaluation-nombre">          
                 <div class="progressbar">
                     <div class="wrap-circles">
@@ -191,8 +191,7 @@
                 {% else %}
                 <div class="evaluation-btn" id="btn-modal-message" onclick="btn_modal_message()" >Evaluer</div> 
                 {% endif %}
-                
-                
+                        
             </div>     
         </div>     
     </div>
@@ -292,8 +291,13 @@
 <!---   ------------------------ SECTION FLOTANT FAVORIS  ----------------------------  -->
     <div class="description-contact">
         {% if uid %}
-        <span id="btn-modal-favoris-add" class="favoris" data-id="{{idannonce}}" ><i class="fas fa-star"></i> Ajouter Au favoris</span>
-        <span style="display:none" id="btn-modal-favoris-del" class="favoris" data-id="{{idannonce}}" ><i class="fas fa-trash"></i> Supprimer Au favoris</span>
+            {% if favoris %}
+            <span  id="btn-modal-favoris-del" class="favoris" data-id="{{idannonce}}" ><i class="fas fa-trash"></i> Supprimer Au favoris</span>
+            <span style="display:none" id="btn-modal-favoris-add" class="favoris" data-id="{{idannonce}}" ><i class="fas fa-star"></i> Ajouter Au favoris</span>
+            {% else %}
+            <span style="display:none" id="btn-modal-favoris-del" class="favoris" data-id="{{idannonce}}" ><i class="fas fa-trash"></i> Supprimer Au favoris</span>
+            <span  id="btn-modal-favoris-add" class="favoris" data-id="{{idannonce}}" ><i class="fas fa-star"></i> Ajouter Au favoris</span>
+            {% endif %}
         <span class="user-btn" onclick="btn_modal_contacter()"><div class="btn-contacter">Contact</div></span>
         {% else %}
         <span  onclick="btn_modal_message()" class="favoris"><i class="fas fa-star"></i> Ajouter Au favoris</span>
@@ -426,23 +430,30 @@
     </div>
     </div>
 
- <!---   ----------------- SECTION SUIVRE et INFO PERSONNE --------------------  -->
+ <!---   ----------------- SECTION SUIVRE et FOURNISSEUR --------------------  -->
     
-    <div class="element contact">
-        <div class="user-thumbails">
+    <div class="element contact" >
+        <div style="cursor:pointer;" class="user-thumbails" onClick='window.location.href="/espacemembre/{{dat.uid}}/"'>
             {% if user.imgurl %}
             <img src="{{user.imgurl}}" alt="{{user.prenom}}" class="user-img" height="80" width="80">
             {% else %}
-
+            <img class="user-img" src="https://th.bing.com/th/id/OIP.iOnAhgLrg_AR5D6STimV3wAAAA?w=221&h=220&c=7&r=0&o=5&pid=1.7" width="80" height="80" alt="">
             {% endif%}
         </div>
         <div class="user-name">
-            <span class="name">{{user.prenom}} {{user.nom}}</span>
+            <span class="name">{{user.prenom|default:"Prenom"}} {{user.nom |default:"Nom"}}</span>
         </div>
         <div class="user-entreprise">
-            <span class="name">{{user.entreprise}}</span>
+            <span class="name">{{user.entreprise|default:"Entreprise"|title}} </span>
         </div>
-        <div class="follow"><a onclick="btn_modal_message()" ><i class="fas fa-bookmark"></i> Suivre</a></div>
+       
+        {% if uid %}
+        
+        <div style="display:none;" id="btn-modal-follow-del" class="follow"><p><i class="fas fa-trash"></i>  Ne plus Suivre</p></div>
+        <div id="btn-modal-follow-add" class="follow"><p><i class="fas fa-bookmark"></i> Suivre</p></div>
+        {% else %}
+        <div  class="follow"><p onclick="btn_modal_message()" ><i class="fas fa-bookmark"></i> Suivre</p></div>
+        {% endif %}
     </div>
    
 
@@ -882,7 +893,7 @@ if (event.target == modalevaluatiion) {
 }
 }
 
-// ------------------- Ajax -------------------------------
+// ------------------- Ajax pour evaluation -------------------------------
 $(document).on('submit', '#evaluation-form', function(e){
 e.preventDefault();
 var evaluation = document.querySelector('input[name="evaluation"]:checked').id;
@@ -910,6 +921,8 @@ success: function(data) {
                 document.getElementById("modal-messsage-systeme").style.display = "none"
     },5000);
     modalevaluatiion.style.display = "none";
+    window.location.reload();
+ 
 },
 })
    
@@ -1008,7 +1021,7 @@ get_commentaire()
 
 
 
-// ------------ code commmaentaire ----------------------
+// ------------ code ajouter commmaentaire ----------------------
 
 $(document).on('submit', '#avis-form', function(e){
         e.preventDefault();
@@ -1047,6 +1060,7 @@ $(document).on('submit', '#avis-form', function(e){
             setInterval(function(){
                 document.getElementById("modal-messsage-systeme").style.display = "none"
             },5000);
+            window.location.reload();
         },
         })
         document.getElementById("message_load_avis").textContent = "ENVOI TERMINE..."; 
@@ -1083,7 +1097,8 @@ $('#btn-modal-favoris-add').click(function(){
         }
      })
 });
-$('#btn-modal-favoris-del').click(function(){
+
+  $('#btn-modal-favoris-del').click(function(){
     //var catid;
     //id = $(this).attr("data-id");
     console.log(user_id)
@@ -1102,6 +1117,33 @@ $('#btn-modal-favoris-del').click(function(){
             setInterval(function(){
                 document.getElementById("modal-messsage-systeme").style.display = "none"
             },5000);
+
+        }
+     })
+});
+// ------------- code pour le botton add follow ---------------------------
+$('#btn-modal-follow-add').click(function(){
+    //var catid;
+    //id = $(this).attr("data-id");
+    console.log(user_id)
+    $.ajax(
+    {   
+        type:"GET",
+        url: `/add_follow/${idannonce}/${user_id}/`,
+        success: function( data ) 
+        {   
+
+            $('#btn-modal-follow-del').css("display","block");
+            $('#btn-modal-follow-add').css("display","none");
+
+            document.getElementById("modal-messsage-systeme").style.display = "block"
+            document.getElementById("message_systeme").textContent = data
+            setInterval(function(){
+                document.getElementById("modal-messsage-systeme").style.display = "none"
+            },5000);
+            
+
+
         }
      })
 });

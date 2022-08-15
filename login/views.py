@@ -94,6 +94,7 @@ def postsignup(request):
             "uid":uid
         }
     database.child("utilisateurs").child(uid).child("Informations").set(data)
+
     
     # intruction pour recuprer le nom d'utilisateur
     geta = fonction.AfficherAnnonce()

@@ -63,6 +63,34 @@ def dashbord_favoris(request):
     # rendu de la page 
     return render(request, "dashbord/dashbord.html",{"com_list": page , "msge": message, "data": userdata,"uid":uid,"v":choice_variable})
 
+def dashbord_follow(request):
+    choice_variable = "follow"
+
+     # intrcution pour recupere l'id dans la session
+    try:
+        geta = fonction.AfficherAnnonce()
+        uid = geta.get_token(request, authe)
+        # intruction pour recuprer le nom d'utilisateur
+        userdata = geta.get_profil_data(database = database,uid = uid )
+        print("HUM = " + str(userdata))   
+    except:
+        message = "Veillez cree Un compte ou Connectez-Vous"
+        return render(request,"login/signUp.html", {"msg": message})
+
+
+    # notre objet class afficher 
+    com_list = geta.get_favoris_user_fonction(database,uid)
+    message=" "
+    try:
+        page = geta.pagination_fonction(request,com_list,number_page=5)
+    except:
+        page = False
+
+         
+
+    # rendu de la page 
+    return render(request, "dashbord/dashbord.html",{"com_list": page , "msge": message, "data": userdata,"uid":uid,"v":choice_variable})
+
 
 def logout(request):
     auth.logout(request)
@@ -184,10 +212,13 @@ def supprimer_annonce(request,cat,idannonce):
     # instruction pour la suppression d'une annonce 
     try:
         database.child("annonces").child(idannonce).remove()
+        database.child("Vues").child(idannonce).remove()
+        database.child("avis").child("compteur").child(idannonce).remove()
+        database.child("avis").child("list_avis").child(idannonce).remove()
         database.child("utilisateurs").child(uid).child("annonces").child(idannonce).remove()
         if cat == "agriculture":
            database.child("categories").child(cat).child(idannonce).remove()
-           database.child("utilisateurs").child(uid).child("categories").child(idannonce).remove()
+           database.child("utilisateurs").child(uid).child("categories").child(cat).child(idannonce).remove()
         if cat == "elevage":
            database.child("categories").child(cat).child(idannonce).remove()
            database.child("utilisateurs").child(uid).child("categories").child(cat).child(idannonce).remove()

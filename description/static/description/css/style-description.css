@@ -496,7 +496,7 @@ img {
   .container-annonces-description .contact .user-entreprise{
     color: rgb(228, 228, 228);
   }
-  .container-annonces-description .contact div a{
+  .container-annonces-description .contact div p{
     text-decoration: none;
     color: rgb(255, 255, 255);
     padding:5px 20px;
@@ -505,7 +505,7 @@ img {
     border: 1px solid white; 
     transition:all .5s ease-in-out;
 }
-.container-annonces-description .control div a:hover{
+.container-annonces-description .control div p:hover{
   background-color: white;
   color: black;
 }

@@ -647,37 +647,40 @@ class AfficherAnnonce:
      
      def add_favoris_fonction(self,database,idannonce,uid):
         database.child("utilisateurs").child(uid).child("favoris").child(str(idannonce)).set(idannonce)
-        return "A Ete Ajoute"    
+        return "Cet annonce a été ajoutée à vos favoris"    
      def del_favoris_fonction(self,database,idannonce,uid):
         database.child("utilisateurs").child(uid).child("favoris").child(str(idannonce)).remove()
-        return "A Ete Supprimer"
+        return "Cet annonce a été supprimée à vos favoris"
      def get_favoris_fonction(sefl,database,idannonce,uid):
         return database.child("utilisateurs").child(uid).child("favoris").child(str(idannonce)).get().val()
      def get_favoris_user_fonction(sefl,database,uid):
         time_favoris_data = database.child("utilisateurs").child(uid).child("favoris").shallow().get().val()
-        list_favoris_data = []
-        for i in time_favoris_data:
-            list_favoris_data.append(i)
-        list_favoris_data.sort(reverse=True)
-        print("************ list annonce favoris ****************")
-        print(list_favoris_data)
+        if time_favoris_data is not None:
+            list_favoris_data = []
+            for i in time_favoris_data:
+                list_favoris_data.append(i)
+            list_favoris_data.sort(reverse=True)
+            print("************ list annonce favoris ****************")
+            print(list_favoris_data)
 
-        work = []
-            #print("test = " + str(lis_time))
-        for i in list_favoris_data:
-            data_annonce= database.child("annonces").child(i).get().val()
-            id_annonce = database.child("annonces").child(i).get().key()
-            vues = database.child("Vues").child(i).get().val()
-            data_avis_annonce =  database.child("avis").child("compteur").child(i).get().val()
-            id_annonce = {"id":id_annonce}
-                # on cree un dictionnaire pour id
-                #----- recuperer le delai --------
-            delai =  database.child("annonces").child(i).child("delai").get().val()
-            disponible = sub_fonction.calculdelai(delai)
-            wor = (id_annonce,data_annonce,vues,disponible,data_avis_annonce)
-            work.append(wor)
+            work = []
+                #print("test = " + str(lis_time))
+            for i in list_favoris_data:
+                data_annonce= database.child("annonces").child(i).get().val()
+                id_annonce = database.child("annonces").child(i).get().key()
+                vues = database.child("Vues").child(i).get().val()
+                data_avis_annonce =  database.child("avis").child("compteur").child(i).get().val()
+                id_annonce = {"id":id_annonce}
+                    # on cree un dictionnaire pour id
+                    #----- recuperer le delai --------
+                delai =  database.child("annonces").child(i).child("delai").get().val()
+                disponible = sub_fonction.calculdelai(delai)
+                wor = (id_annonce,data_annonce,vues,disponible,data_avis_annonce)
+                work.append(wor)
 
-        return work
+            return work
+        else:
+            return False
      #---------- fonction pour prendre les users pour home -----------
      def get_data_information_user_to_homepage(self,database):
         user_data_fournisseurs = database.child("fournisseurs").shallow().get().val()
@@ -732,4 +735,7 @@ class AfficherAnnonce:
         else:
              return False
 
-     
+     def add_follow_fonction(self,database,idannonce,uid):
+        database.child("utilisateurs").child(uid).child("abonnement").child(str(idannonce)).set(idannonce)
+        return "Cet annonce a été ajoutée à votre abonnement" 
+

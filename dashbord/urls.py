@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('dashbord/', views.dashbord ,name='dashbord'),
     path('dashbord/favoris/', views.dashbord_favoris ,name='dashbord_favoris'),
+    path('dashbord/follow/', views.dashbord_follow ,name='dashbord_follow'),
     path('logout/', views.logout, name="logout"),
     path('creation_annonce/', views.create_annonce, name="create_annonce"),
     path('supprannonce/<str:cat>/<int:idannonce>/', views.supprimer_annonce , name="delete_annonce"),

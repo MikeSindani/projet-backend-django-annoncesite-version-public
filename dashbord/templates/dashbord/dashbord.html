@@ -24,14 +24,15 @@
                 {% endif%} 
             </div>
             <div class="dash-profil-text">
-                <h3 class="dash-username">{{data.prenom}}  {{data.nom}}</h3>
-                <P class="dash-useremail">{{data.email}}</P>
+                <h3 class="dash-username">{{data.prenom| default:"prenom"}}  {{data.nom| default:"Nom"}}</h3>
+                <P class="dash-useremail">{{data.email| default:"Email"}}</P>
+                <P class="dash-useremail">{{data.entreprise| default:"Entreprise"}}</P>
                 <div class="dash-socialmedia">
-                    <i class="fa fa-whatsapp" aria-hidden="true"></i>
-                    <i class="fa fa-telegram" aria-hidden="true"></i>
+                    <i class="fas fa-whatsapp" aria-hidden="true"></i>
+                    <i class="fas fa-telegram" aria-hidden="true"></i>
                 </div>  
             </div>  
-            <button class="btn-modifier">Modifier</button>      
+            <button style="display:none;" class="btn-modifier">Modifier</button>      
         </div>
     </div>
     {% endcache %}
@@ -215,7 +216,7 @@
             <div class="tabButton">
                 <button class="tablink" onClick='window.location.href="/dashbord/favoris/"' >VosFavoris</button>
                 <button class="tablink" onClick='window.location.href="/dashbord/"' >VosAnnonces</button>
-                <button class="tablink" onClick='window.location.href="/dashbord/Abonnement/"' >VosAbonnement</button>
+                <button class="tablink" onClick='window.location.href="/dashbord/follow/"' >VosAbonnement</button>
             </div>
         </div>
   {% if v == "Favoris"%}
@@ -232,7 +233,7 @@
               {% endfor %}
             {% else %}
                 <img src="{% static 'dashbord/img/undraw_Add_post_re_174w.png'%}" alt="add" width="250" height="250">
-                <h3 style="color:rgb(71, 71, 71) ;">Pas d'annonce Appuyer sur Ajouter Annonnce.</h3>
+                <h3 style="color:rgb(71, 71, 71) ;">Pas d'annonce <br> Appuyer sur Ajouter Annonnce.</h3>
             {% endif %}
             <div class="pagination">
                 {% if com_list.has_previous %}
@@ -249,7 +250,7 @@
         </div>
     {% endif%}  
  <!---  ---------------------  TAB PARTIE ABONNNEMENT -------------------------->
-    {% if v == "Abonnement" %}
+    {% if v == "follow" %}
         <div id="Contact" class="tabcontent">
             <h1 class="text">Vos Abonnement</h1>
             <p>Voici la liste des personnes qui vous suivez!</p>
@@ -329,7 +330,7 @@
           {% endfor %}
         {% else %}
             <img src="{% static 'dashbord/img/undraw_Add_post_re_174w.png'%}" alt="add" width="250" height="250">
-            <h3 style="color:rgb(71, 71, 71) ;">Pas d'annonce Appuyer sur Ajouter Annonnce.</h3>
+            <h3 style="color:rgb(71, 71, 71) ;">Pas d'annonce aux favoris <br> Appuyer sur Ajouter Aux favoris parmis celle de nos clients.</h3>
         {% endif %}
         <div class="pagination">
             {% if com_list.has_previous %}
