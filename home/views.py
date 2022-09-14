@@ -11,7 +11,7 @@ authe = firebase_app.auth()
 database = firebase_app.database()
 
 context={'name':'hum'}
-# Create your views here.
+# Create your views here.aq
 def home(request):
     geta = fonction.AfficherAnnonce()
     

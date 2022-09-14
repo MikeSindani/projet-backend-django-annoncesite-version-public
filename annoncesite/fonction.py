@@ -370,10 +370,16 @@ class AfficherAnnonce:
         work_id=[]
         for i in timestamps:
             titre = database.child("annonces").child(i).child('titre').get().val()
-            cat = database.child("annonces").child(i).child('categories').get().val()
+            cat = database.child("annonces").child(i).child('categorie').get().val()
             produit = database.child("annonces").child(i).child('produit').get().val()
             desc = database.child("annonces").child(i).child('description').get().val()
-            wor = str(titre)+str(cat)+str(produit)+str(desc)+"$"+str(i)
+            uid = database.child("annonces").child(i).child('uid').get().val()
+            quartier = database.child("utilisateurs").child(uid).child("Informations").child("quartier").get().val()
+            avenue = database.child("utilisateurs").child(uid).child("Informations").child("avenue").get().val()
+            commune = database.child("utilisateurs").child(uid).child("Informations").child("commune").get().val()
+            wor = str(titre)+str(cat)+str(produit)+str(desc)+str(avenue)+str(commune)+str(quartier)+"$"+str(i)
+            print("---------- work -------------")
+            print(wor)
             work_id.append(wor)
 
         matching = [str(string) for string in work_id if search in string.lower()]
@@ -736,6 +742,6 @@ class AfficherAnnonce:
              return False
 
      def add_follow_fonction(self,database,idannonce,uid):
-        database.child("utilisateurs").child(uid).child("abonnement").child(str(idannonce)).set(idannonce)
+        database.child("utilisateurs").child(uid).child("abonnement").child(str(uid)).set(idannonce)
         return "Cet annonce a été ajoutée à votre abonnement" 
 
