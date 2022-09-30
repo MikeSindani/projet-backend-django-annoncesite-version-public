@@ -392,7 +392,7 @@ class AfficherAnnonce:
 
         return s_id
      def rechercher_afficher_annonces_alls(self,database,listannonce):
-        
+            
             listannonce.sort(reverse=True)
             print("test = " + str(listannonce))
             #on recupere la list
@@ -744,4 +744,3 @@ class AfficherAnnonce:
      def add_follow_fonction(self,database,idannonce,uid):
         database.child("utilisateurs").child(uid).child("abonnement").child(str(uid)).set(idannonce)
         return "Cet annonce a été ajoutée à votre abonnement" 
-

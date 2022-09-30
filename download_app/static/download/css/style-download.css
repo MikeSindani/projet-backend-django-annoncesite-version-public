@@ -1,0 +1,137 @@
+.container-downloader {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 60% 40%;
+        grid-template-columns: 60% 40%;
+    -ms-grid-rows: 650px;
+        grid-template-rows: 650px;
+  }
+  
+  .container-downloader .thumbnail {
+    display: -ms-grid;
+    display: grid;
+    place-content: center;
+  }
+  
+  .container-downloader .thumbnail div {
+    margin-top: 50px;
+  }
+  
+  .container-downloader .download_btn {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    background-color: white;
+  }
+  
+  .container-downloader .download_btn .part-0 {
+    text-align: center;
+  }
+  
+  .container-downloader .download_btn .part-0 .text-qr {
+    font-size: 42px;
+  }
+  
+  .container-downloader .download_btn .part-1 img {
+    height: 250px;
+    width: 250px;
+  }
+  
+  .container-downloader .download_btn div {
+    margin: 10px;
+  }
+  
+  .container-downloader .download_btn .btn {
+    background-color: #09112e;
+    padding: 15px 100px;
+    color: white;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 800px) {
+    .container-downloader {
+      margin: 10% 0 0 0;
+      display: -ms-grid;
+      display: grid;
+      -ms-grid-rows: 50% 50%;
+          grid-template-rows: 50% 50%;
+      -ms-grid-columns: 100%;
+          grid-template-columns: 100%;
+    }
+    .container-downloader .thumbnail {
+      display: -ms-grid;
+      display: grid;
+      place-content: center;
+    }
+    .container-downloader .thumbnail img {
+      height: 600px;
+      width: 500px;
+    }
+    .container-downloader .download_btn {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+    }
+    .container-downloader .download_btn .part-1 {
+      display: none;
+    }
+    .container-downloader .download_btn .part-0 .text-qr-1 {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 500px) {
+    .container-downloader {
+      margin: 2% 0;
+      display: -ms-grid;
+      display: grid;
+      -ms-grid-rows: 50% 50%;
+          grid-template-rows: 50% 50%;
+      -ms-grid-columns: 100%;
+          grid-template-columns: 100%;
+    }
+    .container-downloader .thumbnail {
+      display: -ms-grid;
+      display: grid;
+      place-content: center;
+    }
+    .container-downloader .thumbnail img {
+      height: 400px;
+      width: 300px;
+    }
+    .container-downloader .download_btn {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+    }
+    .container-downloader .download_btn .part-1 {
+      display: none;
+    }
+    .container-downloader .download_btn .part-0 .text-qr-1 {
+      display: none;
+    }
+  }
+  /*# sourceMappingURL=tele-style.css.map */
