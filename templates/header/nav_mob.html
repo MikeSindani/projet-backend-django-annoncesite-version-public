@@ -1,0 +1,27 @@
+<nav class="navbar">
+    <div class="logo">
+        <div class="logo-meme"><a href="{% url 'home' %}" translate="no">APAGRE<strong class="logo-pres">Lushi</strong></a></div>
+        <form action="{% url 'rechercher' %}" method="get">
+            {% csrf_token %}
+            <input type="text" id="search" class="search-bar" name="search" placeholder="Rechercher ici Des Annonces..">
+            <button class="search-btn"><i class="fa fa-search" aria-hidden="true"></i> </button>
+        </form>
+    </div>
+    <div class="hamburger">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+    </div>
+    <ul class="nav-links">
+        <li><a href="/">Accueil</a></li>
+        <li class="dropbtn">
+            <a href="javascript:void(0)" >Annonces</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'elevage' %}">Elevage</a>
+                    <a href="{% url 'agriculture' %}">Agriculture</a>
+                </div>
+        </li>
+        <li><a class="join-button" href="{% url 'dashbord' %}">Dashbord</a></li>
+        <li><a class="login-button" href="{% url 'logout' %}">Deconnexion</a></li>
+    </ul>
+   </nav>

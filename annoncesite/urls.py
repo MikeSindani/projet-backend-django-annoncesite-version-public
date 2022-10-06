@@ -15,6 +15,7 @@ urlpatterns = [
     path('',include('searchApp.urls')),
     path('',include('space_member_app.urls')),  
     path('',include('download_app.urls')),  
+    path('',include('mobile_app.urls')), 
 ]
 
 

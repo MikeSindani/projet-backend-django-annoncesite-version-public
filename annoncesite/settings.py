@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'error_page_app',
     'space_member_app',
     'download_app',
+    'mobile_app',
 ]
 
 MIDDLEWARE = [

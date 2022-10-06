@@ -14,35 +14,41 @@ class AfficherAnnonce:
      
      
      def afficher_annonces_publics_alls(self, database):
+
+        timeshamps = database.child("annonces").shallow().get().val()
+        if timeshamps :
+            lis_time = []
+            for i in timeshamps:
+                lis_time.append(i)
+
             
-        timeshamps= database.child("Annonces").shallow().get().val()
-        lis_time = []
-        for i in timeshamps:
-            lis_time.append(i)
+            lis_time.sort(reverse=True)
+            print("test = " + str(lis_time))
+            #on recupere la list
+            work = []
 
-        lis_time.sort(reverse=True)
-        print("test = " + str(lis_time))
+            for i in lis_time:
+                data_annnonce = database.child("annonces").child(i).get().val()
+                vues = database.child("Vues").child(i).get().val()
+                data_avis_annonce =  database.child("avis").child("compteur").child(i).get().val()
+                id_users = database.child("annonces").child(i).child("uid").get().val()
+                data_user = database.child("utilisateurs").child(id_users).child("Informations").get().val()
+                 
+                id_annonce = {"id":i}
+                #----- recuperer le delai --------
+                delai =  database.child("annonces").child(i).child("delai").get().val()
+                disponible = sub_fonction.calculdelai(delai)
+                wor = (id_annonce,data_annnonce,data_user,vues,disponible,data_avis_annonce)
+                work.append(wor)
 
-        work = []
-
-        for i in lis_time:
-            wor = database.child("Annonces").child(i).get().val()
-
-        work.append(wor)
-        print("test2 = " + str(work))
-
-        data = []
-
-        for i in lis_time:
-            i = float(i)
-            dat = datetime.datetime.fromtimestamp(i).strftime('%H:%M: %d-%m-%Y')
-            data.append(dat)
-
-            print(data)
-            # on combine le touts
-            com_list = zip(lis_time, data, work)
-            return com_list
-        return False
+                # --- mettre ca dans un tuple ------
+                
+            print("👌😁😁 " + str(work))
+            print(type(work))
+    
+            return work
+        return False       
+        
      def afficher_annonces_profil(self, database,uid):
         
         timeshamps_Agri = database.child("utilisateurs").child(uid).child("Annonces").child("Agriculture").shallow().get().val()
@@ -130,7 +136,6 @@ class AfficherAnnonce:
         }
         # rendre les dictionnaires 
         return data
-
 
 # ------------ fontion pour prendre les annonces d'un utilisateurs dans le dashnbord -----------------
      def afficher_annonces_user_all(self, database,uid):
