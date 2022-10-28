@@ -6,6 +6,7 @@
 {%endblock style %}
 {%block links %} 
 <link rel="stylesheet" href="{% static 'dashbord/css/style-dashbord.css' %}">
+<link rel="stylesheet" href="{% static 'base/card-patern.css' %}"/>
 {%endblock links %}
 {%block Connexion %}
     {% include "header/nav_connexion.html" %}
@@ -232,8 +233,8 @@
                   {% include "dashbord/card_long_favoris.html" %}
               {% endfor %}
             {% else %}
-                <img src="{% static 'dashbord/img/undraw_Add_post_re_174w.png'%}" alt="add" width="250" height="250">
-                <h3 style="color:rgb(71, 71, 71) ;">Pas d'annonce <br> Appuyer sur Ajouter Annonnce.</h3>
+            <img src="{% static 'dashbord/img/undraw_Add_post_re_174w.png'%}" alt="add" width="250" height="250">
+            <h3 style="color:rgb(71, 71, 71) ;">Pas d'annonce aux favoris <br> Appuyer sur Ajouter Aux favoris parmis celle de nos clients.</h3>
             {% endif %}
             <div class="pagination">
                 {% if com_list.has_previous %}
@@ -254,68 +255,58 @@
         <div id="Contact" class="tabcontent">
             <h1 class="text">Vos Abonnement</h1>
             <p>Voici la liste des personnes qui vous suivez!</p>
-            <div class="conteneur-card">
-                
-                <div class="card-long">
-                    <div class="thumbnail">
-                        <img src="https://images.pexels.com/photos/457447/pexels-photo-457447.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="card-image">
-                    </div>
-                    <div class="contenain">
-                        <h2 class="titre">card </h2>
-                        <p class="subtitle">Disponible</p>
-                        <p class="description"> Lorem ipsum dolor sit amet 
-                            consectetur adipisicing elit. Nemo rem doloremque aspernatur 
-                            modi officiis impedit inventore fugit quidem a repudiandae 
-                            voluptatem reiciendis,
-                            magni accusantium necessitatibus illum cum atque, vero odit. 
-                        </p>
-                        <div class="element">
-                            <p class="vu"><i class="fa fa-users" aria-hidden="true"> Mike</i></p>
-                            <p class="vu"><i class="fas fa-clock    "></i> 2 minutes</p>
-                            <p class="vu"> <i class="fa fa-map-marker" aria-hidden="true"> kasumbalesa</i></p>  
-                        </div> 
-                    </div>
-                    <div  class="more">
-                        <a href="">Voir</a>
-                    </div>
-                    <div class="dash_control">
-                        <div  class="more" id="supprimer">
-                            <a href=""><i class="fa fa-trash"></i></a>
-                        </div>
-                    </div>     
-                </div>
 
-                <div class="card-long">
-                    <div class="thumbnail">
-                        <img src="https://images.pexels.com/photos/457447/pexels-photo-457447.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="card-image">
+            <div> 
+              {% for user,url in list_users %}
+              <!----------- CARD PATERNAIRE ------------- -->
+                    <div class="card-partern">
+                            <div class="card-body" onClick='window.location.href="/espacemembre/{{url.uidf}}/"'>
+                                <div class="item-card-partern thumbail-card">
+                                    {% if user.imgurl %}
+                                    <img class="img_profil_card_partern"  src="{{user.imgurl}}" alt="profil-image" width="120" height="120">
+                                    {% else %}
+                                    <img class="img_profil_card_partern" src="https://th.bing.com/th/id/OIP.iOnAhgLrg_AR5D6STimV3wAAAA?w=221&h=220&c=7&r=0&o=5&pid=1.7" alt="profil-image" width="120" height="120">
+                                    {% endif%}
+                                    
+                                </div>
+                                <div class="item-card-partern containe-card">
+                                    <div  class="name"><strong> {{user.prenom|default:"Prenom"}} {{user.nom|default:"Nom"}}</strong></div>
+                                    <div class="entreprise"> {{user.entreprise|default:"Entreprise"}}</div>
+                                    
+                                    <div class="social">
+                                        {% if uid %}
+                                            <span><a href="https://t.me/{{user.telegram}}"><i class="fab fa-telegram-plane"></i></a></span>
+                                            <span><a href="tel:{{user.tel1}}"><i class="fas fa-phone"></i></a></span>
+                                            <span><a href="https://api.whatsapp.com/send?phone=243{{user.whatsapp}}"><i class="fab fa-whatsapp"></i></a></span>
+            
+                                        {% else  %}
+                                            <span><a onclick="btn_modal_message()" ><i class="fas fa-phone"></i></a></span>
+                                            <span><a onclick="btn_modal_message()" ><i class="fab fa-telegram-plane"></i></a></span>
+                                            <span><a onclick="btn_modal_message()" ><i class="fab fa-whatsapp"></i></a></span>
+                                        {% endif %}
+                                        
+                                    </div>
+                                    <div class="follow">
+                                        {% if uid %}
+                                           <span onclick="btn_modal_message()" class="btn-follow"><i class="fas fa-plus"></i>Ne pas Suivre</span>
+                                        {% else  %}
+                                        <span onclick="btn_modal_message()" class="btn-follow"><i class="fas fa-plus"></i> Suivre</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="item-card-partern seemore-card">
+                                   <p onClick='window.location.href="/espacemembre/{{url.uidf}}/"' >Voir plus</p> 
+                                </div>
+                            </div>
                     </div>
-                    <div class="contenain">
-                        <h2 class="titre">card </h2>
-                        <p class="subtitle">Disponible</p>
-                        <p class="description"> Lorem ipsum dolor sit amet 
-                            consectetur adipisicing elit. Nemo rem doloremque aspernatur 
-                            modi officiis impedit inventore fugit quidem a repudiandae 
-                            voluptatem reiciendis,
-                            magni accusantium necessitatibus illum cum atque, vero odit. 
-                        </p>
-                        <div class="element">
-                            <p class="vu"><i class="fa fa-users" aria-hidden="true"> Mike</i></p>
-                            <p class="vu"><i class="fas fa-clock    "></i> 2 minutes</p>
-                            <p class="vu"> <i class="fa fa-map-marker" aria-hidden="true"> kasumbalesa</i></p>  
-                        </div> 
-                    </div>
-                    <div  class="more">
-                        <a href="">Voir</a>
-                    </div>
-                    <div class="dash_control">
-                        <div  class="more" id="supprimer">
-                            <a href=""><i class="fa fa-trash"></i></a>
-                        </div>
-                    </div>     
-                </div>
+              {% endfor %}
             </div>
-        </div>
+         </div> 
+        
     {% endif%}
+
+
+
     {% if v == "Home"%}
     <!---  -------------------  TAB PARTIE ANNONCE -------------------------->
     <div id="News" class="tabcontent" >
@@ -329,8 +320,9 @@
                {% include "dashbord/card_long.html" %}
           {% endfor %}
         {% else %}
-            <img src="{% static 'dashbord/img/undraw_Add_post_re_174w.png'%}" alt="add" width="250" height="250">
-            <h3 style="color:rgb(71, 71, 71) ;">Pas d'annonce aux favoris <br> Appuyer sur Ajouter Aux favoris parmis celle de nos clients.</h3>
+              <img src="{% static 'dashbord/img/undraw_Add_post_re_174w.png'%}" alt="add" width="250" height="250">
+              <h3 style="color:rgb(71, 71, 71) ;">Pas d'annonce <br> Appuyer sur Ajouter Annonnce.</h3>
+            
         {% endif %}
         <div class="pagination">
             {% if com_list.has_previous %}

@@ -87,9 +87,10 @@ def dashbord_follow(request):
         page = False
 
          
-
+    # fonction pour fournir un choix aleatoire 
+    list_data_profil_fourniseur = geta.get_data_information_user_to_homepage(database)
     # rendu de la page 
-    return render(request, "dashbord/dashbord.html",{"com_list": page , "msge": message, "data": userdata,"uid":uid,"v":choice_variable})
+    return render(request, "dashbord/dashbord.html",{"com_list": page , "msge": message, "data": userdata,"uid":uid,"v":choice_variable,"list_users":list_data_profil_fourniseur})
 
 
 def logout(request):

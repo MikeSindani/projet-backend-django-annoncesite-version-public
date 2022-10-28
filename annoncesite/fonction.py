@@ -749,3 +749,5 @@ class AfficherAnnonce:
      def add_follow_fonction(self,database,idannonce,uid):
         database.child("utilisateurs").child(uid).child("abonnement").child(str(uid)).set(idannonce)
         return "Cet annonce a été ajoutée à votre abonnement" 
+    
+     

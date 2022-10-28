@@ -103,7 +103,7 @@
             <h3 class="titre"> NOTRE APPLICATION MOBILE</h3>
             <p class="subtitre">Telecharger notre application mobile Android pour plus de fun</p>
             <div class="links">
-              <a href="" class="link">Telechargement</a>
+              <a  href="{% url 'download' %}" class="link">Telechargement</a>
             </div>
           </div> 
         </div>
@@ -641,7 +641,7 @@
 
 <!-- ************************************************** RECOMMADATION **********************************************************************--> 
 {%if list_users  %}
-      <div class="recommandation" style="width:100%;background-color: rgb(210, 204, 223);">
+          <div class="recommandation" style="width:100%;background-color: rgb(210, 204, 223);">
           <div class="info">
               <h1>Nos partenaires de choix</h1>
           </div>
@@ -709,7 +709,6 @@
             </span>
         </div>
         <div class="modal-body">
-        
                     <p class="text" >Veillez vous connecter ou vous inscrire s'ils vous plait!</p>
                     <div class="part-evaluation">
                         <button onClick='window.location.href="/signIn/"'>Connexion</button>

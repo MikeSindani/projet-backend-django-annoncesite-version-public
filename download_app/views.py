@@ -26,3 +26,4 @@ def download (request):
 
     content = {"uid":uid}
     return render(request, "download/download.html",content)
+
