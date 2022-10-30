@@ -251,10 +251,10 @@
 	
 }
 /* POUR LES MOBILES SCREENS */
-@media screen and (max-width: 500px){
+@media screen and (max-width: 800px){
 	.body-contact {
 		position: relative;
-		top: 60px;
+		top: -64px;
 	}
 }
 

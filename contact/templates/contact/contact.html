@@ -6,6 +6,13 @@
 {%block links %}
       <link rel="stylesheet" href="{% static 'autre/css/contact-style.css' %}">
 {%endblock links %}
+{%block Connexion %}
+    {% if uid %}
+        {% include "header/nav_connexion.html" %}
+   {% else %}
+      {% include "header/nav.html" %}
+   {% endif %}
+{%endblock Connexion %}
 {% block Content %}
 
 <style>
@@ -17,13 +24,14 @@
  <div class="body-contact">
 	<div class="container-contact" id="container">
 		<div class="form-container-contact contact-container">
-			<form class="form-main" action="#" method="post">
+			<form class="form-main" action="/contacter/" method="post">
+				{% csrf_token %}
 				<h1>Contactez-Nous</h1>
 				
 				<span>Contactez-Nous</span>
-				<input type="text" placeholder="Nom" />
-				<input type="text" placeholder="Prenom" />
-				<input type="email" placeholder="Email" />
+				<input type="text" name="nom" placeholder="Nom complet" />
+				<input type="text" name="objet" placeholder="Objet" />
+				<input type="email" name="email" placeholder="Email" />
 				<textarea name="message" rows="10" cols="30" placeholder="Entre Votre message ici...">
 					
 				</textarea>

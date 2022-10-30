@@ -5,7 +5,15 @@
 {% cache 500 contact %}
 {%block links %}
       <link rel="stylesheet" href="{% static 'autre/css/aboutus-style.css' %}">
+	
 {%endblock links %}
+{%block Connexion %}
+    {% if uid %}
+        {% include "header/nav_connexion.html" %}
+   {% else %}
+      {% include "header/nav.html" %}
+   {% endif %}
+{%endblock Connexion %}
 {% block Content %}
 
 <style>

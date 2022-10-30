@@ -216,6 +216,6 @@ def passreinitialisation(request):
         print(uid) 
     except:
         uid = False
-        return render( request, "login/pass.html", { "uid":uid} )
+        return render( request, "login/passsend.html",{ "uid":uid,"email":email} )
     
-    return render(request,"login/pass.html",{ "uid":uid})
+    return render(request,"login/passsend.html",{ "uid":uid,"email":email})
