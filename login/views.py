@@ -184,3 +184,38 @@ def postdashbord(request):
     url = reverse('dashbord') 
     ret = HttpResponseRedirect(url)
     return ret
+
+def passforgot(request):
+    # intrcution pour recupere l'id dans la session
+    geta = fonction.AfficherAnnonce() 
+   
+    # notre objet class afficher 
+    try:
+         # intrcution pour recupere l'id dans la session
+        uid = geta.get_token(request, authe)
+        print("😊😘😘😍😒") 
+        print(uid) 
+    except:
+        uid = False
+        return render( request, "login/pass.html", { "uid":uid} )
+    
+    return render(request,"login/pass.html",{ "uid":uid})
+
+
+def passreinitialisation(request):
+    email = request.POST.get("email")
+    # intrcution pour recupere l'id dans la session
+    geta = fonction.AfficherAnnonce() 
+    # reset fonction 
+    authe.send_password_reset_email(email)
+    # notre objet class afficher 
+    try:
+         # intrcution pour recupere l'id dans la session
+        uid = geta.get_token(request, authe)
+        print("😊😘😘😍😒") 
+        print(uid) 
+    except:
+        uid = False
+        return render( request, "login/pass.html", { "uid":uid} )
+    
+    return render(request,"login/pass.html",{ "uid":uid})

@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block titre%}Mot de passe Oubliée {%endblock titre %}
+{%block Connexion %}
+    {% if uid %}
+        {% include "header/nav_connexion.html" %}
+   {% else %}
+      {% include "header/nav.html" %}
+   {% endif %}
+{%endblock Connexion %} 
+{% block Content %}
+<style>
+  a{
+    text-decoration: none;
+  }
+.containe-pass {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 2fr 1fr;
+      grid-template-columns: 1fr 2fr 1fr;
+  height: 400px;
+  width: 100%;
+}
+
+.containe-pass .division1 {
+  background-image: url('{% static "login/img/poule.jpg" %}');
+  background-size: cover;
+  padding: 20px;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.containe-pass .division1 h1 {
+  color: tomato;
+  font-weight: bold;
+  margin: 0;
+}
+
+.containe-pass .division1 .panel-haut p {
+  color: white;
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  margin: 20px 0 30px;
+}
+
+.containe-pass .division1 .panel-haut .ghost {
+  background-color: transparent;
+  color: #ffffff;
+  padding: 0.5vw 7vh;
+  border-radius: 20px;
+  border: 1px solid white;
+}
+
+.containe-pass .division2 {
+  background-color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.containe-pass .division2 h1 {
+  font-weight: bold;
+  margin: 0;
+}
+
+.containe-pass .division2 span {
+  font-size: 12px;
+  margin: 5px;
+}
+
+.containe-pass .division2 .form-container {
+  margin: 50px 0;
+}
+
+.containe-pass .division2 .form-main {
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.containe-pass .division2 .form-main input {
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 60%;
+}
+
+.containe-pass .division2 .form-main button {
+  border-radius: 20px;
+  border: 1px solid #09112e;
+  background-color: #09112e;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  -webkit-transition: -webkit-transform 80ms ease-in;
+  transition: -webkit-transform 80ms ease-in;
+  transition: transform 80ms ease-in;
+  transition: transform 80ms ease-in, -webkit-transform 80ms ease-in;
+  margin: 5px;
+}
+
+.containe-pass .division3 {
+  background-image: url('{% static "login/img/porc.jpg" %}');
+  background-size: cover;
+  padding: 20px;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.containe-pass .division3 h1 {
+  color: tomato;
+  font-weight: bold;
+  margin: 0;
+}
+
+.containe-pass .division3 .panel-bas p {
+  color: white;
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  margin: 20px 0 30px;
+}
+
+.containe-pass .division3 .panel-bas .ghost {
+  background-color: transparent;
+  color: #ffffff;
+  padding: 0.5vw 7vh;
+  border-radius: 20px;
+  border: 1px solid white;
+}
+
+@media (max-width: 800px) {
+  .containe-pass {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+    -ms-grid-rows: 2fr 3fr 2fr;
+        grid-template-rows: 2fr 3fr 2fr;
+    height: 900px;
+    width: 100%;
+  }
+}
+/*# sourceMappingURL=passforgot-style.css.map */
+         
+</style>
+<div class="containe-pass">
+    <div class="division1">
+        <div class="panel-haut">
+            <h1>Connectez-Vous</h1>
+            <p>Veillez Cliquer sur <strong>Connectez-vous</strong><br> 
+               pour aller a la page de connexion</p>
+            <a href="{% url 'signUp' %}" class="ghost" id="signUp">Se Connecter</a>
+        </div>
+    </div>
+    <div class="division2">
+        <h1>Mot de Passe Oubliez</h1>
+        <span>Mettez Votre Adresse email Afin de reinitialiser le compte. <br> 
+         <strong>un email vous sera envoyer a votre adresse. </strong>   
+        </span>
+        <div class="form-container sign-in-container">
+            <form class="form-main" action="/reset/" method="post">
+                {% csrf_token %}
+                <input type="email" name="email" placeholder="Email" />
+                <button>Reinitialiser</button>
+            </form>
+        </div>
+    </div>
+    <div class="division3">
+        <div class="panel-bas">
+            <h1>Devenir Notre Partenaire</h1>
+            <p>Veillez Cliquer sur <strong>Créer un Compte</strong><br> 
+                Enfin de devenir Notre Paternaire</p>
+            <a href="{% url 'signUp' %}" class="ghost" id="signUp">Créer Un Compte</a>
+        </div>
+    </div>
+</div>
+
+ {% endblock Content %}

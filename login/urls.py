@@ -8,6 +8,8 @@ urlpatterns = [
    path('postsignup/', views.postsignup, name="postsignup"),
    path('postsignin/', views.postsignin,name="postsignin"),
    path('welcome/', views.welcome,name="welcome"),
+   path('passforgot/', views.passforgot,name="passforgot"),
+   path('reset/', views.passreinitialisation,name="pass-reinitialisation"),
    path('finich_Creater_profil/', views.postdashbord ,name="postdashbord"),
 
 ]

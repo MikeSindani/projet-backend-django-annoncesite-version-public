@@ -66,7 +66,7 @@
               <h3 class="titre"> BIENVENU(E) SUR APAGREL lushi</h3>
               <p class="subtitre"> Le Site d'Annonce des Produits Agricole & Elevage de Lubumbashi</p>
               <div class="links">
-                <a href="{% url 'signIn' %}" class="link">Connexion</a>
+                <a href="{% url 'signIn' %}" class="link">Publier Une Annonce</a>
               </div>
             </div> 
         </div>
@@ -91,7 +91,7 @@
               <p class="subtitre">Creer un compte chez nous afin des publies vos annonces ou de contacter nos fournisseurs.  
               </p>
               <div class="links">
-                <a href=" {% url 'signUp' %}" class="link">Inscrption</a>
+                <a href=" {% url 'signUp' %}" class="link">Créer Un Compte</a>
               </div>
             </div>   
         </div>
@@ -103,7 +103,7 @@
             <h3 class="titre"> NOTRE APPLICATION MOBILE</h3>
             <p class="subtitre">Telecharger notre application mobile Android pour plus de fun</p>
             <div class="links">
-              <a  href="{% url 'download' %}" class="link">Telechargement</a>
+              <a  href="{% url 'download' %}" class="link">Télécharger l'Appli</a>
             </div>
           </div> 
         </div>
@@ -412,7 +412,7 @@
         <!-- Post Content-->
         <div class="post-content">
         <div class="category">{{work.categorie}}</div>
-        <h1 class="title">{{work.titre|title|truncatechars:20 }}</h1>
+        <h1 class="title">{{work.titre|truncatechars:20 }}</h1>
         <div class="prix">
             {% if work.prix %} 
                 {{work.prix}}
@@ -659,9 +659,8 @@
                         
                     </div>
                     <div class="item-card-partern containe-card">
-                        <div  class="name"><strong> {{user.prenom|default:"Prenom"}} {{user.nom|default:"Nom"}}</strong></div>
-                        <div class="entreprise"> {{user.entreprise|default:"Entreprise"}}</div>
-                        
+                        <div  class="name"><strong> {{user.prenom|title|default:"Prenom"}} {{user.nom|title|default:"Nom"}}</strong></div>
+                        <div class="entreprise"> {{user.entreprise|title|default:"Entreprise"}}</div>
                         <div class="social">
                             {% if uid %}
                                 <span><a href="https://t.me/{{user.telegram}}"><i class="fab fa-telegram-plane"></i></a></span>
@@ -712,7 +711,7 @@
                     <p class="text" >Veillez vous connecter ou vous inscrire s'ils vous plait!</p>
                     <div class="part-evaluation">
                         <button onClick='window.location.href="/signIn/"'>Connexion</button>
-                        <button onClick='window.location.href="/signUp/"'>Inscription</button>
+                        <button style="background-color: var(--orange);"  onClick='window.location.href="/signUp/"'>Inscription</button>
                     </div> 
         </div>     
     </div>

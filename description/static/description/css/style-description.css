@@ -217,7 +217,6 @@ a{
 }
 .part-evaluation input,.part-evaluation button {
   border-radius: 20px;
-  border: 1px solid tomato;
   background-color: var(--orange);
   color: #FFFFFF;
   font-size: 12px;
@@ -228,6 +227,11 @@ a{
   transition: transform 80ms ease-in;
   margin: 5px;
   cursor: pointer;
+}
+@media (max-width:500px){
+  .part-evaluation input,.part-evaluation button {
+    font-size: 8px;
+  }
 }
 .part-evaluation input:active,.part-evaluation button:active {
   transform: scale(0.90);

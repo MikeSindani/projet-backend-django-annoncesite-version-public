@@ -32,13 +32,13 @@
 					<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
 					<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 				</div>
-				<span>ou utiliser un compte </span>
+				
 				{% if msg %}
 				  <p class="msg_avertis">{{msg}}</p>
 			    {% endif %}
 				<input type="email" name="email" placeholder="Email" />
 				<input type="password" name="password" placeholder="Password" />
-				<a href="#">Mot de passer?</a>
+				<a href="{% url 'passforgot' %}">Mot de passer Oublier?</a>
 				<button>Connexion</button>
 			</form>
 		</div>
@@ -46,9 +46,9 @@
 			<div class="overlay-in">
 				<div class="overlay-panel overlay-right">
 					<h1>Devenir Notre Partenaire</h1>
-					<p>Veillez Cliquer ici Pour Vous inscrir <br> 
-						Enfin Notre Paternaire</p>
-					<a href="{% url 'signUp' %}" class="ghost" id="signUp">Inscription</a>
+					<p>Veillez Cliquer sur <strong>Créer un Compte</strong><br> 
+						Enfin de devenir Notre Paternaire</p>
+					<a href="{% url 'signUp' %}" class="ghost" id="signUp">Créer Un Compte</a>
 				</div>
 			</div>
 		</div>

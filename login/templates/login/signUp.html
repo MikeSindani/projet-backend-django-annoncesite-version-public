@@ -33,7 +33,7 @@
 				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
-			<span>ou enregistrez-vous par email</span>
+			<span>Enregistrez-vous par email</span>
 			<div class="step">
 				<div class="item item1 isactived">1</div>
 				<div class="item item2" id="item2" >2</div>
@@ -75,7 +75,7 @@
 				<input type="tel" placeholder="numero phone 1" name="tel1">
 				<input type="tel" placeholder="numero phone 2" name="tel2">
 				<input type="tel" placeholder="Numero Whastapp" name="whatsapp">
-				<input type="tel" placeholder="Telegram ex:@clam" name="telegram">
+				<input type="tel" placeholder="Telegram ex:clam" name="telegram">
 
                 
 		<button type="button" onclick="Precedent(4);">precedent</button>
@@ -85,11 +85,11 @@
 		</form>
 	</div>
 	<div class="overlay-container-up">
-		<div class="overlay-up" style="background-image: url('{% static 'login/img/mais.jpg' %}');">
+		<div class="overlay-up" style="background-image: url('{% static 'login/img/mais.jpg' %}');background-size: cover;">
 			<div class="overlay-panel overlay-left">
 				<h1>Bienvenu(e)</h1>
-				<p>TU peux te connecter avec ton compte personnel si tu en as un.</p>
-				<a href="{% url 'signIn' %}" class="ghost" id="signIn">Connexion</a>
+				<p>Tu peux te connecter avec <strong>ton compte personnel</strong> <br> si vous en avez un chez-nous.</p>
+				<a href="{% url 'signIn' %}" class="ghost" id="signIn">Se Connecter</a>
 			</div>
 		</div>
 	</div>
