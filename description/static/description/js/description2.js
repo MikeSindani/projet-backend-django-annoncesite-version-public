@@ -140,7 +140,7 @@ console.log(evaluation);
 
 //name = $('#fiable').val()
 //name = $('#nofiable').val()
-idannonce = $("#uidannonce").attr("data-uidannonce");
+uidannonce = $("#uidannonce").attr("data-uidannonce");
 uid = $("#uid").attr("data-uid");
 console.log(evaluation);
 console.log(uidannonce);

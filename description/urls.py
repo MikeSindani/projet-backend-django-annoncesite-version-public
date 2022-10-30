@@ -9,6 +9,6 @@ urlpatterns = [
      path('get_commentaire/<int:idannonce>/<int:num_avis>/', views.commentaire, name='getcommentaire'), 
      path('get_favoris/<int:idannonce>/<str:uid>/', views.delfavoris, name='del_favoris'), 
      path('set_favoris/<int:idannonce>/<str:uid>/', views.addfavoris, name='add_favoris'),
-     path('add_follow/<int:idannonce>/<str:uid>/', views.add_follow, name='add_follow'),
+     path('add_follow/<str:uidannonce>/<str:uid>/', views.add_follow, name='add_follow'),
        
 ]

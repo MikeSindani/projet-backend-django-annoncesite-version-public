@@ -14,6 +14,15 @@
 
 {% block Content %}
 {% cache 500 band uid %}
+<style>
+@media (max-width:800px) {
+  .contain-card-partern{
+    grid-template-columns: 1fr;
+  }
+             
+  }
+</style>
+
  <div class="container">
     <div class="band-dash">
         <div class="dash-milieu">
@@ -253,15 +262,15 @@
  <!---  ---------------------  TAB PARTIE ABONNNEMENT -------------------------->
     {% if v == "follow" %}
         <div id="Contact" class="tabcontent">
-            <h1 class="text">Vos Abonnement</h1>
+            <h1 class="text">Vos Abonnements</h1>
             <p>Voici la liste des personnes qui vous suivez!</p>
 
-            <div> 
+            <div  class="contain-card-partern"   style="display: grid;grid-template-columns: 1fr 1fr 1fr;"> 
               {% for user,url in list_users %}
               <!----------- CARD PATERNAIRE ------------- -->
                     <div class="card-partern">
-                            <div class="card-body" onClick='window.location.href="/espacemembre/{{url.uidf}}/"'>
-                                <div class="item-card-partern thumbail-card">
+                            <div class="card-body" >
+                                <div class="item-card-partern thumbail-card" onClick='window.location.href="/espacemembre/{{url.uidf}}/"' >
                                     {% if user.imgurl %}
                                     <img class="img_profil_card_partern"  src="{{user.imgurl}}" alt="profil-image" width="120" height="120">
                                     {% else %}
@@ -288,9 +297,8 @@
                                     </div>
                                     <div class="follow">
                                         {% if uid %}
-                                           <span onclick="btn_modal_message()" class="btn-follow"><i class="fas fa-plus"></i>Ne pas Suivre</span>
-                                        {% else  %}
-                                        <span onclick="btn_modal_message()" class="btn-follow"><i class="fas fa-plus"></i> Suivre</span>
+                                           <span onClick='window.location.href="/suppr_follow/{{url.uidf}}/"'  class="btn-follow"><i class="fas fa-trash"></i> Ne pas Suivre</span>
+        
                                         {% endif %}
                                     </div>
                                 </div>

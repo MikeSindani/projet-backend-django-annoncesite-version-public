@@ -88,7 +88,7 @@ def dashbord_follow(request):
 
          
     # fonction pour fournir un choix aleatoire 
-    list_data_profil_fourniseur = geta.get_data_information_user_to_homepage(database)
+    list_data_profil_fourniseur = geta.get_data_information_user_to_userpage(database,uid)
     # rendu de la page 
     return render(request, "dashbord/dashbord.html",{"com_list": page , "msge": message, "data": userdata,"uid":uid,"v":choice_variable,"list_users":list_data_profil_fourniseur})
 
@@ -239,3 +239,19 @@ def see_favoris(request,uid,fav):
     data = geta.get_favoris_user_fonction(database,uid)
 
     return JsonResponse({'data':data})
+def suppr_follow(request,uidannonce):
+    # intrcution pour recupere l'id dans la session
+    geta = fonction.AfficherAnnonce()
+    uid = geta.get_token(request, authe)
+    # instruction pour la suppression d'une annonce 
+    try:
+        database.child("utilisateurs").child(uid).child("abonnement").child(uidannonce).remove()
+    except:
+        message = "Annonce non publies"
+        url = reverse('home')
+        ret = HttpResponseRedirect(url)
+        return ret
+
+    url = reverse('dashbord_follow')
+    ret = HttpResponseRedirect(url)
+    return ret

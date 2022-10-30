@@ -192,10 +192,11 @@ def delfavoris(request,idannonce,uid):
     data = geta.del_favoris_fonction(database,idannonce,uid)
 
     return HttpResponse(data)
-def add_follow(request,idannonce,uid):
-  print(idannonce)
+def add_follow(request,uidannonce,uid):
+  print("----------- FolloW -----------")
+  print(uidannonce)
   print(uid)
   geta = fonction.AfficherAnnonce()
-  data = geta.add_follow_fonction(database,idannonce,uid)
+  data = geta.add_follow_fonction(database,uidannonce,uid)
 
   return HttpResponse(data)

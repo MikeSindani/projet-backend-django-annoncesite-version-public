@@ -746,8 +746,20 @@ class AfficherAnnonce:
         else:
              return False
 
-     def add_follow_fonction(self,database,idannonce,uid):
-        database.child("utilisateurs").child(uid).child("abonnement").child(str(uid)).set(idannonce)
+     def add_follow_fonction(self,database,uidannonce,uid):
+        database.child("utilisateurs").child(uid).child("abonnement").child(str(uidannonce)).set(uidannonce)
         return "Cet annonce a été ajoutée à votre abonnement" 
+     def get_data_information_user_to_userpage(self,database,uid):
+        user_data_fournisseurs = database.child("utilisateurs").child(uid).child("abonnement").shallow().get().val()
+        list_fournisseurs = []
+        for i in user_data_fournisseurs:
+            list_fournisseurs.append(i)
+        work = []
+        for i in list_fournisseurs:
+            user_profil_data = database.child("utilisateurs").child(i).child("Informations").get().val()
+            list_uidf = {"uidf":i}
+            tupl = (user_profil_data,list_uidf)
+            work.append(tupl)
+        return work
     
      

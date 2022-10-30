@@ -470,7 +470,7 @@
 <!---   -------------------------------------RECOMMANDER ----------------------------------  -->
     <div class="recommandation" style="width:100%;background-color: rgb(210, 204, 223);">
         <div class="info">
-            <h2 style="text-align: center;">Meme Categorie </h2>
+            <h2 style="text-align: center;">Même Categorie </h2>
         </div>
         <div class=" owl-carousel owl-theme">
             {% for iden, work,user,dispo in list %}
@@ -1121,15 +1121,18 @@ $('#btn-modal-favoris-add').click(function(){
         }
      })
 });
+
 // ------------- code pour le botton add follow ---------------------------
+uidannonce = $("#uidannonce").attr("data-uidannonce");
 $('#btn-modal-follow-add').click(function(){
     //var catid;
     //id = $(this).attr("data-id");
     console.log(user_id)
+    console.log(uidannonce)
     $.ajax(
     {   
         type:"GET",
-        url: `/add_follow/${idannonce}/${user_id}/`,
+        url: `/add_follow/${uidannonce}/${user_id}/`,
         success: function( data ) 
         {   
 
