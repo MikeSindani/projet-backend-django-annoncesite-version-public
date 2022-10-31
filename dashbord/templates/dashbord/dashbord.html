@@ -16,7 +16,7 @@
 {% cache 500 band uid %}
 <style>
 @media (max-width:800px) {
-  .contain-card-partern{
+  #contain-card-partern{
     grid-template-columns: 1fr;
   }
              
@@ -52,6 +52,7 @@
                 <button id="btn-modal-annonce" class="button"> <i class="fa fa-plus" aria-hidden="true"></i> Ajouter une Annonce </button>
             </div>
         </div>
+     <!---  ----------------------  MODDAL AJOUTER -------------------------->  
      <div class="modal-connexion" id="myModal">
             <!-- Modal content -->
             <div  class="modal-content">
@@ -141,10 +142,11 @@
                                 <div class="choix_type_prix " id="autres-moyens" style="display:none; padding-bottom:30px;margin-bottom:20px; border-bottom: 1px solid rgba(0, 0, 0, 0.486);">
                                   <label for="choix">Choissez:</label>
                                   <select id="choix" name="autres">
-                                    <option value="">Choississez Entre: </option>
+                                    <option value="Demander le Prix">Choississez Entre: </option>
                                     <option value="A Discuter">A Discuter</option>
                                     <option value="Inbox">Inbox</option>
                                     <option value="Contacter Moi">Contacter Moi</option>
+                                    <option value="Demander le Prix">Demander le Prix</option>
                                   </select>
                                 </div>
                                 <label for="Delai">Veillez Introduire un delai Max et Min sera en fonction de la dete</label>
@@ -245,6 +247,8 @@
             <img src="{% static 'dashbord/img/undraw_Add_post_re_174w.png'%}" alt="add" width="250" height="250">
             <h3 style="color:rgb(71, 71, 71) ;">Pas d'annonce aux favoris <br> Appuyer sur Ajouter Aux favoris parmis celle de nos clients.</h3>
             {% endif %}
+
+
             <div class="pagination">
                 {% if com_list.has_previous %}
                     <a href="{% url 'dashbord' %}?page={{com_list.previous_page_number}}" class="page prev"><i class="fas fa-arrow-left"></i> Precedent</a>
@@ -263,9 +267,9 @@
     {% if v == "follow" %}
         <div id="Contact" class="tabcontent">
             <h1 class="text">Vos Abonnements</h1>
-            <p>Voici la liste des personnes qui vous suivez!</p>
-
-            <div  class="contain-card-partern"   style="display: grid;grid-template-columns: 1fr 1fr 1fr;"> 
+            <p>Voici la liste des personnes que vous suivez!</p>
+            {% if list_users %}
+            <div  id="contain-card-partern"   style="display: grid;grid-template-columns: 1fr 1fr 1fr;"> 
               {% for user,url in list_users %}
               <!----------- CARD PATERNAIRE ------------- -->
                     <div class="card-partern">
@@ -309,6 +313,14 @@
                     </div>
               {% endfor %}
             </div>
+            {% else %}
+            <div class="container-favoris">
+              <div class="conteneur-card"> 
+                <img src="{% static 'dashbord/img/undraw_Add_post_re_174w.png'%}" alt="add" width="250" height="250">
+                <h3 style="color:rgb(71, 71, 71) ;">Pas d'utilisateur aux abonnements </h3>
+              </div> 
+            </div> 
+            {% endif%}
          </div> 
         
     {% endif%}
