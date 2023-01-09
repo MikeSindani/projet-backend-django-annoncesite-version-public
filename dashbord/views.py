@@ -36,6 +36,7 @@ def dashbord(request):
         page = geta.pagination_fonction(request,com_list,number_page=5)
     except:
         page = False
+        
 
     # rendu de la page 
     return render(request, "dashbord/dashbord.html",{"com_list": page , "msge": message, "data": userdata,"uid":uid,"v":choice_variable})
