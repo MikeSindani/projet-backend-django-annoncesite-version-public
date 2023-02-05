@@ -1,0 +1,161 @@
+
+.footer{
+    color: rgb(66, 62, 62);
+    background-color: black;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    z-index: 100;
+}
+.footer .footer-main{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    margin: 0;
+    border-bottom: 1px solid rgb(20, 20, 20);
+}
+.footer .footer-main .about{
+    padding: 10px 40px;
+   font-size: 16px;
+  font-family: sans-serif;
+}
+.footer .footer-main .download{
+    padding: 10px 40px;
+    margin: 20px;
+}
+.footer .footer-main .links{
+    padding: 10px 40px;
+}
+.footer .footer-main .links .link {
+   list-style: none;
+   padding: 7px;
+}
+.footer .footer-main .links .link a{
+  color: inherit;
+  text-decoration: none;
+  font-size: 16px;
+  font-family: sans-serif;
+}
+.footer .footer-main .links .link a:hover{
+    color: #adadad;
+}
+
+.footer .footer-main .links .link a::after {
+    content: "";
+    display: block;
+    height: 3px;
+    width: 0%;
+    background-color: #FF4B2B;
+    position: absolute;
+    transition: all ease-in-out 250ms;
+    margin: 0;
+}
+.footer .footer-main .links .link a:hover::after{
+    width: 2%;
+}
+.footer  .social-contact{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    
+}
+.footer  .social-contact ul{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+}
+.footer .footer-main .about .logo{
+    font-size: 40px;
+    color: #7c7474;
+    
+}
+.footer .footer-main .download{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    margin: 0;
+}
+.footer .footer-main .download .phone{
+    padding: 10px;
+    
+}
+.footer .footer-main .download .download-btn{
+    text-decoration: none;
+    border: 1px solid #09112e;
+    background-color: #09112e; 
+    color: white;   
+    border-radius: 20px;
+    padding: 1vh 4vw;
+    font-family: sans-serif;
+}
+.footer .footer-main .download .download-btn:hover{
+    transform: scale(1.1);	
+	color:  #ffffff;
+	background-color:  #FF4B2B;
+	border: none;
+	transition: background-color 50ms ease-in;
+}
+.footer .footer-main .download .download-btn:active{
+    transform: scale(0.95);	
+}
+.footer .footer-main .about .descp{
+    text-align:justify ;
+}
+
+.footer .footer-main .download .text{
+    padding: 10px;
+    font-family: sans-serif;
+    color: white;
+    text-align: justify;
+}
+.footer .social-contact .social-title{
+  font-family: sans-serif;
+  color: #8d8282;
+}
+.footer  .copyright{
+  font-family: sans-serif;
+  padding: 15px;
+  margin: 0;
+}
+.footer .social-contact .social-link{
+    padding: 0 4vw;
+}
+.footer .social-contact .social-link a{
+    color: rgb(214, 190, 190);
+    list-style: none;
+    font-family: sans-serif;
+}
+.footer .social-contact .social-link a:hover{
+    color: tomato;
+}
+.footer .social-contact .social-link a i{ 
+    font-size: 20px;
+}
+/*Stying for small screens*/
+@media screen and (max-width: 800px){
+    .footer{
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    .footer .footer-main{
+        flex-direction: column;
+        margin: 0;
+    }
+    .footer .footer-main .links .link a::after {
+        margin:0;
+    }
+    .footer .footer-main .links .link a:hover::after{
+        width: 5%;
+    }
+    .footer .footer-main .about .logo{
+     text-align:center ;
+    }
+    .footer .footer-main .about .descp{
+        text-align:center ;
+    }
+}

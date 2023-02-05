@@ -1,0 +1,21 @@
+#myBtn-top {
+    display: none;
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+    z-index: 99;
+    font-size: 20px;
+    outline: none;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 50%;
+  }
+  
+  #myBtn-top:hover {
+    background-color: tomato;
+  }
+  #myBtn-top:active {
+    transform:scale(0.90);
+  }

@@ -1,0 +1,82 @@
+.conteneur-card{
+    height: auto;
+}
+.pagination{
+    margin: 20px 5px;
+    align-items: center;
+   }
+.pagination a{
+     text-decoration: none;
+     color: black;
+     text-transform: uppercase;
+     font-weight: bold;
+     font-size: 22px;
+     transition: all .5s ease-in-out;
+ }
+.pagination a:hover{
+      color: tomato;
+      transform: scale(1.1);
+ }
+.pagination a:active{
+     transform: scale(0.9);
+}
+
+.band{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0 10px 0;
+    width: 80%;
+    box-shadow: 0px 1px 50px 0px rgba(0, 0, 0, 0.3);
+    
+}
+.band .category{
+    padding: 50px 30vw;
+    color: white;
+    
+    
+}
+.band .category .titre{
+    font-size: 40px;
+    text-align: center;
+    font-weight: bold;
+    font-family: sans-serif;
+   
+}
+.band .category .subtitre{
+    font-family: sans-serif;
+    line-height: 1em;
+}
+@media screen and (max-width: 800px){
+    .pagination a{
+        font-size: 18px;
+    }
+    
+    .band{
+        display: block;
+        align-items: none;
+        justify-content: none;
+        width: 100%;
+        margin: 0;
+        box-shadow: 0px 1px 50px 0px rgba(0, 0, 0, 0);
+    }
+    .band .category{
+        padding: 20px;
+        color: white;
+        background-image: url('img/champ1.jpg');
+        
+    }
+    .band .category .titre{
+        font-size: 40px;
+        text-align: center;
+        font-weight: bold;
+        font-family: sans-serif;
+       
+    }
+    .band .category .subtitre{
+        font-family: sans-serif;
+        text-align: center;
+        line-height: 1em;
+    }
+
+}
